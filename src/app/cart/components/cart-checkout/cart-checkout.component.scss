@@ -1,0 +1,23 @@
+
+.checkout-confirmation {
+    font-size: 1.1rem;
+    color:white;
+    background: deepskyblue;
+    width: 100%;
+    /*margin: 1em 0 1em 0;*/
+    border-radius: 1em;
+}
+.checkout-verification-message {
+    background: deepskyblue;
+    color: white;
+    width: 100%;
+    font-size: 1.1em;
+    /*margin: 1em 0 1em 0;*/
+    border-radius: 1em;
+}
+.checkout-total {
+  box-shadow: -10px 10px 10px lightblue;
+  border-radius: 15px;
+  margin-top: 3px;
+  font-size: 1.5rem;
+}

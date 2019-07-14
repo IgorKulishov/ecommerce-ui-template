@@ -1,0 +1,85 @@
+<div class="container-fluid default-page-background">
+  <div class="row">
+    <div class="col-12 product-name text-center">
+      {{(productDetail$  | async)?.name}}
+    </div>
+  </div>
+  <div class="row align-items-center">
+
+    <div *ngIf="(productDetail$  | async)" class="col-sm-4 text-center product-image">
+      <img [src]="getProductUrl((productDetail$  | async)?.productInfo)"
+           onerror="this.onerror=null;this.src='/assets/images/teapod.jpeg';"
+           class="product-image" alt="product image">
+    </div>
+
+    <div class="col-sm-8 float-right product-description">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 product-description">
+            <div class="row">
+              <div class="col-5">{{ 'product.productDescription' | translate }}: </div>
+              <div class="col-7">{{(productDetail$  | async)?.description}}</div>
+            </div>
+          </div>
+          <div class="col-12 product-price">
+            <div class="row">
+              <div class="col-5">{{ 'product.price' | translate }}:</div>
+              <div class="col-7">$ {{(productDetail$  | async)?.price}}</div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="row product-add-to-card">
+              <div class="col-5">
+                Available on stock:
+              </div>
+              <div class="col-7">
+                {{((productDetail$  | async)?.defaultMaxQuantity || maxQuantity) - selectedQuantity}} pcs
+              </div>
+            </div>
+          </div>
+          <div class="col-12 order-quantity">
+            <add-to-cart
+              [maxQuantity]="(productDetail$  | async)?.defaultMaxQuantity || maxQuantity"
+              [minQuantity]="minQuantity"
+              (selectedQuantity)="onSelectedQuantity($event)"
+            ></add-to-cart>
+          </div>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-5">{{ 'product.sum' | translate }}:</div>
+              <div class="col-7">$ {{countSum( (productDetail$  | async)?.price,  selectedQuantity )}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row text-center">
+        <div class="col-12 add-to-cart">
+          <button (click)="addToCart()" class="btn btn-primary btn-sm" type="button">{{ 'product.addToCart' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row product-rating">
+    <div class="col-sm-12">
+          <span class="align-bottom">
+            <i class="glyphicon glyphicon-star-empty"></i>
+            <i class="glyphicon glyphicon-star-empty"></i>
+            <i class="glyphicon glyphicon-star-empty"></i>
+            <i class="glyphicon glyphicon-star-empty"></i>
+            <i class="glyphicon glyphicon-star-empty"></i>
+          </span>
+    </div>
+  </div>
+  <div class="col-12 images-container">
+    <div class="row" *ngIf="(productDetail$  | async)?.productInfo">
+      <div class="col-12 col-md-6 col-lg-4" *ngFor="let image of (productDetail$  | async)?.productInfo.imageList">
+        <img class="image-product-details"
+             [src]="image.imageUrl" alt="product image">
+      </div>
+    </div>
+  </div>
+</div>
+
+<alert type="danger" *ngIf='show && (productDetail$ | async)?.error'>
+  <strong>{{(productDetail$ | async)?.error}} <a href="/logout"> Login </a> </strong>
+</alert>

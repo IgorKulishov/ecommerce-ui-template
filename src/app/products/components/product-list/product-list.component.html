@@ -1,0 +1,113 @@
+<div class="container-fluid default-page-background">
+  <div class="row products-parent-block">
+    <div class="col-12" *ngIf="!error">
+      <div class="container thumbnail product-details-container" *ngFor='let product of products$ | async; last as isLast '>
+
+        <div class="row">
+          <div class="col-10 product-name text-center">
+            {{product.name | titlecase}}
+          </div>
+          <div class="col-2 text-right">
+            <button type="button" class="close custom-close" aria-label="Close" (click)="deleteProductConfirmation(approval_template, product)">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="row align-items-center ">
+
+          <div class="col-sm-4 text-center product-image">
+            <a [routerLink]="['/details/' + product?.slug]" class="">
+              <img class="product-image" [src]="getProductUrl(product)" onerror="this.onerror=null;this.src='/assets/images/teapod.jpeg';" alt="{{product.name}}">
+            </a>
+          </div>
+
+          <div class="col-sm-8 float-right product-description">
+            <div class="container-fluid">
+
+                  <div class="row product-description">
+                    <div class="col-5 col-xs-12">{{ 'product.productDescription' | translate }}: </div>
+                    <div class="col-7 col-xs-12">{{product.description}}</div>
+                  </div>
+
+                  <div class="row product-price">
+                    <div class="col-5 col-xs-12">{{ 'product.price' | translate }}:</div>
+                    <div class="col-7 col-xs-12">$ {{product.price}}</div>
+                  </div>
+
+                  <div class="row" *ngIf="product.defaultMaxQuantity">
+                    <div class="col-5 col-xs-12">{{ 'product.quantity' | translate }}:</div>
+                    <div class="col-7 col-xs-12">{{product.defaultMaxQuantity}}</div>
+                  </div>
+
+              <div class="row">
+              <span class="align-bottom product-rating">
+                <i class="glyphicon glyphicon-star-empty"></i>
+                <i class="glyphicon glyphicon-star-empty"></i>
+                <i class="glyphicon glyphicon-star-empty"></i>
+                <i class="glyphicon glyphicon-star-empty"></i>
+                <i class="glyphicon glyphicon-star-empty"></i>
+              </span>
+              </div>
+            </div>
+          </div>
+
+          <!--<div class="sm-screen-product-divider" *ngIf="!isLast"></div>-->
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<alert type="danger" *ngIf='error'>
+  <strong>Something went wrong. Please login again. <a href="/logout"> Login </a> </strong>
+</alert>
+
+
+
+<ng-template #approval_template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Delete product confirmation</h4>
+    <button type="button" class="close pull-right" aria-label="Cancel delete product button" (click)="approveModal.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Please confirm you want to remove "{{deleteProduct.name}}".</p>
+    <p>Once you remove product, the item will be not available for sale.</p>
+    <button type="button" class="btn btn-danger" (click)="removeItemFromProductList()">Delete product</button>
+  </div>
+</ng-template>
+
+
+<ng-template #confirmation_template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Product removal confirmation</h4>
+    <button type="button" class="close pull-right" aria-label="Close submit order confirmation" (click)="confirmationModal.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Product has been removed<br>
+    <button type="button" class="btn btn-primary" (click)="confirmationModal.hide()" (click)="approveModal.hide()">Ok</button>
+  </div>
+</ng-template>
+
+
+<ng-template #error_modal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Error message</h4>
+    <button type="button" class="close pull-right" aria-label="Close error message" (click)="errorModal.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Sorry, there was an error.
+    We are unable to remove the product at the moment.<br>
+    Please try again later or contact administrator.<br>
+    <button type="button" class="btn btn-primary" (click)="errorModal.hide()" >Ok</button>
+  </div>
+</ng-template>
