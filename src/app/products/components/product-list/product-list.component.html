@@ -65,9 +65,11 @@
 <alert type="danger" *ngIf='error'>
   <strong>Something went wrong. Please login again. <a href="/logout"> Login </a> </strong>
 </alert>
-
-
-
+<!--Product from purchased Template //start//-->
+<div class="block">
+  <app-products-view [products]="mockedProducts" offcanvas="always"></app-products-view>
+</div>
+<!--Product from purchased Template //end//-->
 <ng-template #approval_template>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Delete product confirmation</h4>

@@ -21,8 +21,8 @@ export class CartDetailsComponent implements OnInit {
 
   public productsInCart: Observable<Order>;
   public error = false;
-  @ViewChild('confirmation_template') confirmation_template: ModalDirective;
-  @ViewChild('error_modal') error_modal: ModalDirective;
+  @ViewChild('confirmation_template', {'static': false}) confirmation_template: ModalDirective;
+  @ViewChild('error_modal', {'static': false}) error_modal: ModalDirective;
   approveModal: BsModalRef | null;
   confirmationModal: BsModalRef | null;
   errorModal: BsModalRef | null;

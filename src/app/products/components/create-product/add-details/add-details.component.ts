@@ -16,7 +16,7 @@ import {map} from 'rxjs/operators';
 export class AddDetailsComponent implements OnInit {
 
     addProductForm: FormGroup;
-    @ViewChild('image') image: ElementRef;
+    @ViewChild('image', {'static': false}) image: ElementRef;
     submitFormData: any;
     fileDataUrl: any;
 

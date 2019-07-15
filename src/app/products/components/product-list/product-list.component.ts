@@ -14,6 +14,9 @@ import {AddToCart, CheckOut} from "../../../cart/store/actions/cart.actions";
 import { RemoveProduct } from '../../store/actions/products.actions';
 import { ProductDetails} from '../../models/products.model';
 
+//TODO: remove the mock (mock data for purchased template):
+import { products } from '../../../../data/shop-products';
+
 @Component({
   selector: 'product-list',
   templateUrl: './product-list.component.html',
@@ -23,14 +26,16 @@ export class ProductListComponent implements OnInit {
 
   public products$: Observable<Products[]>;
   public error = false;
-  @ViewChild('confirmation_template') confirmation_template: ModalDirective;
-  @ViewChild('error_modal') error_modal: ModalDirective;
+  @ViewChild('confirmation_template', {'static': false}) confirmation_template: ModalDirective;
+  @ViewChild('error_modal', {'static': false}) error_modal: ModalDirective;
   approveModal: BsModalRef | null;
   confirmationModal: BsModalRef | null;
   errorModal: BsModalRef | null;
   deleteProduct: ProductDetails;
   deleteProductState: {action: string; state:string;} = {action: undefined, state:undefined};
   deleteProductSubject: BehaviorSubject<{action: string; state:string;}> = new BehaviorSubject({action: undefined, state:undefined});
+
+  mockedProducts;
 
   constructor(private store: Store<AppStates>,
               private appCookieService: AppCookieService,
@@ -91,6 +96,8 @@ export class ProductListComponent implements OnInit {
       }
 
     });
+
+    this.mockedProducts = products;
   }
 
   removeItemFromProductList() {
