@@ -102,4 +102,15 @@ export class ProductCardComponent implements OnInit, OnDestroy {
             }
         });
     }
+
+    getProductUrl(product) {
+      if(product && product.productInfo && product.productInfo.imageList.length > 0) {
+        let url = product.productInfo.imageList[0]['imageUrl'] ? product.productInfo.imageList[0]['imageUrl'] :
+          product.productInfo.imageList[0]['largeUrl'] ? product.productInfo.imageList[0]['largeUrl'] : '/assets/images/teapod.jpeg';
+        return url;
+      } else {
+        return  '/assets/images/teapod.jpeg';
+      }
+    }
+
 }

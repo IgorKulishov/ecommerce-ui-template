@@ -9,6 +9,13 @@ export interface Products {
   'price': number;
   'productInfo': ProductInfo;
   'id': number;
+
+  'badges'        ?: string[];
+  'rating'        ?: number
+  'reviews'       ?: number;
+  'availability'  ?: string;
+  'features'      ?: {name: string; value: string;}[];
+  'options'       ?: string[];
 }
 
 export interface ProductInfo {

@@ -56,7 +56,6 @@
 
         </div>
 
-
       </div>
     </div>
   </div>
@@ -67,8 +66,20 @@
 </alert>
 <!--Product from purchased Template //start//-->
 <div class="block">
-  <app-products-view [products]="mockedProducts" offcanvas="always"></app-products-view>
+  <app-products-view [products]="(products$ | async)" offcanvas="always"></app-products-view>
 </div>
+<!-- PRODUCT CARD FROM TEMPLATE -->
+
+<!--<div class="products-view" *ngFor='let product of products$ | async; last as isLast '>-->
+  <!--<div class="products-view__list products-list" [attr.data-layout]="layout != 'list' ? grid : layout" [attr.data-with-features]="layout == 'grid-with-features' ? 'true' : 'false'">-->
+    <!--<div class="products-list__body">-->
+      <!--<div class="products-list__item">-->
+        <!--<app-product-card [product]="product"></app-product-card>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+
 <!--Product from purchased Template //end//-->
 <ng-template #approval_template>
   <div class="modal-header">

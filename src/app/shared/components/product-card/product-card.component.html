@@ -10,24 +10,24 @@
         <span class="fake-svg-icon"></span>
     </button>
 
-    <div *ngIf="product.badges.length" class="product-card__badges-list">
+    <div *ngIf="product.badges && product.badges.length" class="product-card__badges-list">
         <div *ngIf="product.badges.includes('sale')" class="product-card__badge product-card__badge--sale">Sale</div>
         <div *ngIf="product.badges.includes('hot')" class="product-card__badge product-card__badge--hot">Hot</div>
         <div *ngIf="product.badges.includes('new')" class="product-card__badge product-card__badge--new">New</div>
     </div>
 
     <div class="product-card__image">
-        <a appClick [routerLink]="root.product(product.id)" *ngIf="product.images?.length"><img [src]="product.images[0]" alt=""></a>
+        <a appClick [routerLink]="['/details/' + product?.slug]" *ngIf="product.productInfo.imageList.length"><img [src]="getProductUrl(product)" onerror="this.onerror=null;this.src='/assets/images/teapod.jpeg';" alt="product {{product.name}} image"></a>
     </div>
     <div class="product-card__info">
         <div class="product-card__name">
-            <a appClick [routerLink]="root.product(product.id)">{{ product.name }}</a>
+            <a appClick [routerLink]="['/details/' + product?.slug]">{{ product.name }}</a>
         </div>
-        <div class="product-card__rating">
+        <div *ngIf="product.rating" class="product-card__rating">
             <app-rating [value]="product.rating"></app-rating>
             <div class="product-card__rating-legend">{{ product.reviews }} Reviews</div>
         </div>
-        <ul *ngIf="product.features.length" class="product-card__features-list">
+        <ul *ngIf="product.features && product.features.length" class="product-card__features-list">
             <li *ngFor="let feature of product.features">{{ feature.name }}: {{ feature.value }}</li>
         </ul>
     </div>
