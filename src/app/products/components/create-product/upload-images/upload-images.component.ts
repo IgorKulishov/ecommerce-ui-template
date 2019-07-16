@@ -16,7 +16,7 @@ import {ProductDetails} from "../../../models/products.model";
 })
 export class UploadImagesComponent implements OnInit {
 
-    @ViewChild('image') image: ElementRef;
+    @ViewChild('image', {'static': false}) image: ElementRef;
     fileDataUrl: any;
     slug: string;
     public productDetail$: Observable<ProductDetails>;

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
-import {HttpClientModule, HttpClient} from '@angular/common/http';
+import { HttpClientModule, HttpClient} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { INITIAL_STORE_DATA } from './products/store/states/app.states';
 import { AppComponent } from './app.component';
@@ -10,6 +10,9 @@ import { CoreModule } from './core/core.module';
 import { LoginModule } from './auth/login.module';
 import { LayoutModule } from './layout/layout.module';
 import { CartModule } from './cart/cart.module';
+
+import { SharedModule } from './shared/shared.module'; //from purchased template
+
 import { reducer } from './app.reducers';
 import { CollapseModule } from "ngx-bootstrap/collapse";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -40,6 +43,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CoreModule,
     LayoutModule,
     CartModule,
+    SharedModule,
     BrowserAnimationsModule,
     CollapseModule.forRoot(),
     TranslateModule.forRoot(),

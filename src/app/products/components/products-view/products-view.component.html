@@ -1,0 +1,11 @@
+<div class="products-view">
+
+    <div class="products-view__list products-list" [attr.data-layout]="layout != 'list' ? grid : layout" [attr.data-with-features]="layout == 'grid-with-features' ? 'true' : 'false'">
+        <div class="products-list__body">
+            <div *ngFor="let product of products" class="products-list__item">
+                <app-product-card [product]="product"></app-product-card>
+            </div>
+        </div>
+    </div>
+
+</div>

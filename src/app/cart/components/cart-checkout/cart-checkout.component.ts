@@ -51,7 +51,7 @@ export class CartCheckoutComponent implements OnInit {
 
   modalCheckoutApprove: BsModalRef | null;
   modalCheckoutConfirmation: BsModalRef;
-  @ViewChild('confirmation_template') confirmation_template: ModalDirective;
+  @ViewChild('confirmation_template', {'static': false}) confirmation_template: ModalDirective;
 
   constructor(private store: Store<AppStates>,
               private appCookieService: AppCookieService,

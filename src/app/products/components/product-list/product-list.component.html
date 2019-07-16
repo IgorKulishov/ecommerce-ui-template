@@ -1,73 +1,118 @@
-<div class="container-fluid default-page-background">
-  <div class="row products-parent-block">
-    <div class="col-12" *ngIf="!error">
-      <div class="container thumbnail product-details-container" *ngFor='let product of products$ | async; last as isLast '>
+<!--<div class="container-fluid default-page-background">-->
+  <!--<div class="row products-parent-block">-->
+    <!--<div class="col-12" *ngIf="!error">-->
+      <!--<div class="container thumbnail product-details-container" *ngFor='let product of products$ | async; last as isLast '>-->
 
-        <div class="row">
-          <div class="col-10 product-name text-center">
-            {{product.name | titlecase}}
-          </div>
-          <div class="col-2 text-right">
-            <button type="button" class="close custom-close" aria-label="Close" (click)="deleteProductConfirmation(approval_template, product)">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        </div>
+        <!--<div class="row">-->
+          <!--<div class="col-10 product-name text-center">-->
+            <!--{{product.name | titlecase}}-->
+          <!--</div>-->
+          <!--<div class="col-2 text-right">-->
+            <!--<button type="button" class="close custom-close" aria-label="Close" (click)="deleteProductConfirmation(approval_template, product)">-->
+              <!--<span aria-hidden="true">&times;</span>-->
+            <!--</button>-->
+          <!--</div>-->
+        <!--</div>-->
 
-        <div class="row align-items-center ">
+        <!--<div class="row align-items-center ">-->
 
-          <div class="col-sm-4 text-center product-image">
-            <a [routerLink]="['/details/' + product?.slug]" class="">
-              <img class="product-image" [src]="getProductUrl(product)" onerror="this.onerror=null;this.src='/assets/images/teapod.jpeg';" alt="{{product.name}}">
-            </a>
-          </div>
+          <!--<div class="col-sm-4 text-center product-image">-->
+            <!--<a [routerLink]="['/details/' + product?.slug]" class="">-->
+              <!--<img class="product-image" [src]="getProductUrl(product)" onerror="this.onerror=null;this.src='/assets/images/teapod.jpeg';" alt="{{product.name}}">-->
+            <!--</a>-->
+          <!--</div>-->
 
-          <div class="col-sm-8 float-right product-description">
-            <div class="container-fluid">
+          <!--<div class="col-sm-8 float-right product-description">-->
+            <!--<div class="container-fluid">-->
 
-                  <div class="row product-description">
-                    <div class="col-5 col-xs-12">{{ 'product.productDescription' | translate }}: </div>
-                    <div class="col-7 col-xs-12">{{product.description}}</div>
-                  </div>
+                  <!--<div class="row product-description">-->
+                    <!--<div class="col-5 col-xs-12">{{ 'product.productDescription' | translate }}: </div>-->
+                    <!--<div class="col-7 col-xs-12">{{product.description}}</div>-->
+                  <!--</div>-->
 
-                  <div class="row product-price">
-                    <div class="col-5 col-xs-12">{{ 'product.price' | translate }}:</div>
-                    <div class="col-7 col-xs-12">$ {{product.price}}</div>
-                  </div>
+                  <!--<div class="row product-price">-->
+                    <!--<div class="col-5 col-xs-12">{{ 'product.price' | translate }}:</div>-->
+                    <!--<div class="col-7 col-xs-12">$ {{product.price}}</div>-->
+                  <!--</div>-->
 
-                  <div class="row" *ngIf="product.defaultMaxQuantity">
-                    <div class="col-5 col-xs-12">{{ 'product.quantity' | translate }}:</div>
-                    <div class="col-7 col-xs-12">{{product.defaultMaxQuantity}}</div>
-                  </div>
+                  <!--<div class="row" *ngIf="product.defaultMaxQuantity">-->
+                    <!--<div class="col-5 col-xs-12">{{ 'product.quantity' | translate }}:</div>-->
+                    <!--<div class="col-7 col-xs-12">{{product.defaultMaxQuantity}}</div>-->
+                  <!--</div>-->
 
-              <div class="row">
-              <span class="align-bottom product-rating">
-                <i class="glyphicon glyphicon-star-empty"></i>
-                <i class="glyphicon glyphicon-star-empty"></i>
-                <i class="glyphicon glyphicon-star-empty"></i>
-                <i class="glyphicon glyphicon-star-empty"></i>
-                <i class="glyphicon glyphicon-star-empty"></i>
-              </span>
-              </div>
-            </div>
-          </div>
+              <!--<div class="row">-->
+              <!--<span class="align-bottom product-rating">-->
+                <!--<i class="glyphicon glyphicon-star-empty"></i>-->
+                <!--<i class="glyphicon glyphicon-star-empty"></i>-->
+                <!--<i class="glyphicon glyphicon-star-empty"></i>-->
+                <!--<i class="glyphicon glyphicon-star-empty"></i>-->
+                <!--<i class="glyphicon glyphicon-star-empty"></i>-->
+              <!--</span>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
 
-          <!--<div class="sm-screen-product-divider" *ngIf="!isLast"></div>-->
+          <!--&lt;!&ndash;<div class="sm-screen-product-divider" *ngIf="!isLast"></div>&ndash;&gt;-->
 
-        </div>
+        <!--</div>-->
 
-
-      </div>
-    </div>
-  </div>
-</div>
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
 
 <alert type="danger" *ngIf='error'>
   <strong>Something went wrong. Please login again. <a href="/logout"> Login </a> </strong>
 </alert>
+<!--Product from purchased Template //start//-->
+<!--<div class="block">-->
+  <!--<app-products-view [products]="(products$ | async)" offcanvas="always"></app-products-view>-->
+<!--</div>-->
+<app-page-header [header]="'Electronics'" [breadcrumbs]="[
+    {label: 'Home',         url: '../../'},
+    {label: 'Electronics', url: ''}
+]"></app-page-header>
 
+<ng-container *ngIf="columns === 3">
+  <div class="container">
+    <div class="shop-layout shop-layout--sidebar--{{ sidebarPosition }}">
+      <div class="shop-layout__sidebar" *ngIf="sidebarPosition === 'start'">
+        <app-shop-sidebar [filters]="filters" offcanvas="mobile"></app-shop-sidebar>
+      </div>
+      <div class="shop-layout__content">
+        <div class="block">
+          <app-products-view [products]="(products$ | async)" [layout]="viewMode" grid="grid-3-sidebar" [limit]="15" offcanvas="mobile"></app-products-view>
+        </div>
+      </div>
+      <div class="shop-layout__sidebar" *ngIf="sidebarPosition === 'end'">
+        <app-shop-sidebar [filters]="filters" offcanvas="mobile"></app-shop-sidebar>
+      </div>
+    </div>
+  </div>
+</ng-container>
 
+<ng-container *ngIf="columns > 3">
+  <div class="container">
+    <div class="block">
+      <app-products-view [products]="(products$ | async)" [layout]="viewMode" [grid]="'grid-'+columns+'-full'" [limit]="15" offcanvas="always"></app-products-view>
+    </div>
+    <app-shop-sidebar [filters]="filters" offcanvas="always"></app-shop-sidebar>
+  </div>
+</ng-container>
 
+<!-- PRODUCT CARD FROM TEMPLATE -->
+
+<!--<div class="products-view" *ngFor='let product of products$ | async; last as isLast '>-->
+  <!--<div class="products-view__list products-list" [attr.data-layout]="layout != 'list' ? grid : layout" [attr.data-with-features]="layout == 'grid-with-features' ? 'true' : 'false'">-->
+    <!--<div class="products-list__body">-->
+      <!--<div class="products-list__item">-->
+        <!--<app-product-card [product]="product"></app-product-card>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+
+<!--Product from purchased Template //end//-->
 <ng-template #approval_template>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Delete product confirmation</h4>
