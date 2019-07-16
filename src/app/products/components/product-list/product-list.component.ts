@@ -32,6 +32,11 @@ export class ProductListComponent implements OnInit {
   deleteProduct: ProductDetails;
   deleteProductState: {action: string; state:string;} = {action: undefined, state:undefined};
   deleteProductSubject: BehaviorSubject<{action: string; state:string;}> = new BehaviorSubject({action: undefined, state:undefined});
+  //Template basic settings:
+  filters: any[] = [];
+  sidebarPosition: 'start'|'end' = 'start';
+  viewMode: 'grid'|'grid-with-features'|'list' = 'grid';
+  columns: 3|4|5 = 3;
 
   constructor(private store: Store<AppStates>,
               private appCookieService: AppCookieService,
