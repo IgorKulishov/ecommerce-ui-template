@@ -31,6 +31,21 @@
 @media only screen and (max-width: 640px) {
   .navbar-custom {
     position: static;
+
+    li button {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+  .nav-item.dropdown.open.show {
+    position: fixed;
+    display: block;
+    z-index: 110000;
+    background-color: #fff;
+    top: 0px !important;
+    right: 0px !important;
+    left: 0px !important;
+    bottom: 0px !important;
   }
 }
 /*.product-name:after {*/
