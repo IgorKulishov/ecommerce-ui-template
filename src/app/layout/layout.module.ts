@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { HeaderComponent } from './header/components/header.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import {BsDropdownModule} from "ngx-bootstrap/dropdown";
 import { CommonModule } from '@angular/common';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AlertModule } from 'ngx-bootstrap/alert';
@@ -11,7 +13,9 @@ import { AlertModule } from 'ngx-bootstrap/alert';
     CommonModule,
     BrowserAnimationsModule,
     AlertModule,
-    CollapseModule.forRoot()
+    CollapseModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    AccordionModule.forRoot()
   ],
   declarations: [
     HeaderComponent
