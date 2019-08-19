@@ -13,7 +13,9 @@
     "compodoc": "./node_modules/.bin/compodoc -p src/tsconfig.app.json -d docs/",
     "build--prod": "ng build --prod --no-sourcemap --stats-json && npm run sw",
     "sw": "sw-precache --root=dist --config=sw-precache-config.js",
-    "static-serve": "cd dist && live-server --port=4200 --host=localhost --entry-file=/index.html"
+    "static-serve": "cd dist && live-server --port=4200 --host=localhost --entry-file=/index.html",
+    "build-local-prod": "ng build --configuration=production",
+    "build-local-dev": "ng build --configuration=dev"
   },
   "private": true,
   "dependencies": {
@@ -27,7 +29,9 @@
     "@angular/platform-browser": "~8.1.0",
     "@angular/platform-browser-dynamic": "~8.1.0",
     "@angular/platform-server": "~8.1.0",
+    "@angular/pwa": "^0.802.0",
     "@angular/router": "~8.1.0",
+    "@angular/service-worker": "~8.1.0",
     "@auth0/angular-jwt": "^2.1.0",
     "@fortawesome/fontawesome-free": "^5.9.0",
     "@ngrx/core": "~1.2.0",
@@ -35,10 +39,10 @@
     "@ngrx/router-store": "^7.4.0",
     "@ngrx/store": "~7.4.0",
     "@ngrx/store-devtools": "^7.4.0",
-    "@ngx-translate/core": "^11.0.1",
-    "@ngx-translate/http-loader": "^4.0.0",
     "@nguniversal/express-engine": "^8.1.1",
     "@nguniversal/module-map-ngfactory-loader": "^8.1.1",
+    "@ngx-translate/core": "^11.0.1",
+    "@ngx-translate/http-loader": "^4.0.0",
     "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
     "express": "^4.17.1",

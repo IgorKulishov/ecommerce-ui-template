@@ -1,7 +1,7 @@
  import { Action, ActionReducer } from '@ngrx/store';
 
 import { AppStates } from '../../../products/store/states/app.states';
-import { LOGIN_USER, LOGIN_USER_SUCCESS, LOG_OUT, FINISH_COOKIES_CLEARENCE, 
+import { LOGIN_USER, LOGIN_USER_SUCCESS, LOG_OUT, FINISH_COOKIES_CLEARENCE,
   REGISTER_USER, REGISTER_USER_SUCCESS, ERROR_LOADING  } from '../actions/login.actions';
 import {CREATE_ORDER_NUMBER} from '../../../cart/store/actions/cart.actions';
 
@@ -38,7 +38,7 @@ const indicateErrorOnLoading = ( state , action): AppStates => {
  return newData;
 }
 
-export const userLoginReducer: ActionReducer<AppStates> = (state: AppStates, action: ReducerClass): AppStates => {
+export function userLoginReducer (state: AppStates, action: ReducerClass) {
   switch (action.type) {
     case LOGIN_USER_SUCCESS:
       return loadUserCredentials(state, action);
