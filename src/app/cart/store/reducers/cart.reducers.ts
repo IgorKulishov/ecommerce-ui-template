@@ -50,7 +50,7 @@ const checkOutSuccess = (state: AppStates, action: ReducerClass): AppStates => {
 }
 
 
-export const cartReducer: ActionReducer<AppStates> = (state: AppStates, action: ReducerClass): AppStates => {
+export function cartReducer (state: AppStates, action: ReducerClass) {
   switch (action.type) {
     case CREATE_ORDER_NUMBER:
       return storeOrderNumber(state, action);

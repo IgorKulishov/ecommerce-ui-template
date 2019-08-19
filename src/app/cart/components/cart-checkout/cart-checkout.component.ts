@@ -41,12 +41,12 @@ export class CartCheckoutComponent implements OnInit {
     ];
 
   public productsInCart: any;
-  private checkOutConfirmationStatus: boolean = false;
+  public checkOutConfirmationStatus: boolean = false;
   public methodsOfPayment: PaymentDescription[] = this.defaultMethodsOfPayment;
   public error = false;
   private payment = {};
-  private totalAmount: number;
-  private totalQuantity: number;
+  public totalAmount: number;
+  public totalQuantity: number;
   public checkoutForm: FormGroup;
 
   modalCheckoutApprove: BsModalRef | null;

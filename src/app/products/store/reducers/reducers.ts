@@ -57,7 +57,7 @@ const createNewProductSuccess = ( state: AppStates, action: ReducerClass ): AppS
   return Object.assign({}, state, { productCreated: action.payload} );
 };
 
-export const productsReducer: ActionReducer<AppStates> = (state: AppStates, action: ReducerClass): AppStates => {
+export function productsReducer (state: AppStates, action: ReducerClass) {
   switch (action.type) {
     case GET_PRODUCT_DETAILS:
       return loadProductSlug(state, action);
