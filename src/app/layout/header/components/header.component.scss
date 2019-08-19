@@ -1,9 +1,23 @@
 
 .custom-navbar-image {
-  height: 75px;
+  height: 65px;
 }
 .custom-navbar-label {
   color:dodgerblue;
+}
+.custom-navbar-image:hover {
+  animation-duration: .5s;
+  animation-name: rotate;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes open-menu {

@@ -16,30 +16,26 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent" [collapse]="isCollapsed" [isAnimated]="true" >
       <ul class="navbar-nav mr-auto navbar-custom">
-        <li *ngIf="user?.userName" class="nav-item dropdown custom-nav-link" dropdown>
-            <button id="button-user-menu" dropdownToggle type="button" class="btn dropdown-toggle"
-                    aria-controls="dropdown-user-menu">
-              {{ user?.userName }}
-              <span class="caret"></span>
-            </button>
-            <ul id="dropdown-user-menu" *dropdownMenu class="dropdown-menu"
-                role="menu" aria-labelledby="dropdown-user-menu">
-              <li role="menuitem"><a class="dropdown-item disabled" href="#">Profile {{ user?.userName }}</a></li>
-              <li class="divider dropdown-divider"></li>
-              <li *ngIf="user?.userName" class="dropdown-item"><a href="/logout" class="nav-link custom-nav-link">Logout</a></li>
-            </ul>
-        </li>
-        <li *ngIf="user?.userName" class="nav-item dropdown" dropdown>
-          <button id="button-admin-console" dropdownToggle type="button" class="btn dropdown-toggle"
-                  aria-controls="dropdown-admin-console">
-            Admin console
-            <span class="caret"></span>
-          </button>
-          <ul id="dropdown-admin-console" *dropdownMenu class="dropdown-menu"
-              role="menu" aria-labelledby="button-basic">
-            <li *ngIf="user?.userName" class="nav-item"><a  [routerLink]="['/create-product']" class="nav-link custom-nav-link">Create product</a></li>
-          </ul>
+        <li *ngIf="user" class="nav-item"><span class="d-flex p-2 user-greeting">{{ user?.userName }}</span></li>
+        <li *ngIf="user?.userName" class="nav-item"><a href="/logout" class="nav-link custom-nav-link">Logout</a></li>
+        <li *ngIf="user?.userName" class="nav-item"><a  [routerLink]="['/create-product']" class="nav-link custom-nav-link">Create product</a></li>
+        <li>
 
+          <div class="btn-group" dropdown>
+            <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+                    aria-controls="dropdown-basic">
+              Button dropdown <span class="caret"></span>
+            </button>
+            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+                role="menu" aria-labelledby="button-basic">
+              <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
+              <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
+              <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
+              <li class="divider dropdown-divider"></li>
+              <li role="menuitem"><a class="dropdown-item" href="#">Separated link</a>
+              </li>
+            </ul>
+          </div>
         </li>
       </ul>
     </div>
@@ -75,5 +71,4 @@
       </div>
     </div>
   </div>
-
 </div>
