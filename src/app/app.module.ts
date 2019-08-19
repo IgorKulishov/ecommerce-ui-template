@@ -14,7 +14,7 @@ import { CartModule } from './cart/cart.module';
 import { SharedModule } from './shared/shared.module'; //from purchased template
 
 import { reducer } from './app.reducers';
-import { CollapseModule } from "ngx-bootstrap/collapse";
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';

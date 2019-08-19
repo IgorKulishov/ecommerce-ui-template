@@ -19,6 +19,25 @@
         <li *ngIf="user" class="nav-item"><span class="d-flex p-2 user-greeting">{{ user?.userName }}</span></li>
         <li *ngIf="user?.userName" class="nav-item"><a href="/logout" class="nav-link custom-nav-link">Logout</a></li>
         <li *ngIf="user?.userName" class="nav-item"><a  [routerLink]="['/create-product']" class="nav-link custom-nav-link">Create product</a></li>
+        <li>
+
+          <div class="btn-group" dropdown>
+            <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+                    aria-controls="dropdown-basic">
+              Button dropdown <span class="caret"></span>
+            </button>
+            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+                role="menu" aria-labelledby="button-basic">
+              <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
+              <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
+              <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
+              <li class="divider dropdown-divider"></li>
+              <li role="menuitem"><a class="dropdown-item" href="#">Separated link</a>
+              </li>
+            </ul>
+          </div>
+
+        </li>
       </ul>
     </div>
   </nav>
@@ -53,5 +72,4 @@
       </div>
     </div>
   </div>
-
 </div>
