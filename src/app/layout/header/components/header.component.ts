@@ -15,6 +15,7 @@ import {transition, trigger, style, animate} from '@angular/animations';
 export class HeaderComponent implements OnInit {
   cart$ : Observable<any>;
   isCollapsed = true;
+  isCollapsedSellerConsole = true;
   user = undefined;
   currentUrl: string;
 

@@ -26,16 +26,28 @@
 .navbar-custom {
   position: absolute;
   right: 40px;
+  top:  40px;
+}
+.navbar-custom-upper-header {
+  position: absolute;
+  right: 40px;
+  top:  5px;
+  font-size: small;
 }
 
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 991px) {
   .navbar-custom {
     position: static;
+    font-size: medium;
 
     li button {
       font-size: 1.3rem;
       margin-bottom: 0.5rem;
     }
+  }
+  .navbar-custom-upper-header {
+    position: static;
+    font-size: medium;
   }
   .nav-item.dropdown.open.show {
     position: fixed;
