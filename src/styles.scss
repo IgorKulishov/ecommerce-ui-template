@@ -1,5 +1,11 @@
 @import 'scss/style';
 
+//variables:
+$base-lightest-grey: #f8f9fa;
+$base-lightest-grey-01: rgba(211,211,211,0.1);
+$base-lightest-grey-02: rgba(211,211,211,0.2);
+$base-lightest-grey-03: rgba(211,211,211,0.3);
+
 .form-frame {
   padding: 1.5rem;
   margin-right: 0;
@@ -34,12 +40,33 @@
   top:  5px;
   font-size: small;
 }
+.custom-drop-down {
+  border-color: $base-lightest-grey;
+  background-color: $base-lightest-grey;
+  color: rgba(0, 0, 0, 0.5);
+  font: 16px Roboto, sans-serif !important;
+}
+.custom-drop-down:hover {
+  border-color: $base-lightest-grey;
+  background-color: $base-lightest-grey-02;
+  color: black;
+}
+.custom-drop-down:focus {
+  border-color: $base-lightest-grey;
+  background-color: $base-lightest-grey-03;
+  color: black;
+}
+
+.custom-menu-dropdown {}
+.language-selector {
+  margin-left: 10px;
+  width: 50%;
+}
 
 @media only screen and (max-width: 991px) {
   .navbar-custom {
     position: static;
     font-size: medium;
-
     li button {
       font-size: 1.3rem;
       margin-bottom: 0.5rem;
@@ -58,6 +85,41 @@
     right: 0px !important;
     left: 0px !important;
     bottom: 0px !important;
+  }
+  .custom-drop-down {
+    border-color: $base-lightest-grey;
+    background-color: $base-lightest-grey;
+    color: rgba(0, 0, 0, 0.5);
+    font: 16px Roboto, sans-serif !important;
+    padding: 8px 0px 0px 0px;
+  }
+  .custom-drop-down:hover {
+    border-color: $base-lightest-grey;
+    background-color: $base-lightest-grey;
+    border-color: $base-lightest-grey;
+    color: black;
+  }
+  .custom-drop-down:focus {
+    border-color: $base-lightest-grey;
+    background-color: $base-lightest-grey;
+    border-color: $base-lightest-grey !important;
+    color: black;
+  }
+  .custom-submenu {
+    margin-left: 10px;
+  }
+  .custom-menu-dropdown {
+    margin-left: 10px;
+    padding-left: 10px;
+    //background-color: #00a2e8;
+  }
+  .language-collapse {
+    margin-left: 10px;
+  }
+  .language-selector {
+    border-color: #727272;
+    padding: 0 0 0 20px;
+    width: 20%;
   }
 }
 /*.product-name:after {*/

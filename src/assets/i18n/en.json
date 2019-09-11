@@ -5,5 +5,8 @@
     "quantity": "Quality",
     "sum": "Sum",
     "addToCart": "Add to cart"
+  },
+  "header": {
+    "language": "Language"
   }
 }

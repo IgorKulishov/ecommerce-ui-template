@@ -13,11 +13,14 @@ import {transition, trigger, style, animate} from '@angular/animations';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  cart$ : Observable<any>;
+  cart$: Observable<any>;
   isCollapsed = true;
   isCollapsedSellerConsole = true;
+  isCollapsedUserAccount = true;
   user = undefined;
   currentUrl: string;
+  languages: string[] = ['En', 'Fr', 'Ru'];
+  selectedLanguage = 'En';
 
   constructor(private appCookieService: AppCookieService,
               private store: Store<AppStates>,
@@ -56,6 +59,9 @@ export class HeaderComponent implements OnInit {
             break;
           case 'checkout':
             this.currentUrl = 'Checkout';
+            break;
+          case 'login':
+            this.currentUrl = 'Login';
             break;
           default:
             this.currentUrl = 'Products';

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { HeaderComponent } from './header/components/header.component';
 import { UpperHeaderComponent } from './header/components/upper-header/upper-header.component';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -16,6 +17,7 @@ import { AlertModule } from 'ngx-bootstrap/alert';
     CommonModule,
     BrowserAnimationsModule,
     AlertModule,
+    FormsModule,
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot()

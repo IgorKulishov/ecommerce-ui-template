@@ -11,19 +11,77 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent" [collapse]="isCollapsed" [isAnimated]="true" >
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" [collapse]="isCollapsed" [isAnimated]="true" *ngIf="currentUrl != 'Login'" >
       <app-upper-header></app-upper-header>
       <ul class="navbar-nav mr-auto navbar-custom">
-        <li *ngIf="user" class="nav-item"><span class="d-flex p-2 user-greeting">{{ user?.userName }}</span></li>
-        <li *ngIf="user?.userName" class="nav-item"><a href="/logout" class="nav-link custom-nav-link">Logout</a></li>
-        <li class="nav-item dropdown">
-          <button id="button-basic" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#dropdown-basic" aria-controls="dropdown-basic" aria-expanded="false" aria-label="seller console"
+        <!--User Account console menu-->
+        <!--1. for Desktop-->
+        <li class="d-none d-lg-block">
+          <div class="btn-group" dropdown [insideClick]="true">
+            <button id="button-dropdown-user-account" dropdownToggle type="button" class="btn dropdown-toggle custom-drop-down"
+                    aria-controls="dropdown-user-account">
+              <i class="far fa-lg fa-user"></i>
+            </button>
+            <ul id="dropdown-user-account" *dropdownMenu class="dropdown-menu"
+                role="menu" aria-labelledby="button-dropdown-user-account">
+              <li *ngIf="user" class="nav-item">
+                <span class="d-flex p-2 user-greeting">{{ user?.userName }}</span>
+              </li>
+              <li>
+                <select class="language-selector" id="languageSelector" [(ngModel)]="selectedLanguage">
+                  <option *ngFor="let language of languages">{{language}}</option>
+                </select>
+              </li>
+              <li class="divider dropdown-divider"></li>
+              <li *ngIf="user?.userName" class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+            </ul>
+          </div>
+        </li>
+        <!--2. for Mobile-->
+        <li class="nav-item dropdown d-block d-lg-none ">
+          <button id="button-collapse-user-account" class="custom-drop-down" type="button" data-toggle="collapse" data-target="#dropdown-basic" aria-controls="dropdown-basic" aria-expanded="false" aria-label="seller console"
+                  (click)="isCollapsedUserAccount = !isCollapsedUserAccount">
+            User account <span class="caret"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="user-account" [collapse]="isCollapsedUserAccount" [isAnimated]="true">
+            <ul id="collapse-user-account" class="navbar-nav mr-auto navbar-custom custom-menu-dropdown">
+              <li *ngIf="user" class="nav-item">
+                <span class="d-flex p-2 user-greeting">{{ user?.userName }}</span>
+              </li>
+              <li class="language-collapse">
+                Language
+                <select class="language-selector" id="languageSelectorMobile" [(ngModel)]="selectedLanguage">
+                  <option *ngFor="let language of languages">{{language}}</option>
+                </select>
+              </li>
+              <li class="divider dropdown-divider"></li>
+              <li *ngIf="user?.userName" class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+            </ul>
+          </div>
+        </li>
+        <!-- Seller console menu -->
+        <!--1. for Desktop-->
+        <li class="d-none d-lg-block">
+          <div class="btn-group" dropdown>
+            <button id="button-dropdown-seller-console" dropdownToggle type="button" class="btn dropdown-toggle custom-drop-down"
+                    aria-controls="dropdown-seller-console">
+              Seller console  <span class="caret"></span>
+            </button>
+            <ul id="dropdown-seller-console" *dropdownMenu class="dropdown-menu"
+                role="menu" aria-labelledby="button-dropdown-seller-console">
+              <li *ngIf="user?.userName" class=""><a  [routerLink]="['/create-product']" class="nav-link">Create product</a></li>
+            </ul>
+          </div>
+        </li>
+        <!--2. for Mobile-->
+        <li class="nav-item dropdown d-block d-lg-none ">
+          <button id="button-collapse-seller-console" class="custom-drop-down" type="button" data-toggle="collapse" data-target="#dropdown-basic" aria-controls="dropdown-basic" aria-expanded="false" aria-label="seller console"
                   (click)="isCollapsedSellerConsole = !isCollapsedSellerConsole">
             Seller console <span class="caret"></span>
           </button>
           <div class="collapse navbar-collapse" id="seller-console" [collapse]="isCollapsedSellerConsole" [isAnimated]="true">
-            <ul id="seller-console-list" class="navbar-nav mr-auto navbar-custom">
-              <li *ngIf="user?.userName" class=""><a  [routerLink]="['/create-product']" class="nav-link custom-nav-link">Create product</a></li>
+            <ul id="collapse-seller-console" class="navbar-nav mr-auto navbar-custom custom-menu-dropdown">
+              <li *ngIf="user?.userName" class=""><a  [routerLink]="['/create-product']" class="nav-link">Create product</a></li>
             </ul>
           </div>
         </li>
