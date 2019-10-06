@@ -1,5 +1,11 @@
 @import 'scss/style';
 
+//variables:
+$base-lightest-grey: #f8f9fa;
+$base-lightest-grey-01: rgba(211,211,211,0.1);
+$base-lightest-grey-02: rgba(211,211,211,0.2);
+$base-lightest-grey-03: rgba(211,211,211,0.3);
+
 .form-frame {
   padding: 1.5rem;
   margin-right: 0;
@@ -9,33 +15,71 @@
 .product-name {
   font-size: 1.5rem;
   border-radius: 15px;
-  box-shadow: -1px 1px 10px lightblue;
+  //box-shadow: -1px 1px 10px lightblue;
   font-family: 'Rokkitt', sans-serif;
   /*height: 45px;*/
 }
 @media only screen and (max-width: 575px) {
   .product-name {
-    font-size: 1.3rem;
-    font-weight: 500;
-    border-radius: 15px;
-    box-shadow: -1px 1px 10px lightblue;
+    //font-weight: 500;
+    //border-radius: 15px;
+    //box-shadow: -1px 1px 10px lightblue;
     /*height: 45px;*/
+    font-family: Overpass;
+    //font-size: 20px;
+    margin: 15px 0 10px;
   }
 }
 
 .navbar-custom {
   position: absolute;
   right: 40px;
+  top:  40px;
+}
+.navbar-custom-upper-header {
+  position: absolute;
+  right: 40px;
+  top:  5px;
+  font-size: small;
+}
+.custom-drop-down {
+  border-color: $base-lightest-grey;
+  background-color: $base-lightest-grey;
+  color: rgba(0, 0, 0, 0.5);
+  font: 16px Roboto, sans-serif !important;
+}
+.custom-drop-down:hover {
+  border-color: $base-lightest-grey;
+  background-color: $base-lightest-grey-02;
+  color: black;
+}
+.custom-drop-down:focus {
+  border-color: $base-lightest-grey;
+  background-color: $base-lightest-grey-03;
+  color: black;
 }
 
-@media only screen and (max-width: 640px) {
+.custom-menu-dropdown {}
+.language-selector {
+  margin-left: 10px;
+  width: 30%;
+}
+.language-collapse {
+  margin-left: 10px;
+}
+
+@media only screen and (max-width: 991px) {
   .navbar-custom {
     position: static;
-
+    font-size: medium;
     li button {
       font-size: 1.3rem;
       margin-bottom: 0.5rem;
     }
+  }
+  .navbar-custom-upper-header {
+    position: static;
+    font-size: medium;
   }
   .nav-item.dropdown.open.show {
     position: fixed;
@@ -46,6 +90,38 @@
     right: 0px !important;
     left: 0px !important;
     bottom: 0px !important;
+  }
+  .custom-drop-down {
+    border-color: $base-lightest-grey;
+    background-color: $base-lightest-grey;
+    color: rgba(0, 0, 0, 0.5);
+    font: 16px Roboto, sans-serif !important;
+    padding: 8px 0px 0px 0px;
+  }
+  .custom-drop-down:hover {
+    border-color: $base-lightest-grey;
+    background-color: $base-lightest-grey;
+    border-color: $base-lightest-grey;
+    color: black;
+  }
+  .custom-drop-down:focus {
+    border-color: $base-lightest-grey;
+    background-color: $base-lightest-grey;
+    border-color: $base-lightest-grey !important;
+    color: black;
+  }
+  .custom-submenu {
+    margin-left: 10px;
+  }
+  .custom-menu-dropdown {
+    margin-left: 10px;
+    padding-left: 10px;
+    //background-color: #00a2e8;
+  }
+  .language-selector {
+    border-color: #727272;
+    padding: 0 0 0 20px;
+    width: 20%;
   }
 }
 /*.product-name:after {*/
@@ -70,19 +146,22 @@
 .product-price {
   /*margin: 1rem;*/
   /*font-size: 1.2rem;*/
-  margin-bottom: 10px;
+  margin: 7px 0 7px;
 }
 .product-rating {
   color: #FFB656;
   /*margin: 1rem;*/
 }
 .product-add-to-card {
-
+  margin: 7px 0 7px;
+}
+.order-total{
+  margin: 7px 0 7px;
 }
 .product-description {
   /*box-shadow: -10px 10px 10px lightblue;*/
-  border-radius: 15px;
-  margin-top: 3px;
+  //border-radius: 15px;
+  margin: 7px 0 7px;
   font-size: 1.1rem;
 }
 
@@ -94,8 +173,8 @@
 }
 .image-product-details {
   width: 100%;
-  /*box-shadow: 2px 2px 2px lightslategrey;*/
-  margin: 1rem;
+  box-shadow: 0px 1px 5px lightslategrey;
+  margin: 5px;
   border-radius: 6px;
 }
 .product-details-container {
@@ -280,7 +359,7 @@ app-root + .loading {
 }
 /** END: LOGIN & REGISTER PAGE **/
 .default-page-background {
-  background-image: linear-gradient(to right bottom, #ffffff, rgba(52, 152, 219, 0.8)), url(/assets/images/electronics_background.png);
+  //background-image: linear-gradient(to right bottom, #ffffff, rgba(52, 152, 219, 0.8)), url(/assets/images/electronics_background.png);
   min-height: 100vh;
   background-repeat: repeat-y;
   background-size: cover;
@@ -332,3 +411,28 @@ app-root + .loading {
   border: solid 1px lightskyblue;
   text-align:center;
 }
+
+carousel {
+  &.show-nav {
+    .carousel {
+      .carousel-control-prev span.icon-prev.carousel-control-prev-icon {
+        background-color: lightslategray;
+        margin-right: 28px;
+      }
+
+      .carousel-control-next span.icon-next.carousel-control-next-icon {
+        background-color: lightslategray;
+        margin-left: 28px;
+      }
+
+      .carousel-indicators {
+        margin: -25px;
+        padding: 0 15px 0 15px;
+        li {
+          background-color: lightslategray;
+        }
+      }
+    }
+  }
+}
+

@@ -1,27 +1,34 @@
 import { NgModule } from '@angular/core';
 import { HeaderComponent } from './header/components/header.component';
-import { CollapseModule } from 'ngx-bootstrap/collapse';
-import {BsDropdownModule} from "ngx-bootstrap/dropdown";
+import { UpperHeaderComponent } from './header/components/upper-header/upper-header.component';
 import { CommonModule } from '@angular/common';
-import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { AlertModule } from 'ngx-bootstrap/alert';
+
 @NgModule({
   imports: [
     RouterModule,
     CommonModule,
     BrowserAnimationsModule,
     AlertModule,
+    FormsModule,
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot()
   ],
   declarations: [
-    HeaderComponent
+    HeaderComponent,
+    UpperHeaderComponent
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    UpperHeaderComponent
   ],
   providers: [
 

@@ -14,14 +14,17 @@ import { CartModule } from './cart/cart.module';
 import { SharedModule } from './shared/shared.module'; //from purchased template
 
 import { reducer } from './app.reducers';
-import { CollapseModule } from "ngx-bootstrap/collapse";
+
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import { ServiceWorkerModule } from '@angular/service-worker';
+// import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 // no need to place actions to providers:
 
 /**
@@ -60,7 +63,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: (HttpLoaderFactory),
         deps: [HttpClient]
       }
-    })
+    }),
+    CarouselModule.forRoot()
   ],
   providers: [
   ],

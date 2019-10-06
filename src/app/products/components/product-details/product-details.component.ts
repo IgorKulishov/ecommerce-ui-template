@@ -1,33 +1,48 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import { Store } from '@ngrx/store';
+import {Component, OnInit, OnDestroy, ViewChild, ElementRef} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
 import {TranslateService} from '@ngx-translate/core';
+import { Observable, of, BehaviorSubject } from 'rxjs';
+import { map, filter, take } from 'rxjs/operators';
+import { ISubscription } from 'rxjs/Subscription';
 import { ProductsService } from '../../../core/services/products.service';
 import { GetProductDetails, ResetProductDetails } from '../../store/actions/products.actions';
 import { AddToCart } from '../../../cart/store/actions/cart.actions';
 import { AppStates } from '../../store/states/app.states';
-import { LoginService } from "../../../core/services/login.service";
-import { ProductDetails} from '../../models/products.model';
+import { LoginService } from '../../../core/services/login.service';
+import { ProductDetails, ProductInfo} from '../../models/products.model';
+import {ImageList} from '../../models/products.model';
 
-import { Observable } from "rxjs";
-
-import { map } from 'rxjs/operators';
+declare var lightGallery: Function;
 
 @Component({
-  selector: 'product-details',
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent implements OnInit, OnDestroy {
-
-  public show = true;
-  public slug: string;
-  public selectedQuantity = 1;
+  slug: string;
+  productDetail$: Observable<ProductDetails>;
+  productDetailSubscribtion: ISubscription;
+  routeSubscribtion: ISubscription;
+  productId: string;
+  images: ImageList[];
+  slidesChangeMessage = '';
+  /*** Configurations: ***/
+  showErrorMsgs = true;
+  // TODO: add lnanguage toggle
+  defaultLanguage = 'en';
+  itemsPerSlide = 1;
+  maxItemsPerSlide = 3;
+  singleSlideOffset = false;
+  noWrap = false;
+  selectedQuantity = 1;
+  showNext = false;
+  showPrev = false;
   // TODO : add max stock product amount in create product API or logic to update stock remaining (for now harcoding to 10 max)
-  public maxQuantity = 10;
-  public minQuantity = 1;
-  public productDetail$: Observable<ProductDetails>;
-  private productId: string;
+  maxQuantity = 10;
+  minQuantity = 1;
+
+  @ViewChild('lightGallery', {static: false}) lightgalleryID: ElementRef;
 
   constructor(private store: Store<AppStates>,
               private loginService: LoginService,
@@ -35,21 +50,47 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
               private productsService: ProductsService,
               private route: ActivatedRoute,
               private translateService: TranslateService) {
+  }
 
-    translateService.use('en');
-
+  ngOnInit() {
     this.productDetail$ = this.store.select(store => {
       if (store && store['productsReducer']) {
         return store['productsReducer'];
       }
-    }).pipe(map((res: any) => {
-      if (res && res.uiStateProductDetails) {
-        this.productId = res.uiStateProductDetails.id;
-        return res.uiStateProductDetails;
-      } else {
-        return;
+    }).pipe(
+      filter(productStore => productStore && productStore['uiStateProductDetails']),
+      map((res: any) => {
+        if (res && res.uiStateProductDetails && res.uiStateProductDetails.productInfo) {
+          this.productId = res.uiStateProductDetails.id;
+          this.images = res.uiStateProductDetails.productInfo.imageList;
+          this.itemsPerSlide = this.images.length < 3 ? this.images.length : 3;
+          return res.uiStateProductDetails;
+        } else {
+          return;
+        }
+      })
+    );
+
+    this.routeSubscribtion = this.route.params.subscribe(
+      (params: any) => {
+        this.slug = params['slug'];
+        this.store.dispatch(new GetProductDetails({ slug : this.slug }));
       }
-    }));
+    );
+
+    this.productDetail$.subscribe(productDetail => {
+      if (productDetail && productDetail.defaultMaxQuantity) {
+        this.maxQuantity = productDetail.defaultMaxQuantity;
+      }
+    });
+
+    this.translateService.use(this.defaultLanguage);
+  }
+
+  ngOnDestroy() {
+    // this.routeSubscribtion.unsubscribe();
+    // this.productDetailSubscribtion.unsubscribe();
+    this.store.dispatch(new ResetProductDetails());
   }
 
   addToCart() {
@@ -58,27 +99,23 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       {
         id : this.productId,
         quantity: this.selectedQuantity
-        }
-      ));
+      }
+    ));
   }
 
-  ngOnInit() {
-    this.route.params.subscribe(
-      (params: any) => {
-        this.slug = params['slug'];
-        this.store.dispatch(new GetProductDetails({ slug : this.slug }));
-      }
-    );
-
-    this.productDetail$.subscribe(productDetail => {
-      if(productDetail && productDetail.defaultMaxQuantity) {
-        this.maxQuantity = productDetail.defaultMaxQuantity;
-      }
-    })
-  }
-
-  ngOnDestroy() {
-    this.store.dispatch(new ResetProductDetails());
+  initGallery(index: number) {
+    lightGallery(this.lightgalleryID.nativeElement, {
+      thumbnail: true,
+      download : false,
+      dynamic  : true,
+      index: index,
+      dynamicEl: this.images.map(image => {
+        return {
+          'src': image.imageUrl,
+          'thumb': image.imageUrl
+        };
+      })
+    });
   }
 
   onSelectedQuantity(quantity) {
@@ -90,14 +127,18 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   }
 
   getProductUrl(product) {
-    if(product && product.imageList.length > 0) {
-      let url = product.imageList[0]['imageUrl'] ? product.imageList[0]['imageUrl'] :
+    if (product && product.imageList.length > 0) {
+      const url = product.imageList[0]['imageUrl'] ? product.imageList[0]['imageUrl'] :
         product.imageList[0]['largeUrl'] ? product.imageList[0]['largeUrl'] : '/assets/images/teapod.jpeg';
-      console.log(url);
+      // console.log(url);
       return url;
-    } else if(product && product.imageList.length == 0) {
+    } else if (product && product.imageList.length === 0) {
       return  '/assets/images/teapod.jpeg';
     }
+  }
+
+  onSlideRangeChange(indexes: number[]): void {
+    // this.slidesChangeMessage = `Slides have been switched: ${indexes}`;
   }
 
 }

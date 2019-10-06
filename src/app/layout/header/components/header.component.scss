@@ -1,9 +1,23 @@
 
 .custom-navbar-image {
-  height: 75px;
+  height: 65px;
 }
 .custom-navbar-label {
   color:dodgerblue;
+}
+.custom-navbar-image:hover {
+  animation-duration: .5s;
+  animation-name: rotate;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes open-menu {
@@ -17,7 +31,7 @@
   border: none;
 }
 .open-menu-button:hover {
-  background-image: linear-gradient(to right bottom, #ffffff, rgba(52, 152, 219, 0.5));
+  //background-image: linear-gradient(to right bottom, #ffffff, rgba(52, 152, 219, 0.5));
 }
 /* mobile menu button open & close */
 @keyframes close-menu-button {
@@ -63,30 +77,18 @@
 
 .nav-custom-styles {
   box-shadow: 1px 1px 5px lightgrey;
-  //background-image: linear-gradient(to right bottom, #ffffff, rgba(52, 152, 219, 0.5));
+  box-shadow: -10px -10px 10px #bedff6;
+}
+.nav-custom-login-styles {
+  background-image: linear-gradient(to right bottom, #ffffff, rgba(52, 152, 219, 0.5));
+  box-shadow: 1px 1px 5px lightgrey;
   box-shadow: -10px -10px 10px #bedff6;
 }
 
 @media only screen and (max-width: 975px) {
-  .custom-nav-link {
-    letter-spacing: 10px;
-    padding-left: 10px;
-    position: relative;
-    border-radius: 12px;
-    margin: 2px 0 2px;
-    font-family: Overpass;
-    font-size: 16px;
-    font-weight: 800;
-    color: steelblue !important;
-  }
-  .custom-nav-link:hover {
-    background-image: linear-gradient(to right bottom, #ffffff, rgba(52, 152, 219, 0.5));
-  }
+
 }
 
-.custom-menu-dropdown{
-  margin: 0px;
-}
 .shopping_cart_total {
   width: 51px
 }
