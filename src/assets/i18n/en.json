@@ -4,6 +4,10 @@
     "price": "Price",
     "quantity": "Quality",
     "sum": "Sum",
-    "addToCart": "Add to cart"
+    "addToCart": "Add to cart",
+    "availableOnStock": "Available on stock"
+  },
+  "header": {
+    "language": "Language"
   }
 }
