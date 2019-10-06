@@ -24,8 +24,9 @@ export interface ProductInfo {
 }
 
 export interface ImageList {
-  '_id':      number,
-  'largeUrl': string
+  '_id':      number;
+  'largeUrl': string;
+  'imageUrl': string;
 }
 
 export interface ProductSlug {
@@ -38,12 +39,12 @@ export interface errorState {
 }
 
 export interface ProductDetails {
+  'id'?:           number;
   'name':         string;
   'description':  string;
   'slug':         string;
   'price':        number;
   'productInfo':  ProductInfo;
-  'id'?:           number;
   'defaultMaxQuantity': number;
 }
 

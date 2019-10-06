@@ -77,7 +77,11 @@
 
 .nav-custom-styles {
   box-shadow: 1px 1px 5px lightgrey;
-  //background-image: linear-gradient(to right bottom, #ffffff, rgba(52, 152, 219, 0.5));
+  box-shadow: -10px -10px 10px #bedff6;
+}
+.nav-custom-login-styles {
+  background-image: linear-gradient(to right bottom, #ffffff, rgba(52, 152, 219, 0.5));
+  box-shadow: 1px 1px 5px lightgrey;
   box-shadow: -10px -10px 10px #bedff6;
 }
 

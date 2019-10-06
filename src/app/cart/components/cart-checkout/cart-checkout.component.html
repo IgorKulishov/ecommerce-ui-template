@@ -1,76 +1,166 @@
 <div class="container-fluid default-page-background">
-
-  <div class="row" *ngFor='let product of productsInCart'>
-    <div class="col-12 product-name text-center">
-      {{product.product.name}}
-    </div>
-    <div class="col-12">
-      <div class="row thumbnail product-card" >
-        <div class="col-sm-12 col-md-4 text-center">
-          <img class="product-image" [src]="getProductUrl(product.product.productInfo)"
-               onerror="this.onerror=null;this.src='/assets/images/teapod.jpeg';" alt="image of {{product.product.name}}">
+  <table class="cart__table cart-table">
+    <thead class="cart-table__head">
+    <tr class="cart-table__row">
+      <th class="cart-table__column cart-table__column--image">Image</th>
+      <th class="cart-table__column cart-table__column--product">Product</th>
+      <th class="cart-table__column cart-table__column--price">Price</th>
+      <th class="cart-table__column cart-table__column--quantity">Quantity</th>
+      <th class="cart-table__column cart-table__column--total">Total</th>
+      <th class="cart-table__column cart-table__column--remove"></th>
+    </tr>
+    </thead>
+    <tbody class="cart-table__body">
+    <tr *ngFor='let product of productsInCart' class="cart-table__row">
+      <td class="cart-table__column cart-table__column--image">
+        <!--      <a [routerLink]="root.product(item.cartItem.product.id)" *ngIf="item.cartItem.product.images?.length"><img [src]="item.cartItem.product.images[0]" alt=""></a>-->
+        <img class="product-image" [src]="getProductUrl(product.product.productInfo)"
+             onerror="this.onerror=null;this.src='/assets/images/teapod.jpeg';" alt="image of {{product.product.name}}">
+      </td>
+      <td class="cart-table__column cart-table__column--product">
+        <div class="col-sm-12 col-md-12 product-description">
+          {{product.product.description}}
         </div>
-        <div class="col-sm-12 col-md-8">
-          <div class="container-fluid">
-            <div class="row">
-
-              <div class="col-sm-12 col-md-12 product-description">
-                {{product.product.description}}
-              </div>
-
-              <div class="col-4 product-price">
-                $ {{product.product.price}}
-              </div>
-
-              <div class="col-4 product-price">
-                {{product.quantity}} pcs
-              </div>
-
-              <div class="col-4 product-price">
-                $ {{ totalSum(product.product.price, product.quantity) }}
-              </div>
-            </div>
-            <div class="row">
-              <span class="align-bottom product-rating">
-                <i class="glyphicon glyphicon-star-empty"></i>
-                <i class="glyphicon glyphicon-star-empty"></i>
-                <i class="glyphicon glyphicon-star-empty"></i>
-                <i class="glyphicon glyphicon-star-empty"></i>
-                <i class="glyphicon glyphicon-star-empty"></i>
-              </span>
-            </div>
-          </div>
+        <!--      <a [routerLink]="root.product(item.cartItem.product.id)" class="cart-table__product-name">{{ item.cartItem.product.name }}</a>-->
+        <!--      <ul *ngIf="item.cartItem.options.length" class="cart-table__options">-->
+        <!--        <li *ngFor="let option of item.cartItem.options">{{ option.name }}: {{ option.value }}</li>-->
+        <!--      </ul>-->
+      </td>
+      <td class="cart-table__column cart-table__column--price" data-title="Price">
+        <div class="col-4 product-price">
+          $ {{product.product.price}}
         </div>
-        <div class="sm-screen-product-divider" *ngIf="!isLast"></div>
+      </td>
+      <td class="cart-table__column cart-table__column--quantity" data-title="Quantity">
+        <div class="col-4 product-price">
+          {{product.quantity}} pcs
+        </div>
+      </td>
+      <td class="cart-table__column cart-table__column--total" data-title="Total">
+        <div class="col-4 product-price">
+          $ {{ totalSum(product.product.price, product.quantity) }}
+        </div>
+      </td>
+          <td class="cart-table__column cart-table__column--remove">
+            <div class="col-2 text-right remove-from-cart">
+              <button type="button" class="close remove-from-cart" aria-label="Close">
+<!--                      (click)="deleteProductConfirmation(approval_template, product.product)"-->
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          </td>
+    </tr>
+    </tbody>
+  </table>
+<!--  <div class="row" *ngFor='let product of productsInCart'>-->
+<!--    <div class="col-12 product-name text-center">-->
+<!--      {{product.product.name}}-->
+<!--    </div>-->
+<!--    <div class="col-12">-->
+<!--      <div class="row thumbnail product-card" >-->
+<!--        <div class="col-sm-12 col-md-4 text-center">-->
+<!--          <img class="product-image" [src]="getProductUrl(product.product.productInfo)"-->
+<!--               onerror="this.onerror=null;this.src='/assets/images/teapod.jpeg';" alt="image of {{product.product.name}}">-->
+<!--        </div>-->
+<!--        <div class="col-sm-12 col-md-8">-->
+<!--          <div class="container-fluid">-->
+<!--            <div class="row">-->
+
+<!--              <div class="col-sm-12 col-md-12 product-description">-->
+<!--                {{product.product.description}}-->
+<!--              </div>-->
+
+<!--              <div class="col-4 product-price">-->
+<!--                $ {{product.product.price}}-->
+<!--              </div>-->
+
+<!--              <div class="col-4 product-price">-->
+<!--                {{product.quantity}} pcs-->
+<!--              </div>-->
+
+<!--              <div class="col-4 product-price">-->
+<!--                $ {{ totalSum(product.product.price, product.quantity) }}-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="row">-->
+<!--              <span class="align-bottom product-rating">-->
+<!--                <i class="glyphicon glyphicon-star-empty"></i>-->
+<!--                <i class="glyphicon glyphicon-star-empty"></i>-->
+<!--                <i class="glyphicon glyphicon-star-empty"></i>-->
+<!--                <i class="glyphicon glyphicon-star-empty"></i>-->
+<!--                <i class="glyphicon glyphicon-star-empty"></i>-->
+<!--              </span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="sm-screen-product-divider" *ngIf="!isLast"></div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+  <div class="row justify-content-end pt-5">
+    <div class="col-12 col-md-7 col-lg-6 col-xl-5">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Cart Totals</h3>
+          <table class="cart__totals">
+            <thead *ngIf="totalAmount" class="cart__totals-header">
+              <tr>
+                <th>Subtotal</th>
+                <td>$ {{totalAmount}}</td>
+              </tr>
+            </thead>
+            <tbody *ngIf="totalAmount" class="cart__totals-body">
+<!--            <tr *ngFor="let total of cart.totals$|async">-->
+<!--              <th>{{ total.title }}</th>-->
+<!--              <td>-->
+<!--                {{ total.price|currencyFormat }}-->
+<!--                <div *ngIf="total.type === 'shipping'" class="cart__calc-shipping"><a href="" (click)="$event.preventDefault()">Calculate Shipping</a></div>-->
+<!--              </td>-->
+<!--            </tr>-->
+            </tbody>
+            <tfoot class="cart__totals-footer">
+              <tr>
+                <th>Total</th>
+                <td>$ {{totalAmount}}</td>
+              </tr>
+              <tr>
+                <th>
+                  <form *ngIf='!checkOutConfirmationStatus' [formGroup]="checkoutForm" class="submit-order-form">
+                    <div class="form-group">
+                      <label for="methodPayment">Please select method of payment</label>
+                      <select formControlName="payment_method_id" class="form-control" name="payment_method_id" id="methodPayment">
+                        <option selected>Select...</option>
+                        <option *ngFor="let method of methodsOfPayment">
+                          {{ method.paymentType }}
+                        </option>
+                      </select>
+                    </div>
+                    <button type="submit"  class="btn btn-primary btn-block" (click)="openCheckoutApproveModal(approval_template)">Submit order</button>
+                  </form>
+                </th>
+                <th>
+                  <div class="text-center checkout-confirmation" *ngIf='checkOutConfirmationStatus'>Thank you! Your order has been accepted!</div>
+                </th>
+              </tr>
+            </tfoot>
+          </table>
+<!--          <a class="btn btn-primary btn-xl btn-block cart__checkout-button" routerLink="../checkout">Proceed to checkout</a>-->
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="row checkout-total">
-    <div class="col-6">
-      {{totalQuantity}} pcs
-    </div>
-    <div class="col-6">
-      $ {{totalAmount}}
-    </div>
-  </div>
+<!--  <div class="row checkout-total">-->
+<!--    <div class="col-6">-->
+<!--      {{totalQuantity}} pcs-->
+<!--    </div>-->
+<!--    <div class="col-6">-->
+<!--      $ {{totalAmount}}-->
+<!--    </div>-->
+<!--  </div>-->
 
-  <div class="text-center checkout-verification-message" *ngIf='!checkOutConfirmationStatus'>Please verify your items and select method of payment</div>
-
-  <div class="text-center checkout-confirmation" *ngIf='checkOutConfirmationStatus'>Thank you! Your order has been accepted!</div>
-
-  <form *ngIf='!checkOutConfirmationStatus' [formGroup]="checkoutForm" class="submit-order-form">
-    <div class="form-group">
-       <label for="methodPayment">Please select method of payment</label>
-       <select formControlName="payment_method_id" class="form-control" name="payment_method_id" id="methodPayment">
-         <option selected>Select...</option>
-         <option *ngFor="let method of methodsOfPayment">
-           {{ method.paymentType }}
-         </option>
-       </select>
-    </div>
-    <button type="submit"  class="btn btn-primary btn-block" (click)="openCheckoutApproveModal(approval_template)">Submit order</button>
-  </form>
+<!--  <div class="text-center checkout-verification-message" *ngIf='!checkOutConfirmationStatus'>Please verify your items and select method of payment</div>-->
 
 </div>
 
@@ -103,4 +193,3 @@
 <!--<alert type="danger" *ngIf='error'>
   <strong>Something went wrong. Please login again. <a href="/logout"> Login </a> </strong>
 </alert>-->
-

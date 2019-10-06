@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterModule, Routes } from '@angular/router';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {StoreModule} from '@ngrx/store';
 
@@ -47,12 +48,13 @@ const routes: Routes = [
     CoreModule,
     WidgetsModule,
     SharedModule,
-    FormsModule, 
-    ReactiveFormsModule, 
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('productsReducer', productsReducer),
     EffectsModule.forFeature([ProductsEffects]),
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    CarouselModule.forRoot()
   ],
   declarations: [
     ProductListComponent,

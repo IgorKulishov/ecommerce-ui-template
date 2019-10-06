@@ -1,9 +1,11 @@
 <div style="position: sticky; top:0; z-index: 3;">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top nav-custom-styles">
-    <a class="navbar-brand custom-navbar-label" href="/products"><img class="custom-navbar-image" src="assets/images/20190601_154728.png"/>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top nav-custom-styles"
+       [ngClass]="{'nav-custom-styles': currentUrl != 'Login', 'nav-custom-login-styles': currentUrl == 'Login'}">
+    <a class="navbar-brand custom-navbar-label" [routerLink]="['/products']">
+      <img class="custom-navbar-image" src="assets/images/20190601_154728.png"/>
       <!--<span class="hidden-md-down">e-commerce</span>-->
     </a>
-    <a *ngIf="(cart$ | async)" [routerLink]="['/cart']" class="nav-link">
+    <a *ngIf="(cart$ | async)" [routerLink]="['/checkout']" class="nav-link">
       <img src="assets/images/shopping_cart_total.png" alt="total amount in shopping cart" class="shopping_cart_total">
       <span> {{(cart$ | async)?.totalAmount}}</span>
     </a>
@@ -27,7 +29,8 @@
               <li *ngIf="user" class="nav-item">
                 <span class="d-flex p-2 user-greeting">{{ user?.userName }}</span>
               </li>
-              <li>
+              <li class="language-collapse">
+                Language
                 <select class="language-selector" id="languageSelector" [(ngModel)]="selectedLanguage">
                   <option *ngFor="let language of languages">{{language}}</option>
                 </select>
