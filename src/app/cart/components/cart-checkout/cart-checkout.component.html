@@ -2,11 +2,11 @@
   <table class="cart__table cart-table">
     <thead class="cart-table__head">
     <tr class="cart-table__row">
-      <th class="cart-table__column cart-table__column--image">Image</th>
-      <th class="cart-table__column cart-table__column--product">Product</th>
-      <th class="cart-table__column cart-table__column--price">Price</th>
-      <th class="cart-table__column cart-table__column--quantity">Quantity</th>
-      <th class="cart-table__column cart-table__column--total">Total</th>
+      <th class="cart-table__column cart-table__column--image">{{ 'checkout.image' | translate }}</th>
+      <th class="cart-table__column cart-table__column--product">{{ 'checkout.product' | translate}}</th>
+      <th class="cart-table__column cart-table__column--price">{{ 'checkout.price' | translate}}</th>
+      <th class="cart-table__column cart-table__column--quantity">{{ 'checkout.quantity' | translate}}</th>
+      <th class="cart-table__column cart-table__column--total">{{ 'checkout.total' | translate}}</th>
       <th class="cart-table__column cart-table__column--remove"></th>
     </tr>
     </thead>
@@ -43,8 +43,8 @@
       </td>
           <td class="cart-table__column cart-table__column--remove">
             <div class="col-2 text-right remove-from-cart">
-              <button type="button" class="close remove-from-cart" aria-label="Close">
-<!--                      (click)="deleteProductConfirmation(approval_template, product.product)"-->
+              <button type="button" class="close remove-from-cart" aria-label="Close"
+                (click)="removeProductConfirmation(remove_item_approval_template, product.product)">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -128,15 +128,15 @@
                 <th>
                   <form *ngIf='!checkOutConfirmationStatus' [formGroup]="checkoutForm" class="submit-order-form">
                     <div class="form-group">
-                      <label for="methodPayment">Please select method of payment</label>
+                      <label for="methodPayment">{{ 'checkout.selectMethod' | translate }}</label>
                       <select formControlName="payment_method_id" class="form-control" name="payment_method_id" id="methodPayment">
-                        <option selected>Select...</option>
+                        <option selected>{{'generic.dropDownSelect' | translate}}</option>
                         <option *ngFor="let method of methodsOfPayment">
                           {{ method.paymentType }}
                         </option>
                       </select>
                     </div>
-                    <button type="submit"  class="btn btn-primary btn-block" (click)="openCheckoutApproveModal(approval_template)">Submit order</button>
+                    <button type="submit"  class="btn btn-primary btn-block" (click)="openCheckoutApproveModal(approval_template)">{{ 'checkout.submitOrder' | translate }}</button>
                   </form>
                 </th>
                 <th>
@@ -193,3 +193,45 @@
 <!--<alert type="danger" *ngIf='error'>
   <strong>Something went wrong. Please login again. <a href="/logout"> Login </a> </strong>
 </alert>-->
+
+<ng-template #remove_item_approval_template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Approval</h4>
+    <button type="button" class="close pull-right" aria-label="Cancel removal from shopping cart" (click)="approveModal.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Please confirm you want to remove "{{deleteProduct.name}}" from your order.</p>
+    <button type="button" class="btn btn-danger" (click)="removeItemFromOrder()">Remove from order</button>
+  </div>
+</ng-template>
+
+<ng-template #remove_item_confirmation_template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Confirmation</h4>
+    <button type="button" class="close pull-right" aria-label="Close modal of removal from shopping cart" (click)="confirmationModal.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Product has been removed from shopping cart<br>
+    <button type="button" class="btn btn-primary" (click)="confirmationModal.hide()" (click)="approveModal.hide()">Ok</button>
+  </div>
+</ng-template>
+
+
+<ng-template #error_modal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Error message</h4>
+    <button type="button" class="close pull-right" aria-label="Close error message" (click)="errorModal.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Sorry, there was an error.
+    We are unable to remove the item from shopping cart at the moment.<br>
+    Please try again later or contact administrator.<br>
+    <button type="button" class="btn btn-primary" (click)="errorModal.hide()" >Ok</button>
+  </div>
+</ng-template>

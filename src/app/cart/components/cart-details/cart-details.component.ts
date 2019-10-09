@@ -8,8 +8,8 @@ import { AppStates } from '../../store/states/cart.states';
 import { Order } from '../../models/cart.model';
 import {BehaviorSubject, Observable} from 'rxjs';
 import { AppCookieService } from '../../../core/services/cookie.service';
-import {RemoveProduct} from "../../../products/store/actions/products.actions";
-import {ProductDetails} from "../../../products/models/products.model";
+import {RemoveProduct} from '../../../products/store/actions/products.actions';
+import {ProductDetails} from '../../../products/models/products.model';
 import { BsModalService, BsModalRef, ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
@@ -27,18 +27,16 @@ export class CartDetailsComponent implements OnInit {
   confirmationModal: BsModalRef | null;
   errorModal: BsModalRef | null;
   deleteProduct: ProductDetails;
-  deleteProductState: {action: string; state:string;} = {action: undefined, state:undefined};
-  deleteProductSubject: BehaviorSubject<{action: string; state:string;}> = new BehaviorSubject({action: undefined, state:undefined});
+  deleteProductState: {action: string; state: string; } = {action: undefined, state: undefined };
+  deleteProductSubject: BehaviorSubject<{action: string; state: string; }> = new BehaviorSubject({action: undefined, state: undefined });
 
   constructor(private store: Store<AppStates>,
               private appCookieService: AppCookieService,
               private router: Router,
               private bsModalService: BsModalService) {
-     
     this.store.select( store => {
-
-        if(store && store['userLoginReducer'] ) {
-          if(store['userLoginReducer']['errorLoading']  && store['userLoginReducer']['errorLoading']['error_message'] == 'remove_product_error') {
+        if (store && store['userLoginReducer'] ) {
+          if (store['userLoginReducer']['errorLoading']  && store['userLoginReducer']['errorLoading']['error_message'] == 'remove_product_error') {
             Object.assign(this.deleteProductState, { state: 'delete_product_error' });
           } else {
             Object.assign(this.deleteProductState, { state: 'no_errors' });
@@ -54,7 +52,7 @@ export class CartDetailsComponent implements OnInit {
         if (data) {
           return data.currentOrderInCart;
         }
-    })).subscribe(res => { 
+    })).subscribe(res => {
       this.productsInCart = res.itemList;
     });
   }
@@ -67,7 +65,7 @@ export class CartDetailsComponent implements OnInit {
     //   this.router.navigate(['/login']);
     this.deleteProductSubject.subscribe( (status: any) => {
 
-      if (status.state == 'delete_product_error' && status.action == 'delete_product') {
+      if (status.state === 'delete_product_error' && status.action == 'delete_product') {
 
         if (this.confirmationModal) {
           this.confirmationModal.hide();

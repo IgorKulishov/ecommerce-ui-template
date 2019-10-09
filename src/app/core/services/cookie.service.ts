@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 // import { CookieService } from 'ngx-cookie';
 import { CookieService } from 'ngx-cookie-service';
- 
+
 @Injectable()
 export class AppCookieService {
   constructor(
@@ -38,4 +38,26 @@ export class AppCookieService {
   public getUserIdFromCookie(): any {
     return this.cookieService.get('userId');
   }
+
+  getUserDetails() {
+    /*** 1. Get token in cookies ***/
+    const token = this.getTokenFromCookie();
+    const userName = this.getUserNameFromCookie();
+    const userId = this.getUserIdFromCookie();
+    const orderNumber = this.getOrderNumberFromCookie();
+    let userDetails: any;
+
+    if (token && userName && userId && orderNumber) {
+      userDetails = {
+        token : token,
+        userName : userName,
+        id : userId,
+        orderNumber : orderNumber
+      };
+    } else {
+      userDetails = {};
+    }
+    return userDetails;
+  }
+
 }

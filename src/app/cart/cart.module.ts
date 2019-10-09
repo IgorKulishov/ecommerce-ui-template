@@ -7,8 +7,9 @@ import { cartReducer } from './store/reducers/cart.reducers';
 import { CartEffects } from './store/effects/cart.effects';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CartCheckoutComponent } from './components/cart-checkout/cart-checkout.component';
-import {StoreModule} from "@ngrx/store";
+import {StoreModule} from '@ngrx/store';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { CoreModule } from '../core/core.module';
 
 const routes: Routes = [
   {path: 'cart', component: CartDetailsComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
     ModalModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
+    CoreModule
   ],
   declarations: [
     CartDetailsComponent,

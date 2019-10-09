@@ -6,6 +6,7 @@ import {
   GET_CURRENT_ORDER_FROM_STORE_SUCCESS, CHECK_OUT, CHECK_OUT_SUCCESS, REMOVE_FROM_CART
 } from '../actions/cart.actions';
 import { Order } from '../../models/cart.model';
+import { INITIAL_STORE_DATA } from '../../../products/store/states/app.states';
 
 export class ReducerClass implements Action {
   type: string;
@@ -45,7 +46,15 @@ const checkOut = (state: AppStates, action: ReducerClass): AppStates => {
   return newData;
 }
 const checkOutSuccess = (state: AppStates, action: ReducerClass): AppStates => {
-  const newData: AppStates = Object.assign({}, state, { checkOutConfirmationStatus: action.payload} );
+  // const newData: AppStates = Object.assign({}, state, { checkOutConfirmationStatus: action.payload} );
+  const newData: AppStates = Object.assign({}, state, {
+    checkOutConfirmationStatus: false,
+    shoppingOrderNumber: undefined,
+    productsInCart: undefined,
+    productToCartSuccess: undefined,
+    currentOrderInCart: undefined,
+    checkOutDetails: undefined
+  } );
   return newData;
 }
 

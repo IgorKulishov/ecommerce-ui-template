@@ -6,7 +6,7 @@ import { Store, Action } from '@ngrx/store';
 import {Observable, of} from 'rxjs';
 
 
-import {LOGIN_USER, LOGIN_USER_SUCCESS, LoginAction, FinishCookieClearence, LoginActionSuccess, EffectError, LOG_OUT} from '../actions/login.actions';
+import {LOGIN_USER, GET_ORDER_NUMBER, LoginAction, FinishCookieClearence, GetOrderNumber, EffectError, LOG_OUT} from '../actions/login.actions';
 import { AppStates } from '../../../products/store/states/app.states';
 import { LoginService } from '../../../core/services/login.service';
 import { CartService } from '../../../core/services/cart.service';
@@ -30,14 +30,14 @@ export class LoginEffects {
       ofType(LOGIN_USER),
       switchMap((userCreds: any) =>  this.loginService.login(userCreds).pipe(
           map((loginData: any) => {
-            return new LoginActionSuccess( loginData )
+            return new GetOrderNumber( loginData );
           }),
           catchError(err => of(new EffectError(err)))
         )
       )
     );
   @Effect() CreateOrder$: any = this.createOrder$.pipe(
-      ofType(LOGIN_USER_SUCCESS),
+      ofType(GET_ORDER_NUMBER),
       switchMap((userInfo: any) => this.cartService.getOrderNumber(userInfo).pipe(
           map((orderData: any) => new CreateOrderNumber( orderData )),
           catchError(err => of(new EffectError(err)))
@@ -53,7 +53,7 @@ export class LoginEffects {
         )
       )
     );
-  
+
   @Effect() RegisterUserEffect$: any = this.RegisterUserActions$.pipe(
       ofType(REGISTER_USER),
       switchMap((registerUserInfo: any) => this.loginService.register(registerUserInfo.payload).pipe(

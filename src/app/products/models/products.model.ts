@@ -11,7 +11,7 @@ export interface Products {
   'id': number;
 
   'badges'        ?: string[];
-  'rating'        ?: number
+  'rating'        ?: number;
   'reviews'       ?: number;
   'availability'  ?: string;
   'features'      ?: {name: string; value: string;}[];
