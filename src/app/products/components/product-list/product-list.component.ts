@@ -47,8 +47,8 @@ export class ProductListComponent implements OnInit {
 
     this.products$ = this.store.select(
       res => {
-        if(res && res['userLoginReducer'] ) {
-          if(res['userLoginReducer']['errorLoading']  && res['userLoginReducer']['errorLoading']['error_message'] == 'remove_product_error') {
+        if (res && res['userLoginReducer'] ) {
+          if (res['userLoginReducer']['errorLoading']  && res['userLoginReducer']['errorLoading']['error_message'] === 'remove_product_error') {
             Object.assign(this.deleteProductState, { state: 'delete_product_error' });
           } else {
             Object.assign(this.deleteProductState, { state: 'no_errors' });
