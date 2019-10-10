@@ -64,12 +64,13 @@ export class CartEffects {
       map((data: any) => new GetCurrentOrderFromStoreSuccess(data))
     );
 
-   // make payment
+   // a) make payment b) get updated order number c) update store
    @Effect() checkoutShoppingCart$: any = this.checkoutShoppingCartAtion$.pipe(
       ofType(CHECK_OUT),
-      switchMap((orderPaymentDetails: any) => this.cartService.checkoutShoppingCart(orderPaymentDetails.payload).pipe(
-        map(() => new GetOrderNumber( this.cookieService.getUserDetails() )),
-        catchError(err => of(new Error('error')))
-      ))
+      switchMap((orderPaymentDetails: any) => this.cartService.checkoutShoppingCart(orderPaymentDetails.payload)),
+      switchMap(data => [
+          new CheckOutSuccess( data ),
+          new GetOrderNumber( this.cookieService.getUserDetails() )
+        ])
     );
 }

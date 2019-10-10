@@ -10,7 +10,7 @@ import {LOGIN_USER, GET_ORDER_NUMBER, LoginAction, FinishCookieClearence, GetOrd
 import { AppStates } from '../../../products/store/states/app.states';
 import { LoginService } from '../../../core/services/login.service';
 import { CartService } from '../../../core/services/cart.service';
-import { CreateOrderNumber } from '../../../cart/store/actions/cart.actions';
+import { CreateOrderNumber } from '../actions/login.actions';
 import { AppCookieService } from '../../../core/services/cookie.service';
 import {ProductDetails} from '../../../products/models/products.model';
 import {GET_PRODUCT_DETAILS, GetProductDetailsSuccess} from '../../../products/store/actions/products.actions';

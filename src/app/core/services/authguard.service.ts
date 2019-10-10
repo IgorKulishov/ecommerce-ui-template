@@ -7,7 +7,7 @@ import {Store} from '@ngrx/store';
 import {AppStates} from '../../products/store/states/app.states';
 import {catchError, map} from 'rxjs/operators';
 import {EffectError} from '../../products/store/actions/products.actions';
-import {GetOrderNumber} from '../../auth/store/actions/login.actions';
+import {GetOrderNumber, CreateOrderNumber} from '../../auth/store/actions/login.actions';
 
 @Injectable()
 export class AuthguardService implements CanActivate {
@@ -43,7 +43,7 @@ export class AuthguardService implements CanActivate {
       loggedIn = true;
     } else if (this.appCookieService.getUserDetails() && this.appCookieService.getUserDetails()['token'] && !AuthguardService.jwtHelper.isTokenExpired(this.appCookieService.getUserDetails()['token'])) {
       this.store.dispatch(
-        new GetOrderNumber({
+        new CreateOrderNumber({
           ...this.appCookieService.getUserDetails(),
           mobile: undefined
         })

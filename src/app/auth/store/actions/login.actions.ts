@@ -10,6 +10,7 @@ export const GET_ORDER_NUMBER = 'GET_ORDER_NUMBER';
 export const LOG_OUT = 'LOG_OUT';
 export const FINISH_COOKIES_CLEARENCE = 'FINISH_COOKIES_CLEARENCE';
 export const ERROR_LOADING = 'ERROR_LOADING';
+export const CREATE_ORDER_NUMBER = 'CREATE_ORDER_NUMBER';
 
 export class LoginAction implements Action {
   readonly type = LOGIN_USER;
@@ -25,12 +26,12 @@ export class GetOrderNumber implements Action {
 
 export class RegisterUserAction implements Action {
   readonly type = REGISTER_USER;
-  constructor(public payload: any) {};
+  constructor(public payload: any) {}
 }
 
 export class RegisterUserSuccess implements Action {
   readonly type = REGISTER_USER_SUCCESS;
-  constructor(public payload: any) {};
+  constructor(public payload: any) {}
 }
 
 export class LogOut implements Action {
@@ -43,6 +44,11 @@ export class FinishCookieClearence implements Action {
 
 export class EffectError implements Action {
   readonly type = ERROR_LOADING;
+  constructor(public payload: any ) {
+  }
+}
+export class CreateOrderNumber implements Action {
+  readonly type = CREATE_ORDER_NUMBER;
   constructor(public payload: any ) {
   }
 }

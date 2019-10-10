@@ -40,7 +40,6 @@ export class AppCookieService {
   }
 
   getUserDetails() {
-    /*** 1. Get token in cookies ***/
     const token = this.getTokenFromCookie();
     const userName = this.getUserNameFromCookie();
     const userId = this.getUserIdFromCookie();

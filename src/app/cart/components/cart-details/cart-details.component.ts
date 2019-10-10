@@ -111,12 +111,12 @@ export class CartDetailsComponent implements OnInit {
   }
 
   getProductUrl(product) {
-    if(product && product.imageList.length > 0) {
-      let url = product.imageList[0]['imageUrl'] ? product.imageList[0]['imageUrl'] :
+    if (product && product.imageList.length > 0) {
+      const url = product.imageList[0]['imageUrl'] ? product.imageList[0]['imageUrl'] :
         product.imageList[0]['largeUrl'] ? product.imageList[0]['largeUrl'] : '/assets/images/teapod.jpeg';
       console.log(url);
       return url;
-    } else if(product && product.imageList.length == 0) {
+    } else if(product && product.imageList.length === 0) {
       return  '/assets/images/teapod.jpeg';
     }
   }

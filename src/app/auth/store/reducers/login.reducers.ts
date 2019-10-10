@@ -3,7 +3,7 @@
 import { AppStates } from '../../../products/store/states/app.states';
 import { LOGIN_USER, GET_ORDER_NUMBER, LOG_OUT, FINISH_COOKIES_CLEARENCE,
   REGISTER_USER, REGISTER_USER_SUCCESS, ERROR_LOADING  } from '../actions/login.actions';
-import {CREATE_ORDER_NUMBER} from '../../../cart/store/actions/cart.actions';
+import {CREATE_ORDER_NUMBER} from '../actions/login.actions';
 
 export class ReducerClass implements Action {
   type: string;
@@ -36,7 +36,12 @@ const registerUserSuccess = ( state , action): AppStates => {
 const indicateErrorOnLoading = ( state , action): AppStates => {
  const newData: AppStates = Object.assign({}, state, { errorLoading: action.payload });
  return newData;
-}
+};
+
+const storeOrderNumber = ( state: AppStates, action: ReducerClass ): AppStates => {
+ const newData: AppStates = Object.assign({}, state, {userDetails : {orderNumber: action.payload.orderNumber}} );
+ return newData;
+};
 
 export function userLoginReducer (state: AppStates, action: ReducerClass) {
   switch (action.type) {
@@ -52,6 +57,8 @@ export function userLoginReducer (state: AppStates, action: ReducerClass) {
       return state;
     case ERROR_LOADING:
       return indicateErrorOnLoading(state, action);
+    case CREATE_ORDER_NUMBER:
+      return storeOrderNumber(state, action);
     default:
       return state;
   }
