@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
   isCollapsed = true;
   isCollapsedSellerConsole = true;
   isCollapsedUserAccount = true;
+  checkOutConfirmationStatus$: Observable<any>;
   user = undefined;
   currentUrl: string;
   languages: string[] = ['En', 'Fr', 'Ru'];
@@ -42,6 +43,14 @@ export class HeaderComponent implements OnInit {
     }).pipe(map((res: any) => {
       if (res && res.currentOrderInCart) {
         return res.currentOrderInCart;
+      }
+    }));
+
+    this.checkOutConfirmationStatus$ = this.store.select( store => {
+      return store['cartReducer'];
+    }).pipe(map(res => {
+      if (res && res.checkOutConfirmationStatus) {
+        return res.checkOutConfirmationStatus;
       }
     }));
 

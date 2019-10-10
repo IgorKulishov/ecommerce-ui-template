@@ -9,5 +9,20 @@
   },
   "header": {
     "language": "Language"
+  },
+  "checkout": {
+    "image": "Image",
+    "product": "Product",
+    "price": "Price",
+    "quantity": "Quantity",
+    "total": "Total",
+    "cartTotals": "Cart Totals",
+    "subtotal": "Subtotal",
+    "selectMethod": "Please select method of payment",
+    "submitOrder": "Submit order"
+
+  },
+  "generic": {
+    "dropDownSelect": "Select.."
   }
 }

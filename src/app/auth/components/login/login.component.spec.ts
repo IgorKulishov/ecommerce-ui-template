@@ -1,10 +1,10 @@
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
-import {RouterTestingModule} from "@angular/router/testing";
+import {RouterTestingModule} from '@angular/router/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { Router, ActivatedRoute, Routes } from '@angular/router'
+import { Router, ActivatedRoute, Routes } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ReactiveFormsModule, FormsModule} from "@angular/forms";
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 
 import { AppCookieService } from '../../../core/services/cookie.service';
 import { LoginComponent } from './login.component';
@@ -33,9 +33,9 @@ describe('LoginComponent', () => {
         {provide: AppCookieService, useClass: AppCookieServiceStub }
       ],
       imports: [
-        ReactiveFormsModule, 
+        ReactiveFormsModule,
         FormsModule,
-        StoreModule.provideStore({}),
+        StoreModule.forRoot({}),
         RouterTestingModule.withRoutes(fake_routes)
         ],
       schemas: [NO_ERRORS_SCHEMA]

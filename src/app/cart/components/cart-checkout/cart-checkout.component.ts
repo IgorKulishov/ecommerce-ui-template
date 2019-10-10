@@ -5,15 +5,16 @@ import { Store } from '@ngrx/store';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
-import { GetCurrentOrderFromStore, CheckOut } from '../../store/actions/cart.actions';
+import {GetCurrentOrderFromStore, CheckOut, RemoveFromCart} from '../../store/actions/cart.actions';
 import { AppStates } from '../../store/states/cart.states';
 import { Order, CheckoutInfo, PaymentMethods, PaymentDescription } from '../../models/cart.model';
-import { Observable } from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import { AppCookieService } from '../../../core/services/cookie.service';
 import { CartService } from '../../../core/services/cart.service';
 import { Payments } from '../../enums/payments.enum';
 
 import { BsModalService, BsModalRef, ModalDirective } from 'ngx-bootstrap/modal';
+import {ProductDetails} from '../../../products/models/products.model';
 
 @Component({
   selector: 'app-home',
@@ -40,43 +41,36 @@ export class CartCheckoutComponent implements OnInit {
       }
     ];
 
-  public productsInCart: any;
-  public checkOutConfirmationStatus: boolean = false;
-  public methodsOfPayment: PaymentDescription[] = this.defaultMethodsOfPayment;
-  public error = false;
+  productsInCart: any;
+  checkOutConfirmationStatus = false;
+  methodsOfPayment: PaymentDescription[] = this.defaultMethodsOfPayment;
+  error = false;
   private payment = {};
-  public totalAmount: number;
-  public totalQuantity: number;
-  public checkoutForm: FormGroup;
+  totalAmount: number;
+  totalQuantity: number;
+  checkoutForm: FormGroup;
+  deleteProduct: ProductDetails;
+  errorModal: BsModalRef | null;
+  approveModal: BsModalRef | null;
+  deleteProductState: { action: string; state: string; } = { action: undefined, state: undefined };
+  deleteProductSubject: BehaviorSubject<{action: string; state: string; }> = new BehaviorSubject({action: undefined, state: undefined});
+  confirmationModal: BsModalRef | null;
 
   modalCheckoutApprove: BsModalRef | null;
   modalCheckoutConfirmation: BsModalRef;
   @ViewChild('confirmation_template', {'static': false}) confirmation_template: ModalDirective;
+  @ViewChild('remove_item_confirmation_template', {'static': false}) remove_item_confirmation_template: ModalDirective;
 
   constructor(private store: Store<AppStates>,
               private appCookieService: AppCookieService,
               private router: Router,
               private cartService: CartService,
               private modalService: BsModalService,
+              private bsModalService: BsModalService,
                @Inject(FormBuilder) fb: FormBuilder) {
 
     this.checkoutForm = fb.group({
       payment_method_id: [null, Validators.minLength(50)]
-    });
-    // app store to list checkout products
-    this.store.select( store => {
-        if (store && store['cartReducer']) {
-          return store['cartReducer'];
-        }
-      }
-    ).pipe(map(data => {
-      if (data) {
-        return data.currentOrderInCart;
-      }
-    })).subscribe(res => {
-      if(res && res.itemList) {
-        this.productsInCart = res.itemList;
-      }
     });
 
     // app store for total amount
@@ -87,13 +81,16 @@ export class CartCheckoutComponent implements OnInit {
         return res.currentOrderInCart;
       }
     })).subscribe(cartInfo => {
-      if(cartInfo && cartInfo.totalAmount && cartInfo.totalAmount) {
+      if (cartInfo && cartInfo.totalAmount && cartInfo.totalAmount) {
         this.totalAmount = cartInfo.totalAmount;
         this.totalQuantity = cartInfo.totalQuantity;
         this.payment = {amount: cartInfo.totalAmount}
       }
+      if (cartInfo && cartInfo.itemList) {
+        this.productsInCart = cartInfo.itemList;
+      }
     });
-    //checkout confirmation status
+    // checkout confirmation status
     this.store.select( store => {
       return store['cartReducer'];
     }).pipe(map(res => {
@@ -112,8 +109,8 @@ export class CartCheckoutComponent implements OnInit {
     // else
     //   this.router.navigate(['/login']);
     this.cartService.getMethodsOfPayment()
-    .subscribe((res :any) => {
-      if(res.payments.length > 0) {
+    .subscribe((res: any) => {
+      if (res.payments.length > 0) {
         this.methodsOfPayment = res.payments;
       }
     },
@@ -137,7 +134,7 @@ export class CartCheckoutComponent implements OnInit {
         break;
       default:
         this.payment = Object.assign(this.payment,{payment_method_id: Payments.cash});
-    };
+    }
 
     this.store.dispatch(new CheckOut(this.payment));
     this.modalCheckoutConfirmation = this.modalService.show(this.confirmation_template);
@@ -157,18 +154,34 @@ export class CartCheckoutComponent implements OnInit {
   }
 
   totalSum(price, selectedQuantity) {
-    return Math.round(price * selectedQuantity * 100)/100;
+    return Math.round(price * selectedQuantity * 100) / 100;
   }
 
   getProductUrl(product) {
-    if(product && product.imageList.length > 0) {
-      let url = product.imageList[0]['imageUrl'] ? product.imageList[0]['imageUrl'] :
+    if (product && product.imageList.length > 0) {
+      const url = product.imageList[0]['imageUrl'] ? product.imageList[0]['imageUrl'] :
         product.imageList[0]['largeUrl'] ? product.imageList[0]['largeUrl'] : '/assets/images/teapod.jpeg';
       console.log(url);
       return url;
-    } else if(product && product.imageList.length == 0) {
+    } else if (product && product.imageList.length === 0) {
       return  '/assets/images/teapod.jpeg';
     }
+  }
+
+  removeProductConfirmation(template: TemplateRef<any>, deleteProduct: ProductDetails) {
+    this.deleteProduct = deleteProduct;
+    this.errorModal = null;
+    this.approveModal = this.bsModalService.show(template, { class: 'modal-lg' });
+  }
+
+  removeItemFromOrder() {
+    this.store.dispatch(new RemoveFromCart(
+      {
+        id : this.deleteProduct.id
+      }
+    ));
+    Object.assign(this.deleteProductState, { action: 'delete_product', state: 'no_errors' });
+    this.deleteProductSubject.next(this.deleteProductState);
   }
 
 }
