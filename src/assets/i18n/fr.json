@@ -1,0 +1,28 @@
+{
+  "product" : {
+    "productDescription": "Description",
+    "price": "Price",
+    "quantity": "Quality",
+    "sum": "Sum",
+    "addToCart": "Add to cart",
+    "availableOnStock": "Available on stock"
+  },
+  "header": {
+    "language": "Language"
+  },
+  "checkout": {
+    "image": "Image",
+    "product": "Product",
+    "price": "Price",
+    "quantity": "Quantity",
+    "total": "Total",
+    "cartTotals": "Cart Totals",
+    "subtotal": "Subtotal",
+    "selectMethod": "Please select method of payment",
+    "submitOrder": "Submit order"
+
+  },
+  "generic": {
+    "dropDownSelect": "Select.."
+  }
+}

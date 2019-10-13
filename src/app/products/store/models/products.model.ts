@@ -9,7 +9,6 @@ export interface Products {
   'price': number;
   'productInfo': ProductInfo;
   'id': number;
-
   'badges'        ?: string[];
   'rating'        ?: number;
   'reviews'       ?: number;
@@ -57,14 +56,6 @@ export const initStateOfProductDetails = {
   'id':                 undefined,
   'defaultMaxQuantity': undefined
 };
-
-export interface UserDetails {
-  'id':          number;
-  'userName':    string;
-  'orderNumber': string;
-  'mobile':      number;
-  'token':       string;
-}
 
 export interface removeProductId {
   'id':          number;

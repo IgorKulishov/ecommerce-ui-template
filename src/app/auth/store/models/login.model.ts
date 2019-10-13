@@ -1,9 +1,10 @@
 export interface UserDetails {
   'id':          number;
   'userName':    string;
-  'orderNumber': string;
+  'orderNumber'?: string;
   'mobile':      number;
   'token':       string;
+  'en'?:         string;
 }
 
 export interface UserCredentials {
@@ -11,6 +12,3 @@ export interface UserCredentials {
   'userName': string;
 }
 
-export interface RegisterUserDetails {
-  
-}

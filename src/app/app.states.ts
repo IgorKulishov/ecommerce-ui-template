@@ -1,5 +1,6 @@
-import { Products, ProductDetails, ProductSlug, UserDetails, Order, errorState } from '../../models/products.model';
-
+import { Products, ProductDetails, ProductSlug, Order, errorState } from '../../models/products.model';
+import { UserDetails } from '../../../auth/models/login.model';
+import { INITIAL_USER_DATA } from '../../../auth/store/states/auth.states';
 export interface AppStates {
   storeData: Products[];
   userDetails: UserDetails;
@@ -52,11 +53,5 @@ export const INITIAL_STORE_DATA: any = {
     'payment': null,
     'id': null
   },
-  userDetails: {
-    'id':          null,
-    'userName':    undefined,
-    'orderNumber': null,
-    'mobile':      null,
-    'token':       undefined,
-  }
+  INITIAL_USER_DATA
 };
