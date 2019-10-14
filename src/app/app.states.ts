@@ -1,6 +1,8 @@
-import { Products, ProductDetails, ProductSlug, Order, errorState } from '../../models/products.model';
-import { UserDetails } from '../../../auth/models/login.model';
-import { INITIAL_USER_DATA } from '../../../auth/store/states/auth.states';
+import { Products, ProductDetails, ProductSlug, Order, errorState } from './products/store/models/products.model';
+import { UserDetails } from './auth/store/models/login.model';
+import { INITIAL_PRODUCTS_DATA } from './products/store/states/products.states';
+import { INITIAL_USER_DATA } from './auth/store/states/auth.states';
+
 export interface AppStates {
   storeData: Products[];
   userDetails: UserDetails;
@@ -11,26 +13,8 @@ export interface AppStates {
 }
 
 export const INITIAL_STORE_DATA: any = {
-  storeData: [
-    {
-      'name': undefined,
-      'description': undefined,
-      'slug': undefined,
-      'price': null,
-      'result': undefined,
-      'productInfo': {
-        'imageList': [
-          {
-            '_id': null,
-            'largeUrl': undefined
-          }
-        ],
-        'id': null
-      },
-      'id': null
-    }
-  ],
-  uiProductDetailsSlug:{
+  storeData: INITIAL_PRODUCTS_DATA,
+  uiProductDetailsSlug: {
     'ProductSlug': undefined
   },
   uiStateProductDetails: {

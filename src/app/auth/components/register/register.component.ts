@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { AppStates } from '../../../products/store/states/app.states';
+import { AppStates } from '../../../app.states';
 import { LoginService } from '../../../core/services/login.service';
 import { RegisterUserAction } from '../../store/actions/login.actions';
 

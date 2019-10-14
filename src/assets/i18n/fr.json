@@ -1,28 +1,47 @@
 {
   "product" : {
     "productDescription": "Description",
-    "price": "Price",
-    "quantity": "Quality",
-    "sum": "Sum",
-    "addToCart": "Add to cart",
-    "availableOnStock": "Available on stock"
+    "price": "Prix",
+    "quantity": "Qualité",
+    "sum": "Somme",
+    "addToCart": "Ajouter au chariot",
+    "availableOnStock": "Disponible en stock"
   },
   "header": {
-    "language": "Language"
+    "language": "La langue",
+    "userAccount": "Compte d'utilisateur",
+    "createProduct": "Créer un produit",
+    "sellerConsole": "Console du vendeur",
+    "logout": "Déconnexion"
+  },
+  "upperHeader": {
+    "home": "D'accueil",
+    "product": "Produit",
+    "about": "À propos",
+    "contacts": "Contacts"
   },
   "checkout": {
     "image": "Image",
-    "product": "Product",
-    "price": "Price",
-    "quantity": "Quantity",
-    "total": "Total",
-    "cartTotals": "Cart Totals",
-    "subtotal": "Subtotal",
-    "selectMethod": "Please select method of payment",
-    "submitOrder": "Submit order"
-
+    "product": "Produit",
+    "price": "Prix",
+    "quantity": "Qualité",
+    "total": "Totale",
+    "cartTotals": "Totaux du panier",
+    "subtotal": "Totale",
+    "selectMethod": "Veuillez sélectionner le mode de paiement",
+    "submitOrder": "Soumettre la commande",
+    "orderSubmission": "Soumettre la commande",
+    "submissionConfirmation": "S'il vous plaît confirmer la soumission",
+    "orderConfirmation": "Confirmation de commande.",
+    "orderAcceptedMsg": "Votre commande a été acceptée",
+    "approval": "Approbation",
+    "ok": "D'accord"
   },
   "generic": {
-    "dropDownSelect": "Select.."
-  }
+    "dropDownSelect": "Sélectionner"
+  },
+  "cash on delivery": "Paiement à la livraison",
+  "debit": "Débit",
+  "credit": "Crédit",
+  "check": "Vérifier"
 }

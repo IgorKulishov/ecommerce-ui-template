@@ -1,18 +1,17 @@
 import {map} from 'rxjs/operators';
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import { BsModalService, BsModalRef, ModalDirective } from 'ngx-bootstrap/modal';
-import {TranslateService} from '@ngx-translate/core';
 import { Store } from '@ngrx/store';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import { GetProducts } from '../../store/actions/products.actions';
-import { AppStates } from '../../store/states/app.states';
-import { errorState, Products } from '../../models/products.model';
+import { AppStates } from '../../../app.states';
+import { errorState, Products } from '../../store/models/products.model';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { AppCookieService } from '../../../core/services/cookie.service';
-import {AddToCart, CheckOut} from "../../../cart/store/actions/cart.actions";
+import {AddToCart, CheckOut} from '../../../cart/store/actions/cart.actions';
 import { RemoveProduct } from '../../store/actions/products.actions';
-import { ProductDetails} from '../../models/products.model';
+import { ProductDetails} from '../../store/models/products.model';
 
 
 @Component({
@@ -29,9 +28,9 @@ export class ProductListComponent implements OnInit {
   confirmationModal: BsModalRef | null;
   errorModal: BsModalRef | null;
   deleteProduct: ProductDetails;
-  deleteProductState: {action: string; state:string;} = {action: undefined, state:undefined};
-  deleteProductSubject: BehaviorSubject<{action: string; state:string;}> = new BehaviorSubject({action: undefined, state:undefined});
-  //Template basic settings:
+  deleteProductState: {action: string; state: string; } = {action: undefined, state: undefined};
+  deleteProductSubject: BehaviorSubject<{action: string; state: string;}> = new BehaviorSubject({action: undefined, state:undefined});
+  // Template basic settings:
   filters: any[] = [];
   sidebarPosition: 'start'|'end' = 'start';
   viewMode: 'grid'|'grid-with-features'|'list' = 'grid';
@@ -40,10 +39,8 @@ export class ProductListComponent implements OnInit {
   constructor(private store: Store<AppStates>,
               private appCookieService: AppCookieService,
               private router: Router,
-              private modalService: BsModalService,
-              translate: TranslateService
+              private modalService: BsModalService
             ) {
-    translate.use('en');
 
     this.products$ = this.store.select(
       res => {
@@ -68,12 +65,13 @@ export class ProductListComponent implements OnInit {
   ngOnInit() {
     if (this.appCookieService.getTokenFromCookie() != null ) {
       this.store.dispatch(new GetProducts());
-    } else
+    } else {
       this.router.navigate(['/login']);
+    }
 
     this.deleteProductSubject.subscribe( (status: any) => {
 
-      if (status.state == 'delete_product_error' && status.action == 'delete_product') {
+      if (status.state === 'delete_product_error' && status.action === 'delete_product') {
 
         if (this.confirmationModal) {
           this.confirmationModal.hide();
@@ -86,7 +84,7 @@ export class ProductListComponent implements OnInit {
         } else {
         }
 
-      } else if (status.state == 'no_error' && status.action == 'delete_product') {
+      } else if (status.state === 'no_error' && status.action === 'delete_product') {
           if(this.errorModal) {this.errorModal.hide()}
           if(!this.confirmationModal) {this.confirmationModal = this.modalService.show(this.confirmation_template, { class: 'modal-lg' })}
         }
@@ -116,7 +114,7 @@ export class ProductListComponent implements OnInit {
   }
 
   getProductUrl(product) {
-    if(product && product.productInfo && product.productInfo.imageList.length > 0) {
+    if (product && product.productInfo && product.productInfo.imageList.length > 0) {
       return product.productInfo.imageList[0]['imageUrl'] ? product.productInfo.imageList[0]['imageUrl'] :
         product.productInfo.imageList[0]['largeUrl'] ? product.productInfo.imageList[0]['largeUrl'] : '/assets/images/teapod.jpeg';
     } else {

@@ -1,7 +1,7 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { AppStates } from '../../../store/states/app.states';
+import { AppStates } from '../../../../app.states';
 
 @Component({
   selector: 'add-to-cart',

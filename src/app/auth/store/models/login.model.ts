@@ -4,7 +4,7 @@ export interface UserDetails {
   'orderNumber'?: string;
   'mobile':      number;
   'token':       string;
-  'en'?:         string;
+  'language'?:    string;
 }
 
 export interface UserCredentials {

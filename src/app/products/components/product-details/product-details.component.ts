@@ -8,10 +8,10 @@ import { ISubscription } from 'rxjs/Subscription';
 import { ProductsService } from '../../../core/services/products.service';
 import { GetProductDetails, ResetProductDetails } from '../../store/actions/products.actions';
 import { AddToCart } from '../../../cart/store/actions/cart.actions';
-import { AppStates } from '../../store/states/app.states';
+import { AppStates } from '../../../app.states';
 import { LoginService } from '../../../core/services/login.service';
-import { ProductDetails, ProductInfo} from '../../models/products.model';
-import {ImageList} from '../../models/products.model';
+import { ProductDetails, ProductInfo} from '../../store/models/products.model';
+import {ImageList} from '../../store/models/products.model';
 
 declare var lightGallery: Function;
 
@@ -84,7 +84,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.translateService.use(this.defaultLanguage);
+    // this.translateService.use(this.defaultLanguage);
   }
 
   ngOnDestroy() {
