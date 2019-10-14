@@ -1,21 +1,24 @@
  import { Action, ActionReducer } from '@ngrx/store';
 
-import { AppStates } from '../../../products/store/states/app.states';
-import { LOGIN_USER, GET_ORDER_NUMBER, LOG_OUT, FINISH_COOKIES_CLEARENCE,
-  REGISTER_USER, REGISTER_USER_SUCCESS, ERROR_LOADING  } from '../actions/login.actions';
+import { AppStates } from '../../../app.states';
+import {
+  LOGIN_USER, GET_ORDER_NUMBER, LOG_OUT, FINISH_COOKIES_CLEARENCE,
+  REGISTER_USER, REGISTER_USER_SUCCESS, ERROR_LOADING, SELECT_LANGUAGE
+} from '../actions/login.actions';
 import {CREATE_ORDER_NUMBER} from '../actions/login.actions';
 
 export class ReducerClass implements Action {
   type: string;
   payload?: any;
-};
+}
 
 const logoutPayload = {
   'id':          null,
   'userName':    undefined,
   'orderNumber': null,
   'mobile':      null,
-  'token':       undefined
+  'token':       undefined,
+  'language':    undefined
 };
 
 const loadUserCredentials = ( state: AppStates, action: ReducerClass ): AppStates => {
@@ -39,8 +42,13 @@ const indicateErrorOnLoading = ( state , action): AppStates => {
 };
 
 const storeOrderNumber = ( state: AppStates, action: ReducerClass ): AppStates => {
- const newData: AppStates = Object.assign({}, state, {userDetails : {orderNumber: action.payload.orderNumber}} );
- return newData;
+  const newUserDetails = {...state.userDetails, orderNumber: action.payload.orderNumber};
+  return {...state, ...{userDetails: newUserDetails}};
+};
+
+const selectLanguage = ( state: AppStates, action: ReducerClass ): AppStates => {
+  const newUserDetails = {...state.userDetails, language: action.payload};
+  return {...state, ...{userDetails: newUserDetails}};
 };
 
 export function userLoginReducer (state: AppStates, action: ReducerClass) {
@@ -59,7 +67,9 @@ export function userLoginReducer (state: AppStates, action: ReducerClass) {
       return indicateErrorOnLoading(state, action);
     case CREATE_ORDER_NUMBER:
       return storeOrderNumber(state, action);
+    case SELECT_LANGUAGE:
+      return selectLanguage(state, action);
     default:
       return state;
   }
-};
+}

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { HttpClientModule, HttpClient} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { INITIAL_STORE_DATA } from './products/store/states/app.states';
+import { INITIAL_STORE_DATA } from './app.states';
 import { AppComponent } from './app.component';
 import { ProductsModule } from './products/products.module';
 import { CoreModule } from './core/core.module';
@@ -55,7 +55,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
-    TranslateModule.forRoot(),
     StoreModule.forRoot(reducer, INITIAL_STORE_DATA),
     TranslateModule.forRoot({
       loader: {

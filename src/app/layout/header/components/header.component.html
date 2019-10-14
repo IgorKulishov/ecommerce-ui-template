@@ -1,11 +1,11 @@
 <div style="position: sticky; top:0; z-index: 3;">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top nav-custom-styles"
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top nav-custom-styles nav-justified"
        [ngClass]="{'nav-custom-styles': currentUrl != 'Login', 'nav-custom-login-styles': currentUrl == 'Login'}">
     <a class="navbar-brand custom-navbar-label" [routerLink]="['/products']">
       <img class="custom-navbar-image" src="assets/images/20190601_154728.png"/>
       <!--<span class="hidden-md-down">e-commerce</span>-->
     </a>
-    <a *ngIf="(cart$ | async) && !(checkOutConfirmationStatus$ | async)" [routerLink]="['/checkout']" class="nav-link">
+    <a *ngIf="(cart$ | async) && !(checkOutConfirmationStatus$ | async)" [routerLink]="['/checkout']" class="nav-link-custom nav-link nav-item">
       <img src="assets/images/shopping_cart_total.png" alt="total amount in shopping cart" class="shopping_cart_total">
       <span> {{(cart$ | async)?.totalAmount}}</span>
     </a>
@@ -30,13 +30,15 @@
                 <span class="d-flex p-2 user-greeting">{{ user?.userName }}</span>
               </li>
               <li class="language-collapse">
-                Language
-                <select class="language-selector" id="languageSelector" [(ngModel)]="selectedLanguage">
+                {{ 'header.language' | translate }}
+                <select class="language-selector" id="languageSelector"
+                        [ngModel]="selectedLanguage"
+                        (ngModelChange)="onLanguageSelect($event)">
                   <option *ngFor="let language of languages">{{language}}</option>
                 </select>
               </li>
               <li class="divider dropdown-divider"></li>
-              <li *ngIf="user?.userName" class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+              <li *ngIf="user?.userName" class="nav-item"><a href="/logout" class="nav-link">{{ 'header.logout' | translate }}</a></li>
             </ul>
           </div>
         </li>
@@ -44,7 +46,7 @@
         <li class="nav-item dropdown d-block d-lg-none ">
           <button id="button-collapse-user-account" class="custom-drop-down" type="button" data-toggle="collapse" data-target="#dropdown-basic" aria-controls="dropdown-basic" aria-expanded="false" aria-label="seller console"
                   (click)="isCollapsedUserAccount = !isCollapsedUserAccount">
-            User account <span class="caret"></span>
+            {{ 'header.userAccount' | translate }} <span class="caret"></span>
           </button>
           <div class="collapse navbar-collapse" id="user-account" [collapse]="isCollapsedUserAccount" [isAnimated]="true">
             <ul id="collapse-user-account" class="navbar-nav mr-auto navbar-custom custom-menu-dropdown">
@@ -52,13 +54,13 @@
                 <span class="d-flex p-2 user-greeting">{{ user?.userName }}</span>
               </li>
               <li class="language-collapse">
-                Language
+                {{ 'header.language' | translate }}
                 <select class="language-selector" id="languageSelectorMobile" [(ngModel)]="selectedLanguage">
                   <option *ngFor="let language of languages">{{language}}</option>
                 </select>
               </li>
               <li class="divider dropdown-divider"></li>
-              <li *ngIf="user?.userName" class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+              <li *ngIf="user?.userName" class="nav-item"><a href="/logout" class="nav-link">{{ 'header.logout' | translate }}</a></li>
             </ul>
           </div>
         </li>
@@ -68,11 +70,11 @@
           <div class="btn-group" dropdown>
             <button id="button-dropdown-seller-console" dropdownToggle type="button" class="btn dropdown-toggle custom-drop-down"
                     aria-controls="dropdown-seller-console">
-              Seller console  <span class="caret"></span>
+              {{ 'header.sellerConsole' | translate }}  <span class="caret"></span>
             </button>
             <ul id="dropdown-seller-console" *dropdownMenu class="dropdown-menu"
                 role="menu" aria-labelledby="button-dropdown-seller-console">
-              <li *ngIf="user?.userName" class=""><a  [routerLink]="['/create-product']" class="nav-link">Create product</a></li>
+              <li *ngIf="user?.userName" class=""><a  [routerLink]="['/create-product']" class="nav-link">{{ 'header.createProduct' | translate }}</a></li>
             </ul>
           </div>
         </li>
@@ -80,11 +82,11 @@
         <li class="nav-item dropdown d-block d-lg-none ">
           <button id="button-collapse-seller-console" class="custom-drop-down" type="button" data-toggle="collapse" data-target="#dropdown-basic" aria-controls="dropdown-basic" aria-expanded="false" aria-label="seller console"
                   (click)="isCollapsedSellerConsole = !isCollapsedSellerConsole">
-            Seller console <span class="caret"></span>
+            {{ 'header.sellerConsole' | translate }} <span class="caret"></span>
           </button>
           <div class="collapse navbar-collapse" id="seller-console" [collapse]="isCollapsedSellerConsole" [isAnimated]="true">
             <ul id="collapse-seller-console" class="navbar-nav mr-auto navbar-custom custom-menu-dropdown">
-              <li *ngIf="user?.userName" class=""><a  [routerLink]="['/create-product']" class="nav-link">Create product</a></li>
+              <li *ngIf="user?.userName" class=""><a  [routerLink]="['/create-product']" class="nav-link">{{ 'header.createProduct' | translate }}</a></li>
             </ul>
           </div>
         </li>

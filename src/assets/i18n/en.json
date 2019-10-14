@@ -8,7 +8,17 @@
     "availableOnStock": "Available on stock"
   },
   "header": {
-    "language": "Language"
+    "language": "Language",
+    "userAccount": "User account",
+    "createProduct": "Create product",
+    "sellerConsole": "Seller console",
+    "logout": "Logout"
+  },
+  "upperHeader": {
+    "home": "Home",
+    "product": "Product",
+    "about": "About",
+    "contacts": "Contacts"
   },
   "checkout": {
     "image": "Image",
@@ -19,10 +29,19 @@
     "cartTotals": "Cart Totals",
     "subtotal": "Subtotal",
     "selectMethod": "Please select method of payment",
-    "submitOrder": "Submit order"
-
+    "submitOrder": "Submit order",
+    "orderSubmission": "Order confirmation",
+    "submissionConfirmation": "Please confirm submission",
+    "orderConfirmation": "Order confirmation",
+    "orderAcceptedMsg": "Your order has been accepted",
+    "approval": "Approval",
+    "ok": "Ok"
   },
   "generic": {
     "dropDownSelect": "Select.."
-  }
+  },
+  "cash on delivery": "Cash on delivery",
+  "debit":"Debit",
+  "credit": "Credit",
+  "check":"Check"
 }

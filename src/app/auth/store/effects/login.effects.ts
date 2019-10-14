@@ -7,12 +7,12 @@ import {Observable, of} from 'rxjs';
 
 
 import {LOGIN_USER, GET_ORDER_NUMBER, LoginAction, FinishCookieClearence, GetOrderNumber, EffectError, LOG_OUT} from '../actions/login.actions';
-import { AppStates } from '../../../products/store/states/app.states';
+import { AppStates } from '../../../app.states';
 import { LoginService } from '../../../core/services/login.service';
 import { CartService } from '../../../core/services/cart.service';
 import { CreateOrderNumber } from '../actions/login.actions';
 import { AppCookieService } from '../../../core/services/cookie.service';
-import {ProductDetails} from '../../../products/models/products.model';
+import {ProductDetails} from '../../../products/store/models/products.model';
 import {GET_PRODUCT_DETAILS, GetProductDetailsSuccess} from '../../../products/store/actions/products.actions';
 import { REGISTER_USER, RegisterUserSuccess } from '../actions/login.actions';
 @Injectable()

@@ -1,0 +1,47 @@
+{
+  "product" : {
+    "productDescription": "Описание",
+    "price": "Цена",
+    "quantity": "Количество",
+    "sum": "Сумма",
+    "addToCart": "Добавить в корзину",
+    "availableOnStock": "Доступно на складе"
+  },
+  "header": {
+    "language": "Язык",
+    "userAccount": "Профиль",
+    "createProduct": "Создать товар",
+    "sellerConsole": "Консоль продавца",
+    "logout": "Выйти"
+  },
+  "upperHeader": {
+    "home": "Главная",
+    "product": "Продукция",
+    "about": "О нас",
+    "contacts": "Контакты"
+  },
+  "checkout": {
+    "image": "Фото",
+    "product": "Продукт",
+    "price": "Цена",
+    "quantity": "Количество",
+    "total": "Сумма",
+    "cartTotals": "Ваш заказ",
+    "subtotal": "Промежуточная сумма",
+    "selectMethod": "Выберете метод оплаты",
+    "submitOrder": "Отправить заказ",
+    "orderSubmission": "Отправить заказ",
+    "submissionConfirmation": "Пожалуйста подтвердите заказ",
+    "orderConfirmation": "Заказ принят",
+    "orderAcceptedMsg": "Ваш заказ принят",
+    "approval": "Подтвердить",
+    "ok": "Ok"
+  },
+  "generic": {
+    "dropDownSelect": "Выберите.."
+  },
+  "cash on delivery": "Наличные по факту доставки",
+  "debit": "Дебетовая карта",
+  "credit": "Кредитная карта",
+  "check": "Чек"
+}

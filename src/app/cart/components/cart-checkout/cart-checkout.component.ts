@@ -14,7 +14,7 @@ import { CartService } from '../../../core/services/cart.service';
 import { Payments } from '../../enums/payments.enum';
 
 import { BsModalService, BsModalRef, ModalDirective } from 'ngx-bootstrap/modal';
-import {ProductDetails} from '../../../products/models/products.model';
+import {ProductDetails} from '../../../products/store/models/products.model';
 
 @Component({
   selector: 'app-home',
@@ -22,28 +22,9 @@ import {ProductDetails} from '../../../products/models/products.model';
   styleUrls: ['./cart-checkout.component.scss']
 })
 export class CartCheckoutComponent implements OnInit {
-  public defaultMethodsOfPayment: PaymentDescription[] = [
-      {
-        _id: 1,
-        paymentType: 'cash on delivery'
-      },
-      {
-        _id: 2,
-        paymentType: 'debit'
-      },
-      {
-        _id: 3,
-        paymentType: 'credit'
-      },
-      {
-        _id: 4,
-        paymentType: 'check'
-      }
-    ];
-
+  methodsOfPayment: PaymentDescription[] = [];
   productsInCart: any;
   checkOutConfirmationStatus = false;
-  methodsOfPayment: PaymentDescription[] = this.defaultMethodsOfPayment;
   error = false;
   private payment = {};
   totalAmount: number;
@@ -103,11 +84,11 @@ export class CartCheckoutComponent implements OnInit {
   }
 
   ngOnInit() {
-    // if (this.appCookieService.getTokenFromCookie() != null ) {
-    //   this.store.dispatch(new GetCurrentOrderFromStore());
-    // }
-    // else
-    //   this.router.navigate(['/login']);
+    if (this.appCookieService.getTokenFromCookie() != null ) {
+      this.store.dispatch(new GetCurrentOrderFromStore());
+    }
+    else
+      this.router.navigate(['/login']);
     this.cartService.getMethodsOfPayment()
     .subscribe((res: any) => {
       if (res.payments.length > 0) {

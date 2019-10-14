@@ -3,9 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, RoutesRecognized } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { AppStates } from '../../../products/store/states/app.states';
+import { AppStates } from '../../../app.states';
 import { AppCookieService } from '../../../core/services/cookie.service';
-import {transition, trigger, style, animate} from '@angular/animations';
+import { SelectLanguageAction } from '../../../auth/store/actions/login.actions';
+import { languages} from '../../../core/consts/consts';
+import {UserDetails} from '../../../auth/store/models/login.model';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -20,22 +23,25 @@ export class HeaderComponent implements OnInit {
   checkOutConfirmationStatus$: Observable<any>;
   user = undefined;
   currentUrl: string;
-  languages: string[] = ['En', 'Fr', 'Ru'];
-  selectedLanguage = 'En';
+  languages: string[] = languages;
+  selectedLanguage = 'en';
 
   constructor(private appCookieService: AppCookieService,
               private store: Store<AppStates>,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private translateService: TranslateService) {
     // user properties for header
-    this.store.select( store => {
-      return store['userLoginReducer'];
-    }).pipe(map((res: any) => {
-      if (res && res.userDetails) {
-        return res.userDetails;
-      }
-    })).subscribe(resp => {
-      this.user = resp;
+    this.store.select(res => {
+        if (res && res['userLoginReducer'] && res['userLoginReducer']['userDetails']) {
+          return res['userLoginReducer']['userDetails'];
+        }
+      }).pipe(
+        map((userDetails: UserDetails) => {
+          return userDetails;
+        })
+      ).subscribe(resp => {
+        this.user = resp;
     });
     // cart properties for header
     this.cart$ = this.store.select( store => {
@@ -78,6 +84,10 @@ export class HeaderComponent implements OnInit {
         }
       }
     });
+  }
+
+  onLanguageSelect(lang) {
+    this.store.dispatch(new SelectLanguageAction(lang));
   }
 
   logout() {

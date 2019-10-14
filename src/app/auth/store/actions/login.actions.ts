@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 
-import { UserDetails, UserCredentials } from '../../models/login.model';
+import { UserDetails, UserCredentials } from '../models/login.model';
 
 export const REGISTER_USER = 'REGISTER_USER';
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
@@ -11,6 +11,7 @@ export const LOG_OUT = 'LOG_OUT';
 export const FINISH_COOKIES_CLEARENCE = 'FINISH_COOKIES_CLEARENCE';
 export const ERROR_LOADING = 'ERROR_LOADING';
 export const CREATE_ORDER_NUMBER = 'CREATE_ORDER_NUMBER';
+export const SELECT_LANGUAGE = 'SELECT_LANGUAGE';
 
 export class LoginAction implements Action {
   readonly type = LOGIN_USER;
@@ -49,6 +50,11 @@ export class EffectError implements Action {
 }
 export class CreateOrderNumber implements Action {
   readonly type = CREATE_ORDER_NUMBER;
+  constructor(public payload: any ) {
+  }
+}
+export class SelectLanguageAction implements Action {
+  readonly type = SELECT_LANGUAGE;
   constructor(public payload: any ) {
   }
 }

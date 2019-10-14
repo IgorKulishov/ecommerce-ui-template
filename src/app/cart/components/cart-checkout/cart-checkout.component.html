@@ -52,76 +52,24 @@
     </tr>
     </tbody>
   </table>
-<!--  <div class="row" *ngFor='let product of productsInCart'>-->
-<!--    <div class="col-12 product-name text-center">-->
-<!--      {{product.product.name}}-->
-<!--    </div>-->
-<!--    <div class="col-12">-->
-<!--      <div class="row thumbnail product-card" >-->
-<!--        <div class="col-sm-12 col-md-4 text-center">-->
-<!--          <img class="product-image" [src]="getProductUrl(product.product.productInfo)"-->
-<!--               onerror="this.onerror=null;this.src='/assets/images/teapod.jpeg';" alt="image of {{product.product.name}}">-->
-<!--        </div>-->
-<!--        <div class="col-sm-12 col-md-8">-->
-<!--          <div class="container-fluid">-->
-<!--            <div class="row">-->
-
-<!--              <div class="col-sm-12 col-md-12 product-description">-->
-<!--                {{product.product.description}}-->
-<!--              </div>-->
-
-<!--              <div class="col-4 product-price">-->
-<!--                $ {{product.product.price}}-->
-<!--              </div>-->
-
-<!--              <div class="col-4 product-price">-->
-<!--                {{product.quantity}} pcs-->
-<!--              </div>-->
-
-<!--              <div class="col-4 product-price">-->
-<!--                $ {{ totalSum(product.product.price, product.quantity) }}-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="row">-->
-<!--              <span class="align-bottom product-rating">-->
-<!--                <i class="glyphicon glyphicon-star-empty"></i>-->
-<!--                <i class="glyphicon glyphicon-star-empty"></i>-->
-<!--                <i class="glyphicon glyphicon-star-empty"></i>-->
-<!--                <i class="glyphicon glyphicon-star-empty"></i>-->
-<!--                <i class="glyphicon glyphicon-star-empty"></i>-->
-<!--              </span>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="sm-screen-product-divider" *ngIf="!isLast"></div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
 
   <div class="row justify-content-end pt-5">
     <div class="col-12 col-md-7 col-lg-6 col-xl-5">
       <div class="card">
         <div class="card-body">
-          <h3 class="card-title">Cart Totals</h3>
+          <h3 class="card-title">{{ 'checkout.cartTotals' | translate }}</h3>
           <table class="cart__totals">
             <thead *ngIf="totalAmount" class="cart__totals-header">
               <tr>
-                <th>Subtotal</th>
+                <th>{{ 'checkout.subtotal' | translate }}</th>
                 <td>$ {{totalAmount}}</td>
               </tr>
             </thead>
             <tbody *ngIf="totalAmount" class="cart__totals-body">
-<!--            <tr *ngFor="let total of cart.totals$|async">-->
-<!--              <th>{{ total.title }}</th>-->
-<!--              <td>-->
-<!--                {{ total.price|currencyFormat }}-->
-<!--                <div *ngIf="total.type === 'shipping'" class="cart__calc-shipping"><a href="" (click)="$event.preventDefault()">Calculate Shipping</a></div>-->
-<!--              </td>-->
-<!--            </tr>-->
             </tbody>
             <tfoot class="cart__totals-footer">
               <tr>
-                <th>Total</th>
+                <th>{{ 'checkout.total' | translate }}</th>
                 <td>$ {{totalAmount}}</td>
               </tr>
               <tr>
@@ -132,7 +80,7 @@
                       <select formControlName="payment_method_id" class="form-control" name="payment_method_id" id="methodPayment">
                         <option selected>{{'generic.dropDownSelect' | translate}}</option>
                         <option *ngFor="let method of methodsOfPayment">
-                          {{ method.paymentType }}
+                          {{ method.paymentType | translate }}
                         </option>
                       </select>
                     </div>
@@ -150,43 +98,31 @@
       </div>
     </div>
   </div>
-
-<!--  <div class="row checkout-total">-->
-<!--    <div class="col-6">-->
-<!--      {{totalQuantity}} pcs-->
-<!--    </div>-->
-<!--    <div class="col-6">-->
-<!--      $ {{totalAmount}}-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--  <div class="text-center checkout-verification-message" *ngIf='!checkOutConfirmationStatus'>Please verify your items and select method of payment</div>-->
-
 </div>
 
 <ng-template #approval_template>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Order submission</h4>
+    <h4 class="modal-title pull-left">{{ 'checkout.orderSubmission' | translate }}</h4>
     <button type="button" class="close pull-right" aria-label="Close approve submit modal" (click)="closeCheckoutApproveModal()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    Please confirm submission
-    <button type="button" class="btn btn-danger" (click)="submitOrder()">Submit order</button>
+    {{ 'checkout.submissionConfirmation' | translate }}
+    <button type="button" class="btn btn-danger" (click)="submitOrder()">{{ 'checkout.submitOrder' | translate }}</button>
   </div>
 </ng-template>
 
 <ng-template #confirmation_template>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Order confirmation</h4>
+    <h4 class="modal-title pull-left">{{ 'checkout.submitOrder' | translate }}</h4>
     <button type="button" class="close pull-right" aria-label="Close submit order confirmation" (click)="closeCheckoutConfirmationModal()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    Your order has been accepted<br>
-    <button type="button" class="btn btn-primary" (click)="closeCheckoutConfirmationModal()">Ok</button>
+    {{ 'checkout.orderAcceptedMsg' | translate }}<br>
+    <button type="button" class="btn btn-primary" (click)="closeCheckoutConfirmationModal()">{{ 'checkout.ok' | translate }}</button>
   </div>
 </ng-template>
 
@@ -196,7 +132,7 @@
 
 <ng-template #remove_item_approval_template>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Approval</h4>
+    <h4 class="modal-title pull-left">{{ 'checkout.approval' | translate }}</h4>
     <button type="button" class="close pull-right" aria-label="Cancel removal from shopping cart" (click)="approveModal.hide()">
       <span aria-hidden="true">&times;</span>
     </button>

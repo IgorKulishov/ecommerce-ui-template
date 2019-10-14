@@ -17,7 +17,7 @@ import {
 // TODO: need to add order models
 
 import { CartService } from '../../../core/services/cart.service';
-import { AppStates } from '../../../products/store/states/app.states';
+import { AppStates } from '../../../app.states';
 import {ProductsService} from '../../../core/services/products.service';
 import {EffectError} from '../../../products/store/actions/products.actions';
 import {GetOrderNumber} from '../../../auth/store/actions/login.actions';
