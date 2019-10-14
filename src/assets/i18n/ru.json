@@ -1,12 +1,4 @@
 {
-  "product" : {
-    "productDescription": "Описание",
-    "price": "Цена",
-    "quantity": "Количество",
-    "sum": "Сумма",
-    "addToCart": "Добавить в корзину",
-    "availableOnStock": "Доступно на складе"
-  },
   "header": {
     "language": "Язык",
     "userAccount": "Профиль",
@@ -19,6 +11,17 @@
     "product": "Продукция",
     "about": "О нас",
     "contacts": "Контакты"
+  },
+  "productList": {
+    "addToCart": "Добавить"
+  },
+  "product" : {
+    "productDescription": "Описание",
+    "price": "Цена",
+    "quantity": "Количество",
+    "sum": "Сумма",
+    "addToCart": "Добавить в корзину",
+    "availableOnStock": "Доступно на складе"
   },
   "checkout": {
     "image": "Фото",

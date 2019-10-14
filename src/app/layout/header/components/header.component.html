@@ -55,7 +55,9 @@
               </li>
               <li class="language-collapse">
                 {{ 'header.language' | translate }}
-                <select class="language-selector" id="languageSelectorMobile" [(ngModel)]="selectedLanguage">
+                <select class="language-selector" id="languageSelectorMobile"
+                        [ngModel]="selectedLanguage"
+                        (ngModelChange)="onLanguageSelect($event)">
                   <option *ngFor="let language of languages">{{language}}</option>
                 </select>
               </li>
