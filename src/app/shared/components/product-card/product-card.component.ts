@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+
 import { CartService } from '../../services/cart.service';
 // import { Product } from '../../interfaces/product';
 import { WishlistService } from '../../services/wishlist.service';
@@ -8,6 +10,8 @@ import { RootService } from '../../services/root.service';
 import { CurrencyService } from '../../services/currency.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import {AddToCart} from '../../../cart/store/actions/cart.actions';
+import { AppStates } from '../../../app.states';
 
 @Component({
     selector: 'app-product-card',
@@ -17,6 +21,8 @@ import { Subject } from 'rxjs';
 })
 export class ProductCardComponent implements OnInit, OnDestroy {
     private destroy$: Subject<void> = new Subject();
+    @Input() productId: string;
+    @Input() selectedQuantity: number;
 
     @Input() product: any;
     @Input() layout: 'grid-sm'|'grid-nl'|'grid-lg'|'list'|'horizontal'|null = null;
@@ -27,6 +33,7 @@ export class ProductCardComponent implements OnInit, OnDestroy {
     showingQuickview = false;
 
     constructor(
+        private store: Store<AppStates>,
         private cd: ChangeDetectorRef,
         public root: RootService,
         public cart: CartService,
@@ -48,17 +55,24 @@ export class ProductCardComponent implements OnInit, OnDestroy {
     }
 
     addToCart(): void {
-        if (this.addingToCart) {
-            return;
-        }
-
-        this.addingToCart = true;
-        this.cart.add(this.product, 1).subscribe({
-            complete: () => {
-                this.addingToCart = false;
-                this.cd.markForCheck();
-            }
-        });
+        // TODO: add option to add number of items
+        this.store.dispatch(new AddToCart(
+          {
+            id : this.product.id,
+            quantity: 1
+          }
+        ));
+        // if (this.addingToCart) {
+        //     return;
+        // }
+        //
+        // this.addingToCart = true;
+        // this.cart.add(this.product, 1).subscribe({
+        //     complete: () => {
+        //         this.addingToCart = false;
+        //         this.cd.markForCheck();
+        //     }
+        // });
     }
 
     addToWishlist(): void {

@@ -1,12 +1,4 @@
 {
-  "product" : {
-    "productDescription": "Description",
-    "price": "Prix",
-    "quantity": "Qualité",
-    "sum": "Somme",
-    "addToCart": "Ajouter au chariot",
-    "availableOnStock": "Disponible en stock"
-  },
   "header": {
     "language": "La langue",
     "userAccount": "Compte d'utilisateur",
@@ -19,6 +11,17 @@
     "product": "Produit",
     "about": "À propos",
     "contacts": "Contacts"
+  },
+  "productList": {
+    "addToCart": "Ajouter au chariot"
+  },
+  "product" : {
+    "productDescription": "Description",
+    "price": "Prix",
+    "quantity": "Qualité",
+    "sum": "Somme",
+    "addToCart": "Ajouter au chariot",
+    "availableOnStock": "Disponible en stock"
   },
   "checkout": {
     "image": "Image",
