@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppCookieService } from './cookie.service';
 import { environment } from '../../../environments/environment';
 import { map } from 'rxjs/operators';
-import {removeProductId} from "../../products/models/products.model";
+import {removeProductId} from "../../products/store/models/products.model";
 
 @Injectable()
 export class ProductsService {

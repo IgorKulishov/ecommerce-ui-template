@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { Injectable } from "@angular/core";
-import { Products, ProductDetails, ProductSlug, removeProductId, error_message } from '../../models/products.model';
+import { Products, ProductDetails, ProductSlug, removeProductId, error_message } from '../models/products.model';
 
 export const GET_PRODUCT_DETAILS = 'GET_PRODUCT_DETAILS';
 export const GET_PRODUCT_DETAILS_SUCCESS = 'GET_PRODUCT_DETAILS_SUCCESS';

@@ -12,6 +12,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { CoreModule } from '../core/core.module';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginEffects } from './store/effects/login.effects';
+
 //TODO: finilze proper routing and add guards
 const routes: Routes = [
   {path: 'login', component: LoginComponent},

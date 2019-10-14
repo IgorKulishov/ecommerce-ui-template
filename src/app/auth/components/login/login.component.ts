@@ -5,7 +5,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { UserCredentials } from '../../models/login.model';
+import { UserCredentials } from '../../store/models/login.model';
 import { AppCookieService } from '../../../core/services/cookie.service';
 import { LoginAction } from '../../store/actions/login.actions';
 @Component({
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     });
 
       this.store.select( states => {
-        return states['userLoginReducer']
+        return states['userLoginReducer'];
       }).pipe(
       map((data: any) => {
         if (data && data.registerUser) {

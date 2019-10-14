@@ -2,13 +2,13 @@ import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { AppStates } from '../../../store/states/app.states';
+import { AppStates } from '../../../../app.states';
 import { ProductsService } from '../../../../core/services/products.service';
 import {UploadProductImage, GetProductDetails} from '../../../store/actions/products.actions';
 
 import {map} from 'rxjs/operators';
 import {Observable} from "rxjs";
-import {ProductDetails} from "../../../models/products.model";
+import {ProductDetails} from "../../../store/models/products.model";
 
 @Component({
   templateUrl: './upload-images.component.html',

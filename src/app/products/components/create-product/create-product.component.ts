@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AppStates } from '../../store/states/app.states';
+import { AppStates } from '../../../app.states';
 import {map} from 'rxjs/operators';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Action, ActionReducer } from '@ngrx/store';
-import { AppStates } from '../states/app.states';
-import { initStateOfProductDetails } from '../../models/products.model';
+import { AppStates } from '../../../app.states';
+import { initStateOfProductDetails } from '../models/products.model';
 import {
   GET_PRODUCT_DETAILS, GET_PRODUCTS, GET_PRODUCT_DETAILS_SUCCESS,
   CREATE_NEW_PRODUCT, CREATE_NEW_PRODUCT_SUCCESS, GET_PRODUCTS_SUCCESS,

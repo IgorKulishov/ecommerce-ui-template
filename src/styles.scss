@@ -6,6 +6,10 @@ $base-lightest-grey-01: rgba(211,211,211,0.1);
 $base-lightest-grey-02: rgba(211,211,211,0.2);
 $base-lightest-grey-03: rgba(211,211,211,0.3);
 
+.nav-link-custom {
+  flex: 4 !important;
+}
+
 .form-frame {
   padding: 1.5rem;
   margin-right: 0;

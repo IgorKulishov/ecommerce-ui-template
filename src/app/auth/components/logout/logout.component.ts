@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { AppStates } from '../../../products/store/states/app.states';
+import { AppStates } from '../../../app.states';
 import { LogOut } from '../../store/actions/login.actions';
 import {AppCookieService} from '../../../core/services/cookie.service';
 

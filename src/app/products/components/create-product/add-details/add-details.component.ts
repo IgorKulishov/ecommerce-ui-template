@@ -2,10 +2,10 @@ import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core'
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { AppStates } from '../../../store/states/app.states';
+import { AppStates } from '../../../../app.states';
 import { ProductsService } from '../../../../core/services/products.service';
 import { CreateNewProduct } from '../../../store/actions/products.actions';
-import { ProductDetails } from '../../../models/products.model';
+import { ProductDetails } from '../../../store/models/products.model';
 import {map} from 'rxjs/operators';
 
 @Component({
@@ -58,7 +58,7 @@ export class AddDetailsComponent implements OnInit {
 
       ngOnInit() {
       }
-      
+
       addProduct() {
         this.submitFormData = Object.assign({}, this.addProductForm.value, { image: this.fileDataUrl } );
         this.store.dispatch(new CreateNewProduct(this.submitFormData));

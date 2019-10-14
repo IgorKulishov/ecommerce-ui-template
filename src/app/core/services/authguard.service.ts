@@ -4,7 +4,7 @@ import {Observable, of} from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AppCookieService } from './cookie.service';
 import {Store} from '@ngrx/store';
-import {AppStates} from '../../products/store/states/app.states';
+import {AppStates} from '../../app.states';
 import {catchError, map} from 'rxjs/operators';
 import {EffectError} from '../../products/store/actions/products.actions';
 import {GetOrderNumber, CreateOrderNumber} from '../../auth/store/actions/login.actions';

@@ -10,9 +10,9 @@ import {
   GetProductDetails, GetProductsSuccess, GetProductDetailsSuccess, CreateNewProductSuccess,
   EffectError, GetProducts, uploadImageSuccess
 } from '../actions/products.actions';
-import { ProductDetails, removeProductId } from '../../models/products.model';
+import { ProductDetails, removeProductId } from '../models/products.model';
 
-import { AppStates } from '../states/app.states';
+import { AppStates } from '../../../app.states';
 import {ProductsService} from '../../../core/services/products.service';
 
 /**

@@ -9,7 +9,7 @@ import { Order } from '../../models/cart.model';
 import {BehaviorSubject, Observable} from 'rxjs';
 import { AppCookieService } from '../../../core/services/cookie.service';
 import {RemoveProduct} from '../../../products/store/actions/products.actions';
-import {ProductDetails} from '../../../products/models/products.model';
+import {ProductDetails} from '../../../products/store/models/products.model';
 import { BsModalService, BsModalRef, ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({

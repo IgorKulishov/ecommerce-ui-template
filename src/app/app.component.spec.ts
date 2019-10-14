@@ -4,7 +4,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Routes, Router } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './layout/header/components/header.component';
 
 describe('AppComponent', () => {
 

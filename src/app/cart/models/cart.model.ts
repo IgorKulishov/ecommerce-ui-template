@@ -49,6 +49,6 @@ export interface PaymentMethods {
 }
 
 export interface PaymentDescription {
-  "_id": number; 
+  "_id": number;
   "paymentType": string;
 }

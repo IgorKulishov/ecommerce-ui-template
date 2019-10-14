@@ -1,12 +1,12 @@
 import { Action, ActionReducer } from '@ngrx/store';
-import { AppStates } from '../../../products/store/states/app.states';
+import { AppStates } from '../../../app.states';
 import {
   ADD_TO_CART, ADD_TO_CART_SUCCESS,
   SAVE_CURRENT_ORDER_IN_STORE, GET_CURRENT_ORDER_FROM_STORE,
   GET_CURRENT_ORDER_FROM_STORE_SUCCESS, CHECK_OUT, CHECK_OUT_SUCCESS, REMOVE_FROM_CART
 } from '../actions/cart.actions';
 import { Order } from '../../models/cart.model';
-import { INITIAL_STORE_DATA } from '../../../products/store/states/app.states';
+import { INITIAL_STORE_DATA } from '../../../app.states';
 
 export class ReducerClass implements Action {
   type: string;
