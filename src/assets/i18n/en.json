@@ -1,12 +1,4 @@
 {
-  "product" : {
-    "productDescription": "Description",
-    "price": "Price",
-    "quantity": "Quality",
-    "sum": "Sum",
-    "addToCart": "Add to cart",
-    "availableOnStock": "Available on stock"
-  },
   "header": {
     "language": "Language",
     "userAccount": "User account",
@@ -19,6 +11,17 @@
     "product": "Product",
     "about": "About",
     "contacts": "Contacts"
+  },
+  "productList": {
+    "addToCart": "Add to cart"
+  },
+  "product" : {
+    "productDescription": "Description",
+    "price": "Price",
+    "quantity": "Quality",
+    "sum": "Sum",
+    "addToCart": "Add to cart",
+    "availableOnStock": "Available on stock"
   },
   "checkout": {
     "image": "Image",

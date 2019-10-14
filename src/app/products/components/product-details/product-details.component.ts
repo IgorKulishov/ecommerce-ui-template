@@ -94,7 +94,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   }
 
   addToCart() {
-    //TODO: add option to add number of items
+    // TODO: add option to add number of items
     this.store.dispatch(new AddToCart(
       {
         id : this.productId,

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-
+import {CoreModule} from '../core/core.module';
 // modules (angular)
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -62,6 +62,7 @@ import { CurrencyFormatPipe } from './pipes/currency-format.pipe';
     ],
     imports: [
         // modules (angular)
+        CoreModule,
         CommonModule,
         RouterModule,
         FormsModule,
