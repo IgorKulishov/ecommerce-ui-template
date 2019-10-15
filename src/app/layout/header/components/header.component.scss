@@ -85,8 +85,13 @@
   box-shadow: -10px -10px 10px #bedff6;
 }
 
-@media only screen and (max-width: 975px) {
+.header-custom {
+  position: sticky;
+  top:0;
+  z-index: 3;
+}
 
+@media only screen and (max-width: 975px) {
 }
 
 .shopping_cart_total {

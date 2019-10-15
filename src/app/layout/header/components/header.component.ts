@@ -26,6 +26,8 @@ export class HeaderComponent implements OnInit {
   languages: string[] = languages;
   selectedLanguage = 'en';
 
+  screenSize: number;
+
   constructor(private appCookieService: AppCookieService,
               private store: Store<AppStates>,
               private router: Router,
@@ -86,6 +88,10 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  ngOnInit() {
+
+  }
+
   onLanguageSelect(lang) {
     this.store.dispatch(new SelectLanguageAction(lang));
   }
@@ -94,8 +100,8 @@ export class HeaderComponent implements OnInit {
     this.appCookieService.logout();
   }
 
-  ngOnInit() {
-
+  onResize() {
+    this.screenSize = window.innerWidth;
   }
 
 }
