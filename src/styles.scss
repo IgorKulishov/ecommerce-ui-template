@@ -440,3 +440,14 @@ carousel {
   }
 }
 
+.caret-right {
+  border-bottom: 0.3em solid transparent;
+  border-top: .3em solid transparent;
+  border-left: .4em solid;
+  display: inline-block;
+  height: 0px;
+  opacity: 0.6;
+  width: 0;
+  vertical-align: 0em;
+  margin-left: 0.3em;
+}
