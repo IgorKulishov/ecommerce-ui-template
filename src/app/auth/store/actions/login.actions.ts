@@ -12,6 +12,13 @@ export const FINISH_COOKIES_CLEARENCE = 'FINISH_COOKIES_CLEARENCE';
 export const ERROR_LOADING = 'ERROR_LOADING';
 export const CREATE_ORDER_NUMBER = 'CREATE_ORDER_NUMBER';
 export const SELECT_LANGUAGE = 'SELECT_LANGUAGE';
+export const RE_LOGIN_ON_REFRESH = 'RE_LOGIN_ON_REFRESH';
+
+export class ReloginOnRefresh implements Action {
+  readonly type = RE_LOGIN_ON_REFRESH;
+  constructor(public payload: UserCredentials ) {
+  }
+}
 
 export class LoginAction implements Action {
   readonly type = LOGIN_USER;

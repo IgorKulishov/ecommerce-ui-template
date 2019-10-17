@@ -103,12 +103,12 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     ));
   }
 
-  initGallery(index: number) {
+  initGallery(index?: number) {
     lightGallery(this.lightgalleryID.nativeElement, {
       thumbnail: true,
       download : false,
       dynamic  : true,
-      index: index,
+      index: index ? index : 0,
       dynamicEl: this.images.map(image => {
         return {
           'src': image.imageUrl,

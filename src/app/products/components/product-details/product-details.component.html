@@ -9,7 +9,8 @@
     <div *ngIf="(productDetail$  | async)" class="col-sm-4 text-center product-image">
       <img [src]="getProductUrl((productDetail$  | async)?.productInfo)"
            onerror="this.onerror=null;this.src='/assets/images/teapod.jpeg';"
-           class="product-image" alt="product image">
+           class="product-image" alt="product image"
+           (click)="initGallery()">
 
       <div #lightGallery class="col-12 images-container">
         <div class="row" id="aniimated-thumbnials" *ngIf="(productDetail$  | async)?.productInfo">

@@ -7,7 +7,7 @@ import {Store} from '@ngrx/store';
 import {AppStates} from '../../app.states';
 import {catchError, map} from 'rxjs/operators';
 import {EffectError} from '../../products/store/actions/products.actions';
-import {GetOrderNumber, CreateOrderNumber} from '../../auth/store/actions/login.actions';
+import {GetOrderNumber, CreateOrderNumber, ReloginOnRefresh} from '../../auth/store/actions/login.actions';
 
 @Injectable()
 export class AuthguardService implements CanActivate {
@@ -25,7 +25,12 @@ export class AuthguardService implements CanActivate {
 
     /*** 1. Check token in store (token is lost on page refresh) ***/
     this.store.select( states => {
-      return states['userLoginReducer']
+      if (states && states['userLoginReducer']) {
+        return states['userLoginReducer'];
+      } else if (this.getUserContent()) {
+        // on refresh if userContext exist
+        this.reloginOnRefresh();
+      }
     }).pipe(
         map(( data: any) => {
         return data['userDetails'];
@@ -54,6 +59,14 @@ export class AuthguardService implements CanActivate {
       loggedIn = false;
     }
     return loggedIn;
+  }
+
+  reloginOnRefresh() {
+    this.store.dispatch(new ReloginOnRefresh(JSON.parse(this.appCookieService.getUserContent())));
+  }
+
+  getUserContent() {
+    return JSON.parse(this.appCookieService.getUserContent());
   }
 
 }
