@@ -15,6 +15,7 @@ import { Payments } from '../../enums/payments.enum';
 
 import { BsModalService, BsModalRef, ModalDirective } from 'ngx-bootstrap/modal';
 import {ProductDetails} from '../../../products/store/models/products.model';
+import {ItemList} from '../../models/cart.model';
 
 @Component({
   selector: 'app-home',
@@ -30,7 +31,7 @@ export class CartCheckoutComponent implements OnInit {
   totalAmount: number;
   totalQuantity: number;
   checkoutForm: FormGroup;
-  deleteProduct: ProductDetails;
+  deleteProduct: ItemList;
   errorModal: BsModalRef | null;
   approveModal: BsModalRef | null;
   deleteProductState: { action: string; state: string; } = { action: undefined, state: undefined };
@@ -142,14 +143,13 @@ export class CartCheckoutComponent implements OnInit {
     if (product && product.imageList.length > 0) {
       const url = product.imageList[0]['imageUrl'] ? product.imageList[0]['imageUrl'] :
         product.imageList[0]['largeUrl'] ? product.imageList[0]['largeUrl'] : '/assets/images/teapod.jpeg';
-      console.log(url);
       return url;
     } else if (product && product.imageList.length === 0) {
       return  '/assets/images/teapod.jpeg';
     }
   }
 
-  removeProductConfirmation(template: TemplateRef<any>, deleteProduct: ProductDetails) {
+  removeProductConfirmation(template: TemplateRef<any>, deleteProduct: ItemList) {
     this.deleteProduct = deleteProduct;
     this.errorModal = null;
     this.approveModal = this.bsModalService.show(template, { class: 'modal-lg' });
