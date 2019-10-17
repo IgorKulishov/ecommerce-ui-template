@@ -3,7 +3,8 @@
 import { AppStates } from '../../../app.states';
 import {
   LOGIN_USER, GET_ORDER_NUMBER, LOG_OUT, FINISH_COOKIES_CLEARENCE,
-  REGISTER_USER, REGISTER_USER_SUCCESS, ERROR_LOADING, SELECT_LANGUAGE
+  REGISTER_USER, REGISTER_USER_SUCCESS, ERROR_LOADING, SELECT_LANGUAGE,
+  RE_LOGIN_ON_REFRESH
 } from '../actions/login.actions';
 import {CREATE_ORDER_NUMBER} from '../actions/login.actions';
 
@@ -69,6 +70,8 @@ export function userLoginReducer (state: AppStates, action: ReducerClass) {
       return storeOrderNumber(state, action);
     case SELECT_LANGUAGE:
       return selectLanguage(state, action);
+    case RE_LOGIN_ON_REFRESH:
+      return loadUserCredentials(state, action);
     default:
       return state;
   }

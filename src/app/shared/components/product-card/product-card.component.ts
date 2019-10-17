@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, TemplateRef} from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { CartService } from '../../services/cart.service';
@@ -12,6 +12,8 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import {AddToCart} from '../../../cart/store/actions/cart.actions';
 import { AppStates } from '../../../app.states';
+import {ProductDetails} from '../../../products/store/models/products.model';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 
 @Component({
     selector: 'app-product-card',
@@ -32,6 +34,10 @@ export class ProductCardComponent implements OnInit, OnDestroy {
     addingToCompare = false;
     showingQuickview = false;
 
+    approveModal: BsModalRef | null;
+    deleteProduct: ProductDetails;
+    errorModal: BsModalRef | null;
+
     constructor(
         private store: Store<AppStates>,
         private cd: ChangeDetectorRef,
@@ -40,7 +46,8 @@ export class ProductCardComponent implements OnInit, OnDestroy {
         public wishlist: WishlistService,
         public compare: CompareService,
         public quickview: QuickviewService,
-        public currency: CurrencyService
+        public currency: CurrencyService,
+        private modalService: BsModalService
     ) { }
 
     ngOnInit(): void {
@@ -74,6 +81,12 @@ export class ProductCardComponent implements OnInit, OnDestroy {
         //     }
         // });
     }
+
+  deleteProductConfirmation(template: TemplateRef<any>, deleteProduct: ProductDetails) {
+    this.deleteProduct = deleteProduct;
+    this.errorModal = null;
+    this.approveModal = this.modalService.show(template, { class: 'modal-lg' });
+  }
 
     addToWishlist(): void {
         if (this.addingToWishlist) {
@@ -118,8 +131,8 @@ export class ProductCardComponent implements OnInit, OnDestroy {
     }
 
     getProductUrl(product) {
-      if(product && product.productInfo && product.productInfo.imageList.length > 0) {
-        let url = product.productInfo.imageList[0]['imageUrl'] ? product.productInfo.imageList[0]['imageUrl'] :
+      if (product && product.productInfo && product.productInfo.imageList.length > 0) {
+        const url = product.productInfo.imageList[0]['imageUrl'] ? product.productInfo.imageList[0]['imageUrl'] :
           product.productInfo.imageList[0]['largeUrl'] ? product.productInfo.imageList[0]['largeUrl'] : '/assets/images/teapod.jpeg';
         return url;
       } else {

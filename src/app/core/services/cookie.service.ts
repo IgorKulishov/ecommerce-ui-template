@@ -13,12 +13,21 @@ export class AppCookieService {
     this.cookieService.delete('orderId');
     this.cookieService.delete('orderNumber');
     this.cookieService.delete('userName');
+    this.cookieService.delete('userContent');
   }
 
   public storeTokenInCookie(data: any): void {
     this.cookieService.set('token', data.token);
     this.cookieService.set('userId', data.id);
     this.cookieService.set('userName', data.userName );
+  }
+
+  public setUserContent(data: any): void {
+    this.cookieService.set('userContent', data);
+  }
+
+  public getUserContent(): any {
+    return this.cookieService.get('userContent');
   }
 
   public storeOrderNumberInCookie(data: any): void {

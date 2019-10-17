@@ -6,6 +6,7 @@
     'product-card--layout--horizontal':                  layout === 'horizontal'
 }">
     <button class="product-card__quickview" type="button" appClick (click)="showQuickview()" [ngClass]="{'product-card__quickview--preload': showingQuickview}">
+<!--      <button type="button" class="close custom-close" aria-label="Close" (click)="deleteProductConfirmation(approval_template, product)">-->
         <app-icon name="quickview-16" size="16"></app-icon>
         <span class="fake-svg-icon"></span>
     </button>
