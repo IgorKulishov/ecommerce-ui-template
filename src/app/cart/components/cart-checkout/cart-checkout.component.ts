@@ -69,7 +69,6 @@ export class CartCheckoutComponent implements OnInit {
         this.payment = {amount: cartInfo.totalAmount}
       }
       if (cartInfo && cartInfo.itemList) {
-        console.log(cartInfo);
         this.productsInCart = cartInfo.itemList;
       }
     });
@@ -144,7 +143,6 @@ export class CartCheckoutComponent implements OnInit {
     if (product && product.imageList.length > 0) {
       const url = product.imageList[0]['imageUrl'] ? product.imageList[0]['imageUrl'] :
         product.imageList[0]['largeUrl'] ? product.imageList[0]['largeUrl'] : '/assets/images/teapod.jpeg';
-      console.log(url);
       return url;
     } else if (product && product.imageList.length === 0) {
       return  '/assets/images/teapod.jpeg';
