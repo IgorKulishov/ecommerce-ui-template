@@ -72,9 +72,8 @@ export class CartService {
       };
       return this.http.post(
         environment.REST_API + `/rest/api/item/remove/${orderNumber}`,
-        // environment.REST_API + `/rest/api/item/delete/${orderNumber}/line_items/${data.payload.id}`,
         {
-          'productId': data.payload.id
+          'itemId': data.payload.id
         },
         options
       );
