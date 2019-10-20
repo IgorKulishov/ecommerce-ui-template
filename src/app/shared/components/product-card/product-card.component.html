@@ -5,11 +5,19 @@
     'product-card--layout--list':                        layout === 'list',
     'product-card--layout--horizontal':                  layout === 'horizontal'
 }">
-    <button class="product-card__quickview" type="button" appClick (click)="showQuickview()" [ngClass]="{'product-card__quickview--preload': showingQuickview}">
-<!--      <button type="button" class="close custom-close" aria-label="Close" (click)="deleteProductConfirmation(approval_template, product)">-->
+  <div class="row">
+    <div class="col-auto mr-auto">
+      <button class="product-card__quickview" type="button" appClick (click)="showQuickview()" [ngClass]="{'product-card__quickview--preload': showingQuickview}">
         <app-icon name="quickview-16" size="16"></app-icon>
         <span class="fake-svg-icon"></span>
-    </button>
+      </button>
+    </div>
+    <div class="col-auto">
+      <button type="button" class="close remove-btn" aria-label="Close" (click)="removeItemConfirmation(remove_item_approval_template, product)">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
 
     <div *ngIf="product.badges && product.badges.length" class="product-card__badges-list">
         <div *ngIf="product.badges.includes('sale')" class="product-card__badge product-card__badge--sale">Sale</div>
@@ -60,3 +68,46 @@
         </div>
     </div>
 </div>
+
+
+<ng-template #remove_item_approval_template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{ 'checkout.approval' | translate }}</h4>
+    <button type="button" class="close pull-right" aria-label="Cancel removal from shopping cart" (click)="approveModal.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Please confirm you want completely delete item "{{deleteProduct.name}}" from product list</p>
+    <button type="button" class="btn btn-danger" (click)="removeItemFromProductList()">Remove from order</button>
+  </div>
+</ng-template>
+
+<ng-template #remove_item_confirmation_template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Confirmation</h4>
+    <button type="button" class="close pull-right" aria-label="Close modal of removal from shopping cart" (click)="confirmationModal.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Product has been removed from shopping cart<br>
+    <button type="button" class="btn btn-primary" (click)="confirmationModal.hide()" (click)="approveModal.hide()">Ok</button>
+  </div>
+</ng-template>
+
+
+<ng-template #error_modal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Error message</h4>
+    <button type="button" class="close pull-right" aria-label="Close error message" (click)="errorModal.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Sorry, there was an error.
+    We are unable to remove the item from shopping cart at the moment.<br>
+    Please try again later or contact administrator.<br>
+    <button type="button" class="btn btn-primary" (click)="errorModal.hide()" >Ok</button>
+  </div>
+</ng-template>

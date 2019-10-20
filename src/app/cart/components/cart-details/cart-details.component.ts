@@ -8,7 +8,7 @@ import { AppStates } from '../../store/states/cart.states';
 import { Order } from '../../models/cart.model';
 import {BehaviorSubject, Observable} from 'rxjs';
 import { AppCookieService } from '../../../core/services/cookie.service';
-import {RemoveProduct} from '../../../products/store/actions/products.actions';
+import { RemoveItemFromProductList } from '../../../products/store/actions/products.actions';
 import {ProductDetails} from '../../../products/store/models/products.model';
 import { BsModalService, BsModalRef, ModalDirective } from 'ngx-bootstrap/modal';
 
@@ -36,7 +36,7 @@ export class CartDetailsComponent implements OnInit {
               private bsModalService: BsModalService) {
     this.store.select( store => {
         if (store && store['userLoginReducer'] ) {
-          if (store['userLoginReducer']['errorLoading']  && store['userLoginReducer']['errorLoading']['error_message'] == 'remove_product_error') {
+          if (store['userLoginReducer']['errorLoading']  && store['userLoginReducer']['errorLoading']['error_message'] === 'remove_product_error') {
             Object.assign(this.deleteProductState, { state: 'delete_product_error' });
           } else {
             Object.assign(this.deleteProductState, { state: 'no_errors' });
@@ -78,7 +78,7 @@ export class CartDetailsComponent implements OnInit {
         } else {
         }
 
-      } else if (status.state == 'no_error' && status.action == 'delete_product') {
+      } else if (status.state === 'no_error' && status.action === 'delete_product') {
         if(this.errorModal) {this.errorModal.hide()}
         if(!this.confirmationModal) {this.confirmationModal = this.bsModalService.show(this.confirmation_template, { class: 'modal-lg' })}
       }
