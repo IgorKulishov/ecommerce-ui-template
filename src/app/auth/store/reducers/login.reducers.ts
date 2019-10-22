@@ -1,5 +1,4 @@
- import { Action, ActionReducer } from '@ngrx/store';
-
+import { Action, ActionReducer } from '@ngrx/store';
 import { AppStates } from '../../../app.states';
 import {
   LOGIN_USER, GET_ORDER_NUMBER, LOG_OUT, FINISH_COOKIES_CLEARENCE,
@@ -7,28 +6,21 @@ import {
   RE_LOGIN_ON_REFRESH
 } from '../actions/login.actions';
 import {CREATE_ORDER_NUMBER} from '../actions/login.actions';
+import {INITIAL_USER_DATA} from '../states/auth.states';
 
 export class ReducerClass implements Action {
   type: string;
   payload?: any;
 }
 
-const logoutPayload = {
-  'id':          null,
-  'userName':    undefined,
-  'orderNumber': null,
-  'mobile':      null,
-  'token':       undefined,
-  'language':    undefined
-};
-
-const loadUserCredentials = ( state: AppStates, action: ReducerClass ): AppStates => {
-  const newData: AppStates = Object.assign({}, state, { userDetails: action.payload} );
-  return newData;
+const loadUserCredentials = ( state: AppStates = INITIAL_USER_DATA, action: ReducerClass ): AppStates => {
+  const newUserDetailsState = { ...state.userDetails,  ...action.payload};
+  const newSate: AppStates = { ...state, ...{ userDetails: newUserDetailsState} };
+  return newSate;
 };
 
 const logOutUser = ( state: AppStates, action: ReducerClass ): AppStates => {
-  const newData: AppStates = Object.assign({}, state, { userDetails: logoutPayload} );
+  const newData: AppStates = Object.assign({}, state, {'userDetails' : INITIAL_USER_DATA} );
   return newData;
 };
 

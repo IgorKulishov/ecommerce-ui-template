@@ -1,3 +1,4 @@
+import { defaultLanguage, defaultRole} from '../../../core/consts/consts';
 export const INITIAL_USER_DATA: any = {
   'userDetails': {
     'id':          null,
@@ -5,6 +6,7 @@ export const INITIAL_USER_DATA: any = {
     'orderNumber': null,
     'mobile':      null,
     'token':       undefined,
-    'language':    undefined
+    'language':    defaultLanguage,
+    'role':        defaultRole
   }
 };

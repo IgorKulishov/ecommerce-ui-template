@@ -8,13 +8,14 @@ import { CompareService } from '../../services/compare.service';
 import { QuickviewService } from '../../services/quickview.service';
 import { RootService } from '../../services/root.service';
 import { CurrencyService } from '../../services/currency.service';
-import { takeUntil } from 'rxjs/operators';
-import {BehaviorSubject, Subject} from 'rxjs';
+import {map, takeUntil} from 'rxjs/operators';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {AddToCart} from '../../../cart/store/actions/cart.actions';
 import { AppStates } from '../../../app.states';
-import {ProductDetails} from '../../../products/store/models/products.model';
+import {ProductDetails, Products} from '../../../products/store/models/products.model';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {RemoveItemFromProductList} from '../../../products/store/actions/products.actions';
+import {UserDetails} from '../../../auth/store/models/login.model';
 
 @Component({
     selector: 'app-product-card',
@@ -35,6 +36,7 @@ export class ProductCardComponent implements OnInit, OnDestroy {
     addingToWishlist = false;
     addingToCompare = false;
     showingQuickview = false;
+    userDetails$: Observable<UserDetails>;
 
     approveModal: BsModalRef | null;
     deleteProduct: ProductDetails;
@@ -50,7 +52,19 @@ export class ProductCardComponent implements OnInit, OnDestroy {
         public quickview: QuickviewService,
         public currency: CurrencyService,
         private modalService: BsModalService
-    ) { }
+    ) {
+      this.userDetails$ = this.store.select(
+        res => {
+          if (res && res['userLoginReducer'] && res['userLoginReducer']['userDetails']) {
+            return res['userLoginReducer']['userDetails'];
+          }
+        })
+        .pipe(
+          map((userDetails: UserDetails) => {
+            return userDetails;
+          })
+        );
+    }
 
     ngOnInit(): void {
         this.currency.changes$.pipe(takeUntil(this.destroy$)).subscribe(() => {

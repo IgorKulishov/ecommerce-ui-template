@@ -106,8 +106,8 @@ export class ProductsService {
 
       return this.http.delete(
         // TODO: temp placed wromg, please use second URL:
-        // `${environment.REST_API}/api/product/delete/${removeItemId.id}`, options
-        `${environment.REST_API}/rest/api/product/delete/${removeItemId.id}`, options
+        `${environment.REST_API}/api/product/delete/${removeItemId.id}`, options
+        // `${environment.REST_API}/rest/api/product/delete/${removeItemId.id}`, options
       ).pipe(
         map((res: any) => res)
       );

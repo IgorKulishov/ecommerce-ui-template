@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { HttpClientModule, HttpClient} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+// TODO: INITIAL_STORE_DATA is not use - each feature module is using initial data load in reducers
 import { INITIAL_STORE_DATA } from './app.states';
 import { AppComponent } from './app.component';
 import { ProductsModule } from './products/products.module';
@@ -11,9 +12,9 @@ import { LoginModule } from './auth/login.module';
 import { LayoutModule } from './layout/layout.module';
 import { CartModule } from './cart/cart.module';
 
-import { SharedModule } from './shared/shared.module'; //from purchased template
+import { SharedModule } from './shared/shared.module'; // from purchased template
 
-import { reducer } from './app.reducers';
+// import { reducer } from './app.reducers';
 
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -25,14 +26,6 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 // import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
-// no need to place actions to providers:
-
-/**
- * 1. Actions are not registered inside 'providers'
- * 2. INITIAL_STORE_DATA has storeData state
- * 3. reducer fun and INITIAL_STORE_DATA const are registered in StoreData
- * 4. Effect class is registered inside EffectModule
- **/
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -55,7 +48,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
-    StoreModule.forRoot(reducer, INITIAL_STORE_DATA),
+    StoreModule.forRoot({}),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
