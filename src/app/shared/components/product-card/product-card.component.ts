@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, TemplateRef} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { CartService } from '../../services/cart.service';
@@ -13,7 +13,7 @@ import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {AddToCart} from '../../../cart/store/actions/cart.actions';
 import { AppStates } from '../../../app.states';
 import {ProductDetails, Products} from '../../../products/store/models/products.model';
-import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {BsModalRef, BsModalService, ModalDirective} from 'ngx-bootstrap';
 import {RemoveItemFromProductList} from '../../../products/store/actions/products.actions';
 import {UserDetails} from '../../../auth/store/models/login.model';
 
@@ -27,6 +27,10 @@ export class ProductCardComponent implements OnInit, OnDestroy {
     private destroy$: Subject<void> = new Subject();
     deleteProductSubject: BehaviorSubject<{action: string; state: string; }> = new BehaviorSubject({action: undefined, state: undefined});
     deleteProductState: {action: string; state: string; } = {action: undefined, state: undefined};
+    confirmationModal: BsModalRef | null;
+    @ViewChild('error_modal', {'static': false}) error_modal: ModalDirective;
+    @ViewChild('remove_item_confirmation_template', {'static': false}) confirmation_template: ModalDirective;
+
     @Input() productId: string;
     @Input() selectedQuantity: number;
     @Input() product: any;
@@ -70,6 +74,30 @@ export class ProductCardComponent implements OnInit, OnDestroy {
         this.currency.changes$.pipe(takeUntil(this.destroy$)).subscribe(() => {
             this.cd.markForCheck();
         });
+
+      this.deleteProductSubject.subscribe( (status: any) => {
+
+        if (status.state === 'delete_product_error' && status.action === 'delete_product') {
+
+          if (this.confirmationModal) {
+            this.confirmationModal.hide();
+          }
+          if (this.approveModal) {
+            this.approveModal.hide();
+          }
+          if (!this.errorModal) {
+            this.errorModal = this.modalService.show(this.error_modal, {class: 'modal-lg'});
+          } else {
+          }
+
+        } else if (status.state === 'no_error' && status.action === 'delete_product') {
+          if (this.errorModal) { this.errorModal.hide(); }
+          if (!this.confirmationModal) {this.confirmationModal = this.modalService.show(this.confirmation_template, { class: 'modal-lg' })}
+        } else {
+          //  TODO: modify this place
+        }
+
+      });
     }
 
     ngOnDestroy(): void {
