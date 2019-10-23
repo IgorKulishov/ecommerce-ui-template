@@ -10,7 +10,7 @@ import { errorState, Products } from '../../store/models/products.model';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { AppCookieService } from '../../../core/services/cookie.service';
 import {AddToCart, CheckOut} from '../../../cart/store/actions/cart.actions';
-import { RemoveProduct } from '../../store/actions/products.actions';
+import { RemoveItemFromProductList } from '../../store/actions/products.actions';
 import { ProductDetails} from '../../store/models/products.model';
 
 
@@ -29,7 +29,7 @@ export class ProductListComponent implements OnInit {
   errorModal: BsModalRef | null;
   deleteProduct: ProductDetails;
   deleteProductState: {action: string; state: string; } = {action: undefined, state: undefined};
-  deleteProductSubject: BehaviorSubject<{action: string; state: string;}> = new BehaviorSubject({action: undefined, state:undefined});
+  deleteProductSubject: BehaviorSubject<{action: string; state: string;}> = new BehaviorSubject({action: undefined, state: undefined});
   // Template basic settings:
   filters: any[] = [];
   sidebarPosition: 'start'|'end' = 'start';
@@ -45,7 +45,8 @@ export class ProductListComponent implements OnInit {
     this.products$ = this.store.select(
       res => {
         if (res && res['userLoginReducer'] ) {
-          if (res['userLoginReducer']['errorLoading']  && res['userLoginReducer']['errorLoading']['error_message'] === 'remove_product_error') {
+          if (res['userLoginReducer']['errorLoading']  &&
+            res['userLoginReducer']['errorLoading']['error_message'] === 'remove_product_error') {
             Object.assign(this.deleteProductState, { state: 'delete_product_error' });
           } else {
             Object.assign(this.deleteProductState, { state: 'no_errors' });
@@ -85,19 +86,17 @@ export class ProductListComponent implements OnInit {
         }
 
       } else if (status.state === 'no_error' && status.action === 'delete_product') {
-          if(this.errorModal) {this.errorModal.hide()}
-          if(!this.confirmationModal) {this.confirmationModal = this.modalService.show(this.confirmation_template, { class: 'modal-lg' })}
-        }
-
-      else {
-
+          if (this.errorModal) {this.errorModal.hide()}
+          if (!this.confirmationModal) {this.confirmationModal = this.modalService.show(this.confirmation_template, { class: 'modal-lg' })}
+        } else {
+      //  TODO: modify this place
       }
 
     });
   }
 
   removeItemFromProductList() {
-    this.store.dispatch(new RemoveProduct(
+    this.store.dispatch(new RemoveItemFromProductList(
       {
         id : this.deleteProduct.id
       }

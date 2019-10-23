@@ -37,5 +37,5 @@ export const INITIAL_STORE_DATA: any = {
     'payment': null,
     'id': null
   },
-  INITIAL_USER_DATA
+  'userDetails' : INITIAL_USER_DATA
 };
