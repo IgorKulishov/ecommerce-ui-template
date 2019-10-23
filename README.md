@@ -1,3 +1,35 @@
+***
+
+## Framework 
+Angular 8
+
+
+## Libraries 
+NGRX, Observable
+
+
+## Constants and default value
+in file `/src/app/core/consts/consts.ts`
+
+E.g.
+
+A) default language `'en'` ('en', 'fr', 'ru')
+
+B) default role `'seller'` 
+
+## Main pages:
+* `/login`
+* `/register`
+* `/products`
+* `/details/{product-name}`
+* `/checkout`
+* `/create-product/add-details`
+
+## Default user
+abc@test.com / atz
+
+***
+
 
 - [API](#api)
   - [Register](#register-user)
