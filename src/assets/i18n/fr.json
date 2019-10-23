@@ -38,7 +38,13 @@
     "orderConfirmation": "Confirmation de commande.",
     "orderAcceptedMsg": "Votre commande a été acceptée",
     "approval": "Approbation",
-    "ok": "D'accord"
+    "ok": "D'accord",
+    "confirmDeleteItem": "Confirmez que vous souhaitez supprimer \"{{name}}\" de la liste des produits.",
+    "confirmationMessage": "L'élément a été supprimé de la liste de produits",
+    "confirmationTitle": "Confirmation",
+    "errorTitle": "Message d'erreur",
+    "removeButton": "Retirer l'objet",
+    "errorDeleteItem": "<p>Désolé, il y a eu une erreur.</p><p>Nous ne pouvons pas supprimer l'article de la liste de produits.</p><p>Veuillez réessayer ultérieurement ou contactez l'administrateur.</p>"
   },
   "generic": {
     "dropDownSelect": "Sélectionner"

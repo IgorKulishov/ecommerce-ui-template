@@ -1,4 +1,3 @@
-
 import {switchMap,  map, catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
@@ -6,11 +5,11 @@ import { Store, Action } from '@ngrx/store';
 import { of ,  Observable } from 'rxjs';
 
 import {
-  GET_PRODUCTS, GET_PRODUCT_DETAILS, CREATE_NEW_PRODUCT, REMOVE_PRODUCT, UPLOAD_PRODUCT_IMAGE,
+  GET_PRODUCTS, GET_PRODUCT_DETAILS, CREATE_NEW_PRODUCT, REMOVE_ITEM_FROM_PRODUCT_LIST, UPLOAD_PRODUCT_IMAGE,
   GetProductDetails, GetProductsSuccess, GetProductDetailsSuccess, CreateNewProductSuccess,
   EffectError, GetProducts, uploadImageSuccess
 } from '../actions/products.actions';
-import { ProductDetails, removeProductId } from '../models/products.model';
+import { ProductDetails, RemoveItemId } from '../models/products.model';
 
 import { AppStates } from '../../../app.states';
 import {ProductsService} from '../../../core/services/products.service';
@@ -63,8 +62,8 @@ export class ProductsEffects {
     );
 
   @Effect() DeleteProduct: any = this.DeleteProductAction$.pipe(
-      ofType(REMOVE_PRODUCT),
-      switchMap((removeProduct: any) => this.productService.remove(removeProduct.payload).pipe(
+      ofType(REMOVE_ITEM_FROM_PRODUCT_LIST),
+      switchMap((removeProduct: any) => this.productService.removeItemFromProductList(removeProduct.payload).pipe(
         map( (res: any) => new GetProducts() ),
         catchError(err => of(new EffectError({error_message:'remove_product_error'})))
       ))

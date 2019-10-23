@@ -38,7 +38,13 @@
     "orderConfirmation": "Order confirmation",
     "orderAcceptedMsg": "Your order has been accepted",
     "approval": "Approval",
-    "ok": "Ok"
+    "ok": "Ok",
+    "confirmDeleteItem": "Please confirm you want to remove \"{{name}}\" from products list.",
+    "confirmationMessage": "Item has been deleted from products list",
+    "confirmationTitle": "Confirmation",
+    "errorTitle": "Error message",
+    "removeButton": "Remove item",
+    "errorDeleteItem": "<p>Sorry, there was an error.</p><p>We are unable to delete the item from the products list</p><p>Please try again later or contact administrator.</p>"
   },
   "generic": {
     "dropDownSelect": "Select.."

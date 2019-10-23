@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppCookieService } from './cookie.service';
 import { environment } from '../../../environments/environment';
 import { map } from 'rxjs/operators';
-import {removeProductId} from "../../products/store/models/products.model";
+import {RemoveItemId} from '../../products/store/models/products.model';
 
 @Injectable()
 export class ProductsService {
@@ -92,7 +92,7 @@ export class ProductsService {
     }
   }
 
-  remove(removeProductId?: removeProductId): Observable<any> {
+  removeItemFromProductList( removeItemId ?: RemoveItemId ): Observable<any> {
 
     const token = this.appCookieService.getTokenFromCookie();
     if (token) {
@@ -105,7 +105,9 @@ export class ProductsService {
       };
 
       return this.http.delete(
-        `${environment.REST_API}/rest/api/product/delete/${removeProductId.id}`, options
+        // TODO: temp placed wromg, please use second URL:
+        `${environment.REST_API}/api/product/delete/${removeItemId.id}`, options
+        // `${environment.REST_API}/rest/api/product/delete/${removeItemId.id}`, options
       ).pipe(
         map((res: any) => res)
       );

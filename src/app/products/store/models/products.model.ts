@@ -57,7 +57,7 @@ export const initStateOfProductDetails = {
   'defaultMaxQuantity': undefined
 };
 
-export interface removeProductId {
+export interface RemoveItemId {
   'id':          number;
 }
 
