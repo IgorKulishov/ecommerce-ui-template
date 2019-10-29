@@ -27,6 +27,9 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { environment } from '../environments/environment';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 
+// for Redux
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -49,6 +52,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
     StoreModule.forRoot({}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
