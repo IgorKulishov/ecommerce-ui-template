@@ -1,15 +1,13 @@
-
 import {map} from 'rxjs/operators';
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Store } from '@ngrx/store';
-
+import { getAuthSelector, loginUserDetailsMapper, loginErrorMapper } from '../../store/select/auth.selectors';
 import { UserCredentials } from '../../store/models/login.model';
 import { AppCookieService } from '../../../core/services/cookie.service';
 import { LoginAction } from '../../store/actions/login.actions';
 @Component({
-  selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
@@ -28,58 +26,6 @@ export class LoginComponent implements OnInit {
       userName: [null, Validators.minLength(3)],
       password: [null, Validators.minLength(3)]
     });
-
-      this.store.select( states => {
-        return states['userLoginReducer'];
-      }).pipe(
-      map((data: any) => {
-        if (data && data.registerUser) {
-          return data.registerUser;
-        } else {
-          return ;
-        }
-      }))
-      .subscribe(res => {
-        if (res && res.userName) {
-          this.loading = false;
-          this.loginForm.setValue({userName: res.userName, password: null});
-        }
-      });
-
-    this.store.select( states => {
-      return states['userLoginReducer']
-    }).pipe(
-      map(( data: any) => {
-        if (data && data.userDetails) {
-          return data.userDetails;
-        } else {
-          return ;
-        }
-      }))
-      .subscribe(res => {
-        if (res && res.token) {
-          this.loading = false;
-          this.router.navigate(['/products']);
-        }
-    });
-    // Error handing
-    this.store.select( states => {
-      return states['userLoginReducer']
-    }).pipe(
-      map(( data: any) => {
-        if (data && data.errorLoading && data.errorLoading.error) {
-          return data.errorLoading.error;
-        } else {
-          return ;
-        }
-      }))
-      .subscribe(error => {
-        this.errorMessage = error;
-        this.loading = false;
-        console.log(error)
-      });
-
-
   }
   login() {
     this.store.dispatch(new LoginAction(this.loginForm.value));
@@ -87,6 +33,24 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Login
+    this.store.select(getAuthSelector).pipe(
+      map(loginUserDetailsMapper))
+      .subscribe(res => {
+        if (res && res.token) {
+          this.loading = false;
+          this.router.navigate(['/products']);
+        }
+      });
+    // Error handing
+    this.store.select(getAuthSelector).pipe(
+      map(loginErrorMapper))
+      .subscribe(error => {
+        this.errorMessage = error;
+        this.loading = false;
+        console.log(error);
+      });
+
     if (this.appCookieService.getTokenFromCookie() != null) {
       // this.router.navigate(['/products']);
     }
