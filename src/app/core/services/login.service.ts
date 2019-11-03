@@ -29,7 +29,7 @@ export class LoginService {
         })
     );
   }
-  
+
   register(data?: any): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
@@ -38,7 +38,7 @@ export class LoginService {
       headers: headers
     };
     return this.http.post(
-      environment.REST_API + '/rest/login/register', data, options
+      environment.REST_API + '/rest/register', data, options
     ).pipe(
       map((res: any) => {
         return res;

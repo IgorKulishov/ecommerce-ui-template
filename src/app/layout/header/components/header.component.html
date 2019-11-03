@@ -1,15 +1,21 @@
 <div class="header-custom" (window:resize)="onResize()" #detector>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top nav-custom-styles"
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top nav-custom-styles nav-justified"
        [ngClass]="{'nav-custom-styles': currentUrl != 'Login',
-       'nav-custom-login-styles': currentUrl == 'Login',
-       'nav-justified': screenSize > 991}">
+       'nav-custom-login-styles': currentUrl == 'Login'}">
     <a class="navbar-brand custom-navbar-label" [routerLink]="['/products']">
       <img class="custom-navbar-image" src="assets/images/20190601_154728.png"/>
       <!--<span class="hidden-md-down">e-commerce</span>-->
     </a>
     <a *ngIf="(cart$ | async) && !(checkOutConfirmationStatus$ | async)" [routerLink]="['/checkout']" class="nav-link-custom nav-link nav-item">
-      <img src="assets/images/shopping_cart_total.png" alt="total amount in shopping cart" class="shopping_cart_total">
-      <span> {{(cart$ | async)?.totalAmount}}</span>
+      <div class="shopping-cart">
+        <div>
+          <img src="assets/images/shopping_cart_total.png" alt="total amount in shopping cart" class="shopping_cart_total">
+        </div>
+        <div class="total-in-cart">
+          <span> $ {{(cart$ | async)?.totalAmount}}</span>
+          <span> {{(cart$ | async)?.totalQuantity}} pcs</span>
+        </div>
+      </div>
     </a>
     <button class="navbar-toggler" [ngClass]="{'open-menu-button' : !isCollapsed, 'close-menu-button': isCollapsed}" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"  (click)="isCollapsed = !isCollapsed">
       <span class="navbar-toggler-icon"></span>
