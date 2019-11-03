@@ -9,6 +9,16 @@ $base-lightest-grey-03: rgba(211,211,211,0.3);
 .nav-link-custom {
   flex: 4 !important;
 }
+.shopping-cart {
+  display: inline-flex;
+}
+.total-in-cart {
+  display: inline-grid;
+  /* background-color: lightpink; */
+  margin: 5px;
+  border-radius: 5px;
+  padding: 2px;
+}
 
 .form-frame {
   padding: 1.5rem;
@@ -344,6 +354,10 @@ app-root + .loading {
 }
 .loading-form {
   opacity: 0.5;
+}
+#methodPayment.form-control {
+  background-size: 10px 15px;
+  background-position: right;
 }
 .login-btn::after {
   content: "";
