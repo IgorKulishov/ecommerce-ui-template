@@ -1,5 +1,5 @@
 import {map} from 'rxjs/operators';
-import {Component, OnInit, Inject} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -19,14 +19,7 @@ export class RegisterComponent implements OnInit {
   constructor(private router: Router,
               private loginService: LoginService,
               private store: Store<AppStates>,
-              @Inject(FormBuilder) fb: FormBuilder) {
-              this.registerForm = fb.group({
-                userName: [null, Validators.minLength(6)],
-                email:    [null, Validators.minLength(6)],
-                mobile:    [null, Validators.minLength(6)],
-                password: [null, Validators.minLength(6)],
-                confirmPassword: [null, Validators.minLength(6)]
-                });
+              private fb: FormBuilder) {
               }
 
     ngOnInit() {
@@ -36,6 +29,14 @@ export class RegisterComponent implements OnInit {
         if (res && res.userName) {
           this.router.navigate(['/login']);
         }
+      });
+
+      this.registerForm = this.fb.group({
+        userName: [null, [Validators.required, Validators.minLength(6)]],
+        email:    [null, [Validators.required, Validators.minLength(6), Validators.email]],
+        mobile:   [null, [Validators.required, Validators.minLength(9), Validators.maxLength(10), Validators.pattern('^[0-9]+$')]],
+        password: [null, [Validators.required, Validators.minLength(6)]],
+        confirmPassword: [null, [Validators.required, Validators.minLength(6)]]
       });
     }
 
