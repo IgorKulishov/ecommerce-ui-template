@@ -31,3 +31,9 @@
   </form>
 </div>
 
+<div>
+  <p>{{ws_message}}</p>
+  <label for="ws_message">Send message</label>
+  <input [(ngModel)]="ws_message" id="ws_message" type="text">
+  <button (click)="submitWsMessage()">Submit message</button>
+</div>
