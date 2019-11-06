@@ -49,7 +49,6 @@ export class LoginComponent implements OnInit {
 
   submitWsMessage() {
     const submitMessage = new Message('client1', this.ws_message, false);
-    this.socket$.next(submitMessage);
   }
 
   ngOnInit() {
