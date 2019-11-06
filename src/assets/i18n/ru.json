@@ -49,6 +49,12 @@
   "generic": {
     "dropDownSelect": "Выберите.."
   },
+  "loginProcess": {
+    "errorNetworkMessage": "К сожалению, сервер временно недоступен",
+    "loginLink": "Войти",
+    "registerLink": "Зарегистрироваться",
+    "loadingMessage": "Загружается..."
+  },
   "cash on delivery": "Наличные по факту доставки",
   "debit": "Дебетовая карта",
   "credit": "Кредитная карта",
