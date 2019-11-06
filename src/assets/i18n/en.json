@@ -50,6 +50,7 @@
     "dropDownSelect": "Select.."
   },
   "loginProcess": {
+    "submitButton": "Submit",
     "errorNetworkMessage": "Désolé, le serveur est temporairement indisponible.",
     "loginLink": "S'identifier",
     "registerLink": "S'inscrire",
