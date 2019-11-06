@@ -7,7 +7,11 @@ import { getAuthSelector, loginUserDetailsMapper, loginErrorMapper } from '../..
 import { UserCredentials } from '../../store/models/login.model';
 import { AppCookieService } from '../../../core/services/cookie.service';
 import { LoginAction } from '../../store/actions/login.actions';
-import {WebSocketSubject, webSocket} from 'rxjs/webSocket';
+
+export interface ErrorMessage {
+  message: any;
+  status: string;
+}
 
 export class Message {
   constructor(
@@ -23,17 +27,15 @@ export class Message {
 export class LoginComponent implements OnInit {
   public ws_message: string;
   loginForm: FormGroup;
-  errorMessage = '';
+  errorMessage: ErrorMessage;
   userName$;
   loading = false;
   user: string;
-  private socket$: WebSocketSubject<Message>;
   constructor(private appCookieService: AppCookieService,
               private router: Router,
               private store: Store<UserCredentials>,
               @Inject(FormBuilder) fb: FormBuilder) {
 
-    this.socket$ = webSocket('ws://localhost:8000');
 
     this.loginForm = fb.group({
       userName: [null, Validators.minLength(3)],
@@ -62,22 +64,18 @@ export class LoginComponent implements OnInit {
       });
     // Error handing
     this.store.select(getAuthSelector).pipe(
-      map(loginErrorMapper))
-      .subscribe(error => {
+      map(loginErrorMapper)
+    )
+    .subscribe((error: ErrorMessage) => {
+      if ( error && error.message ) {
         this.errorMessage = error;
         this.loading = false;
-        console.log(error);
-      });
+      }
+    });
 
     if (this.appCookieService.getTokenFromCookie() != null) {
       // this.router.navigate(['/products']);
     }
-    this.socket$
-      .subscribe(
-        (message) => console.log(message),
-        (err) => console.error(err),
-        () => console.warn('Completed!')
-      );
   }
 
 }

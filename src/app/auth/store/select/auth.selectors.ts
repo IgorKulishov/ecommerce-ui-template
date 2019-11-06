@@ -23,7 +23,10 @@ export const registerUserMapper = (data: any) => {
 
 export const loginErrorMapper = ( data: any) => {
   if (data && data.errorLoading && data.errorLoading.error) {
-    return data.errorLoading.error;
+    return {
+      message: data.errorLoading.error,
+      status: data.errorLoading.status
+    };
   } else {
     return ;
   }

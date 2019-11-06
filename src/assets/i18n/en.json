@@ -49,6 +49,9 @@
   "generic": {
     "dropDownSelect": "Select.."
   },
+  "loginProcess": {
+    "errorNetworkMessage": "We are sorry, server temporary is unavailable"
+  },
   "cash on delivery": "Cash on delivery",
   "debit":"Debit",
   "credit": "Credit",

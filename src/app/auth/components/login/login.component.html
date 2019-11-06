@@ -1,7 +1,8 @@
 <div class="form-frame login-register-page">
 
   <alert type="danger" *ngIf='errorMessage'>
-    <strong>{{errorMessage.message}} </strong>
+    <strong *ngIf="errorMessage?.status != 500">{{errorMessage.message.errorMessage}} </strong>
+    <strong *ngIf="errorMessage?.status == 500">{{ 'loginProcess.errorNetworkMessage' | translate }} </strong>
   </alert>
 
   <div class="row text-center register-or-login-main">
@@ -29,11 +30,4 @@
       </button>
     </div>
   </form>
-</div>
-
-<div>
-  <p>{{ws_message}}</p>
-  <label for="ws_message">Send message</label>
-  <input [(ngModel)]="ws_message" id="ws_message" type="text">
-  <button (click)="submitWsMessage()">Submit message</button>
 </div>
