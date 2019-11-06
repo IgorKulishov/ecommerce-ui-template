@@ -50,6 +50,7 @@
     "dropDownSelect": "Выберите.."
   },
   "loginProcess": {
+    "submitButton": "Войти",
     "errorNetworkMessage": "К сожалению, сервер временно недоступен",
     "loginLink": "Войти",
     "registerLink": "Зарегистрироваться",
