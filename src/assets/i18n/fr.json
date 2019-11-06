@@ -49,6 +49,12 @@
   "generic": {
     "dropDownSelect": "Sélectionner"
   },
+  "loginProcess": {
+    "errorNetworkMessage": "Nous sommes désolés, le serveur temporaire est indisponible",
+    "loginLink": "login",
+    "registerLink": "Register",
+    "loadingMessage": "Loading..."
+  },
   "cash on delivery": "Paiement à la livraison",
   "debit": "Débit",
   "credit": "Crédit",

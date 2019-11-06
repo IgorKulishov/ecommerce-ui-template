@@ -7,10 +7,10 @@
 
   <div class="row text-center register-or-login-main">
     <div class="col-12 col-sm-6 register-or-login-selected">
-      <a routerLink="/login">Login</a>
+      <a routerLink="/login">{{ 'loginProcess.loginLink' | translate }}</a>
     </div>
     <div class="col-12 col-sm-6 register-or-login-other">
-      <a routerLink="/register">Register</a>
+      <a routerLink="/register">{{ 'loginProcess.registerLink' | translate }}</a>
     </div>
   </div>
   <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-or-register-form" [ngClass]="{'loading-form': loading}">
@@ -26,7 +26,7 @@
       <button *ngIf="!loading" [disabled]="!loginForm.value.password || !loginForm.value.userName || loginForm.status!=='VALID'" type="submit" class="btn btn-primary login-btn">Submit</button>
       <button *ngIf="loading"  disabled type="submit" class="btn btn-primary login-btn">
         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-        Loading...
+        {{ 'loginProcess.loadingMessage' | translate }}
       </button>
     </div>
   </form>
