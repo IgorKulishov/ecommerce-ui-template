@@ -18,22 +18,27 @@
     <div class="form-group">
       <label for="userName"></label>
       <input formControlName="userName"  class="form-control custom-login" [ngClass]="{'invalid-input': (registerForm.get('userName').touched || registerForm.get('userName').dirty)  && !registerForm.value.userName}" id="userName" placeholder="user name">
+      <span *ngIf="(registerForm.get('userName').touched || registerForm.get('userName').dirty)  && !registerForm.get('userName').valid" class="validation-message"><i>{{'registerProcess.validationErrorMessages.userName' | translate}}</i></span>
     </div>
     <div class="form-group">
       <label for="email"></label>
       <input formControlName="email" type="email" class="form-control custom-login" [ngClass]="{'invalid-input': (registerForm.get('email').touched || registerForm.get('email').dirty)  && !registerForm.get('email').valid}" id="email" placeholder="email">
+      <span *ngIf="(registerForm.get('email').touched || registerForm.get('email').dirty)  && !registerForm.get('email').valid" class="validation-message"><i>{{'registerProcess.validationErrorMessages.email' | translate}}</i></span>
     </div>
     <div class="form-group">
       <label for="mobile"></label>
       <input formControlName="mobile" type="tel" class="form-control custom-login" [ngClass]="{'invalid-input': (registerForm.get('mobile').touched || registerForm.get('mobile').dirty)  && !registerForm.get('mobile').valid}" id="mobile" placeholder="mobile">
+      <span *ngIf="(registerForm.get('mobile').touched || registerForm.get('mobile').dirty)  && !registerForm.get('mobile').valid" class="validation-message"><i>{{'registerProcess.validationErrorMessages.phone' | translate}}</i></span>
     </div>
     <div class="form-group">
       <label for="password"></label>
-      <input formControlName="password" type="password" class="form-control custom-login" [ngClass]="{'invalid-input': (registerForm.get('password').touched || registerForm.get('password').dirty)  && !registerForm.value.password}" id="password" placeholder="password">
+      <input formControlName="password" type="password" class="form-control custom-login" [ngClass]="{'invalid-input': (registerForm.get('password').touched || registerForm.get('password').dirty)  && !registerForm.get('password').valid}" id="password" placeholder="password">
+      <span *ngIf="(registerForm.get('password').touched || registerForm.get('password').dirty) && !registerForm.get('password').valid" class="validation-message"><i>{{'registerProcess.validationErrorMessages.password' | translate}}</i></span>
     </div>
     <div class="form-group">
       <label for="confirm_password"></label>
-      <input formControlName="confirmPassword" type="password" class="form-control custom-login" [ngClass]="{'invalid-input': (registerForm.get('confirmPassword').touched || registerForm.get('confirmPassword').dirty)  && !registerForm.value.confirmPassword}" id="confirm_password" placeholder="confirm password">
+      <input formControlName="confirmPassword" type="password" class="form-control custom-login" [ngClass]="{'invalid-input': (registerForm.get('password').value !== registerForm.get('confirmPassword').value) }" id="confirm_password" placeholder="confirm password">
+      <span *ngIf="registerForm.get('password').value !== registerForm.get('confirmPassword').value"  class="validation-message"><i>{{'registerProcess.validationErrorMessages.confirmPassword' | translate}}</i></span>
     </div>
     <div class="btn-box">
       <button [disabled]="registerForm.status !=='VALID' || !registerForm.value.userName ||
