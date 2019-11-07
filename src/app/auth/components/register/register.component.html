@@ -1,11 +1,16 @@
 <div class="form-frame login-register-page">
 
+  <alert type="danger" *ngIf='errorMessage'>
+    <strong *ngIf="errorMessage?.status != 500">{{errorMessage.message.errorMessage}} </strong>
+    <strong *ngIf="errorMessage?.status == 500 || 503 || 0">{{ 'loginProcess.errorNetworkMessage' | translate }} </strong>
+  </alert>
+
   <div class="row text-center register-or-login-main">
     <div class="col-12 col-sm-6 register-or-login-other">
-      <a routerLink="/login">Login</a>
+      <a routerLink="/login">{{ 'registerProcess.loginLink' | translate }}</a>
     </div>
     <div class="col-12 col-sm-6 register-or-login-selected">
-      <a routerLink="/register">Register</a>
+      <a routerLink="/register">{{ 'registerProcess.registerLink' | translate }}</a>
     </div>
   </div>
 
@@ -32,7 +37,7 @@
     </div>
     <div class="btn-box">
       <button [disabled]="registerForm.status !=='VALID' || !registerForm.value.userName ||
-            !registerForm.value.password || !registerForm.value.confirmPassword" type="submit" class="btn btn-primary login-btn">Submit</button>
+            !registerForm.value.password || !registerForm.value.confirmPassword" type="submit" class="btn btn-primary login-btn">{{'registerProcess.submitButton' | translate}}</button>
 
     </div>
   </form>
