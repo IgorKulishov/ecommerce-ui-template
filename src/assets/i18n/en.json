@@ -60,7 +60,14 @@
     "submitButton": "Submit",
     "errorNetworkMessage": "Sorry, server is temporarily unavailable.",
     "loginLink": "Login",
-    "registerLink": "Register"
+    "registerLink": "Register",
+    "validationErrorMessages": {
+      "userName": "At least 6 characters",
+      "email": "Valid email",
+      "phone": "9 or 10 numbers, no space, '-' or '('",
+      "password": "At least 6 characters",
+      "confirmPassword": "Confirm the same password"
+    }
   },
   "cash on delivery": "Cash on delivery",
   "debit":"Debit",

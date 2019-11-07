@@ -60,7 +60,14 @@
     "submitButton": "Soumettre",
     "errorNetworkMessage": "Désolé, le serveur est temporairement indisponible.",
     "loginLink": "S'identifier",
-    "registerLink": "S'inscrire"
+    "registerLink": "S'inscrire",
+    "validationErrorMessages": {
+      "userName": "Au moins 6 caractères",
+      "email": "Email valide",
+      "phone": "9 ou 10 chiffres, pas d'espace, '-' ou '('",
+      "password": "Au moins 6 caractères",
+      "confirmPassword": "Confirmer le même mot de passe"
+    }
   },
   "cash on delivery": "Paiement à la livraison",
   "debit": "Débit",

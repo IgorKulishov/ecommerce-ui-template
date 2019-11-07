@@ -62,6 +62,13 @@
     "loginLink": "Войти",
     "registerLink": "Зарегистрироваться"
   },
+  "validationErrorMessages": {
+    "userName": "Не менее 6 символов",
+    "email": "Действительный email",
+    "phone": "9 или 10 чисел, без пробелов, '-' или '('",
+    "password": "Не менее 6 символов",
+    "confirmPassword": "Подтвердите тот же пароль"
+  },
   "cash on delivery": "Наличные по факту доставки",
   "debit": "Дебетовая карта",
   "credit": "Кредитная карта",
