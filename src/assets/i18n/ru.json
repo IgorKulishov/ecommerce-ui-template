@@ -56,6 +56,12 @@
     "registerLink": "Зарегистрироваться",
     "loadingMessage": "Загружается..."
   },
+  "registerProcess": {
+    "submitButton": "Войти",
+    "errorNetworkMessage": "К сожалению, сервер временно недоступен",
+    "loginLink": "Войти",
+    "registerLink": "Зарегистрироваться"
+  },
   "cash on delivery": "Наличные по факту доставки",
   "debit": "Дебетовая карта",
   "credit": "Кредитная карта",
