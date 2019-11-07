@@ -71,6 +71,9 @@ export class HeaderComponent implements OnInit {
           case 'details':
             this.currentUrl = 'Details';
             break;
+          case 'register':
+            this.currentUrl = 'Register';
+            break;
           case 'cart':
             this.currentUrl = 'Cart';
             break;
