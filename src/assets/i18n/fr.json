@@ -51,10 +51,16 @@
   },
   "loginProcess": {
     "submitButton": "Soumettre",
-    "errorNetworkMessage": "Nous sommes désolés, le serveur temporaire est indisponible",
-    "loginLink": "login",
-    "registerLink": "Register",
-    "loadingMessage": "Loading..."
+    "errorNetworkMessage": "Désolé, le serveur est temporairement indisponible.",
+    "loginLink": "S'identifier",
+    "registerLink": "S'inscrire",
+    "loadingMessage": "Chargement..."
+  },
+  "registerProcess": {
+    "submitButton": "Soumettre",
+    "errorNetworkMessage": "Désolé, le serveur est temporairement indisponible.",
+    "loginLink": "S'identifier",
+    "registerLink": "S'inscrire"
   },
   "cash on delivery": "Paiement à la livraison",
   "debit": "Débit",
