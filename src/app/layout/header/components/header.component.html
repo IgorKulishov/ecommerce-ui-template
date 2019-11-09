@@ -1,6 +1,6 @@
 <div class="header-custom" (window:resize)="onResize()" #detector>
   <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top nav-custom-styles nav-justified"
-       [ngClass]="{'nav-custom-styles': currentUrl != 'Login' || currentUrl != 'Register',
+       [ngClass]="{'nav-custom-styles': currentUrl != 'Login' && currentUrl != 'Register',
        'nav-custom-login-styles': currentUrl == 'Login' || currentUrl == 'Register'}">
     <a class="navbar-brand custom-navbar-label" [routerLink]="['/products']">
       <img class="custom-navbar-image" src="assets/images/20190601_154728.png"/>
