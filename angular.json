@@ -65,7 +65,14 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "styles": [
-                "node_modules/bootstrap/dist/css/bootstrap.min.css"
+                "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                "src/styles.scss",
+                "node_modules/ngx-toastr/toastr.css",
+                "node_modules/lightgallery.js/dist/css/lightgallery.min.css"
+              ],
+              "scripts": [
+                "node_modules/lightgallery.js/dist/js/lightgallery.min.js",
+                "node_modules/lg-thumbnail.js/dist/lg-thumbnail.min.js"
               ],
               "fileReplacements": [
                 {
@@ -84,10 +91,20 @@
               "namedChunks": true,
               "aot": true,
               "extractLicenses": false,
-              "vendorChunk": false,
+              "vendorChunk": true,
               "buildOptimizer": false,
               "serviceWorker": true,
-              "ngswConfigPath": "ngsw-config.json"
+              "ngswConfigPath": "ngsw-config.json",
+              "styles": [
+                "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                "src/styles.scss",
+                "node_modules/ngx-toastr/toastr.css",
+                "node_modules/lightgallery.js/dist/css/lightgallery.min.css"
+              ],
+              "scripts": [
+                "node_modules/lightgallery.js/dist/js/lightgallery.min.js",
+                "node_modules/lg-thumbnail.js/dist/lg-thumbnail.min.js"
+              ]
             }
           }
         },
