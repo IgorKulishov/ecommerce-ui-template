@@ -8,7 +8,7 @@ import { CompareService } from '../../services/compare.service';
 import { QuickviewService } from '../../services/quickview.service';
 import { RootService } from '../../services/root.service';
 import { CurrencyService } from '../../services/currency.service';
-import {map, takeUntil} from 'rxjs/operators';
+import {filter, map, takeUntil} from 'rxjs/operators';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {AddToCart} from '../../../cart/store/actions/cart.actions';
 import { AppStates } from '../../../app.states';
@@ -184,6 +184,13 @@ export class ProductCardComponent implements OnInit, OnDestroy {
               this.cd.markForCheck();
           }
       });
+  }
+
+  ifSeller(): Observable<boolean> {
+    return this.userDetails$.pipe(
+      map(userData => userData.login ? userData.login.roles : undefined),
+      map(roles => roles.filter(role => role.roleName === 'seller').length > 0)
+    );
   }
 
 }
