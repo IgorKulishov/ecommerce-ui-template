@@ -64,13 +64,23 @@ curl -X POST \
 
 ### Response Body:
 ```json
-    {
-      "id":1105,
-      "userName":"user123",
-      "password":"$2a$10$ZcmJmdATBrZ86wELX8Li2e5Oe4LesBwHYoAR5vOv7E16ygJ7nK4tO",
-      "token":null,
-      "mobile":1234567890
+
+{
+  "id":1105,
+  "userName":"user123",
+  "password":"$2a$10$ZcmJmdATBrZ86wELX8Li2e5Oe4LesBwHYoAR5vOv7E16ygJ7nK4tO",
+  "token":null,
+  "mobile":1234567890,
+    "login": {
+      "id": 1106,
+      "roles": [{
+        "description": null,
+        "id": 1107,
+        "roleName": "buyer"
+      }]
     }
+}
+
 ```
 
 ### *Changes comming:* 
@@ -90,14 +100,30 @@ curl -X POST \
 
 ### Response Body:
 ```json
-    {
-      "id":219,
-      "userName":"test@gmail.com",
-      "password":"",
-      "token":"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsInJvbGVzIjoidXNlciIsImlhdCI6MTUyODMzMDQ3MCwiZXhwIjoxNTI4MzMxMDcwfQ._YiRnTOPL0IqqrtsSgKWYqKloe8wTtkMsFEVVSYJg-k",
-      "mobile":2045651432
-    }
+{
+  "id": 1105,
+  "userName": "user123",
+  "orderNumber": null,
+  "mobile": 123456789,
+  "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrdWt1QGt1a3UuY29tIiwiaWF.nPc7ODKCUrwQ",
+  "language": null,
+  "login": {
+    "id": 1106,
+    "roles": [{
+      "description": null,
+      "id": 1107,
+      "roleName": "buyer"
+    }]
+  }
+}
 ```
+
+### *Note:*
+ "roles" could be:
+  * `"buyer"`  can view and buy products
+  * `"seller"` can create and delete products
+  * `"guest"` 'guest'/'guest' can login but unautherised 
+ 
 
 Get all products
 ----------------
