@@ -1,5 +1,5 @@
 <div class="header-custom" (window:resize)="onResize()" #detector>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top nav-custom-styles nav-justified"
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top nav-custom-styles"
        [ngClass]="{'nav-custom-styles': currentUrl != 'Login' && currentUrl != 'Register',
        'nav-custom-login-styles': currentUrl == 'Login' || currentUrl == 'Register'}">
     <a class="navbar-brand custom-navbar-label" [routerLink]="['/products']">
@@ -21,7 +21,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent" [collapse]="isCollapsed" [isAnimated]="true" *ngIf="currentUrl != 'Login'" >
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" [collapse]="isCollapsed" [isAnimated]="true" *ngIf="currentUrl != 'Login' && currentUrl != 'Register'" >
       <app-upper-header></app-upper-header>
       <ul class="navbar-nav mr-auto navbar-custom">
         <!--User Account console menu-->
@@ -104,34 +104,4 @@
     </div>
   </nav>
 </div>
-<!--  <div class="container" *ngIf="user">-->
-<!--    <div class="row">-->
-<!--      <div class="col-4 " [ngClass]="{'selected-page': currentUrl == 'Products', 'none-selected-page': currentUrl != 'Products'}">-->
-<!--        <a [routerLink]="['/products']" [ngClass]="{'selected-page-link': currentUrl == 'Products'}">-->
-<!--          <span class="">Products</span>-->
-<!--        </a>-->
-<!--      </div>-->
-<!--      <div class="col-4" [ngClass]="{'selected-page': currentUrl == 'Details', 'none-selected-page': currentUrl != 'Details'}">-->
-<!--        Details-->
-<!--      </div>-->
-<!--      <div class="col-4" [ngClass]="{'selected-page': currentUrl == ('Cart' || 'Checkout'), 'none-selected-page': currentUrl != 'Cart'}">-->
-<!--        <a [routerLink]="['/cart']" [ngClass]="{'selected-page-link': currentUrl == 'Cart'}">-->
-<!--          <span class="">Cart</span>-->
-<!--        </a>-->
-<!--      </div>-->
-<!--    </div>-->
-
-<!--    <div class="row" *ngIf="currentUrl == 'Cart' || currentUrl == 'Checkout'">-->
-<!--      <div class="col-6" [ngClass]="{'selected-page': currentUrl == 'Cart', 'none-selected-page': currentUrl != 'Cart'}">-->
-<!--        <a [routerLink]="['/cart']" [ngClass]="{'selected-page-link': currentUrl == 'Cart'}">-->
-<!--          <span class="">Cart</span>-->
-<!--        </a>-->
-<!--      </div>-->
-<!--      <div class="col-6" [ngClass]="{'selected-page': currentUrl == 'Checkout', 'none-selected-page': currentUrl != 'Checkout'}">-->
-<!--        <a [routerLink]="['/checkout']" [ngClass]="{'selected-page-link': currentUrl == 'Checkout'}">-->
-<!--          <span class="">Checkout</span>-->
-<!--        </a>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
 
