@@ -8,6 +8,7 @@ $base-lightest-grey-03: rgba(211,211,211,0.3);
 
 .nav-link-custom {
   flex: 4 !important;
+  text-align: center;
 }
 .shopping-cart {
   display: inline-flex;
@@ -137,6 +138,9 @@ $base-lightest-grey-03: rgba(211,211,211,0.3);
     border-color: #727272;
     padding: 0 0 0 20px;
     width: 20%;
+  }
+  #navbarSupportedContent {
+    margin-left: 5%;
   }
 }
 /*.product-name:after {*/

@@ -13,7 +13,7 @@
       </button>
     </div>
     <div class="col-auto">
-      <button *ngIf="(userDetails$ | async).role === 'seller'" type="button" class="close remove-btn" aria-label="Close" (click)="removeItemConfirmation(remove_item_approval_template, product)">
+      <button *ngIf="ifSeller() | async" type="button" class="close remove-btn" aria-label="Close" (click)="removeItemConfirmation(remove_item_approval_template, product)">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>

@@ -82,7 +82,12 @@ curl -X POST \
 }
 
 ```
-
+### *Note:*
+ "roles" could be:
+  * `"buyer"`  can view and buy products
+  * `"seller"` can create and delete products
+  * `"guest"` 'guest'/'guest' can login but unautherised 
+  
 ### *Changes comming:* 
 #### *remove `"password"` from response payload*
 
