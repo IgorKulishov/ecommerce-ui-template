@@ -1,7 +1,7 @@
 {
   "header": {
     "language": "Language",
-    "userAccount": "User account",
+    "userAccount": "Account",
     "createProduct": "Create product",
     "sellerConsole": "Seller console",
     "logout": "Logout"
@@ -44,7 +44,8 @@
     "confirmationTitle": "Confirmation",
     "errorTitle": "Error message",
     "removeButton": "Remove item",
-    "errorDeleteItem": "<p>Sorry, there was an error.</p><p>We are unable to delete the item from the products list</p><p>Please try again later or contact administrator.</p>"
+    "errorDeleteItem": "<p>Sorry, there was an error.</p><p>We are unable to delete the item from the products list</p><p>Please try again later or contact administrator.</p>",
+    "placedOrders": "Placed orders"
   },
   "generic": {
     "dropDownSelect": "Select.."

@@ -35,6 +35,9 @@
             <ul id="dropdown-user-account" *dropdownMenu class="dropdown-menu"
                 role="menu" aria-labelledby="button-dropdown-user-account">
               <li *ngIf="user" class="nav-item">
+                <a  [routerLink]="['/placed-orders']" class="nav-link"><span class="d-flex p-2 user-greeting">{{ 'checkout.placedOrders' | translate }}</span></a>
+              </li>
+              <li class="nav-item">
                 <span class="d-flex p-2 user-greeting">{{ user?.userName }}</span>
               </li>
               <li class="language-collapse">
