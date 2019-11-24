@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { Injectable } from '@angular/core';
+import {UserDetails} from '../../../auth/store/models/login.model';
 
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const ADD_TO_CART_SUCCESS = 'ADD_PRODUCT_TO_CART_SUCCESS';
@@ -9,6 +10,7 @@ export const GET_CURRENT_ORDER_FROM_STORE_SUCCESS = 'GET_CURRENT_ORDER_FROM_STOR
 export const CHECK_OUT = 'CHECK_OUT';
 export const CHECK_OUT_SUCCESS = 'CHECK_OUT_SUCCESS';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+export const SAVE_PLACED_ORDER = 'SAVE_PLACED_ORDER';
 
 export class AddToCart implements Action {
   readonly type = ADD_TO_CART;
@@ -46,5 +48,10 @@ export class CheckOut implements Action {
 export class CheckOutSuccess implements Action {
   readonly type = CHECK_OUT_SUCCESS;
   constructor(public payload?: any) {
+  }
+}
+export class SavePlacedOrder implements Action {
+  readonly type = SAVE_PLACED_ORDER;
+  constructor(public payload: UserDetails ) {
   }
 }

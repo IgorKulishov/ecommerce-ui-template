@@ -1,4 +1,3 @@
-
 import {switchMap,  map, catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
@@ -10,9 +9,9 @@ import { AppCookieService } from '../../../core/services/cookie.service';
 import {
   ADD_TO_CART, ADD_TO_CART_SUCCESS,
   GET_CURRENT_ORDER_FROM_STORE,
-  CHECK_OUT,
+  CHECK_OUT, REMOVE_FROM_CART, SAVE_PLACED_ORDER,
   AddToCart, AddToCartSuccess, StoreCurrentOrder,
-  GetCurrentOrderFromStoreSuccess, CheckOutSuccess, REMOVE_FROM_CART
+  GetCurrentOrderFromStoreSuccess, CheckOutSuccess, SavePlacedOrder
 } from '../actions/cart.actions';
 // TODO: need to add order models
 
@@ -29,6 +28,7 @@ export class CartEffects {
               private saveProductsInStoreAPIAction$: Actions,
               private getOrdersFromtStoreAction$: Actions,
               private removeFromCartAction$: Actions,
+              private savePlacedOrderActions$: Actions,
               private productService: ProductsService,
               private store: Store<AppStates>,
               private cartService: CartService,
@@ -67,8 +67,13 @@ export class CartEffects {
    // a) make payment b) get updated order number c) update store
    @Effect() checkoutShoppingCart$: any = this.checkoutShoppingCartAtion$.pipe(
       ofType(CHECK_OUT),
+      map( data => {
+        this.cookieService.setPlacedOrderNumberInCookie(this.cookieService.getOrderNumberFromCookie());
+        return data;
+      }),
       switchMap((orderPaymentDetails: any) => this.cartService.checkoutShoppingCart(orderPaymentDetails.payload)),
       switchMap(data => [
+          new SavePlacedOrder( this.cookieService.getOrderNumberFromCookie() ),
           new CheckOutSuccess( data ),
           new GetOrderNumber( this.cookieService.getUserDetails() )
         ])

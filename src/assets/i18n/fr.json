@@ -1,7 +1,7 @@
 {
   "header": {
     "language": "La langue",
-    "userAccount": "Compte d'utilisateur",
+    "userAccount": "Compte",
     "createProduct": "Créer un produit",
     "sellerConsole": "Console du vendeur",
     "logout": "Déconnexion"
@@ -44,7 +44,8 @@
     "confirmationTitle": "Confirmation",
     "errorTitle": "Message d'erreur",
     "removeButton": "Retirer l'objet",
-    "errorDeleteItem": "<p>Désolé, il y a eu une erreur.</p><p>Nous ne pouvons pas supprimer l'article de la liste de produits.</p><p>Veuillez réessayer ultérieurement ou contactez l'administrateur.</p>"
+    "errorDeleteItem": "<p>Désolé, il y a eu une erreur.</p><p>Nous ne pouvons pas supprimer l'article de la liste de produits.</p><p>Veuillez réessayer ultérieurement ou contactez l'administrateur.</p>",
+    "placedOrders": "Placé commandé"
   },
   "generic": {
     "dropDownSelect": "Sélectionner"

@@ -35,14 +35,23 @@ export class AppCookieService {
     this.cookieService.set('orderId', data.id);
   }
 
+  public getOrderNumberFromCookie(): any {
+    return this.cookieService.get('orderNumber');
+  }
+
+  public setPlacedOrderNumberInCookie(placedOrderNumber: any): void {
+    this.cookieService.set('placedOrderId', placedOrderNumber);
+  }
+
+  public getPlacedOrderNumberFromCookie(): any {
+    return this.cookieService.get('orderNumber');
+  }
+
   public getTokenFromCookie(): any {
     return this.cookieService.get('token');
   }
   public getUserNameFromCookie(): any {
     return this.cookieService.get('userName');
-  }
-  public getOrderNumberFromCookie(): any {
-    return this.cookieService.get('orderNumber');
   }
   public getUserIdFromCookie(): any {
     return this.cookieService.get('userId');

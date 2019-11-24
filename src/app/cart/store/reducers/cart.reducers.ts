@@ -2,7 +2,7 @@ import { Action, ActionReducer } from '@ngrx/store';
 import { AppStates } from '../../../app.states';
 import {
   ADD_TO_CART, ADD_TO_CART_SUCCESS,
-  SAVE_CURRENT_ORDER_IN_STORE, GET_CURRENT_ORDER_FROM_STORE,
+  SAVE_CURRENT_ORDER_IN_STORE, GET_CURRENT_ORDER_FROM_STORE, SAVE_PLACED_ORDER,
   GET_CURRENT_ORDER_FROM_STORE_SUCCESS, CHECK_OUT, CHECK_OUT_SUCCESS, REMOVE_FROM_CART
 } from '../actions/cart.actions';
 import { Order } from '../../models/cart.model';
@@ -41,6 +41,10 @@ const checkOut = (state: AppStates, action: ReducerClass): AppStates => {
   const newData: AppStates = Object.assign({}, state, { checkOutDetails: action.payload} );
   return newData;
 };
+const savePlacedOrder = (state: AppStates, action: ReducerClass): AppStates => {
+  const newData: AppStates = Object.assign({}, state, { processedOrders: action.payload} );
+  return newData;
+};
 const checkOutSuccess = (state: AppStates, action: ReducerClass): AppStates => {
   // const newData: AppStates = Object.assign({}, state, { checkOutConfirmationStatus: action.payload} );
   const newData: AppStates = Object.assign({}, state, {
@@ -69,6 +73,8 @@ export function cartReducer (state: AppStates, action: ReducerClass) {
       return readCurrentOrderFromStore(state, action);
     case GET_CURRENT_ORDER_FROM_STORE_SUCCESS:
       return readCurrentOrderFromStoreSuccess(state, action);
+    case SAVE_PLACED_ORDER:
+      return savePlacedOrder(state, action);
     case CHECK_OUT:
       return checkOut(state, action);
     case CHECK_OUT_SUCCESS:
