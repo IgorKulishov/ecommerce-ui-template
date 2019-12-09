@@ -61,8 +61,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    CarouselModule.forRoot(),
-    ServiceWorkerModule.register('ngsw-worker.js')
+    CarouselModule.forRoot()
   ],
   providers: [
   ],
