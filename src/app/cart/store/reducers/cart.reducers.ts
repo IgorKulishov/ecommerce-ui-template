@@ -3,7 +3,7 @@ import { AppStates } from '../../../app.states';
 import {
   ADD_TO_CART, ADD_TO_CART_SUCCESS,
   SAVE_CURRENT_ORDER_IN_STORE, GET_CURRENT_ORDER_FROM_STORE, SAVE_PLACED_ORDER,
-  GET_CURRENT_ORDER_FROM_STORE_SUCCESS, CHECK_OUT, CHECK_OUT_SUCCESS, REMOVE_FROM_CART
+  GET_CURRENT_ORDER_FROM_STORE_SUCCESS, CHECK_OUT, CHECK_OUT_SUCCESS, REMOVE_FROM_CART, SAVE_PLACED_ORDER_DETAILS
 } from '../actions/cart.actions';
 import { Order } from '../../models/cart.model';
 import { INITIAL_STORE_DATA } from '../../../app.states';
@@ -45,6 +45,10 @@ const savePlacedOrder = (state: AppStates, action: ReducerClass): AppStates => {
   const newData: AppStates = Object.assign({}, state, { processedOrders: action.payload} );
   return newData;
 };
+const savePlacedOrderDetails = (state: AppStates, action: ReducerClass): AppStates => {
+  const newData: AppStates = Object.assign({}, state, { processedOrdersDetails: action.payload} );
+  return newData;
+};
 const checkOutSuccess = (state: AppStates, action: ReducerClass): AppStates => {
   // const newData: AppStates = Object.assign({}, state, { checkOutConfirmationStatus: action.payload} );
   const newData: AppStates = Object.assign({}, state, {
@@ -75,6 +79,8 @@ export function cartReducer (state: AppStates, action: ReducerClass) {
       return readCurrentOrderFromStoreSuccess(state, action);
     case SAVE_PLACED_ORDER:
       return savePlacedOrder(state, action);
+    case SAVE_PLACED_ORDER_DETAILS:
+      return savePlacedOrderDetails(state, action);
     case CHECK_OUT:
       return checkOut(state, action);
     case CHECK_OUT_SUCCESS:

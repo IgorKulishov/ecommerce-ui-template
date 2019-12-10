@@ -44,7 +44,7 @@ export class AppCookieService {
   }
 
   public getPlacedOrderNumberFromCookie(): any {
-    return this.cookieService.get('orderNumber');
+    return this.cookieService.get('placedOrderId');
   }
 
   public getTokenFromCookie(): any {

@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
-import {GetCurrentOrderFromStore, CheckOut, RemoveFromCart} from '../../store/actions/cart.actions';
+import {GetProcessedOrderFromStore, CheckOut, RemoveFromCart} from '../../store/actions/cart.actions';
 import { AppStates } from '../../store/states/cart.states';
 import { Order, CheckoutInfo, PaymentMethods, PaymentDescription } from '../../models/cart.model';
 
@@ -14,6 +14,7 @@ import { CartService } from '../../../core/services/cart.service';
 
 import { BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
 import {GetProducts} from '../../../products/store/actions/products.actions';
+import {Observable} from "rxjs";
 
 
 @Component({
@@ -29,6 +30,7 @@ export class PlacedOrdersComponent implements OnInit {
   totalAmount: number;
   totalQuantity: number;
   checkoutForm: FormGroup;
+  processedOrdersDetails$: Observable<any>;
   @ViewChild('confirmation_template', {'static': false}) confirmation_template: ModalDirective;
   @ViewChild('remove_item_confirmation_template', {'static': false}) remove_item_confirmation_template: ModalDirective;
 
@@ -41,14 +43,13 @@ export class PlacedOrdersComponent implements OnInit {
               @Inject(FormBuilder) fb: FormBuilder) {
 
     // app store for total amount
-    this.store.select( store => {
+    this.processedOrdersDetails$ = this.store.select( store => {
       return store['cartReducer'];
-    }).pipe(map(res => {
-      if (res && res.processedOrders) {
-        return res.processedOrders;
+    }).pipe(map((res: any) => {
+      if (res && res.processedOrdersDetails) {
+        return res.processedOrdersDetails;
       }
-    })).subscribe(cartInfo => {
-      console.log(cartInfo);
+    }));
 
       // this.store.dispatch(new GetProducts());
 
@@ -60,22 +61,22 @@ export class PlacedOrdersComponent implements OnInit {
       // if (cartInfo && cartInfo.itemList) {
       //   this.productsInCart = cartInfo.itemList;
       // }
-    });
+
   }
 
   ngOnInit() {
-    if (this.appCookieService.getTokenFromCookie() != null ) {
-      this.store.dispatch(new GetCurrentOrderFromStore());
+    if (this.appCookieService.getPlacedOrderNumberFromCookie()) {
+      this.store.dispatch(new GetProcessedOrderFromStore(this.appCookieService.getPlacedOrderNumberFromCookie()));
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/']);
     }
-    this.cartService.getMethodsOfPayment()
-      .subscribe((res: any) => {
-          if (res.payments.length > 0) {
-            this.methodsOfPayment = res.payments;
-          }
-        },
-        err => console.error(err));
+    // this.cartService.getMethodsOfPayment()
+    //   .subscribe((res: any) => {
+    //       if (res.payments.length > 0) {
+    //         this.methodsOfPayment = res.payments;
+    //       }
+    //     },
+    //     err => console.error(err));
   }
 
   totalSum(price, selectedQuantity) {
