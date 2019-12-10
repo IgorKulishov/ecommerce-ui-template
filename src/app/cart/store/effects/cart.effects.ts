@@ -10,8 +10,8 @@ import {
   ADD_TO_CART, ADD_TO_CART_SUCCESS,
   GET_CURRENT_ORDER_FROM_STORE,
   CHECK_OUT, REMOVE_FROM_CART, SAVE_PLACED_ORDER,
-  AddToCart, AddToCartSuccess, StoreCurrentOrder,
-  GetCurrentOrderFromStoreSuccess, CheckOutSuccess, SavePlacedOrder
+  GET_PROCESSED_ORDER_FROM_STORE,  AddToCart, AddToCartSuccess, StoreCurrentOrder,
+  GetCurrentOrderFromStoreSuccess, CheckOutSuccess, SavePlacedOrder, StorePlacedOrderDetails
 } from '../actions/cart.actions';
 // TODO: need to add order models
 
@@ -27,6 +27,7 @@ export class CartEffects {
               private checkoutShoppingCartAtion$: Actions,
               private saveProductsInStoreAPIAction$: Actions,
               private getOrdersFromtStoreAction$: Actions,
+              private getProcessedOrdersFromtStoreAction$: Actions,
               private removeFromCartAction$: Actions,
               private savePlacedOrderActions$: Actions,
               private productService: ProductsService,
@@ -78,4 +79,13 @@ export class CartEffects {
           new GetOrderNumber( this.cookieService.getUserDetails() )
         ])
     );
+
+  // get order from store
+  @Effect() getProcessedOrdersFromtStore$: any = this.getOrdersFromtStoreAction$.pipe(
+    ofType(GET_PROCESSED_ORDER_FROM_STORE),
+    switchMap((processedOrderToken: string) => this.cartService.productsProcessedOrderShoppingCart(processedOrderToken).pipe(
+      map((data: any) => new StorePlacedOrderDetails( data )),
+      catchError(err => of(new Error('error')))
+    ))
+  );
 }

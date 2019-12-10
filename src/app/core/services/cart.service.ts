@@ -101,6 +101,29 @@ export class CartService {
       );
     }
   }
+  productsProcessedOrderShoppingCart(processedOrderToken: any): Observable<any> {
+
+    const token = this.appCookieService.getTokenFromCookie();
+    const placedOrderNumber = this.appCookieService.getPlacedOrderNumberFromCookie();
+    if (token && processedOrderToken && processedOrderToken.payload) {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      });
+      const options = {
+        headers: headers
+      };
+      return this.http.get(
+        environment.REST_API + `/rest/api/order/number/${placedOrderNumber}`,
+        options
+      ).pipe(
+        map((res: Response) => {
+          const respObj = res;
+          return respObj;
+        })
+      );
+    }
+  }
   checkoutShoppingCart(paymentInfo: any) {
     // order_token is not used yet
     const order_token = null;
