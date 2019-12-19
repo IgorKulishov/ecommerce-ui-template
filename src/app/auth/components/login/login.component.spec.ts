@@ -5,10 +5,10 @@ import { Routes } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { Store } from '@ngrx/store';
-import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {TranslateModule, TranslateService, TranslateLoader} from '@ngx-translate/core';
 import { LoginComponent } from './login.component';
 import { AppCookieService } from '../../../core/services/cookie.service';
-import {StoreMock, TranslateServiceMock} from '../../../../test/mock';
+import {StoreMock, TranslateServiceMock, TranslateLoaderMock} from '../../../../test/mock';
 
 class AppCookieServiceStub {
   public logout(): any {}
@@ -37,7 +37,9 @@ describe('LoginComponent', () => {
       imports: [
         ReactiveFormsModule,
         FormsModule,
-        TranslateModule,
+        TranslateModule.forRoot({
+          loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
+        }),
         StoreModule.forRoot({}),
         RouterTestingModule.withRoutes(fake_routes)
         ],
