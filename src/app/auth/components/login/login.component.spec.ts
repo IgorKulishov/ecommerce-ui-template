@@ -1,14 +1,14 @@
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { Router, ActivatedRoute, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-
-import { AppCookieService } from '../../../core/services/cookie.service';
+import { Store } from '@ngrx/store';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import { LoginComponent } from './login.component';
-
+import { AppCookieService } from '../../../core/services/cookie.service';
+import {StoreMock, TranslateServiceMock} from '../../../../test/mock';
 
 class AppCookieServiceStub {
   public logout(): any {}
@@ -30,11 +30,14 @@ describe('LoginComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ LoginComponent ],
       providers: [
-        {provide: AppCookieService, useClass: AppCookieServiceStub }
+        {provide: AppCookieService, useClass: AppCookieServiceStub },
+        {provide: Store, useClass: StoreMock},
+        {provide: TranslateService, useClass: TranslateServiceMock}
       ],
       imports: [
         ReactiveFormsModule,
         FormsModule,
+        TranslateModule,
         StoreModule.forRoot({}),
         RouterTestingModule.withRoutes(fake_routes)
         ],
@@ -46,10 +49,10 @@ describe('LoginComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    // fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create', async() => {
     expect(component).toBeTruthy();
   });
 });
