@@ -28,6 +28,7 @@ describe('CreateProductComponent', () => {
             imports: [
                 ReactiveFormsModule,
                 FormsModule,
+                StoreModule.forRoot({}),
                 StoreModule.forFeature('productsReducer', productsReducer)
             ],
             providers: [
