@@ -1,8 +1,7 @@
-
 import { Router, ActivatedRoute, Routes } from '@angular/router'
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {RouterTestingModule} from "@angular/router/testing";
+import {RouterTestingModule} from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { AlertModule } from 'ngx-bootstrap/alert';
@@ -10,7 +9,9 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { ProductDetailsComponent } from './product-details.component';
 import { LoginService } from '../../../core/services/login.service';
 import { ProductsService } from '../../../core/services/products.service';
-import {productsReducer} from "../../store/reducers/reducers";
+import {productsReducer} from '../../store/reducers/reducers';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {TranslateLoaderMock, TranslateServiceMock} from '../../../../test/mock';
 
 export const fake_routes: Routes = [
   {path: 'details/:slug', component: ProductDetailsComponent}
@@ -35,21 +36,26 @@ describe('AddToCartComponent', () => {
     TestBed.configureTestingModule({
         imports: [
             AlertModule,
+            StoreModule.forRoot({}),
             StoreModule.forFeature('productsReducer', productsReducer),
-            RouterTestingModule.withRoutes(fake_routes)
+            RouterTestingModule.withRoutes(fake_routes),
+            TranslateModule.forRoot({
+              loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
+            })
         ],
         declarations: [ ProductDetailsComponent ],
         providers: [
             {provide: LoginService, useClass: LoginServiceStub},
             {provide: ProductsService, useClass: ProductsServiceStub},
+            {provide: TranslateService, useClass: TranslateServiceMock}
         ],
         schemas: [NO_ERRORS_SCHEMA]
     });
-    
+
     fixture = TestBed.createComponent(ProductDetailsComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
-     
+    // fixture.detectChanges();
+
     let productsService = TestBed.get(ProductsService);
 
   }));

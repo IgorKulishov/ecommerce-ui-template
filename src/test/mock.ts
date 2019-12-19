@@ -1,5 +1,13 @@
-import {empty, of} from 'rxjs';
+import {empty, of, Observable} from 'rxjs';
+import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core'
 
+// Translation
+export const translation = require( '../assets/i18n/en.json');
+export class TranslateLoaderMock implements TranslateLoader {
+  getTranslation(lang: string): Observable<any> {
+    return of(translation);
+  }
+}
 export class TranslateServiceMock {
   use(lang) {
     return lang;
@@ -10,6 +18,7 @@ export class TranslateServiceMock {
     });
   }
 }
+// Store
 export class StoreMock {
   select(options) {
     return empty();
@@ -17,3 +26,5 @@ export class StoreMock {
   dispatch(options) {
   }
 }
+
+
