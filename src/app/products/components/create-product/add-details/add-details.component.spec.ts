@@ -1,11 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { StoreModule } from '@ngrx/store';
-import {ReactiveFormsModule, FormsModule} from "@angular/forms";
-import { Router, ActivatedRoute } from '@angular/router'
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 
-import { CreateProductComponent } from './add-details.component';
+import { AddDetailsComponent } from './add-details.component';
 import {ProductsService} from '../../../../core/services/products.service';
-import {productsReducer} from "../../../store/reducers/reducers";
+import {productsReducer} from '../../../store/reducers/reducers';
 
 export class ProductsServiceStub {
     getAllProducts(): any {}
@@ -19,14 +19,14 @@ export class RouterStub {
 
 
 describe('CreateProductComponent', () => {
-    let component: CreateProductComponent;
-    let fixture: ComponentFixture<CreateProductComponent>;
+    let component: AddDetailsComponent;
+    let fixture: ComponentFixture<AddDetailsComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ CreateProductComponent ],
+            declarations: [ AddDetailsComponent ],
             imports: [
-                ReactiveFormsModule, 
+                ReactiveFormsModule,
                 FormsModule,
                 StoreModule.forFeature('productsReducer', productsReducer)
             ],
@@ -39,7 +39,7 @@ describe('CreateProductComponent', () => {
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(CreateProductComponent);
+        fixture = TestBed.createComponent(AddDetailsComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
