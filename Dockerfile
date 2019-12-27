@@ -1,11 +1,18 @@
-FROM node:12.2.0
-WORKDIR /appENV PATH /app/node_modules/.bin:$PATH
-COPY package.json /app/package.json
-RUN npm install
-RUN npm install -g @angular/cli@^8.1.0
+FROM node:12.14.0-buster
 
-# add app
-COPY . /app
+#WORKDIR /angular_project
 
-# start app
+#RUN pwd
+
+#ENV PATH /angular_project/node_modules/.bin:$PATH
+
+RUN npm install -g @angular/cli --unsafe
+RUN ng new ngproject
+WORKDIR ngproject
+RUN pwd
+
+#RUN copy . /ngproject
+#RUN echo 'location >>>'
+#RUN pwd
+
 CMD ng serve --host 0.0.0.0
