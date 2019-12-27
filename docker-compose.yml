@@ -1,0 +1,4 @@
+e-commerce:
+  image: igorkulishov/ecommerce-ui-template:basic
+  ports:
+    - 4200:4200

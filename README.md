@@ -4,8 +4,13 @@
 Angular 9
 
 ## Docker
-docker run --expose 4200 -p 4200:4200 igorkulishov/ecommerce-ui-template:basic
+run one of the following commands:
 
+a. `docker-compose up`
+
+or
+
+b. `docker run --expose 4200 -p 4200:4200 igorkulishov/ecommerce-ui-template:basic`
 ## Libraries 
 NGRX, Observable
 
