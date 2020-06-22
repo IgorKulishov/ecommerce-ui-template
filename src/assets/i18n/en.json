@@ -1,7 +1,7 @@
 {
   "header": {
     "language": "Language",
-    "userAccount": "Account",
+    "userAccount": "User account",
     "createProduct": "Create product",
     "sellerConsole": "Seller console",
     "logout": "Logout"
@@ -21,7 +21,9 @@
     "quantity": "Quality",
     "sum": "Sum",
     "addToCart": "Add to cart",
-    "availableOnStock": "Available on stock"
+    "availableOnStock": "Available on stock",
+    "selectMinLimit": "You reached the minimum limit of {{value}} pcs",
+    "selectMaxLimit": "You reached the maximum limit of {{value}} pcs"
   },
   "checkout": {
     "image": "Image",

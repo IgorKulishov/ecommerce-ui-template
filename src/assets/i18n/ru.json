@@ -21,7 +21,9 @@
     "quantity": "Количество",
     "sum": "Сумма",
     "addToCart": "Добавить в корзину",
-    "availableOnStock": "Доступно на складе"
+    "availableOnStock": "Доступно на складе",
+    "selectMinLimit": "Вы достигли минимума {{value}} шт",
+    "selectMaxLimit": "Вы достигли максимума {{value}} шт"
   },
   "checkout": {
     "image": "Фото",

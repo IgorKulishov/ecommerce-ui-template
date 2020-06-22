@@ -23,7 +23,24 @@ import {ItemList} from '../../models/cart.model';
   styleUrls: ['./cart-checkout.component.scss']
 })
 export class CartCheckoutComponent implements OnInit {
-  methodsOfPayment: PaymentDescription[] = [];
+  methodsOfPayment: PaymentDescription[] = [
+    {
+      '_id': 1,
+      'paymentType': 'cash on delivery'
+    },
+    {
+      '_id': 2,
+      'paymentType': 'debit'
+    },
+    {
+      '_id': 3,
+      'paymentType': 'credit'
+    },
+    {
+      '_id': 4,
+      'paymentType': 'check'
+    }
+  ];
   productsInCart: any;
   checkOutConfirmationStatus = false;
   error = false;
@@ -112,10 +129,10 @@ export class CartCheckoutComponent implements OnInit {
         this.payment = Object.assign(this.payment, {payment_method_id: Payments.credit});
         break;
       case 'check':
-        this.payment = Object.assign(this.payment,{payment_method_id: Payments.check});
+        this.payment = Object.assign(this.payment, {payment_method_id: Payments.check});
         break;
       default:
-        this.payment = Object.assign(this.payment,{payment_method_id: Payments.cash});
+        this.payment = Object.assign(this.payment, {payment_method_id: Payments.cash});
     }
 
     this.store.dispatch(new CheckOut(this.payment));
@@ -163,6 +180,7 @@ export class CartCheckoutComponent implements OnInit {
     ));
     Object.assign(this.deleteProductState, { action: 'delete_product', state: 'no_errors' });
     this.deleteProductSubject.next(this.deleteProductState);
+    this.approveModal.hide();
   }
 
 }

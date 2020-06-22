@@ -1,7 +1,7 @@
 {
   "header": {
     "language": "La langue",
-    "userAccount": "Compte",
+    "userAccount": "Compte d'utilisateur",
     "createProduct": "Créer un produit",
     "sellerConsole": "Console du vendeur",
     "logout": "Déconnexion"
@@ -21,7 +21,9 @@
     "quantity": "Qualité",
     "sum": "Somme",
     "addToCart": "Ajouter au chariot",
-    "availableOnStock": "Disponible en stock"
+    "availableOnStock": "Disponible en stock",
+    "selectMinLimit": "Vous avez atteint la limite minimale de {{value}} pièces",
+    "selectMaxLimit": "Vous avez atteint la limite maximale de {{value}} pièces"
   },
   "checkout": {
     "image": "Image",

@@ -1,3 +1,21 @@
 .order-quantity {
-  margin: 10px 0px;
+  margin: 8px 0px;
+}
+.arrow-btn-custom {
+  width: 10px;
+}
+.increment-decrement-arrows {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  background-color: white;
+  margin: 0 10px;
+  &:active {
+    box-shadow: 2px 2px 2px grey;
+    outline: none !important;
+  }
+  &:focus {
+    box-shadow: 2px 2px 2px grey;
+    outline: none !important;
+  }
 }

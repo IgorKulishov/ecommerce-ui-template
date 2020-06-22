@@ -18,7 +18,16 @@ $base-lightest-grey-03: rgba(211,211,211,0.3);
   /* background-color: lightpink; */
   margin: 5px;
   border-radius: 5px;
-  padding: 2px;
+  padding: 0 7px;
+  .in-cart-total, .in-cart-quantity {
+    color: deepskyblue;
+    font-size: 17px;
+    font-weight: 600;
+    text-shadow: 0px 2px 3px rgba(255,255,255,0.5);
+  }
+}
+.total-in-cart:hover {
+  box-shadow: 1px 1px 7px lightblue;
 }
 
 .form-frame {
@@ -108,22 +117,27 @@ $base-lightest-grey-03: rgba(211,211,211,0.3);
     bottom: 0px !important;
   }
   .custom-drop-down {
-    border-color: $base-lightest-grey;
+    //border-color: $base-lightest-grey;
     background-color: $base-lightest-grey;
     color: rgba(0, 0, 0, 0.5);
     font: 16px Roboto, sans-serif !important;
     padding: 8px 0px 0px 0px;
+    width: 90vw;
+    text-align: left;
+    border-color: transparent;
   }
   .custom-drop-down:hover {
-    border-color: $base-lightest-grey;
+    //border-color: $base-lightest-grey;
+    border-color: transparent;
     background-color: $base-lightest-grey;
-    border-color: $base-lightest-grey;
+    //border-color: $base-lightest-grey;
     color: black;
   }
   .custom-drop-down:focus {
-    border-color: $base-lightest-grey;
+    //border-color: $base-lightest-grey;
+    border-color: transparent;
     background-color: $base-lightest-grey;
-    border-color: $base-lightest-grey !important;
+    //border-color: $base-lightest-grey !important;
     color: black;
   }
   .custom-submenu {
@@ -424,14 +438,15 @@ app-root + .loading {
   position: absolute;
   font-family: 'Overpass', sans-serif;
   font-size: 16px;
-  color: palevioletred;
-  top: 20px;
+  top: 27px;
   left: -40px;
+  z-index: 10;
+  background: antiquewhite;
 }
 .input-number-of-items {
   width: 30px;
   border-radius: 20%;
-  border: solid 1px lightskyblue;
+  //border: solid 1px lightskyblue;
   text-align:center;
 }
 
