@@ -12,8 +12,8 @@
           <img src="assets/images/shopping_cart_total.png" alt="total amount in shopping cart" class="shopping_cart_total">
         </div>
         <div class="total-in-cart">
-          <span> $ {{(cart$ | async)?.totalAmount}}</span>
-          <span> {{(cart$ | async)?.totalQuantity}} pcs</span>
+          <i class="in-cart-total"> $ {{(cart$ | async)?.totalAmount}}</i>
+          <i class="in-cart-quantity"> {{(cart$ | async)?.totalQuantity}} pcs</i>
         </div>
       </div>
     </a>

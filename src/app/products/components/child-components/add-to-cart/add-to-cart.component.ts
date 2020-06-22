@@ -1,5 +1,6 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Store } from '@ngrx/store';
+import {TranslateService} from '@ngx-translate/core';
 
 import { AppStates } from '../../../../app.states';
 
@@ -21,7 +22,10 @@ export class AddToCartComponent implements OnInit {
   intervalIcrementQnty: any;
   itervalDecrementQnty: any;
 
-  constructor(private store: Store<AppStates>) {
+  constructor(
+    private store: Store<AppStates>,
+    private translate: TranslateService
+    ) {
 
   }
 
@@ -35,40 +39,52 @@ export class AddToCartComponent implements OnInit {
       this.selectedQuantity.emit(this.quantity);
       this.limitStockMessage = '';
     } else {
-      this.limitStockMessage = 'You reached the maximum limit of ' + this.maxQuantity;
+      this.translate.get('product.selectMaxLimit', {value: this.maxQuantity})
+        .subscribe(translation => {
+          this.limitStockMessage = translation;
+        });
     }
   }
 
   decrementQuantity() {
-    if(this.quantity > this.minQuantity) {
+    if (this.quantity > this.minQuantity) {
       --this.quantity;
       this.selectedQuantity.emit(this.quantity);
       this.limitStockMessage = '';
     } else {
-      this.limitStockMessage = 'You reached the minimum limit of ' + this.minQuantity;
+      this.translate.get('product.selectMinLimit', {value: this.minQuantity})
+        .subscribe(translation => {
+          this.limitStockMessage = translation;
+        });
     }
   }
 
   checkIfExceedLimit(numberEntered) {
-    if(isNaN(numberEntered)) {
+    if (isNaN(numberEntered)) {
       this.limitStockMessage = 'Please enter a number';
       this.quantity = this.minQuantity;
     } else if (numberEntered >= this.maxQuantity) {
-      this.limitStockMessage = 'You reached the maximum limit of ' + this.maxQuantity;
+      this.translate.get('product.selectMaxLimit', {value: this.maxQuantity})
+        .subscribe(translation => {
+          this.limitStockMessage = translation;
+        });
       this.quantity = this.maxQuantity;
     } else if (numberEntered < this.minQuantity) {
-      this.limitStockMessage = 'You reached the minimum limit of ' + this.minQuantity;
+      this.translate.get('product.selectMinLimit', {value: this.minQuantity})
+        .subscribe(translation => {
+          this.limitStockMessage = translation;
+        });
       this.quantity = this.minQuantity;
     } else {
       this.limitStockMessage = '';
       this.quantity = numberEntered;
     }
   }
-  //Auto-increment functionality:
+  // Auto-increment functionality:
   mousedown(changeQuantity: string) {
-    if(changeQuantity === 'incrementQuantity') {
+    if (changeQuantity === 'incrementQuantity') {
       this.startIntervalIcrementQnty();
-    } else if(changeQuantity === 'decrementQuantity') {
+    } else if (changeQuantity === 'decrementQuantity') {
       this.startIntervalDecrementQnty();
     }
   }

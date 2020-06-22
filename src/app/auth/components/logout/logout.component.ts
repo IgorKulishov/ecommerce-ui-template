@@ -25,7 +25,7 @@ export class LogoutComponent implements OnInit {
       }
     ).subscribe(res => {
       if (res && !res.userDetail) {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
       }
     });
   }
