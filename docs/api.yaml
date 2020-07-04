@@ -1,0 +1,185 @@
+openapi: 3.0.0
+info:
+  title: E-Commerce
+  description: 'E-Commerce API define functionality required for a small online store. It allows search products, add to a shopping card and checkout the products in the cart.'
+  version: '1.0'
+  contact: {}
+tags:
+  - name: product
+    description: 'responsible for list of products, product categories and search'
+  - name: cart
+    description: shopping cart functionality
+  - name: checkout
+    description: checkout and payment options
+servers: []
+components:
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+  schemas:
+    ProductInfoDao:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Product info ID
+    ProductDao:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Product identificator
+        name:
+          type: string
+          description: Product name
+        description:
+          type: string
+          description: Product description
+        slug:
+          type: string
+          description: 'Slug - derived from name, does not conatns spaces (TODO: beter description is required)'
+        price:
+          type: number
+          description: Price
+        productInfo:
+          $ref: '#/components/schemas/ProductInfoDao'
+      required:
+        - name
+        - productInfo
+paths:
+  /:
+    get:
+      operationId: AppController_getHello
+      parameters: []
+      responses:
+        '200':
+          description: ''
+  /product:
+    get:
+      operationId: ProductController_search
+      summary: ''
+      description: 'Search the products. All search parameters are optional. If no parameters provided, the search returns a list of products that can be displayed on the front page.'
+      parameters:
+        - name: name
+          required: false
+          in: query
+          description: 'used for search for product name, returns product that have substring of this parameter in the name'
+          example: magic
+          schema:
+            type: string
+        - name: text
+          required: false
+          in: query
+          description: used for search for product name and description using full text search
+          example: Fountain pen
+          schema:
+            type: string
+        - name: maxPrice
+          required: false
+          in: query
+          description: max price condition
+          example: '100.00'
+          schema:
+            type: string
+        - name: minPrice
+          required: false
+          in: query
+          description: min price condition
+          examples:
+            any min price:
+              value: '0'
+            $10:
+              value: '10.00'
+          schema:
+            type: string
+        - name: maxItemNumber
+          required: false
+          in: query
+          description: maximum number of products to return.
+          example: '10'
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Returns a list of products.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductDao'
+      tags:
+        - product
+  /product/all:
+    get:
+      operationId: ProductController_getAll
+      summary: ''
+      deprecated: true
+      description: 'Returns a list of products. Depreceated, since useless for usable number of products.'
+      parameters: []
+      responses:
+        '200':
+          description: Returns a list of products.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductDao'
+      tags:
+        - product
+      security:
+        - bearer: []
+  '/product/slug/{slug}':
+    get:
+      operationId: ProductController_getBySlug
+      parameters:
+        - name: slug
+          required: true
+          in: path
+          example: magic-pen
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Returns a product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductDao'
+        '404':
+          description: Product is not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductDao'
+      tags:
+        - product
+      security:
+        - bearer: []
+  /product/add:
+    post:
+      operationId: ProductController_create
+      summary: ''
+      deprecated: true
+      description: Add a product. Deprecated since it should not be part of consumer API and should be moved to management API.
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              example:
+                name: Apache Sunset Ink
+                price: 10.12
+      responses:
+        '201':
+          description: Create a product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductDao'
+      tags:
+        - product
