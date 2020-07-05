@@ -72,16 +72,15 @@ components:
           type: string
           example: da061f28-d67d-4194-8159-04936f63e1af
           description: 'cart ID. It is optional, but either ID or bearer token must be in the request.'
-        items:
-          example:
-            slug: apache-sunset-ink
-            number: 2
-          description: Item and number of items to add
-          type: array
-          items:
-            $ref: '#/components/schemas/CartItem'
+        item:
+          allOf:
+            - $ref: '#/components/schemas/CartItem'
+            - example:
+                slug: apache-sunset-ink
+                number: 2
+              description: Item and number of items to add
       required:
-        - items
+        - item
 paths:
   /:
     get:
@@ -262,7 +261,9 @@ paths:
               $ref: '#/components/schemas/AddItemRequest'
       responses:
         '201':
-          description: ''
+          description: Item is added
+        '404':
+          description: Product is not found
       tags:
         - cart
       security:
