@@ -8,7 +8,12 @@ tags:
   - name: product
     description: 'responsible for list of products, product categories and search'
   - name: cart
-    description: shopping cart functionality
+    description: |
+      Shopping cart functionality.
+      Content of shopping cart can be connected to account or to a session ID. If user is not logged it, he can still
+      work with the site: add products to the shopping cart and initiate checkout. Shopping cart content is connected to
+      a 'cartId'. 'cartId' is saved as a cookie. If user logging in, content of session cart is added to content of
+      user's cart.
   - name: checkout
     description: checkout and payment options
 servers: []
@@ -48,6 +53,18 @@ components:
       required:
         - name
         - productInfo
+    CartItem:
+      type: object
+      properties:
+        slug:
+          type: string
+          description: product slug
+        number:
+          type: number
+          description: number of items in the cart
+      required:
+        - slug
+        - number
 paths:
   /:
     get:
@@ -183,3 +200,54 @@ paths:
                 $ref: '#/components/schemas/ProductDao'
       tags:
         - product
+  /cart/id:
+    get:
+      operationId: CartController_requestCartId
+      summary: ''
+      description: generate new cartId
+      parameters: []
+      responses:
+        '200':
+          description: new cartId
+      tags:
+        - cart
+  /cart:
+    get:
+      operationId: CartController_getCartContent
+      parameters:
+        - name: id
+          required: true
+          in: query
+          description: cart id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: cart content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CartItem'
+      tags:
+        - cart
+    post:
+      operationId: CartController_addItems
+      summary: ''
+      description: add one or several items to the cart
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              example:
+                slug: apache-sunset-ink
+                number: 2
+              $ref: '#/components/schemas/CartItem'
+      responses:
+        '201':
+          description: ''
+      tags:
+        - cart
