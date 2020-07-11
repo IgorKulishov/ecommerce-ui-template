@@ -16,9 +16,6 @@ products.push({
   slug: 'magic-ink'
 });
 
-
-// export const search: APIGatewayProxyHandler = (event, _context): APIGatewayProxyResult => {
-// export const search = async (event, _context): Promise<any> => {
 export async function search(event, _context): Promise<APIGatewayProxyResult> {
   let name = event.queryStringParameters['name'];
 
