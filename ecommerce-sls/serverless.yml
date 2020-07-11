@@ -8,12 +8,66 @@ custom:
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
+  documentation:
+    api:
+      info:
+        version: '1.0'
+        title: E-Commerce
+        description: E-Commerce API
+      tags:
+        - name: product
+          description: 'responsible for list of products, product categories and search'
+        - name: cart
+          description: |
+            Shopping cart functionality. Content of shopping cart can be connected to account or to a session ID.
+            If user is not logged it, he can still work with the site: add products to the shopping cart and initiate
+            checkout. Shopping cart content is connected to a 'cartId'. 'cartId' is saved as a cookie. If user logging
+            in, content of session cart is added to content of user's cart.
+        - name: checkout
+          description: checkout and payment options
+      components:
+        securitySchemes:
+          bearer:
+            scheme: bearer
+            bearerFormat: JWT
+            type: http
+        schemas:
+          ProductInfoDao:
+            type: object
+            properties:
+              id:
+                type: number
+                description: Product info ID
+          ProductDao:
+            type: object
+            properties:
+              id:
+                type: number
+                description: Product identificator
+              name:
+                type: string
+                description: Product name
+              description:
+                type: string
+                description: Product description
+              slug:
+                type: string
+                description: 'Slug - derived from name, does not conatns spaces (TODO: beter description is required)'
+              price:
+                type: number
+                description: Price
+              productInfo:
+                $ref: '#/components/schemas/ProductInfoDao'
+            required:
+              - name
+              - productInfo
+
+
 
 # Add the serverless-webpack plugin
 plugins:
   - serverless-webpack
   - serverless-aws-documentation
-
 provider:
   name: aws
   runtime: nodejs12.x
@@ -21,6 +75,7 @@ provider:
     minimumCompressionSize: 1024 # Enable gzip compression for responses > 1 KB
   environment:
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+
 
 functions:
   product-search:
@@ -31,4 +86,55 @@ functions:
           path: product
           documentation:
             summary: 'Search the products.'
+            tags:
+              - product
             description: 'Search the products. All search parameters are optional. If no parameters provided, the search returns a list of products that can be displayed on the front page.'
+            parameters:
+              - name: name
+                required: false
+                in: query
+                description: 'used for search for product name, returns product that have substring of this parameter in the name'
+                example: magic
+                schema:
+                  type: string
+              - name: text
+                required: false
+                in: query
+                description: used for search for product name and description using full text search
+                example: Fountain pen
+                schema:
+                  type: string
+              - name: maxPrice
+                required: false
+                in: query
+                description: max price condition
+                example: '100.00'
+                schema:
+                  type: string
+              - name: minPrice
+                required: false
+                in: query
+                description: min price condition
+                examples:
+                  any min price:
+                    value: '0'
+                  $10:
+                    value: '10.00'
+                schema:
+                  type: string
+              - name: maxItemNumber
+                required: false
+                in: query
+                description: maximum number of products to return.
+                example: '10'
+                schema:
+                  type: number
+            responses:
+              '200':
+                description: Returns a list of products.
+                content:
+                  application/json:
+                    schema:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/ProductDao'
