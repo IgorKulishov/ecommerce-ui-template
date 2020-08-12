@@ -11,12 +11,14 @@ import {StoreModule} from '@ngrx/store';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CoreModule } from '../core/core.module';
 import { PlacedOrdersComponent} from './components/placed-orders/placed-orders.component';
+import { OrdersHistoryComponent } from './orders-history/orders-history.component';
 
 const routes: Routes = [
-  {path: 'cart', component: CartDetailsComponent},
+  { path: 'cart', component: CartDetailsComponent },
   // {path: 'delivery', component: undefined},
-  {path: 'checkout', component: CartCheckoutComponent},
-  {path: 'placed-orders', component: PlacedOrdersComponent}
+  { path: 'checkout', component: CartCheckoutComponent },
+  { path: 'placed-orders', component: PlacedOrdersComponent },
+  { path: 'orders-history', component: OrdersHistoryComponent }
 ];
 
 @NgModule({
@@ -33,7 +35,8 @@ const routes: Routes = [
   declarations: [
     CartDetailsComponent,
     CartCheckoutComponent,
-    PlacedOrdersComponent
+    PlacedOrdersComponent,
+    OrdersHistoryComponent
   ]
 })
 export class CartModule { }

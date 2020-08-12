@@ -55,6 +55,7 @@ describe('LoginComponent', () => {
   });
 
   it('should create', async() => {
+    debugger
     expect(component).toBeTruthy();
   });
 });
