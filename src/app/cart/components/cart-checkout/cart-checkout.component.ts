@@ -1,5 +1,5 @@
 
-import {map} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import {Component, OnInit, Inject, TemplateRef, ViewChild} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -8,7 +8,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {GetCurrentOrderFromStore, CheckOut, RemoveFromCart} from '../../store/actions/cart.actions';
 import { AppStates } from '../../store/states/cart.states';
 import { Order, CheckoutInfo, PaymentMethods, PaymentDescription } from '../../models/cart.model';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import { AppCookieService } from '../../../core/services/cookie.service';
 import { CartService } from '../../../core/services/cart.service';
 import { Payments } from '../../enums/payments.enum';
@@ -43,6 +43,12 @@ export class CartCheckoutComponent implements OnInit {
   ];
   productsInCart: any;
   checkOutConfirmationStatus = false;
+  selecteddates: Observable<string[]> = of(['2020-09-10, 2020-09-10', '2020-09-10, 2020-09-10']).pipe(
+    map((value: string[]) => {
+      return value.filter( (date: string, index: number, arrayOfUniqueDates: string[]) => arrayOfUniqueDates.indexOf(date) === index );
+    })
+  );
+  cartModel: string[];
   error = false;
   private payment = {};
   totalAmount: number;
@@ -181,6 +187,11 @@ export class CartCheckoutComponent implements OnInit {
     Object.assign(this.deleteProductState, { action: 'delete_product', state: 'no_errors' });
     this.deleteProductSubject.next(this.deleteProductState);
     this.approveModal.hide();
+  }
+
+  onChange(event) {
+    console.log(event.target.value);
+    console.log(this.cartModel);
   }
 
 }
