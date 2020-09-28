@@ -13,7 +13,7 @@ import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {AddToCart} from '../../../cart/store/actions/cart.actions';
 import { AppStates } from '../../../app.states';
 import {ProductDetails, Products} from '../../../products/store/models/products.model';
-import {BsModalRef, BsModalService, ModalDirective} from 'ngx-bootstrap';
+import {BsModalRef, BsModalService, ModalDirective} from 'ngx-bootstrap/modal';
 import {RemoveItemFromProductList} from '../../../products/store/actions/products.actions';
 import {UserDetails} from '../../../auth/store/models/login.model';
 
