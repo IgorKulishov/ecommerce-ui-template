@@ -5,7 +5,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { getAuthSelector, loginUserDetailsMapper, loginErrorMapper } from '../../store/select/auth.selectors';
 import { UserCredentials } from '../../store/models/login.model';
-import { AppCookieService } from '../../../core/services/cookie.service';
+import { SessionService } from '../../../core/services/session.service';
 import { LoginAction } from '../../store/actions/login.actions';
 
 export interface ErrorMessage {
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   userName$;
   loading = false;
   user: string;
-  constructor(private appCookieService: AppCookieService,
+  constructor(private sessionService: SessionService,
               private router: Router,
               private store: Store<UserCredentials>,
               @Inject(FormBuilder) fb: FormBuilder) {
@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
       }
     });
 
-    if (this.appCookieService.getTokenFromCookie() != null) {
+    if (this.sessionService.getTokenFromStorage() != null) {
       // this.router.navigate(['/products']);
     }
   }

@@ -7,7 +7,7 @@ import { GetCurrentOrderFromStore, RemoveFromCart } from '../../store/actions/ca
 import { AppStates } from '../../store/states/cart.states';
 import { Order } from '../../models/cart.model';
 import {BehaviorSubject, Observable} from 'rxjs';
-import { AppCookieService } from '../../../core/services/cookie.service';
+import { SessionService } from '../../../core/services/session.service';
 import { RemoveItemFromProductList } from '../../../products/store/actions/products.actions';
 import {ProductDetails} from '../../../products/store/models/products.model';
 import { BsModalService, BsModalRef, ModalDirective } from 'ngx-bootstrap/modal';
@@ -31,7 +31,7 @@ export class CartDetailsComponent implements OnInit {
   deleteProductSubject: BehaviorSubject<{action: string; state: string; }> = new BehaviorSubject({action: undefined, state: undefined });
 
   constructor(private store: Store<AppStates>,
-              private appCookieService: AppCookieService,
+              private sessionService: SessionService,
               private router: Router,
               private bsModalService: BsModalService) {
     this.store.select( store => {
@@ -58,7 +58,7 @@ export class CartDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    // if (this.appCookieService.getTokenFromCookie() != null ) {
+    // if (this.sessionService.getTokenFromStorage() != null ) {
     //   this.store.dispatch(new GetCurrentOrderFromStore());
     // }
     // else

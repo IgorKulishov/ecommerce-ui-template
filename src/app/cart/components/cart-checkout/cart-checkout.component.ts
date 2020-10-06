@@ -9,12 +9,11 @@ import {GetCurrentOrderFromStore, CheckOut, RemoveFromCart} from '../../store/ac
 import { AppStates } from '../../store/states/cart.states';
 import { Order, CheckoutInfo, PaymentMethods, PaymentDescription } from '../../models/cart.model';
 import {BehaviorSubject, Observable} from 'rxjs';
-import { AppCookieService } from '../../../core/services/cookie.service';
+import { SessionService } from '../../../core/services/session.service';
 import { CartService } from '../../../core/services/cart.service';
 import { Payments } from '../../enums/payments.enum';
 
 import { BsModalService, BsModalRef, ModalDirective } from 'ngx-bootstrap/modal';
-import {ProductDetails} from '../../../products/store/models/products.model';
 import {ItemList} from '../../models/cart.model';
 
 @Component({
@@ -61,7 +60,7 @@ export class CartCheckoutComponent implements OnInit {
   @ViewChild('remove_item_confirmation_template', {'static': false}) remove_item_confirmation_template: ModalDirective;
 
   constructor(private store: Store<AppStates>,
-              private appCookieService: AppCookieService,
+              private sessionService: SessionService,
               private router: Router,
               private cartService: CartService,
               private modalService: BsModalService,
@@ -102,7 +101,7 @@ export class CartCheckoutComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.appCookieService.getTokenFromCookie() != null ) {
+    if (this.sessionService.getTokenFromStorage() != null ) {
       this.store.dispatch(new GetCurrentOrderFromStore());
     }
     else

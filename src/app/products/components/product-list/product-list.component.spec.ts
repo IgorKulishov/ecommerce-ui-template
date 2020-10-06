@@ -5,7 +5,7 @@ import { StoreModule } from '@ngrx/store';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import {BsModalRef, BsModalService, ModalModule} from 'ngx-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { AppCookieService } from '../../../core/services/cookie.service';
+import { SessionService } from '../../../core/services/session.service';
 import { ProductListComponent } from './product-list.component';
 import {productsReducer} from '../../store/reducers/reducers';
 
@@ -13,12 +13,12 @@ export const fake_routes: Routes = [
   {path: 'products', component: ProductListComponent}
 ];
 
- class AppCookieServiceStub {
+ class SessionServiceStub {
   public logout(): any {}
-  public storeTokenInCookie(data: any): void {}
-  public getTokenFromCookie(): any {}
-  public storeOrderNumberInCookie(data: any): void {}
-  public getOrderNumberFromCookie(): any {}
+  public storeTokenInSession(data: any): void {}
+  public getTokenFromStorage(): any {}
+  public storeOrderNumberInStorage(data: any): void {}
+  public getOrderNumberFromStorage(): any {}
 }
 
 describe('ProductListComponent', () => {
@@ -36,7 +36,7 @@ describe('ProductListComponent', () => {
       ],
       providers: [
         BsModalService,
-         { provide: AppCookieService, useClass: AppCookieServiceStub }
+         { provide: SessionService, useClass: SessionServiceStub }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })

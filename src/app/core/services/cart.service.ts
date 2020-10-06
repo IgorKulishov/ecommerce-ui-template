@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AppCookieService } from './cookie.service';
+import { SessionService } from './session.service';
 import {catchError, map} from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 
@@ -9,10 +9,10 @@ import { environment } from '../../../environments/environment';
 export class CartService {
 
   constructor(private http: HttpClient,
-              private appCookieService: AppCookieService) { }
+              private sessionService: SessionService) { }
 
   getOrderNumber(data: any): Observable<any> {
-    const token = this.appCookieService.getTokenFromCookie();
+    const token = this.sessionService.getTokenFromStorage();
     if (token) {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ export class CartService {
       ).pipe(
         map((res: Response) => {
           const respObj = res;
-          this.appCookieService.storeOrderNumberInCookie(respObj);
+          this.sessionService.storeOrderNumberInStorage(respObj);
           return respObj;
         })
       );
@@ -34,8 +34,8 @@ export class CartService {
   }
 
   addProductToShoppingCart(data: any): Observable<any> {
-    const token = this.appCookieService.getTokenFromCookie();
-    const orderNumber = this.appCookieService.getOrderNumberFromCookie();
+    const token = this.sessionService.getTokenFromStorage();
+    const orderNumber = this.sessionService.getOrderNumberFromStorage();
     if (token && orderNumber) {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
@@ -60,8 +60,8 @@ export class CartService {
     }
   }
   removeProductFromShoppingCart(data: any): Observable<any> {
-    const token = this.appCookieService.getTokenFromCookie();
-    const orderNumber = this.appCookieService.getOrderNumberFromCookie();
+    const token = this.sessionService.getTokenFromStorage();
+    const orderNumber = this.sessionService.getOrderNumberFromStorage();
     if (token && orderNumber) {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
@@ -80,8 +80,8 @@ export class CartService {
     }
   }
   productsShoppingCart(): Observable<any> {
-    const token = this.appCookieService.getTokenFromCookie();
-    const orderNumber = this.appCookieService.getOrderNumberFromCookie();
+    const token = this.sessionService.getTokenFromStorage();
+    const orderNumber = this.sessionService.getOrderNumberFromStorage();
     if (token && orderNumber) {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
@@ -103,8 +103,8 @@ export class CartService {
   }
   productsProcessedOrderShoppingCart(processedOrderToken: any): Observable<any> {
 
-    const token = this.appCookieService.getTokenFromCookie();
-    const placedOrderNumber = this.appCookieService.getPlacedOrderNumberFromCookie();
+    const token = this.sessionService.getTokenFromStorage();
+    const placedOrderNumber = this.sessionService.getPlacedOrderNumberFromStorage();
     if (token && processedOrderToken && processedOrderToken.payload) {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
@@ -127,8 +127,8 @@ export class CartService {
   checkoutShoppingCart(paymentInfo: any) {
     // order_token is not used yet
     const order_token = null;
-    const token = this.appCookieService.getTokenFromCookie();
-    const orderNumber = this.appCookieService.getOrderNumberFromCookie();
+    const token = this.sessionService.getTokenFromStorage();
+    const orderNumber = this.sessionService.getOrderNumberFromStorage();
     if (token && orderNumber) {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
@@ -155,8 +155,8 @@ export class CartService {
   }
 
   getMethodsOfPayment() {
-    const token = this.appCookieService.getTokenFromCookie();
-    const orderNumber = this.appCookieService.getOrderNumberFromCookie();
+    const token = this.sessionService.getTokenFromStorage();
+    const orderNumber = this.sessionService.getOrderNumberFromStorage();
 
     if (token && orderNumber) {
       const headers = new HttpHeaders({

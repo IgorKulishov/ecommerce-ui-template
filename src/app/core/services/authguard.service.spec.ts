@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
-import { AppCookieService } from './cookie.service';
+import { SessionService } from './session.service';
 import { AuthguardService } from './authguard.service';
 import {Routes} from '@angular/router';
 import {ProductListComponent} from '../../products/components/product-list/product-list.component';
@@ -11,12 +11,12 @@ export const fake_routes: Routes = [
   {path: 'products', component: ProductListComponent}
 ];
 
-class AppCookieServiceStub {
+class SessionServiceStub {
   public logout(): any {}
-  public storeTokenInCookie(data: any): void {}
-  public getTokenFromCookie(): any {}
-  public storeOrderNumberInCookie(data: any): void {}
-  public getOrderNumberFromCookie(): any {}
+  public storeTokenInSession(data: any): void {}
+  public getTokenFromStorage(): any {}
+  public storeOrderNumberInStorage(data: any): void {}
+  public getOrderNumberFromStorage(): any {}
 }
 
 describe('Authguard.ServiceService', () => {
@@ -24,7 +24,7 @@ describe('Authguard.ServiceService', () => {
     TestBed.configureTestingModule({
       providers: [
         AuthguardService,
-        {provide: AppCookieService, useClass: AppCookieServiceStub},
+        {provide: SessionService, useClass: SessionServiceStub},
         {provide: Store, useClass: StoreMock}
       ],
       imports: [

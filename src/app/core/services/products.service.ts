@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AppCookieService } from './cookie.service';
+import { SessionService } from './session.service';
 import { environment } from '../../../environments/environment';
 import { map } from 'rxjs/operators';
 import {RemoveItemId} from '../../products/store/models/products.model';
@@ -10,10 +10,10 @@ import {RemoveItemId} from '../../products/store/models/products.model';
 export class ProductsService {
 
   constructor(private http: HttpClient,
-              private appCookieService: AppCookieService) { }
+              private sessionService: SessionService) { }
 
   getAllProducts(): Observable<any> {
-    const token = this.appCookieService.getTokenFromCookie();
+    const token = this.sessionService.getTokenFromStorage();
     if (token) {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ export class ProductsService {
 
   /*** use if you need to make a call to get data for product details ***/
   getProductDetails(path: any) {
-    const token = this.appCookieService.getTokenFromCookie();
+    const token = this.sessionService.getTokenFromStorage();
     if (token) {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ export class ProductsService {
   }
 
   create(data?: any): Observable<any> {
-    const token = this.appCookieService.getTokenFromCookie();
+    const token = this.sessionService.getTokenFromStorage();
     if (token) {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ export class ProductsService {
 
   uploadProductImage(imageDetails: {file: File, productId: number}): Observable<any> {
 
-    const token = this.appCookieService.getTokenFromCookie();
+    const token = this.sessionService.getTokenFromStorage();
     const uploadImage = new FormData();
 
     uploadImage.append('uploads[]', imageDetails['file'], imageDetails['file']['name']);
@@ -94,7 +94,7 @@ export class ProductsService {
 
   removeItemFromProductList( removeItemId ?: RemoveItemId ): Observable<any> {
 
-    const token = this.appCookieService.getTokenFromCookie();
+    const token = this.sessionService.getTokenFromStorage();
     if (token) {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
@@ -107,7 +107,6 @@ export class ProductsService {
       return this.http.delete(
         // TODO: temp placed wromg, please use second URL:
         `${environment.REST_API}/api/product/delete/${removeItemId.id}`, options
-        // `${environment.REST_API}/rest/api/product/delete/${removeItemId.id}`, options
       ).pipe(
         map((res: any) => res)
       );

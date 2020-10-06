@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, RoutesRecognized } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppStates } from '../../../app.states';
-import { AppCookieService } from '../../../core/services/cookie.service';
+import { SessionService } from '../../../core/services/session.service';
 import { SelectLanguageAction } from '../../../auth/store/actions/login.actions';
 import { languages} from '../../../core/consts/consts';
 import {UserDetails} from '../../../auth/store/models/login.model';
@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
 
   screenSize: number;
 
-  constructor(private appCookieService: AppCookieService,
+  constructor(private sessionService: SessionService,
               private store: Store<AppStates>,
               private router: Router,
               private route: ActivatedRoute,
@@ -54,7 +54,7 @@ export class HeaderComponent implements OnInit {
       }
     }));
 
-    this.checkOutConfirmationStatus$ = this.store.select( store => {
+    this.checkOutConfirmationStatus$ = this.store.select( (store: any) => {
       return store['cartReducer'];
     }).pipe(map(res => {
       if (res && res.checkOutConfirmationStatus) {
@@ -100,7 +100,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.appCookieService.logout();
+    this.sessionService.logout();
   }
 
   onResize() {

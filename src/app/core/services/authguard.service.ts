@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import {Observable, of} from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { AppCookieService } from './cookie.service';
+import { SessionService } from './session.service';
 import {Store} from '@ngrx/store';
 import {AppStates} from '../../app.states';
 import {catchError, map} from 'rxjs/operators';
@@ -13,7 +13,7 @@ import {GetOrderNumber, CreateOrderNumber, ReloginOnRefresh} from '../../auth/st
 export class AuthguardService implements CanActivate {
   static jwtHelper: JwtHelperService = new JwtHelperService();
   constructor(
-    private appCookieService: AppCookieService,
+    private sessionService: SessionService,
     private router: Router,
     private store: Store<AppStates>,
   ) { }
@@ -46,10 +46,10 @@ export class AuthguardService implements CanActivate {
 
     if (userDetailsInStore && !AuthguardService.jwtHelper.isTokenExpired(userDetailsInStore.token)) {
       loggedIn = true;
-    } else if (this.appCookieService.getUserDetails() && this.appCookieService.getUserDetails()['token'] && !AuthguardService.jwtHelper.isTokenExpired(this.appCookieService.getUserDetails()['token'])) {
+    } else if (this.sessionService.getUserDetails() && this.sessionService.getUserDetails()['token'] && !AuthguardService.jwtHelper.isTokenExpired(this.sessionService.getUserDetails()['token'])) {
       this.store.dispatch(
         new CreateOrderNumber({
-          ...this.appCookieService.getUserDetails(),
+          ...this.sessionService.getUserDetails(),
           mobile: undefined
         })
       );
@@ -62,11 +62,11 @@ export class AuthguardService implements CanActivate {
   }
 
   reloginOnRefresh() {
-    this.store.dispatch(new ReloginOnRefresh(JSON.parse(this.appCookieService.getUserContent())));
+    this.store.dispatch(new ReloginOnRefresh(JSON.parse(this.sessionService.getUserContent())));
   }
 
   getUserContent() {
-    return JSON.parse(this.appCookieService.getUserContent());
+    return JSON.parse(this.sessionService.getUserContent());
   }
 
 }
