@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 
 import { AppStates } from '../../../app.states';
 import { LogOut } from '../../store/actions/login.actions';
-import {AppCookieService} from '../../../core/services/cookie.service';
+import { SessionService } from '../../../core/services/session.service';
 
 @Component({
   selector: 'logout',
@@ -14,7 +14,7 @@ import {AppCookieService} from '../../../core/services/cookie.service';
 export class LogoutComponent implements OnInit {
 
   constructor(private router: Router,
-              private appCookieService: AppCookieService,
+              private sessionService: SessionService,
               private store: Store<AppStates>) {
 
     this.store.select(

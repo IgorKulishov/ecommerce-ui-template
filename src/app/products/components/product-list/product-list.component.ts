@@ -8,8 +8,7 @@ import { GetProducts } from '../../store/actions/products.actions';
 import { AppStates } from '../../../app.states';
 import { errorState, Products } from '../../store/models/products.model';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { AppCookieService } from '../../../core/services/cookie.service';
-import {AddToCart, CheckOut} from '../../../cart/store/actions/cart.actions';
+import { SessionService } from '../../../core/services/session.service';
 import { RemoveItemFromProductList } from '../../store/actions/products.actions';
 import { ProductDetails} from '../../store/models/products.model';
 
@@ -37,7 +36,7 @@ export class ProductListComponent implements OnInit {
   columns: 3|4|5 = 3;
 
   constructor(private store: Store<AppStates>,
-              private appCookieService: AppCookieService,
+              private sessionService: SessionService,
               private router: Router,
               private modalService: BsModalService
             ) {
@@ -64,7 +63,7 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.appCookieService.getTokenFromCookie() != null ) {
+    if (this.sessionService.getTokenFromStorage() != null ) {
       this.store.dispatch(new GetProducts());
     } else {
       this.router.navigate(['/login']);

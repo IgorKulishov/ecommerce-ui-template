@@ -3,13 +3,13 @@ import { Observable } from 'rxjs';
 import { UserCredentials, UserDetails, RegisterUser } from '../../auth/store/models/login.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { AppCookieService } from './cookie.service';
+import { SessionService } from './session.service';
 import { environment } from '../../../environments/environment';
 @Injectable()
 export class LoginService {
 
   constructor(private http: HttpClient,
-              private appCookieService: AppCookieService) { }
+              private sessionService: SessionService) { }
 
   login(data?: {action: string; payload: UserCredentials}): Observable<UserDetails> {
     const userCredentials: UserCredentials = data.payload;
@@ -24,7 +24,7 @@ export class LoginService {
       environment.REST_API + '/rest/login/', userCredentials, options
     ).pipe(
         map((res: any) => {
-            this.appCookieService.storeTokenInCookie(res);
+            this.sessionService.storeTokenInSession(res);
             return res;
         })
     );

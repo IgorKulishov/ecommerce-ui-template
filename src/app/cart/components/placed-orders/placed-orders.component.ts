@@ -8,7 +8,7 @@ import {GetProcessedOrderFromStore, CheckOut, RemoveFromCart} from '../../store/
 import { AppStates } from '../../store/states/cart.states';
 import { Order, CheckoutInfo, PaymentMethods, PaymentDescription } from '../../models/cart.model';
 
-import { AppCookieService } from '../../../core/services/cookie.service';
+import { SessionService } from '../../../core/services/session.service';
 import { CartService } from '../../../core/services/cart.service';
 
 
@@ -35,7 +35,7 @@ export class PlacedOrdersComponent implements OnInit {
   @ViewChild('remove_item_confirmation_template', {'static': false}) remove_item_confirmation_template: ModalDirective;
 
   constructor(private store: Store<AppStates>,
-              private appCookieService: AppCookieService,
+              private sessionService: SessionService,
               private router: Router,
               private cartService: CartService,
               private modalService: BsModalService,
@@ -65,8 +65,8 @@ export class PlacedOrdersComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.appCookieService.getPlacedOrderNumberFromCookie()) {
-      this.store.dispatch(new GetProcessedOrderFromStore(this.appCookieService.getPlacedOrderNumberFromCookie()));
+    if (this.sessionService.getPlacedOrderNumberFromStorage()) {
+      this.store.dispatch(new GetProcessedOrderFromStore(this.sessionService.getPlacedOrderNumberFromStorage()));
     } else {
       this.router.navigate(['/']);
     }

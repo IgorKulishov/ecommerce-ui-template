@@ -7,15 +7,15 @@ import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { Store } from '@ngrx/store';
 import {TranslateModule, TranslateService, TranslateLoader} from '@ngx-translate/core';
 import { LoginComponent } from './login.component';
-import { AppCookieService } from '../../../core/services/cookie.service';
+import { SessionService } from '../../../core/services/session.service';
 import {StoreMock, TranslateServiceMock, TranslateLoaderMock} from '../../../../test/mock';
 
-class AppCookieServiceStub {
+class SessionServiceStub {
   public logout(): any {}
-  public storeTokenInCookie(data: any): void {}
-  public getTokenFromCookie(): any {}
-  public storeOrderNumberInCookie(data: any): void {}
-  public getOrderNumberFromCookie(): any {}
+  public storeTokenInSession(data: any): void {}
+  public getTokenFromStorage(): any {}
+  public storeOrderNumberInStorage(data: any): void {}
+  public getOrderNumberFromStorage(): any {}
 }
 
 export const fake_routes: Routes = [
@@ -30,7 +30,7 @@ describe('LoginComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ LoginComponent ],
       providers: [
-        {provide: AppCookieService, useClass: AppCookieServiceStub },
+        {provide: SessionService, useClass: SessionServiceStub },
         {provide: Store, useClass: StoreMock},
         {provide: TranslateService, useClass: TranslateServiceMock}
       ],

@@ -48,7 +48,6 @@
               "node_modules/lg-thumbnail.js/dist/lg-thumbnail.min.js",
               "node_modules/ecommerce-tutorial-webcomp/src/index.js"
             ],
-            "es5BrowserSupport": true,
             "stylePreprocessorOptions": {
               "includePaths": [
                 "src/scss/themes/theme-default"

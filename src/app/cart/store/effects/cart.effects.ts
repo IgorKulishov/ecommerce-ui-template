@@ -4,7 +4,7 @@ import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Store, Action } from '@ngrx/store';
 import { of ,  Observable } from 'rxjs';
 
-import { AppCookieService } from '../../../core/services/cookie.service';
+import { SessionService } from '../../../core/services/session.service';
 
 import {
   ADD_TO_CART, ADD_TO_CART_SUCCESS,
@@ -33,13 +33,13 @@ export class CartEffects {
               private productService: ProductsService,
               private store: Store<AppStates>,
               private cartService: CartService,
-              private cookieService: AppCookieService) {}
+              private sessionService: SessionService) {}
     // Add to cart
   @Effect() addToCart$: any = this.addToCartAction$.pipe(
       ofType(ADD_TO_CART),
       switchMap((productToCart: any) => this.cartService.addProductToShoppingCart(productToCart).pipe(
         map((data: any) => new AddToCartSuccess( data )),
-        //TODO: need to replace with Error action:
+        // TODO: need to replace with Error action:
         catchError(err => of(new Error('error')))
       ))
     );
@@ -47,7 +47,7 @@ export class CartEffects {
       ofType(ADD_TO_CART_SUCCESS),
       switchMap((productToCart: any) => this.cartService.productsShoppingCart().pipe(
         map((data: any) => new StoreCurrentOrder( data )),
-        //TODO: need to replace with Error action:
+        // TODO: need to replace with Error action:
         catchError(err => of(new Error('error')))
       ))
     );
@@ -69,14 +69,14 @@ export class CartEffects {
    @Effect() checkoutShoppingCart$: any = this.checkoutShoppingCartAtion$.pipe(
       ofType(CHECK_OUT),
       map( data => {
-        this.cookieService.setPlacedOrderNumberInCookie(this.cookieService.getOrderNumberFromCookie());
+        this.sessionService.setPlacedOrderNumberInStorage(this.sessionService.getOrderNumberFromStorage());
         return data;
       }),
       switchMap((orderPaymentDetails: any) => this.cartService.checkoutShoppingCart(orderPaymentDetails.payload)),
       switchMap(data => [
-          new SavePlacedOrder( this.cookieService.getOrderNumberFromCookie() ),
+          new SavePlacedOrder( this.sessionService.getOrderNumberFromStorage() ),
           new CheckOutSuccess( data ),
-          new GetOrderNumber( this.cookieService.getUserDetails() )
+          new GetOrderNumber( this.sessionService.getUserDetails() )
         ])
     );
 

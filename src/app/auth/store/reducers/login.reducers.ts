@@ -1,7 +1,7 @@
 import { Action, ActionReducer } from '@ngrx/store';
 import { AppStates } from '../../../app.states';
 import {
-  LOGIN_USER, GET_ORDER_NUMBER, LOG_OUT, FINISH_COOKIES_CLEARENCE,
+  LOGIN_USER, GET_ORDER_NUMBER, LOG_OUT, FINISH_STORAGE_CLEARENCE,
   REGISTER_USER, REGISTER_USER_SUCCESS, ERROR_LOADING, SELECT_LANGUAGE,
   RE_LOGIN_ON_REFRESH
 } from '../actions/login.actions';
@@ -54,7 +54,7 @@ export function userLoginReducer (state: AppStates, action: ReducerClass) {
       return registerUserSuccess(state, action);
     case LOG_OUT:
       return logOutUser(state, action);
-    case FINISH_COOKIES_CLEARENCE:
+    case FINISH_STORAGE_CLEARENCE:
       return state;
     case ERROR_LOADING:
       return indicateErrorOnLoading(state, action);
