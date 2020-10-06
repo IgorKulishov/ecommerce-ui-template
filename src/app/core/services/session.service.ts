@@ -7,13 +7,13 @@ export class SessionService {
   constructor() {}
 
   static getSession(sessionObjectName: string) {
-    return JSON.parse(window.sessionStorage.getItem(sessionObjectName));
+    return window.sessionStorage.getItem(sessionObjectName);
   }
   static setSession(sessionObjectName: string, sessionObjectKey: string): void {
     window.sessionStorage.setItem(sessionObjectName, sessionObjectKey);
   }
   static deleteSession(sessionObjectName: string): void {
-    window.sessionStorage.remove(sessionObjectName);
+    window.sessionStorage.removeItem(sessionObjectName);
   }
 
   public logout(): any {
