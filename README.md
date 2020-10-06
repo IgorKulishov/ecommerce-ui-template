@@ -1,7 +1,7 @@
 ***
 
 ## Framework 
-Angular 9
+Angular 10
 
 ## Docker
 run one of the following commands:
