@@ -46,7 +46,7 @@ export class OrdersHistoryApiService {
               return this.http.post(
                 environment.ORDER_HISTORY_API + '/dev/orders',
                 {
-                  userid: storeDate.id,
+                  userid: JSON.stringify(storeDate.id),
                   orderid: orderInCart.orderNumber,
                   userRole: userRole,
                   orderDetails: orderInCart.itemList
