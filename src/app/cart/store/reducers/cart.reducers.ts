@@ -3,7 +3,8 @@ import { AppStates } from '../../../app.states';
 import {
   ADD_TO_CART, ADD_TO_CART_SUCCESS,
   SAVE_CURRENT_ORDER_IN_STORE, GET_CURRENT_ORDER_FROM_STORE, SAVE_PLACED_ORDER,
-  GET_CURRENT_ORDER_FROM_STORE_SUCCESS, CHECK_OUT, CHECK_OUT_SUCCESS, REMOVE_FROM_CART, SAVE_PLACED_ORDER_DETAILS
+  GET_CURRENT_ORDER_FROM_STORE_SUCCESS, CHECK_OUT, CHECK_OUT_SUCCESS, REMOVE_FROM_CART,
+  SAVE_PLACED_ORDER_DETAILS, STORE_PROCESSED_ORDER_IN_HISTORY_API_SUCCESS
 } from '../actions/cart.actions';
 import { Order } from '../../models/cart.model';
 import { INITIAL_STORE_DATA } from '../../../app.states';
@@ -49,6 +50,11 @@ const savePlacedOrderDetails = (state: AppStates, action: ReducerClass): AppStat
   const newData: AppStates = Object.assign({}, state, { processedOrdersDetails: action.payload} );
   return newData;
 };
+// There is no actual use of the (same) order details processed also saved in history lambda API
+const storeProcessedOrderInHistoryApi = (state: AppStates, action: ReducerClass): AppStates => {
+  const newData: AppStates = Object.assign({}, state, { orderStoredInHistoryApi: action.payload} );
+  return newData;
+};
 const checkOutSuccess = (state: AppStates, action: ReducerClass): AppStates => {
   // const newData: AppStates = Object.assign({}, state, { checkOutConfirmationStatus: action.payload} );
   const newData: AppStates = Object.assign({}, state, {
@@ -85,6 +91,8 @@ export function cartReducer (state: AppStates, action: ReducerClass) {
       return checkOut(state, action);
     case CHECK_OUT_SUCCESS:
       return checkOutSuccess(state, action);
+    case STORE_PROCESSED_ORDER_IN_HISTORY_API_SUCCESS:
+      return storeProcessedOrderInHistoryApi(state, action);
     default:
       return state;
   }

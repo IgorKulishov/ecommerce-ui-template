@@ -13,6 +13,8 @@ export const CHECK_OUT_SUCCESS = 'CHECK_OUT_SUCCESS';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const SAVE_PLACED_ORDER = 'SAVE_PLACED_ORDER';
 export const SAVE_PLACED_ORDER_DETAILS = 'SAVE_PLACED_ORDER_DETAILS';
+export const SAVE_ORDER_IN_HISTORY_API = 'SAVE_ORDER_IN_HISTORY_API';
+export const STORE_PROCESSED_ORDER_IN_HISTORY_API_SUCCESS = 'STORE_PROCESSED_ORDER_IN_HISTORY_API_SUCCESS';
 
 export class AddToCart implements Action {
   readonly type = ADD_TO_CART;
@@ -64,6 +66,14 @@ export class SavePlacedOrder implements Action {
 }
 export class StorePlacedOrderDetails implements Action {
   readonly type = SAVE_PLACED_ORDER_DETAILS;
+  constructor(public payload: any ) {
+  }
+}
+export class SaveOrderInHistoryApi implements Action {
+  readonly type = SAVE_ORDER_IN_HISTORY_API;
+}
+export class StoreProcessedOrderInHistoryApiSuccess implements Action {
+  readonly type = STORE_PROCESSED_ORDER_IN_HISTORY_API_SUCCESS;
   constructor(public payload: any ) {
   }
 }
