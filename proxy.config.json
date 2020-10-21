@@ -1,0 +1,7 @@
+{
+  "/dev/**": {
+    "target": "https://uf18vg0jb7.execute-api.us-east-1.amazonaws.com/dev",
+    "secure": false,
+    "changeOrigin": true
+  }
+}
