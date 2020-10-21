@@ -101,10 +101,10 @@ export class CartService {
       );
     }
   }
-  productsProcessedOrderShoppingCart(processedOrderToken: any): Observable<any> {
-
+  // TODO: move to separate AWS module with services
+  fetchOrdersHistory(processedOrderToken: any): Observable<any> {
     const token = this.sessionService.getTokenFromStorage();
-    const placedOrderNumber = this.sessionService.getPlacedOrderNumberFromStorage();
+    const userid = this.sessionService.getUserIdFromStorage();
     if (token && processedOrderToken && processedOrderToken.payload) {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
@@ -113,15 +113,7 @@ export class CartService {
       const options = {
         headers: headers
       };
-      return this.http.get(
-        environment.REST_API + `/rest/api/order/number/${placedOrderNumber}`,
-        options
-      ).pipe(
-        map((res: Response) => {
-          const respObj = res;
-          return respObj;
-        })
-      );
+      return this.http.get(environment.ORDER_HISTORY_API + `/orders/userid/${userid}`, options );
     }
   }
   checkoutShoppingCart(paymentInfo: any) {

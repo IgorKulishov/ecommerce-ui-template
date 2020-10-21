@@ -1,4 +1,4 @@
-import {switchMap,  map, catchError } from 'rxjs/operators';
+import {switchMap, map, catchError, filter} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Store, Action } from '@ngrx/store';
@@ -10,9 +10,9 @@ import {
   ADD_TO_CART, ADD_TO_CART_SUCCESS,
   GET_CURRENT_ORDER_FROM_STORE,
   CHECK_OUT, REMOVE_FROM_CART, SAVE_PLACED_ORDER,
-  GET_PROCESSED_ORDER_FROM_STORE, SAVE_ORDER_IN_HISTORY_API,
+  FETCH_ORDERS_HISTORY, SAVE_ORDER_IN_HISTORY_API,
   AddToCart, AddToCartSuccess, StoreCurrentOrder,
-  GetCurrentOrderFromStoreSuccess, CheckOutSuccess, SavePlacedOrder, StorePlacedOrderDetails,
+  GetCurrentOrderFromStoreSuccess, CheckOutSuccess, SavePlacedOrder,
   SaveOrderInHistoryApi, StoreProcessedOrderInHistoryApiSuccess
 } from '../actions/cart.actions';
 // TODO: need to add order models
@@ -87,10 +87,18 @@ export class CartEffects {
 
   // get order from store
   @Effect() getProcessedOrdersFromtStore$: any = this.getOrdersFromtStoreAction$.pipe(
-    ofType(GET_PROCESSED_ORDER_FROM_STORE),
-    switchMap((processedOrderToken: string) => this.cartService.productsProcessedOrderShoppingCart(processedOrderToken).pipe(
-      map((data: any) => new StorePlacedOrderDetails( data )),
-      catchError(err => of(new Error('error')))
+    ofType(FETCH_ORDERS_HISTORY),
+    switchMap((processedOrderToken: string) => this.cartService.fetchOrdersHistory(processedOrderToken).pipe(
+      filter((resp: any) => {
+        return Array.isArray(resp) && resp.length > 0;
+      }),
+      map((data: any) => {
+        return new StoreProcessedOrderInHistoryApiSuccess(data);
+      }),
+      catchError(err => {
+        console.error(err);
+        return of(new Error('error'));
+      })
     ))
   );
 
@@ -98,7 +106,6 @@ export class CartEffects {
     ofType(SAVE_ORDER_IN_HISTORY_API),
     switchMap(() => this.ordersHistoryService.saveOrder().pipe(
       map((data: any) => {
-        console.log(data);
         return new StoreProcessedOrderInHistoryApiSuccess(data);
       }),
       catchError(err => {

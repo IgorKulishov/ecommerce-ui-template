@@ -7,7 +7,7 @@ import { of, combineLatest } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { UserDetails, Role } from '../../auth/store/models/login.model';
 import { loginUserDetailsMapper } from '../../auth/store/select/auth.selectors';
-
+// TODO: move to new module for AWS microservices
 @Injectable({
   providedIn: 'root'
 })
@@ -44,12 +44,12 @@ export class OrdersHistoryApiService {
               console.log(orderInCart);
               const userRole = storeDate.login.roles.filter((role: Role) => role.roleName === 'seller').length > 0 ? 'seller' : 'buyer';
               return this.http.post(
-                environment.ORDER_HISTORY_API + '/dev/orders',
+                environment.ORDER_HISTORY_API + '/orders',
                 {
                   userid: JSON.stringify(storeDate.id),
                   orderid: orderInCart.orderNumber,
                   userRole: userRole,
-                  orderDetails: orderInCart.itemList
+                  orderDetails: JSON.stringify(orderInCart)
                 }, options
               );
             })

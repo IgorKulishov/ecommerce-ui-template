@@ -3,7 +3,7 @@ import {Component, OnInit, Inject, ViewChild} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {GetProcessedOrderFromStore } from '../../store/actions/cart.actions';
+import {FetchOrderHistory } from '../../store/actions/cart.actions';
 import { AppStates } from '../../store/states/cart.states';
 import { PaymentDescription } from '../../models/cart.model';
 import { SessionService } from '../../../core/services/session.service';
@@ -23,7 +23,7 @@ export class PlacedOrdersComponent implements OnInit {
   totalAmount: number;
   totalQuantity: number;
   checkoutForm: FormGroup;
-  processedOrdersDetails$: Observable<any>;
+  placedOrdersDetails$: Observable<any>;
   @ViewChild('confirmation_template', {'static': false}) confirmation_template: ModalDirective;
   @ViewChild('remove_item_confirmation_template', {'static': false}) remove_item_confirmation_template: ModalDirective;
 
@@ -36,11 +36,11 @@ export class PlacedOrdersComponent implements OnInit {
               @Inject(FormBuilder) fb: FormBuilder) {
 
     // app store for total amount
-    this.processedOrdersDetails$ = this.store.select( ( store: any ) => {
+    this.placedOrdersDetails$ = this.store.select( ( store: any ) => {
       return store['cartReducer'];
     }).pipe(map((res: any) => {
-      if (res && res.processedOrdersDetails) {
-        return res.processedOrdersDetails;
+      if (res && res.orderStoredInHistoryApi) {
+        return res.orderStoredInHistoryApi;
       }
     }));
 
@@ -48,7 +48,7 @@ export class PlacedOrdersComponent implements OnInit {
 
   ngOnInit() {
     if (this.sessionService.getPlacedOrderNumberFromStorage()) {
-      this.store.dispatch(new GetProcessedOrderFromStore(this.sessionService.getPlacedOrderNumberFromStorage()));
+      this.store.dispatch(new FetchOrderHistory(this.sessionService.getPlacedOrderNumberFromStorage()));
     } else {
       this.router.navigate(['/']);
     }
