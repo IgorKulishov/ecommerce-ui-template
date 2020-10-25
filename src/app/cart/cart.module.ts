@@ -26,6 +26,7 @@ const routes: Routes = [
     EffectsModule.forRoot([CartEffects]),
     StoreModule.forFeature('cartReducer', cartReducer),
     RouterModule.forChild(routes),
+    SharedModule,
     ModalModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
