@@ -11,6 +11,7 @@ import {StoreModule} from '@ngrx/store';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CoreModule } from '../core/core.module';
 import { PlacedOrdersComponent} from './components/placed-orders/placed-orders.component';
+import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
   {path: 'cart', component: CartDetailsComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
     EffectsModule.forRoot([CartEffects]),
     StoreModule.forFeature('cartReducer', cartReducer),
     RouterModule.forChild(routes),
+    SharedModule,
     ModalModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,

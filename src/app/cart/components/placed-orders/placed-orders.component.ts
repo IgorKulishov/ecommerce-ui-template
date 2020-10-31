@@ -1,22 +1,15 @@
 import {map} from 'rxjs/operators';
-import {Component, OnInit, Inject, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnInit, Inject, ViewChild} from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-
-import {GetProcessedOrderFromStore, CheckOut, RemoveFromCart} from '../../store/actions/cart.actions';
+import { Router } from '@angular/router';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {FetchOrderHistory } from '../../store/actions/cart.actions';
 import { AppStates } from '../../store/states/cart.states';
-import { Order, CheckoutInfo, PaymentMethods, PaymentDescription } from '../../models/cart.model';
-
+import { PaymentDescription } from '../../models/cart.model';
 import { SessionService } from '../../../core/services/session.service';
 import { CartService } from '../../../core/services/cart.service';
-
-
 import { BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
-import {GetProducts} from '../../../products/store/actions/products.actions';
-import {Observable} from "rxjs";
-
-
+import {Observable} from 'rxjs';
 @Component({
   templateUrl: './placed-orders.component.html',
   styleUrls: ['./placed-orders.component.scss']
@@ -30,7 +23,7 @@ export class PlacedOrdersComponent implements OnInit {
   totalAmount: number;
   totalQuantity: number;
   checkoutForm: FormGroup;
-  processedOrdersDetails$: Observable<any>;
+  placedOrdersDetails$: Observable<any>;
   @ViewChild('confirmation_template', {'static': false}) confirmation_template: ModalDirective;
   @ViewChild('remove_item_confirmation_template', {'static': false}) remove_item_confirmation_template: ModalDirective;
 
@@ -43,40 +36,22 @@ export class PlacedOrdersComponent implements OnInit {
               @Inject(FormBuilder) fb: FormBuilder) {
 
     // app store for total amount
-    this.processedOrdersDetails$ = this.store.select( store => {
+    this.placedOrdersDetails$ = this.store.select( ( store: any ) => {
       return store['cartReducer'];
     }).pipe(map((res: any) => {
-      if (res && res.processedOrdersDetails) {
-        return res.processedOrdersDetails;
+      if (res && res.orderStoredInHistoryApi) {
+        return res.orderStoredInHistoryApi;
       }
     }));
-
-      // this.store.dispatch(new GetProducts());
-
-      // if (cartInfo && cartInfo.totalAmount && cartInfo.totalAmount) {
-      //   this.totalAmount = cartInfo.totalAmount;
-      //   this.totalQuantity = cartInfo.totalQuantity;
-      //   this.payment = {amount: cartInfo.totalAmount}
-      // }
-      // if (cartInfo && cartInfo.itemList) {
-      //   this.productsInCart = cartInfo.itemList;
-      // }
 
   }
 
   ngOnInit() {
     if (this.sessionService.getPlacedOrderNumberFromStorage()) {
-      this.store.dispatch(new GetProcessedOrderFromStore(this.sessionService.getPlacedOrderNumberFromStorage()));
+      this.store.dispatch(new FetchOrderHistory(this.sessionService.getPlacedOrderNumberFromStorage()));
     } else {
       this.router.navigate(['/']);
     }
-    // this.cartService.getMethodsOfPayment()
-    //   .subscribe((res: any) => {
-    //       if (res.payments.length > 0) {
-    //         this.methodsOfPayment = res.payments;
-    //       }
-    //     },
-    //     err => console.error(err));
   }
 
   totalSum(price, selectedQuantity) {

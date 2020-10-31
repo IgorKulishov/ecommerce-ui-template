@@ -15,6 +15,7 @@
     "minify": "node minify.build.js",
     "ng": "./node_modules/@angular/cli/bin/ng",
     "start": "node server.js",
+    "start-proxy": "ng serve --port 4200 --host 0.0.0.0 --proxy-config proxy.config.json",
     "start-mock": "ng serve --environment=mock",
     "stats": "ng build --prod --stats-json &&  npx webpack-bundle-analyzer dist/stats.json",
     "static-serve": "npm run build-local-dev && cd dist && live-server --port=4200 --host=localhost --entry-file=/index.html",

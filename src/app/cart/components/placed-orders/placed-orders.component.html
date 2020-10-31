@@ -1,49 +1,64 @@
+<app-alert [size]="'lg'" [dismissible]="true" [type]="'warning'"></app-alert>
 <div class="container-fluid default-page-background">
-  <table class="cart__table cart-table">
-    <thead class="cart-table__head">
-    <tr class="cart-table__row">
-      <th class="cart-table__column cart-table__column--image">{{ 'checkout.image' | translate }}</th>
-      <th class="cart-table__column cart-table__column--product">{{ 'checkout.product' | translate}}</th>
-      <th class="cart-table__column cart-table__column--price">{{ 'checkout.price' | translate}}</th>
-      <th class="cart-table__column cart-table__column--quantity">{{ 'checkout.quantity' | translate}}</th>
-      <th class="cart-table__column cart-table__column--total">{{ 'checkout.total' | translate}}</th>
-      <th class="cart-table__column cart-table__column--remove"></th>
-    </tr>
+
+  <table class="table text-center">
+    <thead>
+      <tr>
+        <th>{{ 'checkout.image' | translate }}</th>
+        <th>{{ 'checkout.product' | translate}}</th>
+        <th>{{ 'checkout.price' | translate}}</th>
+        <th>{{ 'checkout.quantity' | translate}}</th>
+        <th>{{ 'checkout.total' | translate}}</th>
+        <th>Cancel</th>
+      </tr>
     </thead>
-    <tbody class="cart-table__body">
-    <tr *ngFor='let processedProducts of (processedOrdersDetails$ | async)?.itemList' class="cart-table__row">
-      <td class="cart-table__column cart-table__column--image">
-        <!--      <a [routerLink]="root.product(item.cartItem.product.id)" *ngIf="item.cartItem.product.images?.length"><img [src]="item.cartItem.product.images[0]" alt=""></a>-->
-        <img class="product-image" [src]="getProductUrl(processedProducts.product.productInfo)"
-             onerror="this.onerror=null;this.src='/assets/images/teapod.jpeg';" alt="image of {{processedProducts.product.name}}">
-      </td>
-      <td class="cart-table__column cart-table__column--product">
-        <div class="col-sm-12 col-md-12 product-description">
-          {{processedProducts.product.description}}
-        </div>
-        <!--      <a [routerLink]="root.product(item.cartItem.product.id)" class="cart-table__product-name">{{ item.cartItem.product.name }}</a>-->
-        <!--      <ul *ngIf="item.cartItem.options.length" class="cart-table__options">-->
-        <!--        <li *ngFor="let option of item.cartItem.options">{{ option.name }}: {{ option.value }}</li>-->
-        <!--      </ul>-->
-      </td>
-      <td class="cart-table__column cart-table__column--price" data-title="Price">
-        <div class="col-4 product-price">
-          $ {{processedProducts.product.price}}
-        </div>
-      </td>
-      <td class="cart-table__column cart-table__column--quantity" data-title="Quantity">
-        <div class="col-4 product-price">
-          {{processedProducts.quantity}} pcs
-        </div>
-      </td>
-      <td class="cart-table__column cart-table__column--total" data-title="Total">
-        <div class="col-4 product-price">
-          $ {{ totalSum(processedProducts.product.price, processedProducts.quantity) }}
-        </div>
-      </td>
-    </tr>
+    <tbody *ngFor='let placedOrdersDetails of (placedOrdersDetails$ | async)'>
+      <tr *ngFor='let placedOrderProductsDescription of placedOrdersDetails?.orderDetails.itemList'>
+        <td class="align-middle"><img class="" [src]="getProductUrl(placedOrderProductsDescription.product.productInfo)"
+          onerror="this.onerror=null;this.src='/assets/images/teapod.jpeg';" alt="image of {{placedOrderProductsDescription.product.name}}" style="max-width: 100px;"></td>
+        <td class="align-middle">{{placedOrderProductsDescription.product.description}}</td>
+        <td class="align-middle">$ {{placedOrderProductsDescription.product.price}}</td>
+        <td class="align-middle">{{placedOrderProductsDescription.quantity}} pcs</td>
+        <td class="align-middle">$ {{ totalSum(placedOrderProductsDescription.product.price, placedOrderProductsDescription.quantity) }}</td>
+        <td class="align-middle"><button class="btn btn-danger">Cancel</button></td>
+      </tr>
     </tbody>
   </table>
+
+    <!-- <div class="row">
+      <div class="col-2">{{ 'checkout.image' | translate }}</div>
+      <div class="col-2">{{ 'checkout.product' | translate}}</div>
+      <div class="col-2">{{ 'checkout.price' | translate}}</div>
+      <div class="col-2">{{ 'checkout.quantity' | translate}}</div>
+      <div class="col-2">{{ 'checkout.total' | translate}}</div>
+      <div class="col-2"></div>
+    </div>
+    <div class="row">
+
+    <div *ngFor='let placedOrdersDetails of (placedOrdersDetails$ | async)'>
+      <div *ngFor='let placedOrderProductsDescription of placedOrdersDetails?.orderDetails.itemList' class="row">
+        <div class="col-2 cart-table__column cart-table__column--image">
+          <img class="" [src]="getProductUrl(placedOrderProductsDescription.product.productInfo)"
+               onerror="this.onerror=null;this.src='/assets/images/teapod.jpeg';" alt="image of {{placedOrderProductsDescription.product.name}}">
+        </div>
+        <div class="col-2 product-description">
+          {{placedOrderProductsDescription.product.description}}
+        </div>
+        <div class="col-2 product-price" data-title="Price">
+          $ {{placedOrderProductsDescription.product.price}}
+        </div>
+        <div class="col-2 product-price" data-title="Quantity">
+          {{placedOrderProductsDescription.quantity}} pcs
+        </div>
+        <div class="col-2" data-title="Total">
+          <div class="col-4 product-price">
+            $ {{ totalSum(placedOrderProductsDescription.product.price, placedOrderProductsDescription.quantity) }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </div> -->
 
   <div class="row justify-content-end pt-5">
     <div class="col-12 col-md-7 col-lg-6 col-xl-5">

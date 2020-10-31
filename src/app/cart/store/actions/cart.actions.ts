@@ -8,11 +8,12 @@ export const SAVE_CURRENT_ORDER_IN_STORE = 'SAVE_CURRENT_ORDER_IN_STORE';
 export const GET_CURRENT_ORDER_FROM_STORE = 'GET_CURRENT_ORDER_FROM_STORE';
 export const GET_CURRENT_ORDER_FROM_STORE_SUCCESS = 'GET_CURRENT_ORDER_FROM_STORE_SUCCESS';
 export const CHECK_OUT = 'CHECK_OUT';
-export const GET_PROCESSED_ORDER_FROM_STORE = 'GET_PROCESSED_ORDER_FROM_STORE';
+export const FETCH_ORDERS_HISTORY = 'FETCH_ORDERS_HISTORY';
 export const CHECK_OUT_SUCCESS = 'CHECK_OUT_SUCCESS';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const SAVE_PLACED_ORDER = 'SAVE_PLACED_ORDER';
-export const SAVE_PLACED_ORDER_DETAILS = 'SAVE_PLACED_ORDER_DETAILS';
+export const SAVE_ORDER_IN_HISTORY_API = 'SAVE_ORDER_IN_HISTORY_API';
+export const STORE_PROCESSED_ORDER_IN_HISTORY_API_SUCCESS = 'STORE_PROCESSED_ORDER_IN_HISTORY_API_SUCCESS';
 
 export class AddToCart implements Action {
   readonly type = ADD_TO_CART;
@@ -37,8 +38,8 @@ export class GetCurrentOrderFromStore implements Action {
   constructor(public payload?: any) {
   }
 }
-export class GetProcessedOrderFromStore implements Action {
-  readonly type = GET_PROCESSED_ORDER_FROM_STORE;
+export class FetchOrderHistory implements Action {
+  readonly type = FETCH_ORDERS_HISTORY;
   constructor(public payload?: any) {
   }
 }
@@ -62,8 +63,11 @@ export class SavePlacedOrder implements Action {
   constructor(public payload: UserDetails ) {
   }
 }
-export class StorePlacedOrderDetails implements Action {
-  readonly type = SAVE_PLACED_ORDER_DETAILS;
+export class SaveOrderInHistoryApi implements Action {
+  readonly type = SAVE_ORDER_IN_HISTORY_API;
+}
+export class StoreProcessedOrderInHistoryApiSuccess implements Action {
+  readonly type = STORE_PROCESSED_ORDER_IN_HISTORY_API_SUCCESS;
   constructor(public payload: any ) {
   }
 }
