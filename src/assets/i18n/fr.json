@@ -75,5 +75,11 @@
   "cash on delivery": "Paiement à la livraison",
   "debit": "Débit",
   "credit": "Crédit",
-  "check": "Vérifier"
+  "check": "Vérifier",
+  
+  "placedOrder":{
+    "dateOfOrder": "Date de commande",
+    "cancel": "Annuler",
+    "pcs": "pcs"
+  }
 }

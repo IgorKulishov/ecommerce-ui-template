@@ -75,5 +75,11 @@
   "cash on delivery": "Наличные по факту доставки",
   "debit": "Дебетовая карта",
   "credit": "Кредитная карта",
-  "check": "Чек"
+  "check": "Чек",
+
+  "placedOrder":{
+    "dateOfOrder": "Дата заказа",
+    "cancel": "Отмена",
+    "pcs": "шт"
+  }
 }

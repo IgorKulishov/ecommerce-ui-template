@@ -9,8 +9,8 @@
         <th>{{ 'checkout.price' | translate}}</th>
         <th>{{ 'checkout.quantity' | translate}}</th>
         <th>{{ 'checkout.total' | translate}}</th>
-        <th>Date of order</th>
-        <th>Cancel</th>
+        <th>{{ 'placedOrder.dateOfOrder' | translate }}</th>
+        <th>{{ 'placedOrder.cancel' | translate }}</th>
       </tr>
     </thead>
     <tbody *ngFor='let placedOrdersDetails of (placedOrdersDetails$ | async)'>
@@ -19,10 +19,10 @@
           onerror="this.onerror=null;this.src='/assets/images/teapod.jpeg';" alt="image of {{placedOrderProductsDescription.product.name}}" style="max-width: 100px;"></td>
         <td class="align-middle">{{placedOrderProductsDescription.product.description}}</td>
         <td class="align-middle">$ {{placedOrderProductsDescription.product.price}}</td>
-        <td class="align-middle">{{placedOrderProductsDescription.quantity}} pcs</td>
+        <td class="align-middle">{{placedOrderProductsDescription.quantity}} {{'placedOrder.pcs' | translate}}</td>
         <td class="align-middle">$ {{ totalSum(placedOrderProductsDescription.product.price, placedOrderProductsDescription.quantity) }}</td>
         <td class="align-middle">01/11/2020</td>
-        <td class="align-middle"><button class="btn btn-danger">Cancel</button></td>
+        <td class="align-middle"><button class="btn btn-danger">{{ 'placedOrder.cancel' | translate }}</button></td>
       </tr>
     </tbody>
   </table>
