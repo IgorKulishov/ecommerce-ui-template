@@ -30,9 +30,9 @@
   transform:rotate(90deg);
   border: none;
 }
-.open-menu-button:hover {
-  //background-image: linear-gradient(to right bottom, #ffffff, rgba(52, 152, 219, 0.5));
-}
+// .open-menu-button:hover {
+//   background-image: linear-gradient(to right bottom, #ffffff, rgba(52, 152, 219, 0.5));
+// }
 /* mobile menu button open & close */
 @keyframes close-menu-button {
   from {transform:rotate(90deg);}
