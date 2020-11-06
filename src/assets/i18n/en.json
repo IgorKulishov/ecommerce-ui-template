@@ -75,5 +75,11 @@
   "cash on delivery": "Cash on delivery",
   "debit":"Debit",
   "credit": "Credit",
-  "check":"Check"
+  "check":"Check",
+
+  "placedOrder":{
+    "dateOfOrder": "Date of order",
+    "cancel": "Cancel",
+    "pcs": "pcs"
+  }
 }
