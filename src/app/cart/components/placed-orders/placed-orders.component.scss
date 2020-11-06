@@ -21,3 +21,36 @@
   margin-top: 3px;
   font-size: 1.5rem;
 }
+
+
+@media (max-width: 729px) {
+
+  .table-block table thead {
+    display: none;
+  }
+
+  .table-block table tr {
+    display: block;
+  }
+
+  .table-block table td:first-child {
+    display: flex;
+    justify-content: center;
+  }
+
+  .table-block table td img{
+    max-width: 170px !important;
+  }
+
+  .table-block table td {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .table-block table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    margin-right: 20px;
+  }
+
+}
