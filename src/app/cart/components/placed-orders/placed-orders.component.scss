@@ -21,9 +21,19 @@
   margin-top: 3px;
   font-size: 1.5rem;
 }
+#order-block-for-mobile{
+  display: none;
+}
 
 
 @media (max-width: 729px) {
+  #order-block-for-desktop{
+    display: none;
+  }
+
+  #order-block-for-mobile{
+    display: block;
+  }
 
   .table-block table thead {
     display: none;
