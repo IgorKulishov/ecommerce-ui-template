@@ -29,71 +29,24 @@
       </tbody>
 
       <tbody *ngFor='let placedOrdersDetails of (placedOrdersDetails$ | async); let i = index' id="order-block-for-mobile">
-        <div class="accordion" id="accordionBlock">
-          <div class="card">
-            <div class="card-header" [attr.id]="'heading' + i">
-              <h2 class="mb-0">
-                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" [attr.data-target]="'#collapse'+i" aria-expanded="false" [attr.aria-controls]="'collapse' + i">
-                  Here will be date of order
-                </button>
-              </h2>
-            </div>
-            <div [attr.id]="'collapse'+i" class="collapse" [attr.aria-labelledby]="'heading' + i" data-parent="#accordionBlock">
-              <div class="card-body">
-                <tr *ngFor='let placedOrderProductsDescription of placedOrdersDetails?.orderDetails.itemList'>
-                  <td class="align-middle"><img [src]="getProductUrl(placedOrderProductsDescription.product.productInfo)"
-                    onerror="this.onerror=null;this.src='/assets/images/teapod.jpeg';" alt="image of {{placedOrderProductsDescription.product.name}}" style="max-width: 100px;"></td>
-                  <td class="align-middle" [attr.data-label]="'checkout.product' | translate">{{placedOrderProductsDescription.product.description}}</td>
-                  <td class="align-middle" [attr.data-label]="'checkout.price' | translate">$ {{placedOrderProductsDescription.product.price}}</td>
-                  <td class="align-middle" [attr.data-label]="'checkout.quantity' | translate">{{placedOrderProductsDescription.quantity}} {{'placedOrder.pcs' | translate}}</td>
-                  <td class="align-middle" [attr.data-label]="'checkout.total' | translate">$ {{ totalSum(placedOrderProductsDescription.product.price, placedOrderProductsDescription.quantity) }}</td>
-                  <td class="align-middle" [attr.data-label]="'placedOrder.dateOfOrder' | translate">01/11/2020</td>
-                  <td class="align-middle" [attr.data-label]="'placedOrder.cancel' | translate"><button class="btn btn-danger">{{ 'placedOrder.cancel' | translate }}</button></td>
-                </tr>
-              </div>
-            </div>
-          </div>
-        </div>
+        <accordion [isAnimated]="true">
+          <accordion-group heading="Date of order">
+            <tr *ngFor='let placedOrderProductsDescription of placedOrdersDetails?.orderDetails.itemList'>
+              <td class="align-middle"><img [src]="getProductUrl(placedOrderProductsDescription.product.productInfo)"
+                onerror="this.onerror=null;this.src='/assets/images/teapod.jpeg';" alt="image of {{placedOrderProductsDescription.product.name}}" style="max-width: 100px;"></td>
+              <td class="align-middle" [attr.data-label]="'checkout.product' | translate">{{placedOrderProductsDescription.product.description}}</td>
+              <td class="align-middle" [attr.data-label]="'checkout.price' | translate">$ {{placedOrderProductsDescription.product.price}}</td>
+              <td class="align-middle" [attr.data-label]="'checkout.quantity' | translate">{{placedOrderProductsDescription.quantity}} {{'placedOrder.pcs' | translate}}</td>
+              <td class="align-middle" [attr.data-label]="'checkout.total' | translate">$ {{ totalSum(placedOrderProductsDescription.product.price, placedOrderProductsDescription.quantity) }}</td>
+              <td class="align-middle" [attr.data-label]="'placedOrder.dateOfOrder' | translate">01/11/2020</td>
+              <td class="align-middle" [attr.data-label]="'placedOrder.cancel' | translate"><button class="btn btn-danger">{{ 'placedOrder.cancel' | translate }}</button></td>
+            </tr>
+          </accordion-group>
+        </accordion>
       </tbody>      
 
     </table>
-  </div>
-
-<strong>CONTROL COLLAPSING BLOCK FOR ACCORDION</strong>
-  <div class="accordion" id="accordionExample">
-    <div class="card">
-      <div class="card-header" id="headingOne">
-        <h2 class="mb-0">
-          <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            Collapsible Group Item #1
-          </button>
-        </h2>
-      </div>
-  
-      
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-        <div class="card-body">
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header" id="headingTwo">
-        <h2 class="mb-0">
-          <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            Collapsible Group Item #2
-          </button>
-        </h2>
-      </div>
-      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-        <div class="card-body">
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- END OF CONTROL COLLAPSING BLOCK -->
+  </div>  
 
   <div class="row justify-content-end pt-5">
     <div class="col-12 col-md-7 col-lg-6 col-xl-5">
