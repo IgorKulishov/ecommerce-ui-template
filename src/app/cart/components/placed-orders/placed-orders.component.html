@@ -15,25 +15,25 @@
         </tr>
       </thead>
 
-      <tbody *ngFor='let placedOrdersDetails of (placedOrdersDetails$ | async); let i = index' id="order-block-for-desktop">
+      <tbody *ngFor='let placedOrdersDetails of (placedOrdersDetails$ | async)' id="order-block-for-desktop">
         <tr *ngFor='let placedOrderProductsDescription of placedOrdersDetails?.orderDetails.itemList'>
           <td class="align-middle"><img [src]="getProductUrl(placedOrderProductsDescription.product.productInfo)"
-            onerror="this.onerror=null;this.src='/assets/images/teapod.jpeg';" alt="image of {{placedOrderProductsDescription.product.name}}" style="max-width: 100px;"></td>
-          <td class="align-middle" [attr.data-label]="'checkout.product' | translate">{{placedOrderProductsDescription.product.description}}</td>
-          <td class="align-middle" [attr.data-label]="'checkout.price' | translate">$ {{placedOrderProductsDescription.product.price}}</td>
-          <td class="align-middle" [attr.data-label]="'checkout.quantity' | translate">{{placedOrderProductsDescription.quantity}} {{'placedOrder.pcs' | translate}}</td>
-          <td class="align-middle" [attr.data-label]="'checkout.total' | translate">$ {{ totalSum(placedOrderProductsDescription.product.price, placedOrderProductsDescription.quantity) }}</td>
-          <td class="align-middle" [attr.data-label]="'placedOrder.dateOfOrder' | translate">01/11/2020</td>
-          <td class="align-middle" [attr.data-label]="'placedOrder.cancel' | translate"><button class="btn btn-danger">{{ 'placedOrder.cancel' | translate }}</button></td>
+            onerror="this.onerror=null;this.src='/assets/images/teapod.jpeg';" alt="image of {{placedOrderProductsDescription.product.name}}"></td>
+          <td class="align-middle">{{placedOrderProductsDescription.product.description}}</td>
+          <td class="align-middle">$ {{placedOrderProductsDescription.product.price}}</td>
+          <td class="align-middle">{{placedOrderProductsDescription.quantity}} {{'placedOrder.pcs' | translate}}</td>
+          <td class="align-middle">$ {{ totalSum(placedOrderProductsDescription.product.price, placedOrderProductsDescription.quantity) }}</td>
+          <td class="align-middle">01/11/2020</td>
+          <td class="align-middle"><button class="btn btn-danger">{{ 'placedOrder.cancel' | translate }}</button></td>
         </tr>
       </tbody>
 
-      <tbody *ngFor='let placedOrdersDetails of (placedOrdersDetails$ | async); let i = index' id="order-block-for-mobile">
+      <tbody *ngFor='let placedOrdersDetails of (placedOrdersDetails$ | async)' id="order-block-for-mobile">
         <accordion [isAnimated]="true">
           <accordion-group heading="Date of order">
             <tr *ngFor='let placedOrderProductsDescription of placedOrdersDetails?.orderDetails.itemList'>
               <td class="align-middle"><img [src]="getProductUrl(placedOrderProductsDescription.product.productInfo)"
-                onerror="this.onerror=null;this.src='/assets/images/teapod.jpeg';" alt="image of {{placedOrderProductsDescription.product.name}}" style="max-width: 100px;"></td>
+                onerror="this.onerror=null;this.src='/assets/images/teapod.jpeg';" alt="image of {{placedOrderProductsDescription.product.name}}"></td>
               <td class="align-middle" [attr.data-label]="'checkout.product' | translate">{{placedOrderProductsDescription.product.description}}</td>
               <td class="align-middle" [attr.data-label]="'checkout.price' | translate">$ {{placedOrderProductsDescription.product.price}}</td>
               <td class="align-middle" [attr.data-label]="'checkout.quantity' | translate">{{placedOrderProductsDescription.quantity}} {{'placedOrder.pcs' | translate}}</td>

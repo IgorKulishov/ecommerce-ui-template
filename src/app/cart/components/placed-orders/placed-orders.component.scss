@@ -24,6 +24,9 @@
 #order-block-for-mobile{
   display: none;
 }
+#order-block-for-desktop td img{
+  width: 100px;
+}
 
 
 @media (max-width: 729px) {
@@ -48,8 +51,8 @@
     justify-content: center;
   }
 
-  .table-block table td img{
-    max-width: 170px !important;
+  #order-block-for-mobile td img{
+    width: 170px;
   }
 
   .table-block table td {

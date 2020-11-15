@@ -15,12 +15,12 @@
   </div>
   <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-or-register-form" [ngClass]="{'loading-form': loading}">
     <div class="form-group">
-      <label for="userName"></label>
-      <input type="email" formControlName="userName" class="form-control custom-login" id="userName" placeholder="user name">
+      <label for="userName">User Name</label>
+      <input type="email" formControlName="userName" class="form-control custom-login" id="userName" placeholder="Enter user name">
     </div>
     <div class="form-group">
-      <label for="password"></label>
-      <input type="password" formControlName="password" class="form-control custom-login" id="password" placeholder="password">
+      <label for="password">Password</label>
+      <input type="password" formControlName="password" class="form-control custom-login" id="password" placeholder="Enter password">
     </div>
     <div class="btn-box">
       <button *ngIf="!loading" [disabled]="!loginForm.value.password || !loginForm.value.userName || loginForm.status!=='VALID'" type="submit" class="btn btn-primary login-btn">{{'loginProcess.submitButton' | translate}}</button>
