@@ -83,7 +83,7 @@ $base-lightest-grey-03: rgba(211,211,211,0.3);
   color: black;
 }
 
-.custom-menu-dropdown {}
+// .custom-menu-dropdown {}
 .language-selector {
   margin-left: 10px;
   width: 30%;
@@ -288,23 +288,23 @@ app-root + .loading {
   }
 }
 
-@media only screen and (max-width: 975px) {
-  .login-or-register-form {
-    animation-name: moveInBottom;
-    animation-duration: 1s;
-    animation-timing-function: ease-out;
-    position: relative;
-    top: 15%;
-    padding: 0 20% 0;
-  }
+// @media only screen and (max-width: 975px) {
+//   .login-or-register-form {
+//     animation-name: moveInBottom;
+//     animation-duration: 1s;
+//     animation-timing-function: ease-out;
+//     position: relative;
+//     top: 15%;
+//     padding: 0 20% 0;
+//   }
 
-  .register-or-login-main {
-    position: relative;
-    top: 10vh;
-    padding: 0 21% 0;
+//   .register-or-login-main {
+//     position: relative;
+//     top: 10vh;
+//     padding: 0 21% 0;
 
-  }
-}
+//   }
+// }
 
 .register-or-login-selected {
   letter-spacing: 10px;

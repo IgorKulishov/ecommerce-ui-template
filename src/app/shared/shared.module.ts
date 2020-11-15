@@ -8,6 +8,8 @@ import { RouterModule } from '@angular/router';
 // modules (third-party)
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // directives
 import { ClickDirective } from './directives/click.directive';
@@ -69,6 +71,8 @@ import { CurrencyFormatPipe } from './pipes/currency-format.pipe';
         ReactiveFormsModule,
         // modules (third-party)
         CarouselModule,
+        BrowserAnimationsModule,
+        AccordionModule.forRoot(),
         ModalModule.forRoot()
     ],
     exports: [
@@ -93,6 +97,7 @@ import { CurrencyFormatPipe } from './pipes/currency-format.pipe';
         ProductComponent,
         QuickviewComponent,
         RatingComponent,
+        AccordionModule,
         // pipes
         CurrencyFormatPipe
     ]

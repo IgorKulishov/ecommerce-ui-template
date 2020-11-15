@@ -16,9 +16,7 @@ import { SharedModule } from './shared/shared.module'; // from purchased templat
 
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { AccordionModule } from 'ngx-bootstrap/accordion';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -45,10 +43,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     LayoutModule,
     CartModule,
     SharedModule,
-    BrowserAnimationsModule,
+    
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
-    AccordionModule.forRoot(),
+    
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

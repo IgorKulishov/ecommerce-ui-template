@@ -21,3 +21,49 @@
   margin-top: 3px;
   font-size: 1.5rem;
 }
+#order-block-for-mobile{
+  display: none;
+}
+#order-block-for-desktop td img{
+  width: 100px;
+}
+
+
+@media (max-width: 729px) {
+  #order-block-for-desktop{
+    display: none;
+  }
+
+  #order-block-for-mobile{
+    display: block;
+  }
+
+  .table-block table thead {
+    display: none;
+  }
+
+  .table-block table tr {
+    display: block;
+  }
+
+  .table-block table td:first-child {
+    display: flex;
+    justify-content: center;
+  }
+
+  #order-block-for-mobile td img{
+    width: 170px;
+  }
+
+  .table-block table td {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .table-block table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    margin-right: 20px;
+  }
+
+}
