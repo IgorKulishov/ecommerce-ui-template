@@ -23,7 +23,7 @@
           <td class="align-middle">$ {{placedOrderProductsDescription.product.price}}</td>
           <td class="align-middle">{{placedOrderProductsDescription.quantity}} {{'placedOrder.pcs' | translate}}</td>
           <td class="align-middle">$ {{ totalSum(placedOrderProductsDescription.product.price, placedOrderProductsDescription.quantity) }}</td>
-          <td class="align-middle">01/11/2020</td>
+          <td class="align-middle">{{placedOrdersDetails?.updatedAt | date}}</td>
           <td class="align-middle"><button class="btn btn-danger">{{ 'placedOrder.cancel' | translate }}</button></td>
         </tr>
       </tbody>
@@ -43,10 +43,10 @@
             </tr>
           </accordion-group>
         </accordion>
-      </tbody>      
+      </tbody>
 
     </table>
-  </div>  
+  </div>
 
   <div class="row justify-content-end pt-5">
     <div class="col-12 col-md-7 col-lg-6 col-xl-5">
