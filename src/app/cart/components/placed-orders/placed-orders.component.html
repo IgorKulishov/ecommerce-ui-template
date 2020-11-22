@@ -30,7 +30,7 @@
 
       <tbody *ngFor='let placedOrdersDetails of (placedOrdersDetails$ | async)' id="order-block-for-mobile">
         <accordion [isAnimated]="true">
-          <accordion-group heading="Date of order">
+          <accordion-group heading="{{placedOrdersDetails?.updatedAt | date}}">
             <tr *ngFor='let placedOrderProductsDescription of placedOrdersDetails?.orderDetails.itemList'>
               <td class="align-middle"><img [src]="getProductUrl(placedOrderProductsDescription.product.productInfo)"
                 onerror="this.onerror=null;this.src='/assets/images/teapod.jpeg';" alt="image of {{placedOrderProductsDescription.product.name}}"></td>
@@ -38,7 +38,7 @@
               <td class="align-middle" [attr.data-label]="'checkout.price' | translate">$ {{placedOrderProductsDescription.product.price}}</td>
               <td class="align-middle" [attr.data-label]="'checkout.quantity' | translate">{{placedOrderProductsDescription.quantity}} {{'placedOrder.pcs' | translate}}</td>
               <td class="align-middle" [attr.data-label]="'checkout.total' | translate">$ {{ totalSum(placedOrderProductsDescription.product.price, placedOrderProductsDescription.quantity) }}</td>
-              <td class="align-middle" [attr.data-label]="'placedOrder.dateOfOrder' | translate">01/11/2020</td>
+              <td class="align-middle" [attr.data-label]="'placedOrder.dateOfOrder' | translate">{{placedOrdersDetails?.updatedAt | date}}</td>
               <td class="align-middle" [attr.data-label]="'placedOrder.cancel' | translate"><button class="btn btn-danger">{{ 'placedOrder.cancel' | translate }}</button></td>
             </tr>
           </accordion-group>
