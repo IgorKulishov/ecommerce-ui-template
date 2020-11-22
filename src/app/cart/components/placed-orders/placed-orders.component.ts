@@ -3,7 +3,7 @@ import {Component, OnInit, Inject, ViewChild} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {FetchOrderHistory } from '../../store/actions/cart.actions';
+import {FetchOrderHistory, DeleteOrderFromHistoryApi } from '../../store/actions/cart.actions';
 import { AppStates } from '../../store/states/cart.states';
 import { PaymentDescription } from '../../models/cart.model';
 import { SessionService } from '../../../core/services/session.service';
@@ -47,11 +47,7 @@ export class PlacedOrdersComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.sessionService.getPlacedOrderNumberFromStorage()) {
-      this.store.dispatch(new FetchOrderHistory(this.sessionService.getPlacedOrderNumberFromStorage()));
-    } else {
-      this.router.navigate(['/']);
-    }
+    this.store.dispatch(new FetchOrderHistory());
   }
 
   totalSum(price, selectedQuantity) {
@@ -66,6 +62,10 @@ export class PlacedOrdersComponent implements OnInit {
     } else if (product && product.imageList.length === 0) {
       return  '/assets/images/teapod.jpeg';
     }
+  }
+
+  deleteOrderFromHistory( orderId: string ) {
+    this.store.dispatch(new DeleteOrderFromHistoryApi(orderId));
   }
 
 }

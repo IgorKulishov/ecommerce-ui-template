@@ -101,21 +101,6 @@ export class CartService {
       );
     }
   }
-  // TODO: move to separate AWS module with services
-  fetchOrdersHistory(processedOrderToken: any): Observable<any> {
-    const token = this.sessionService.getTokenFromStorage();
-    const userid = this.sessionService.getUserIdFromStorage();
-    if (token && processedOrderToken && processedOrderToken.payload) {
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-      });
-      const options = {
-        headers: headers
-      };
-      return this.http.get(environment.ORDER_HISTORY_API + `/orders/userid/${userid}`, options );
-    }
-  }
   checkoutShoppingCart(paymentInfo: any) {
     // order_token is not used yet
     const order_token = null;

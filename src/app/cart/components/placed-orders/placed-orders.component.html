@@ -23,8 +23,8 @@
           <td class="align-middle">$ {{placedOrderProductsDescription.product.price}}</td>
           <td class="align-middle">{{placedOrderProductsDescription.quantity}} {{'placedOrder.pcs' | translate}}</td>
           <td class="align-middle">$ {{ totalSum(placedOrderProductsDescription.product.price, placedOrderProductsDescription.quantity) }}</td>
-          <td class="align-middle">01/11/2020</td>
-          <td class="align-middle"><button class="btn btn-danger">{{ 'placedOrder.cancel' | translate }}</button></td>
+          <td class="align-middle">{{placedOrdersDetails?.updatedAt | date}}</td>
+          <td class="align-middle"><button class="btn btn-danger" (click)="deleteOrderFromHistory(placedOrdersDetails?.id)">{{ 'placedOrder.cancel' | translate }}</button></td>
         </tr>
       </tbody>
 
@@ -38,15 +38,15 @@
               <td class="align-middle" [attr.data-label]="'checkout.price' | translate">$ {{placedOrderProductsDescription.product.price}}</td>
               <td class="align-middle" [attr.data-label]="'checkout.quantity' | translate">{{placedOrderProductsDescription.quantity}} {{'placedOrder.pcs' | translate}}</td>
               <td class="align-middle" [attr.data-label]="'checkout.total' | translate">$ {{ totalSum(placedOrderProductsDescription.product.price, placedOrderProductsDescription.quantity) }}</td>
-              <td class="align-middle" [attr.data-label]="'placedOrder.dateOfOrder' | translate">01/11/2020</td>
-              <td class="align-middle" [attr.data-label]="'placedOrder.cancel' | translate"><button class="btn btn-danger">{{ 'placedOrder.cancel' | translate }}</button></td>
+              <td class="align-middle" [attr.data-label]="'placedOrder.dateOfOrder' | translate">{{placedOrdersDetails?.updatedAt | date}}</td>
+              <td class="align-middle" [attr.data-label]="'placedOrder.cancel' | translate"><button class="btn btn-danger" (click)="deleteOrderFromHistory()">{{ 'placedOrder.cancel' | translate }}</button></td>
             </tr>
           </accordion-group>
         </accordion>
-      </tbody>      
+      </tbody>
 
     </table>
-  </div>  
+  </div>
 
   <div class="row justify-content-end pt-5">
     <div class="col-12 col-md-7 col-lg-6 col-xl-5">
