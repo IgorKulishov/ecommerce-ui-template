@@ -81,5 +81,10 @@
     "dateOfOrder": "Date of order",
     "cancel": "Cancel",
     "pcs": "pcs"
+  },
+  "cancelOrderModal": {
+    "modalBodyText": "Are you sure you want to cancel your order?",
+    "close": "Close",
+    "cancelOrder": "Cancel order"
   }
 }

@@ -24,13 +24,28 @@
           <td class="align-middle">{{placedOrderProductsDescription.quantity}} {{'placedOrder.pcs' | translate}}</td>
           <td class="align-middle">$ {{ totalSum(placedOrderProductsDescription.product.price, placedOrderProductsDescription.quantity) }}</td>
           <td class="align-middle">{{placedOrdersDetails?.updatedAt | date}}</td>
-          <td class="align-middle"><button class="btn btn-danger" (click)="deleteOrderFromHistory(placedOrdersDetails?.id)">{{ 'placedOrder.cancel' | translate }}</button></td>
+          <td class="align-middle"><button type="button" class="btn btn-danger" (click)="openModal(orderCancel)">{{ 'placedOrder.cancel' | translate }}</button>          
+          </td>
+          <!-- Modal window to approve Order cancel -->
+          <ng-template #orderCancel>
+            <div class="modal-body">
+              <div class="text-center modal-body-text">{{'cancelOrderModal.modalBodyText' | translate}}</div><br>
+              <div class="text-right">
+                <button type="button" class="btn btn-success" aria-label="Close" (click)="modalRef.hide()">
+                  <span aria-hidden="true">{{'cancelOrderModal.close' | translate}}</span>
+                </button>
+                <button type="button" class="btn btn-danger" (click)="deleteOrderFromHistory(placedOrdersDetails?.id)">{{'cancelOrderModal.cancelOrder' | translate}}</button>
+              </div>
+            </div>
+          </ng-template>
+          <!-- modal window -->
         </tr>
+
       </tbody>
 
       <tbody *ngFor='let placedOrdersDetails of (placedOrdersDetails$ | async)' id="order-block-for-mobile">
         <accordion [isAnimated]="true">
-          <accordion-group heading="Date of order">
+          <accordion-group heading="{{placedOrdersDetails?.updatedAt | date}}">
             <tr *ngFor='let placedOrderProductsDescription of placedOrdersDetails?.orderDetails.itemList'>
               <td class="align-middle"><img [src]="getProductUrl(placedOrderProductsDescription.product.productInfo)"
                 onerror="this.onerror=null;this.src='/assets/images/teapod.jpeg';" alt="image of {{placedOrderProductsDescription.product.name}}"></td>
@@ -39,7 +54,20 @@
               <td class="align-middle" [attr.data-label]="'checkout.quantity' | translate">{{placedOrderProductsDescription.quantity}} {{'placedOrder.pcs' | translate}}</td>
               <td class="align-middle" [attr.data-label]="'checkout.total' | translate">$ {{ totalSum(placedOrderProductsDescription.product.price, placedOrderProductsDescription.quantity) }}</td>
               <td class="align-middle" [attr.data-label]="'placedOrder.dateOfOrder' | translate">{{placedOrdersDetails?.updatedAt | date}}</td>
-              <td class="align-middle" [attr.data-label]="'placedOrder.cancel' | translate"><button class="btn btn-danger" (click)="deleteOrderFromHistory()">{{ 'placedOrder.cancel' | translate }}</button></td>
+              <td class="align-middle" [attr.data-label]="'placedOrder.cancel' | translate"><button type="button" class="btn btn-danger" (click)="openModal(orderCancel)">{{ 'placedOrder.cancel' | translate }}</button></td>
+              <!-- Modal window to approve Order cancel -->
+              <ng-template #orderCancel>
+                <div class="modal-body">
+                  <div class="text-center modal-body-text">{{'cancelOrderModal.modalBodyText' | translate}}</div><br>
+                  <div class="text-right">
+                    <button type="button" class="btn btn-success" aria-label="Close" (click)="modalRef.hide()">
+                      <span aria-hidden="true">{{'cancelOrderModal.close' | translate}}</span>
+                    </button>
+                    <button type="button" class="btn btn-danger" (click)="deleteOrderFromHistory(placedOrdersDetails?.id)">{{'cancelOrderModal.cancelOrder' | translate}}</button>
+                  </div>
+                </div>
+              </ng-template>
+              <!-- modal window -->
             </tr>
           </accordion-group>
         </accordion>
