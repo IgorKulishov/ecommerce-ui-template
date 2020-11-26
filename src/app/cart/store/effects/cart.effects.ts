@@ -90,9 +90,6 @@ export class CartEffects {
   @Effect() getSubmittedOrdersFromHistoryApi$: any = this.getOrdersFromtStoreAction$.pipe(
     ofType(FETCH_ORDERS_HISTORY),
     switchMap(() => this.ordersHistoryService.fetchOrdersHistory().pipe(
-      filter((resp: any) => {
-        return Array.isArray(resp) && resp.length > 0;
-      }),
       map((data: any) => {
         return new StoreProcessedOrderInHistoryApiSuccess(data);
       }),

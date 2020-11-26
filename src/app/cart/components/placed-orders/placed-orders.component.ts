@@ -1,4 +1,4 @@
-import {map} from 'rxjs/operators';
+import {map, filter} from 'rxjs/operators';
 import {Component, OnInit, Inject, ViewChild, TemplateRef} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
@@ -39,10 +39,10 @@ export class PlacedOrdersComponent implements OnInit {
     // app store for total amount
     this.placedOrdersDetails$ = this.store.select( ( store: any ) => {
       return store['cartReducer'];
-    }).pipe(map((res: any) => {
-      if (res && res.orderStoredInHistoryApi) {
+    }).pipe(
+      filter((res: any) => res && res.orderStoredInHistoryApi),
+      map((res: any) => {
         return res.orderStoredInHistoryApi;
-      }
     }));
 
   }
