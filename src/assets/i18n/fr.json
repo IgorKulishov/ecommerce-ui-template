@@ -81,5 +81,11 @@
     "dateOfOrder": "Date de commande",
     "cancel": "Annuler",
     "pcs": "pcs"
+  },
+
+  "cancelOrderModal": {
+    "modalBodyText": "Êtes-vous sûr de vouloir supprimer la commande?",
+    "close": "Fermer",
+    "cancelOrder": "Annuler la commande"
   }
 }

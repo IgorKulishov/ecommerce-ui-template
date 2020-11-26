@@ -1,14 +1,14 @@
-import {map} from 'rxjs/operators';
-import {Component, OnInit, Inject, ViewChild} from '@angular/core';
+import {map, filter} from 'rxjs/operators';
+import {Component, OnInit, Inject, ViewChild, TemplateRef} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {FetchOrderHistory } from '../../store/actions/cart.actions';
+import {FetchOrderHistory, DeleteOrderFromHistoryApi } from '../../store/actions/cart.actions';
 import { AppStates } from '../../store/states/cart.states';
 import { PaymentDescription } from '../../models/cart.model';
 import { SessionService } from '../../../core/services/session.service';
 import { CartService } from '../../../core/services/cart.service';
-import { BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
 import {Observable} from 'rxjs';
 @Component({
   templateUrl: './placed-orders.component.html',
@@ -26,6 +26,7 @@ export class PlacedOrdersComponent implements OnInit {
   placedOrdersDetails$: Observable<any>;
   @ViewChild('confirmation_template', {'static': false}) confirmation_template: ModalDirective;
   @ViewChild('remove_item_confirmation_template', {'static': false}) remove_item_confirmation_template: ModalDirective;
+  modalRef: BsModalRef;
 
   constructor(private store: Store<AppStates>,
               private sessionService: SessionService,
@@ -38,20 +39,16 @@ export class PlacedOrdersComponent implements OnInit {
     // app store for total amount
     this.placedOrdersDetails$ = this.store.select( ( store: any ) => {
       return store['cartReducer'];
-    }).pipe(map((res: any) => {
-      if (res && res.orderStoredInHistoryApi) {
+    }).pipe(
+      filter((res: any) => res && res.orderStoredInHistoryApi),
+      map((res: any) => {
         return res.orderStoredInHistoryApi;
-      }
     }));
 
   }
 
   ngOnInit() {
-    if (this.sessionService.getPlacedOrderNumberFromStorage()) {
-      this.store.dispatch(new FetchOrderHistory(this.sessionService.getPlacedOrderNumberFromStorage()));
-    } else {
-      this.router.navigate(['/']);
-    }
+    this.store.dispatch(new FetchOrderHistory());
   }
 
   totalSum(price, selectedQuantity) {
@@ -66,6 +63,15 @@ export class PlacedOrdersComponent implements OnInit {
     } else if (product && product.imageList.length === 0) {
       return  '/assets/images/teapod.jpeg';
     }
+  }
+
+  deleteOrderFromHistory( orderId: string ) {
+    this.store.dispatch(new DeleteOrderFromHistoryApi(orderId));
+    this.modalService.hide();
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 
 }

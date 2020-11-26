@@ -81,5 +81,11 @@
     "dateOfOrder": "Дата заказа",
     "cancel": "Отмена",
     "pcs": "шт"
+  },
+
+  "cancelOrderModal": {
+    "modalBodyText": "Вы уверены, что ходите отменить заказ?",
+    "close": "Закрыть",
+    "cancelOrder": "Отменить заказ"
   }
 }

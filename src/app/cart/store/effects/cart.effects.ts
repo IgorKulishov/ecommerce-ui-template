@@ -9,11 +9,11 @@ import { SessionService } from '../../../core/services/session.service';
 import {
   ADD_TO_CART, ADD_TO_CART_SUCCESS,
   GET_CURRENT_ORDER_FROM_STORE,
-  CHECK_OUT, REMOVE_FROM_CART, SAVE_PLACED_ORDER,
+  CHECK_OUT, REMOVE_FROM_CART, SAVE_PLACED_ORDER, DELETE_ORDER_FROM_HISTORY_API,
   FETCH_ORDERS_HISTORY, SAVE_ORDER_IN_HISTORY_API,
   AddToCart, AddToCartSuccess, StoreCurrentOrder,
   GetCurrentOrderFromStoreSuccess, CheckOutSuccess, SavePlacedOrder,
-  SaveOrderInHistoryApi, StoreProcessedOrderInHistoryApiSuccess
+  SaveOrderInHistoryApi, StoreProcessedOrderInHistoryApiSuccess, FetchOrderHistory
 } from '../actions/cart.actions';
 // TODO: need to add order models
 
@@ -32,7 +32,8 @@ export class CartEffects {
               private getProcessedOrdersFromtStoreAction$: Actions,
               private removeFromCartAction$: Actions,
               private savePlacedOrderActions$: Actions,
-              private saveOrdersInHistoryApi$StoreAction$: Actions,
+              private saveOrderInHistoryApiAction$: Actions,
+              private deleteOrderInHistoryApiAction$: Actions,
               private productService: ProductsService,
               private store: Store<AppStates>,
               private cartService: CartService,
@@ -86,12 +87,9 @@ export class CartEffects {
     );
 
   // get order from store
-  @Effect() getProcessedOrdersFromtStore$: any = this.getOrdersFromtStoreAction$.pipe(
+  @Effect() getSubmittedOrdersFromHistoryApi$: any = this.getOrdersFromtStoreAction$.pipe(
     ofType(FETCH_ORDERS_HISTORY),
-    switchMap((processedOrderToken: string) => this.cartService.fetchOrdersHistory(processedOrderToken).pipe(
-      filter((resp: any) => {
-        return Array.isArray(resp) && resp.length > 0;
-      }),
+    switchMap(() => this.ordersHistoryService.fetchOrdersHistory().pipe(
       map((data: any) => {
         return new StoreProcessedOrderInHistoryApiSuccess(data);
       }),
@@ -102,7 +100,7 @@ export class CartEffects {
     ))
   );
 
-  @Effect() saveProcessedOrdersInHistoryApi$: any = this.saveOrdersInHistoryApi$StoreAction$.pipe(
+  @Effect() saveSubmittedOrderToHistoryApi$: any = this.saveOrderInHistoryApiAction$.pipe(
     ofType(SAVE_ORDER_IN_HISTORY_API),
     switchMap(() => this.ordersHistoryService.saveOrder().pipe(
       map((data: any) => {
@@ -111,6 +109,19 @@ export class CartEffects {
       catchError(err => {
         console.log(err);
         return of(new Error('error'));
+      })
+    ))
+  );
+
+  @Effect() deleteSubmittedOrderFromApi: any = this.deleteOrderInHistoryApiAction$.pipe(
+    ofType(DELETE_ORDER_FROM_HISTORY_API),
+    switchMap((deleteOrderObj: {type: string; payload: any}) => this.ordersHistoryService.deleteOrder(deleteOrderObj.payload).pipe(
+      map((data: any) => {
+        return new FetchOrderHistory();
+      }),
+      catchError(err => {
+        console.log(`Was not able to delete order, error: ${err}`);
+        return of( new FetchOrderHistory());
       })
     ))
   );

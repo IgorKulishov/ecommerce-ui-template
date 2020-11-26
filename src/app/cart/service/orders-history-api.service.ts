@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { catchError, map, switchMap, take } from 'rxjs/operators';
 import { SessionService } from '../../core/services/session.service';
-import { of, combineLatest } from 'rxjs';
+import {of, combineLatest, Observable} from 'rxjs';
 import { Store } from '@ngrx/store';
 import { UserDetails, Role } from '../../auth/store/models/login.model';
 import { loginUserDetailsMapper } from '../../auth/store/select/auth.selectors';
@@ -17,7 +17,20 @@ export class OrdersHistoryApiService {
       private sessionService: SessionService,
       private store: Store
   ) {}
-
+  fetchOrdersHistory(): Observable<any> {
+    const token = this.sessionService.getTokenFromStorage();
+    const userid = this.sessionService.getUserIdFromStorage();
+    if (!!token) {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      });
+      const options = {
+        headers: headers
+      };
+      return this.http.get(environment.ORDER_HISTORY_API + `/orders/userid/${userid}`, options );
+    }
+  }
   saveOrder() {
     const token = this.sessionService.getTokenFromStorage();
       const headers = new HttpHeaders({
@@ -46,7 +59,7 @@ export class OrdersHistoryApiService {
               return this.http.post(
                 environment.ORDER_HISTORY_API + '/orders',
                 {
-                  userid: JSON.stringify(storeDate.id),
+                  userid: storeDate.id,
                   orderid: orderInCart.orderNumber,
                   userRole: userRole,
                   orderDetails: JSON.stringify(orderInCart)
@@ -55,7 +68,18 @@ export class OrdersHistoryApiService {
             })
       );
   }
-  // getOrder() {
-  //
-  // }
+  deleteOrder(orderId: string): Observable<any> {
+    const token = this.sessionService.getTokenFromStorage();
+    const userid = this.sessionService.getUserIdFromStorage();
+    if (!!token) {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      });
+      const options = {
+        headers: headers
+      };
+      return this.http.delete(environment.ORDER_HISTORY_API + `/orders/${orderId}`, options );
+    }
+  }
 }
