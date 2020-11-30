@@ -62,6 +62,9 @@
           <div class="collapse navbar-collapse" id="user-account" [collapse]="isCollapsedUserAccount" [isAnimated]="true">
             <ul id="collapse-user-account" class="navbar-nav mr-auto navbar-custom custom-menu-dropdown">
               <li *ngIf="user" class="nav-item">
+                <a  [routerLink]="['/placed-orders']" class="nav-link"><span class="d-flex p-2 user-greeting">{{ 'checkout.placedOrders' | translate }}</span></a>
+              </li>
+              <li *ngIf="user" class="nav-item">
                 <span class="d-flex p-2 user-greeting">{{ user?.userName }}</span>
               </li>
               <li class="language-collapse">
