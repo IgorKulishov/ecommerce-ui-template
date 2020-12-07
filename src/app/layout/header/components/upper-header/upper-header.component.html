@@ -11,4 +11,15 @@
   <li class="nav-item">
     <a class="nav-link" href="#">{{ 'upperHeader.contacts' | translate }}</a>
   </li>
+  <li class="nav-item language-collapse mobile-hide-item">
+    {{ 'header.language' | translate }}
+    <select class="language-selector" id="languageSelectorMobile"
+            [ngModel]="selectedLanguage"
+            (ngModelChange)="onLanguageSelect($event)">
+      <option *ngFor="let language of languages">{{language}}</option>
+    </select>
+  </li>
+  <li class="nav-item mobile-hide-item">
+    <a href="/logout" class="nav-link">{{ 'header.logout' | translate }}</a>
+  </li>
 </ul>
