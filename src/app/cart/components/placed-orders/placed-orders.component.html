@@ -15,6 +15,7 @@
         </tr>
       </thead>
 
+      <!-- fullscreen view -->
       <tbody *ngFor='let placedOrdersDetails of (placedOrdersDetails$ | async)' id="order-block-for-desktop">
         <tr *ngFor='let placedOrderProductsDescription of placedOrdersDetails?.orderDetails.itemList'>
           <td class="align-middle"><img [src]="getProductUrl(placedOrderProductsDescription.product.productInfo)"
@@ -43,9 +44,16 @@
 
       </tbody>
 
-      <tbody *ngFor='let placedOrdersDetails of (placedOrdersDetails$ | async)' id="order-block-for-mobile">
+      <!-- mobile view -->
+      <tbody *ngFor='let placedOrdersDetails of (placedOrdersDetails$ | async); let i = index' id="order-block-for-mobile">
         <accordion [isAnimated]="true">
-          <accordion-group heading="{{placedOrdersDetails?.updatedAt | date}}">
+          <accordion-group>
+            <button id="modalBtn" class="btn btn-link" accordion-heading type="button" (click)='changeChevronDirection(i)'>
+              {{placedOrdersDetails?.updatedAt | date}}
+              <svg [attr.id]="'chevCaretDown'+i" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+              </svg>
+            </button>
             <tr *ngFor='let placedOrderProductsDescription of placedOrdersDetails?.orderDetails.itemList'>
               <td class="align-middle"><img [src]="getProductUrl(placedOrderProductsDescription.product.productInfo)"
                 onerror="this.onerror=null;this.src='/assets/images/teapod.jpeg';" alt="image of {{placedOrderProductsDescription.product.name}}"></td>

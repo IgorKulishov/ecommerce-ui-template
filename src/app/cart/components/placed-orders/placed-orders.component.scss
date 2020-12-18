@@ -30,8 +30,25 @@
 .btn{
   margin: 5px 7px 5px;
 }
+#modalBtn{
+  width: 100%;
+}
+accordion-group button{
+  outline: none;
+  margin: 0;
+}
 .modal-body-text{
   margin-top: 15px;
+}
+accordion-group svg{
+  display: inline-block;
+}
+svg{
+  width: 1em;
+  height: 1em;
+}
+.expanded-block{
+  font-weight: 500;
 }
 
 

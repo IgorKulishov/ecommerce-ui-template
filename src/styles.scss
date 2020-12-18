@@ -166,19 +166,6 @@ $base-lightest-grey-03: rgba(211,211,211,0.3);
     margin-left: 5%;
   }
 }
-/*.product-name:after {*/
-  /*content: "x";*/
-  /*position: absolute;*/
-  /*right: 5px;*/
-  /*color: cadetblue;*/
-  /*font-size: 1.6rem;*/
-  /*box-sizing: border-box;*/
-/*}*/
-// .product-description {
-  /*position: relative;*/
-  /*left: 10px;*/
-  /*font-size: 1.2rem;*/
-// }
 .product-card:hover .product-description,
 .product-card:hover .product-image {
   /*box-shadow: -10px 10px 10px cadetblue;*/
@@ -296,24 +283,6 @@ app-root + .loading {
 
   }
 }
-
-// @media only screen and (max-width: 975px) {
-//   .login-or-register-form {
-//     animation-name: moveInBottom;
-//     animation-duration: 1s;
-//     animation-timing-function: ease-out;
-//     position: relative;
-//     top: 15%;
-//     padding: 0 20% 0;
-//   }
-
-//   .register-or-login-main {
-//     position: relative;
-//     top: 10vh;
-//     padding: 0 21% 0;
-
-//   }
-// }
 
 .register-or-login-selected {
   letter-spacing: 10px;
