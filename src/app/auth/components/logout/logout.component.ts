@@ -7,7 +7,6 @@ import { LogOut } from '../../store/actions/login.actions';
 import { SessionService } from '../../../core/services/session.service';
 
 @Component({
-  selector: 'logout',
   templateUrl: './logout.component.html',
   styleUrls: ['./logout.component.scss']
 })
@@ -16,22 +15,14 @@ export class LogoutComponent implements OnInit {
   constructor(private router: Router,
               private sessionService: SessionService,
               private store: Store<AppStates>) {
-
-    this.store.select(
-      data => {
-        if (data && data['userLoginReducer']) {
-          return data['userLoginReducer'];
-        }
-      }
-    ).subscribe(res => {
-      if (res && !res.userDetail) {
-        this.router.navigate(['/']);
-      }
-    });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.store.dispatch(new LogOut());
+    await this.navigateToLogin();
+  }
+  async navigateToLogin() {
+    await this.router.navigate(['/login']);
   }
 
 }
