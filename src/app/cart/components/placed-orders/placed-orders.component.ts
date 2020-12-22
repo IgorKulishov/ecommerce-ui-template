@@ -77,9 +77,9 @@ export class PlacedOrdersComponent implements OnInit {
   deg: number;
   attrName: any;
   changeChevronDirection(index){
-    this.attrName = document.getElementById('chevCaretDown' + index);
+    this.attrName = document.getElementById('chevCaretRight' + index);
     this.attrName.classList.toggle("expanded-block");
-    this.deg = this.attrName.classList.contains("expanded-block")? 180 : 0;
+    this.deg = this.attrName.classList.contains("expanded-block")? 90 : 0;
     this.attrName.style.transform = 'rotate('+this.deg+'deg)';
   }
 

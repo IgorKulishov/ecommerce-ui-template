@@ -43,12 +43,11 @@ accordion-group button{
 accordion-group svg{
   display: inline-block;
 }
-svg{
-  width: 1em;
-  height: 1em;
-}
 .expanded-block{
   font-weight: 500;
+}
+.table tbody+tbody {
+  border-top: none;
 }
 
 
