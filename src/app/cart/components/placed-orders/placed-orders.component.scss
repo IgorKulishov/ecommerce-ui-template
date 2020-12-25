@@ -45,14 +45,14 @@ accordion-group svg{
 }
 .expanded-block{
   animation-name: open-menu-button;
-  height: 20px;
-  animation-duration: 1s;
+  height: 16px;
+  animation-duration: .45s;
   transform: rotate(90deg);
 }
 .close-block{
   animation-name: close-menu-button;
-  height: 20px;
-  animation-duration: 1s;
+  height: 16px;
+  animation-duration: .45s;
 }
 .table tbody+tbody {
   border-top: none;

@@ -52,10 +52,10 @@
 
 
               <div class="row">
-                <div class="col-6 align-content-center">
+                <div class="col-10 text-left">
                   {{placedOrdersDetails?.updatedAt | date}}
                 </div>
-                <div class="col-6 align-content-center">
+                <div class="col-2 text-right">
                   <img [ngClass]="{'expanded-block': accordionPosition && accordionPosition[i], 'close-block': (accordionPosition && !accordionPosition[i])}" src="../../../../assets/svg/arrow-rounded-right-6x9.svg" alt="Right caret">
                 </div>
               </div>
