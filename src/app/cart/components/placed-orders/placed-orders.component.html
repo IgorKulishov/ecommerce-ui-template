@@ -25,7 +25,7 @@
           <td class="align-middle">{{placedOrderProductsDescription.quantity}} {{'placedOrder.pcs' | translate}}</td>
           <td class="align-middle">$ {{ totalSum(placedOrderProductsDescription.product.price, placedOrderProductsDescription.quantity) }}</td>
           <td class="align-middle">{{placedOrdersDetails?.updatedAt | date}}</td>
-          <td class="align-middle"><button type="button" class="btn btn-danger" (click)="openModal(orderCancel)">{{ 'placedOrder.cancel' | translate }}</button>          
+          <td class="align-middle"><button type="button" class="btn btn-danger" (click)="openModal(orderCancel)">{{ 'placedOrder.cancel' | translate }}</button>
           </td>
           <!-- Modal window to approve Order cancel -->
           <ng-template #orderCancel>
@@ -49,8 +49,16 @@
         <accordion [isAnimated]="true">
           <accordion-group>
             <button id="modalBtn" class="btn btn-link" accordion-heading type="button" (click)='changeChevronDirection(i)'>
-              {{placedOrdersDetails?.updatedAt | date}}
-              <img [attr.id]="'chevCaretRight'+i" src="../../../../assets/svg/caret-right-fill.svg" alt="Right caret">
+
+
+              <div class="row">
+                <div class="col-6 align-content-center">
+                  {{placedOrdersDetails?.updatedAt | date}}
+                </div>
+                <div class="col-6 align-content-center">
+                  <img [ngClass]="{'expanded-block': accordionPosition && accordionPosition[i], 'close-block': (accordionPosition && !accordionPosition[i])}" src="../../../../assets/svg/arrow-rounded-right-6x9.svg" alt="Right caret">
+                </div>
+              </div>
             </button>
             <tr *ngFor='let placedOrderProductsDescription of placedOrdersDetails?.orderDetails.itemList'>
               <td class="align-middle"><img [src]="getProductUrl(placedOrderProductsDescription.product.productInfo)"

@@ -44,7 +44,15 @@ accordion-group svg{
   display: inline-block;
 }
 .expanded-block{
-  font-weight: 500;
+  animation-name: open-menu-button;
+  height: 20px;
+  animation-duration: 1s;
+  transform: rotate(90deg);
+}
+.close-block{
+  animation-name: close-menu-button;
+  height: 20px;
+  animation-duration: 1s;
 }
 .table tbody+tbody {
   border-top: none;

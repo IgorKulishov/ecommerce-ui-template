@@ -27,6 +27,7 @@ export class PlacedOrdersComponent implements OnInit {
   @ViewChild('confirmation_template', {'static': false}) confirmation_template: ModalDirective;
   @ViewChild('remove_item_confirmation_template', {'static': false}) remove_item_confirmation_template: ModalDirective;
   modalRef: BsModalRef;
+  accordionPosition: {[index: number]: boolean} = [];
 
   constructor(private store: Store<AppStates>,
               private sessionService: SessionService,
@@ -74,13 +75,13 @@ export class PlacedOrdersComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  deg: number;
-  attrName: any;
-  changeChevronDirection(index){
-    this.attrName = document.getElementById('chevCaretRight' + index);
-    this.attrName.classList.toggle("expanded-block");
-    this.deg = this.attrName.classList.contains("expanded-block")? 90 : 0;
-    this.attrName.style.transform = 'rotate('+this.deg+'deg)';
+  changeChevronDirection(index) {
+    if ( this.accordionPosition && this.accordionPosition[index] ) {
+      this.accordionPosition[index] = !this.accordionPosition[index];
+    } else {
+      this.accordionPosition[index] = true;
+    }
   }
+
 
 }
