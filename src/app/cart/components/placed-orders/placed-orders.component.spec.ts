@@ -66,7 +66,6 @@ describe('PlacedOrdersComponent', () => {
     fixture.detectChanges();
     component.changeChevronDirection(1);
     component.changeChevronDirection(1);
-    console.log(component.accordionPosition[1]);
     expect(component.accordionPosition[1]).toBe(false);
   }));
 
