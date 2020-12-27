@@ -43,10 +43,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     LayoutModule,
     CartModule,
     SharedModule,
-    
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
-    
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
