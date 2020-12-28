@@ -41,6 +41,6 @@ jobs:
       - name: Run tests
         run: |
           npm install
-          npm install @angular/cli
+          npm install -g @angular/cli
           ng test
           
