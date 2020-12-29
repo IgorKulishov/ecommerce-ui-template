@@ -3,7 +3,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import { PlacedOrdersComponent } from './placed-orders.component';
-import {TranslateServiceMock, StoreMock, cartReducerStateMock, TranslateLoaderMock} from '../../../../test/mock';
+import { StoreMock, cartReducerStateMock, TranslateLoaderMock } from '../../../../test/mock';
 import { Store } from '@ngrx/store';
 import { AppStates } from '../../store/states/cart.states';
 import { BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
@@ -12,7 +12,6 @@ import { CartService } from '../../../core/services/cart.service';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { HttpClientTestingModule} from '@angular/common/http/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { By } from '@angular/platform-browser';
 const cartReducerState = cartReducerStateMock;
 
 describe('PlacedOrdersComponent', () => {
