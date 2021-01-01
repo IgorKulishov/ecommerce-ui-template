@@ -1,8 +1,8 @@
-import { TestBed, async, inject, ComponentFixture } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { TranslateServiceMock, StoreMock, initialAppState } from '../test/mock';
+import { TranslateServiceMock, initialAppState } from '../test/mock';
 import { Store } from '@ngrx/store';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';

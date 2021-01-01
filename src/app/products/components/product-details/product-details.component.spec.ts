@@ -1,11 +1,9 @@
-import { Router, ActivatedRoute, Routes } from '@angular/router'
-
+import { Routes } from '@angular/router';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { AlertModule } from 'ngx-bootstrap/alert';
-
 import { ProductDetailsComponent } from './product-details.component';
 import { LoginService } from '../../../core/services/login.service';
 import { ProductsService } from '../../../core/services/products.service';
