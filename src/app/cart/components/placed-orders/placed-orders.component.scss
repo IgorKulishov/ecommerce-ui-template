@@ -30,8 +30,32 @@
 .btn{
   margin: 5px 7px 5px;
 }
+#modalBtn{
+  width: 100%;
+}
+accordion-group button{
+  outline: none;
+  margin: 0;
+}
 .modal-body-text{
   margin-top: 15px;
+}
+accordion-group svg{
+  display: inline-block;
+}
+.expanded-block{
+  animation-name: open-menu-button;
+  height: 16px;
+  animation-duration: .45s;
+  transform: rotate(90deg);
+}
+.close-block{
+  animation-name: close-menu-button;
+  height: 16px;
+  animation-duration: .45s;
+}
+.table tbody+tbody {
+  border-top: none;
 }
 
 
