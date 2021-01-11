@@ -17,9 +17,7 @@ import { Observable } from 'rxjs';
 export class PlacedOrdersComponent implements OnInit {
   methodsOfPayment: PaymentDescription[] = [];
   productsInCart: any;
-  checkOutConfirmationStatus = false;
   error = false;
-  totalAmount: number;
   totalQuantity: number;
   checkoutForm: FormGroup;
   placedOrdersDetails$: Observable<any>;
