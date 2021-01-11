@@ -242,7 +242,7 @@ describe('PlacedOrdersComponent', () => {
       expect(component.getProductUrl(param)).toEqual('/assets/images/teapod.jpeg');
     }));
 
-    it('getProductUrl should return default image url if product does not have imageUrl prop', async(() => {
+    it('getProductUrl should return large image url if product does not have imageUrl prop', async(() => {
       const param = {
         id: 1,
         imageList: [{
@@ -257,7 +257,7 @@ describe('PlacedOrdersComponent', () => {
       expect(component.getProductUrl(param)).toEqual('https://test-image-large.jpg');
     }));
 
-    it('getProductUrl should return default image url if product.imageList.length = 0', () => {
+    it('if product does not have images', () => {
       const param = {
         id: 1,
         imageList: []
