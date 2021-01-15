@@ -6,7 +6,7 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {StoreModule} from '@ngrx/store';
-
+import { NgxImgZoomModule } from 'ngx-img-zoom';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductsViewComponent } from './components/products-view/products-view.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
@@ -44,6 +44,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    NgxImgZoomModule,
     CommonModule,
     CoreModule,
     WidgetsModule,

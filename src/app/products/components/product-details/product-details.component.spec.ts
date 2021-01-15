@@ -10,7 +10,7 @@ import { ProductsService } from '../../../core/services/products.service';
 import {productsReducer} from '../../store/reducers/reducers';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {TranslateLoaderMock, TranslateServiceMock} from '../../../../test/mock';
-
+import { NgxImgZoomModule } from 'ngx-img-zoom';
 export const fake_routes: Routes = [
   {path: 'details/:slug', component: ProductDetailsComponent}
 ];
@@ -39,7 +39,8 @@ describe('AddToCartComponent', () => {
             RouterTestingModule.withRoutes(fake_routes),
             TranslateModule.forRoot({
               loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
-            })
+            }),
+            NgxImgZoomModule
         ],
         declarations: [ ProductDetailsComponent ],
         providers: [
