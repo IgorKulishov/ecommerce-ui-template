@@ -83,4 +83,10 @@ describe('PlacedOrdersComponent', () => {
     expect(component.getProductUrl(param)).toEqual('https://test-image1.jpg');
   }));
 
+  it('getProductUrl should return default image url if product does not have imageUrl prop', async(() => {
+    // Please add test here when product does not have imageUrl prop
+
+
+  }));
+
 });
