@@ -68,4 +68,35 @@ describe('PlacedOrdersComponent', () => {
     expect(component.accordionPosition[1]).toBe(false);
   }));
 
+  it('getProductUrl should return image url if product has imageUrl prop', async(() => {
+    const param = {
+      id: 1,
+      imageList: [{
+        description: null,
+        id: 2,
+        imageUrl: 'https://test-image1.jpg',
+        largeUrl: null,
+        productInfoId: 56,
+        publicId: 's4l1dp26u0cllhvmafm6'
+      }]
+    };
+    expect(component.getProductUrl(param)).toEqual('https://test-image1.jpg');
+  }));
+
+  it('getProductUrl should return default image url if product does not have imageUrl prop', async(() => {
+    const param = {
+      id: 1,
+      imageList: [{
+        description: null,
+        id: 2,
+        imageUrl: null,
+        largeUrl: null,
+        productInfoId: 56,
+        publicId: 's4l1dp26u0cllhvmafm6'
+      }]
+    };
+    expect(component.getProductUrl(param)).toEqual('/assets/images/teapod.jpeg');
+
+  }));
+
 });
