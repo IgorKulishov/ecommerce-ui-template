@@ -1,5 +1,6 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { TestBed, async, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
+import {NO_ERRORS_SCHEMA, DebugElement, Component} from '@angular/core';
+import { Location } from '@angular/common';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { PlacedOrdersComponent } from './placed-orders.component';
@@ -13,17 +14,31 @@ import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { HttpClientTestingModule} from '@angular/common/http/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 const cartReducerState = cartReducerStateMock;
+import { By } from '@angular/platform-browser';
+import {Routes, Router} from '@angular/router';
 
+
+@Component({
+  template: `<router-outlet></router-outlet>`
+})
+export class AppComponent { }
 describe('PlacedOrdersComponent', () => {
 
+  const routes: Routes = [
+    {path: '', redirectTo: 'placed-orders', pathMatch: 'full'},
+    {path: 'placed-orders', component: PlacedOrdersComponent}
+  ];
   let component: PlacedOrdersComponent;
+  let appComponent: AppComponent;
   let fixture: ComponentFixture<PlacedOrdersComponent>;
+  let appFixture: ComponentFixture<AppComponent>;
   let store: MockStore<AppStates>;
-
+  let router: Router;
+  let location: Location;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule,
+        RouterTestingModule.withRoutes(routes),
         ModalModule.forRoot(),
         HttpClientTestingModule,
         FormsModule,
@@ -34,7 +49,8 @@ describe('PlacedOrdersComponent', () => {
       ],
       declarations: [
         PlacedOrdersComponent,
-        ModalDirective
+        ModalDirective,
+        AppComponent
       ],
       providers: [
         { provide: Store, useClass: StoreMock },
@@ -46,9 +62,13 @@ describe('PlacedOrdersComponent', () => {
     }).compileComponents();
   }));
   beforeEach(() => {
+    router = TestBed.get(Router);
+    location = TestBed.get(Location);
     store = TestBed.get(Store);
     fixture = TestBed.createComponent(PlacedOrdersComponent);
+    appFixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
+    appComponent = appFixture.componentInstance;
   });
 
   it('should create the app', async(() => {
@@ -84,19 +104,27 @@ describe('PlacedOrdersComponent', () => {
   }));
 
   it('getProductUrl should return default image url if product does not have imageUrl prop', async(() => {
-    const param = {
-      id: 1,
-      imageList: [{
-        description: null,
-        id: 2,
-        imageUrl: null,
-        largeUrl: null,
-        productInfoId: 56,
-        publicId: 's4l1dp26u0cllhvmafm6'
-      }]
-    };
-    expect(component.getProductUrl(param)).toEqual('/assets/images/teapod.jpeg');
+      const param = {
+        id: 1,
+        imageList: [{
+          description: null,
+          id: 2,
+          imageUrl: null,
+          largeUrl: null,
+          productInfoId: 56,
+          publicId: 's4l1dp26u0cllhvmafm6'
+        }]
+      };
+      expect(component.getProductUrl(param)).toEqual('/assets/images/teapod.jpeg');
+    }));
 
+    it('should navigate to "/placed-orders"" component', fakeAsync(() => {
+      router.initialNavigation();
+      tick();
+      router.navigate(['/placed-orders']).then(() => {
+        const path = location.path();
+        expect(path).toBe('/placed-orders');
+      });
   }));
 
 });

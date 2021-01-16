@@ -36,12 +36,6 @@ const routes: Routes = [
   // {path: '**', component: ProductListComponent, canActivate: [AuthguardService]}
 ];
 
-// const routes: Routes = [
-//   {path: 'products', component: ProductListComponent},
-//   {path: 'details/:slug', component: AddToCartComponent},
-//   {path: 'create-product', component: CreateProductComponent}
-// ];
-
 @NgModule({
   imports: [
     CommonModule,
