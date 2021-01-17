@@ -19,7 +19,6 @@ export class PlacedOrdersComponent implements OnInit {
   productsInCart: any;
   checkOutConfirmationStatus = false;
   error = false;
-  private payment = {};
   totalAmount: number;
   totalQuantity: number;
   checkoutForm: FormGroup;
@@ -33,9 +32,7 @@ export class PlacedOrdersComponent implements OnInit {
               private sessionService: SessionService,
               private router: Router,
               private cartService: CartService,
-              private modalService: BsModalService,
-              private bsModalService: BsModalService,
-              @Inject(FormBuilder) fb: FormBuilder) {
+              private modalService: BsModalService) {
 
     // app store for total amount
     this.placedOrdersDetails$ = this.store.select( ( store: any ) => {
