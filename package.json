@@ -10,7 +10,7 @@
     "bundle-report": "webpack-bundle-analyzer dist/stats.json",
     "compodoc": "./node_modules/.bin/compodoc -p src/tsconfig.app.json -d docs/",
     "e2e": "ng e2e",
-    "heroku-postbuild": "ng build --no-watch --code-coverage",
+    "heroku-postbuild": "ng build --prod=true",
     "lint": "ng lint",
     "minify": "node minify.build.js",
     "ng": "./node_modules/@angular/cli/bin/ng",
@@ -19,7 +19,7 @@
     "start-mock": "ng serve --environment=mock",
     "stats": "ng build --prod --stats-json &&  npx webpack-bundle-analyzer dist/stats.json",
     "static-serve": "npm run build-local-dev && cd dist && live-server --port=4200 --host=localhost --entry-file=/index.html",
-    "test": "ng test --code-coverage true"
+    "test": "ng test --no-watch --code-coverage"
   },
   "private": true,
   "dependencies": {
