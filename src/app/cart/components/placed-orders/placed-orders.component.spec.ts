@@ -267,6 +267,6 @@ describe('PlacedOrdersComponent', () => {
       translate.use('fr');
       fixture.detectChanges();
       const element = fixture.debugElement.query(By.css('#image')).nativeElement;
-      expect(element.innerHTML).toEqual('Image');
+      expect(element.innerHTML).toEqual('Images');
     });
 });
