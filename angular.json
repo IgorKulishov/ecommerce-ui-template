@@ -158,7 +158,8 @@
               "src/assets",
               "src/favicon.ico",
               "src/manifest.webmanifest"
-            ]
+            ],
+            "codeCoverage": true
           }
         },
         "lint": {
