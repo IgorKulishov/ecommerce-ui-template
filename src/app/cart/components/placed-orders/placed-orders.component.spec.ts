@@ -269,4 +269,26 @@ describe('PlacedOrdersComponent', () => {
       const element = fixture.debugElement.query(By.css('#image')).nativeElement;
       expect(element.innerHTML).toEqual('Image');
     });
+
+    //Product column translate
+    it('should render Product column name in Fr', () => {
+      translate.use('fr');
+      fixture.detectChanges();
+      const element = fixture.debugElement.query(By.css('#product')).nativeElement;
+      expect(element.innerHTML).toEqual('Produit');
+    });
+
+    it('should render Product column name in Ru', () => {
+      translate.use('ru');
+      fixture.detectChanges();
+      const element = fixture.debugElement.query(By.css('#product')).nativeElement;
+      expect(element.innerHTML).toEqual('Продукт');
+    });
+
+    it('should render Product column name in En', () => {
+      translate.use('en');
+      fixture.detectChanges();
+      const element = fixture.debugElement.query(By.css('#product')).nativeElement;
+      expect(element.innerHTML).toEqual('Product');
+    });
 });
