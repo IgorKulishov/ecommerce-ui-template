@@ -82,36 +82,4 @@
       </tbody>
     </table>
   </div>
-  <div class="row justify-content-end pt-5">
-    <div class="col-12 col-md-7 col-lg-6 col-xl-5">
-      <div class="card">
-        <div class="card-body">
-          <h3 class="card-title">{{ 'checkout.cartTotals' | translate }}</h3>
-          <table class="cart__totals">
-            <thead *ngIf="totalAmount" class="cart__totals-header">
-            <tr>
-              <th>{{ 'checkout.subtotal' | translate }}</th>
-              <td>$ {{totalAmount}}</td>
-            </tr>
-            </thead>
-            <tbody *ngIf="totalAmount" class="cart__totals-body">
-            </tbody>
-            <tfoot class="cart__totals-footer">
-            <tr>
-              <th>{{ 'checkout.total' | translate }}</th>
-              <td>$ {{totalAmount}}</td>
-            </tr>
-            <tr>
-              <th>
-              </th>
-              <th>
-                <div class="text-center checkout-confirmation" *ngIf='checkOutConfirmationStatus'>Thank you! Your order has been accepted!</div>
-              </th>
-            </tr>
-            </tfoot>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
