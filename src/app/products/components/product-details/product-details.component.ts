@@ -12,6 +12,7 @@ import { AppStates } from '../../../app.states';
 import { LoginService } from '../../../core/services/login.service';
 import { ProductDetails, ProductInfo} from '../../store/models/products.model';
 import {ImageList} from '../../store/models/products.model';
+import { NgxImgZoomService} from 'ngx-img-zoom';
 
 declare var lightGallery: Function;
 
@@ -41,16 +42,40 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   // TODO : add max stock product amount in create product API or logic to update stock remaining (for now harcoding to 10 max)
   maxQuantity = 10;
   minQuantity = 1;
-
   @ViewChild('lightGallery', {static: false}) lightgalleryID: ElementRef;
-
+  imgs = [
+    {url: 'https://www.futuresplatform.com/sites/default/files/styles/article_hero_image/public/2018-04/Future%20of%20Airplanes.jpg?itok=Oj9J2usE'},
+    {url: 'https://www.futuresplatform.com/sites/default/files/styles/article_hero_image/public/2018-04/Future%20of%20Airplanes.jpg?itok=Oj9J2usE'},
+    {url: 'https://www.futuresplatform.com/sites/default/files/styles/article_hero_image/public/2018-04/Future%20of%20Airplanes.jpg?itok=Oj9J2usE'},
+    {url: 'https://www.futuresplatform.com/sites/default/files/styles/article_hero_image/public/2018-04/Future%20of%20Airplanes.jpg?itok=Oj9J2usE'},
+    {url: 'https://www.futuresplatform.com/sites/default/files/styles/article_hero_image/public/2018-04/Future%20of%20Airplanes.jpg?itok=Oj9J2usE'},
+    {url: 'https://www.futuresplatform.com/sites/default/files/styles/article_hero_image/public/2018-04/Future%20of%20Airplanes.jpg?itok=Oj9J2usE'},
+    {url: 'https://www.futuresplatform.com/sites/default/files/styles/article_hero_image/public/2018-04/Future%20of%20Airplanes.jpg?itok=Oj9J2usE'},
+    {url: 'https://www.futuresplatform.com/sites/default/files/styles/article_hero_image/public/2018-04/Future%20of%20Airplanes.jpg?itok=Oj9J2usE'},
+    {url: 'https://www.futuresplatform.com/sites/default/files/styles/article_hero_image/public/2018-04/Future%20of%20Airplanes.jpg?itok=Oj9J2usE'},
+    {url: 'https://www.futuresplatform.com/sites/default/files/styles/article_hero_image/public/2018-04/Future%20of%20Airplanes.jpg?itok=Oj9J2usE'},
+    {url: 'https://www.futuresplatform.com/sites/default/files/styles/article_hero_image/public/2018-04/Future%20of%20Airplanes.jpg?itok=Oj9J2usE'},
+    {url: 'https://www.futuresplatform.com/sites/default/files/styles/article_hero_image/public/2018-04/Future%20of%20Airplanes.jpg?itok=Oj9J2usE'},
+    {url: 'https://www.futuresplatform.com/sites/default/files/styles/article_hero_image/public/2018-04/Future%20of%20Airplanes.jpg?itok=Oj9J2usE'},
+    {url: 'https://www.futuresplatform.com/sites/default/files/styles/article_hero_image/public/2018-04/Future%20of%20Airplanes.jpg?itok=Oj9J2usE'},
+    {url: 'https://www.futuresplatform.com/sites/default/files/styles/article_hero_image/public/2018-04/Future%20of%20Airplanes.jpg?itok=Oj9J2usE'}
+  ];
   constructor(private store: Store<AppStates>,
               private loginService: LoginService,
               private router: Router,
               private productsService: ProductsService,
               private route: ActivatedRoute,
-              private translateService: TranslateService) {
-  }
+              private translateService: TranslateService,
+              private zoomService: NgxImgZoomService
+              ) {
+                // this.zoomService.setZoomBreakPoints([
+                //   { w: 10, h: 10 },
+                //   { w: 15, h: 15 },
+                //   { w: 20, h: 20 },
+                //   { w: 25, h: 25 },
+                //   { w: 30, h: 30 }
+                // ]);
+              }
 
   ngOnInit() {
     this.productDetail$ = this.store.select(store => {

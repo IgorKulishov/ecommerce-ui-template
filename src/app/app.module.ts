@@ -13,7 +13,7 @@ import { LayoutModule } from './layout/layout.module';
 import { CartModule } from './cart/cart.module';
 
 import { SharedModule } from './shared/shared.module'; // from purchased template
-
+import { NgxImgZoomModule } from 'ngx-img-zoom';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
@@ -35,6 +35,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent
   ],
   imports: [
+    NgxImgZoomModule,
     BrowserModule,
     AppRoutingModule,
     ProductsModule,
