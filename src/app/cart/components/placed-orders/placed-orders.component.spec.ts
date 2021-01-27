@@ -241,6 +241,30 @@ describe('PlacedOrdersComponent', () => {
       };
       expect(component.getProductUrl(param)).toEqual('/assets/images/teapod.jpeg');
     }));
+
+    it('getProductUrl should return large image url if product does not have imageUrl prop', async(() => {
+      const param = {
+        id: 1,
+        imageList: [{
+          description: null,
+          id: 2,
+          imageUrl: null,
+          largeUrl: 'https://test-image-large.jpg',
+          productInfoId: 56,
+          publicId: 's4l1dp26u0cllhvmafm6'
+        }]
+      };
+      expect(component.getProductUrl(param)).toEqual('https://test-image-large.jpg');
+    }));
+
+    it('if product does not have images', () => {
+      const param = {
+        id: 1,
+        imageList: []
+      }
+      expect(component.getProductUrl(param)).toEqual('/assets/images/teapod.jpeg')
+    });
+
     // Routing testing
     it('should navigate to "/placed-orders"" component', fakeAsync(() => {
         router.initialNavigation();
