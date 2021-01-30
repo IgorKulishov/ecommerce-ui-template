@@ -19,12 +19,12 @@ module.exports = function (config) {
       dir: require('path').join(__dirname, 'coverage'),
       reports: [ 'html', 'lcovonly' ],
       fixWebpackSourcePaths: true,
-      // thresholds: {
-      //   statements: 48,
-      //   lines: 47,
-      //   branches: 15,
-      //   functions: 20
-      // }
+      thresholds: {
+        statements: 47,
+        lines: 45,
+        branches: 15,
+        functions: 20
+      }
     },
 
     reporters: ['progress', 'kjhtml'],
