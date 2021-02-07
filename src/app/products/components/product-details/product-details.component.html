@@ -87,7 +87,7 @@
 
 <!--  <pre class="card card-block card-header">{{slidesChangeMessage}}</pre>-->
   <alert type="danger" *ngIf='showErrorMsgs && (productDetail$ | async)?.error'>
-    <strong>{{(productDetail$ | async)?.error}} <a href="/logout"> Login </a> </strong>
+    <strong>{{(productDetail$ | async)?.error}} <a routerLink="/logout"> Login </a> </strong>
   </alert>
 
 

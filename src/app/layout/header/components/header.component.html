@@ -40,6 +40,8 @@
               <li *ngIf="user" class="nav-item">
                 <a  [routerLink]="['/placed-orders']" class="nav-link"><span class="d-flex p-2 user-greeting">{{ 'checkout.placedOrders' | translate }}</span></a>
               </li>
+              <li class="divider dropdown-divider"></li>
+              <li *ngIf="user?.userName" class="nav-item"><a routerLink="/logout" class="nav-link">{{ 'header.logout' | translate }}</a></li>
             </ul>
           </div>
         </li>
@@ -54,9 +56,16 @@
               <li *ngIf="user" class="nav-item">
                 <span class="d-flex p-2 user-greeting">{{ user?.userName }}</span>
               </li>
-              <li *ngIf="user" class="nav-item">
-                <a  [routerLink]="['/placed-orders']" class="nav-link"><span class="d-flex p-2 user-greeting">{{ 'checkout.placedOrders' | translate }}</span></a>
-              </li>              
+              <li class="language-collapse">
+                {{ 'header.language' | translate }}
+                <select class="language-selector" id="languageSelectorMobile"
+                        [ngModel]="selectedLanguage"
+                        (ngModelChange)="onLanguageSelect($event)">
+                  <option *ngFor="let language of languages">{{language}}</option>
+                </select>
+              </li>
+              <li class="divider dropdown-divider"></li>
+              <li *ngIf="user?.userName" class="nav-item"><a routerLink="/logout" class="nav-link">{{ 'header.logout' | translate }}</a></li>
             </ul>
           </div>
         </li>
