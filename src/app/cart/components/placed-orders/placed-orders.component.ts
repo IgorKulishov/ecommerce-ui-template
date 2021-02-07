@@ -1,15 +1,15 @@
-import {map, filter} from 'rxjs/operators';
-import {Component, OnInit, Inject, ViewChild, TemplateRef} from '@angular/core';
+import { map, filter } from 'rxjs/operators';
+import { Component, OnInit, Inject, ViewChild, TemplateRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {FetchOrderHistory, DeleteOrderFromHistoryApi } from '../../store/actions/cart.actions';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { FetchOrderHistory, DeleteOrderFromHistoryApi } from '../../store/actions/cart.actions';
 import { AppStates } from '../../store/states/cart.states';
 import { PaymentDescription } from '../../models/cart.model';
 import { SessionService } from '../../../core/services/session.service';
 import { CartService } from '../../../core/services/cart.service';
 import { BsModalRef, BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 @Component({
   templateUrl: './placed-orders.component.html',
   styleUrls: ['./placed-orders.component.scss']
@@ -17,24 +17,20 @@ import {Observable} from 'rxjs';
 export class PlacedOrdersComponent implements OnInit {
   methodsOfPayment: PaymentDescription[] = [];
   productsInCart: any;
-  checkOutConfirmationStatus = false;
   error = false;
-  private payment = {};
-  totalAmount: number;
   totalQuantity: number;
   checkoutForm: FormGroup;
   placedOrdersDetails$: Observable<any>;
   @ViewChild('confirmation_template', {'static': false}) confirmation_template: ModalDirective;
   @ViewChild('remove_item_confirmation_template', {'static': false}) remove_item_confirmation_template: ModalDirective;
   modalRef: BsModalRef;
+  accordionPosition: {[index: number]: boolean} = [];
 
   constructor(private store: Store<AppStates>,
               private sessionService: SessionService,
               private router: Router,
               private cartService: CartService,
-              private modalService: BsModalService,
-              private bsModalService: BsModalService,
-              @Inject(FormBuilder) fb: FormBuilder) {
+              private modalService: BsModalService) {
 
     // app store for total amount
     this.placedOrdersDetails$ = this.store.select( ( store: any ) => {
@@ -73,5 +69,14 @@ export class PlacedOrdersComponent implements OnInit {
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
+
+  changeChevronDirection(index) {
+    if ( this.accordionPosition && this.accordionPosition[index] ) {
+      this.accordionPosition[index] = !this.accordionPosition[index];
+    } else {
+      this.accordionPosition[index] = true;
+    }
+  }
+
 
 }

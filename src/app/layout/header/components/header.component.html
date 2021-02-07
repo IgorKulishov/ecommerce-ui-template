@@ -34,19 +34,11 @@
             </button>
             <ul id="dropdown-user-account" *dropdownMenu class="dropdown-menu"
                 role="menu" aria-labelledby="button-dropdown-user-account">
-              <li *ngIf="user" class="nav-item">
-                <a  [routerLink]="['/placed-orders']" class="nav-link"><span class="d-flex p-2 user-greeting">{{ 'checkout.placedOrders' | translate }}</span></a>
-              </li>
               <li class="nav-item">
                 <span class="d-flex p-2 user-greeting">{{ user?.userName }}</span>
               </li>
-              <li class="language-collapse">
-                {{ 'header.language' | translate }}
-                <select class="language-selector" id="languageSelector"
-                        [ngModel]="selectedLanguage"
-                        (ngModelChange)="onLanguageSelect($event)">
-                  <option *ngFor="let language of languages">{{language}}</option>
-                </select>
+              <li *ngIf="user" class="nav-item">
+                <a  [routerLink]="['/placed-orders']" class="nav-link"><span class="d-flex p-2 user-greeting">{{ 'checkout.placedOrders' | translate }}</span></a>
               </li>
               <li class="divider dropdown-divider"></li>
               <li *ngIf="user?.userName" class="nav-item"><a routerLink="/logout" class="nav-link">{{ 'header.logout' | translate }}</a></li>
@@ -61,9 +53,6 @@
           </button>
           <div class="collapse navbar-collapse" id="user-account" [collapse]="isCollapsedUserAccount" [isAnimated]="true">
             <ul id="collapse-user-account" class="navbar-nav mr-auto navbar-custom custom-menu-dropdown">
-              <li *ngIf="user" class="nav-item">
-                <a  [routerLink]="['/placed-orders']" class="nav-link"><span class="d-flex p-2 user-greeting">{{ 'checkout.placedOrders' | translate }}</span></a>
-              </li>
               <li *ngIf="user" class="nav-item">
                 <span class="d-flex p-2 user-greeting">{{ user?.userName }}</span>
               </li>
@@ -105,6 +94,19 @@
               <li *ngIf="user?.userName" class=""><a  [routerLink]="['/create-product']" class="nav-link">{{ 'header.createProduct' | translate }}</a></li>
             </ul>
           </div>
+        </li>
+        <li id="lang-logout-block" class="nav-item dropdown d-block d-lg-none ">
+          <ul  class="navbar-nav mr-auto navbar-custom custom-menu-dropdown">
+            <li class="language-collapse">
+              {{ 'header.language' | translate }}
+              <select class="language-selector" id="languageSelectorMobile"
+                      [ngModel]="selectedLanguage"
+                      (ngModelChange)="onLanguageSelect($event)">
+                <option *ngFor="let language of languages">{{language}}</option>
+              </select>
+            </li>
+            <li *ngIf="user?.userName" class="nav-item"><a href="/logout" class="nav-link">{{ 'header.logout' | translate }}</a></li>
+          </ul>
         </li>
       </ul>
     </div>

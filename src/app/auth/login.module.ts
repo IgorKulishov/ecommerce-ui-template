@@ -15,10 +15,10 @@ import { LoginEffects } from './store/effects/login.effects';
 
 //TODO: finilze proper routing and add guards
 const routes: Routes = [
+  {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LogoutComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: '', redirectTo: '/login', pathMatch: 'full'}
+  {path: 'register', component: RegisterComponent}
 ];
 
 @NgModule({

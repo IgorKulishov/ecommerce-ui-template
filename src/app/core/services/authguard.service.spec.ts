@@ -6,6 +6,7 @@ import {Routes} from '@angular/router';
 import {ProductListComponent} from '../../products/components/product-list/product-list.component';
 import {Store} from '@ngrx/store';
 import {StoreMock} from '../../../test/mock';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 export const fake_routes: Routes = [
   {path: 'products', component: ProductListComponent}
@@ -19,7 +20,7 @@ class SessionServiceStub {
   public getOrderNumberFromStorage(): any {}
 }
 
-describe('Authguard.ServiceService', () => {
+describe('AuthguardService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -29,7 +30,8 @@ describe('Authguard.ServiceService', () => {
       ],
       imports: [
         RouterTestingModule.withRoutes(fake_routes)
-      ]
+      ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     });
   });
 
