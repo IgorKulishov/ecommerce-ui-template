@@ -46,5 +46,3 @@ Thumbs.db
 # Debug logs
 debug.log
 
-# we use yarn and maitain yarn.lock
-package-lock.json
