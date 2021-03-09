@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { StoreModule } from '@ngrx/store';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { Router } from '@angular/router';
@@ -21,7 +21,7 @@ describe('CreateProductComponent', () => {
     let component: AddDetailsComponent;
     let fixture: ComponentFixture<AddDetailsComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ AddDetailsComponent ],
             imports: [

@@ -1,4 +1,4 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { TestBed, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
@@ -23,7 +23,7 @@ describe('AppComponent', () => {
   let translate: TranslateService;
   let store: MockStore<AppStates>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
@@ -56,11 +56,11 @@ describe('AppComponent', () => {
     fixture.destroy();
   });
 
-  it('should create the app', async(() => {
+  it('should create the app', waitForAsync(() => {
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));
-  it(`should have as title 'e-commerce'`, async(() => {
+  it(`should have as title 'e-commerce'`, waitForAsync(() => {
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('e-commerce');
   }));

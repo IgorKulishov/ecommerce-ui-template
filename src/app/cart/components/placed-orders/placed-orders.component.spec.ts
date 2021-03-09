@@ -1,4 +1,4 @@
-import { TestBed, async, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
+import { TestBed, ComponentFixture, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import {NO_ERRORS_SCHEMA, DebugElement, Component} from '@angular/core';
 import { Location } from '@angular/common';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -36,7 +36,7 @@ describe('PlacedOrdersComponent', () => {
   let router: Router;
   let location: Location;
   let translate: TranslateService;
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes(routes),
@@ -195,24 +195,24 @@ describe('PlacedOrdersComponent', () => {
     appComponent = appFixture.componentInstance;
   });
 
-  it('should create the app', async(() => {
+  it('should create the app', waitForAsync(() => {
     expect(component).toBeTruthy();
   }));
 
-  it('should change chevron index # 1 to open position if it was closed', async(() => {
+  it('should change chevron index # 1 to open position if it was closed', waitForAsync(() => {
     fixture.detectChanges();
     component.changeChevronDirection(1);
     expect(component.accordionPosition[1]).toBe(true);
   }));
 
-  it('should change chevron index # 1 to close position if it was open', async(() => {
+  it('should change chevron index # 1 to close position if it was open', waitForAsync(() => {
     fixture.detectChanges();
     component.changeChevronDirection(1);
     component.changeChevronDirection(1);
     expect(component.accordionPosition[1]).toBe(false);
   }));
 
-  it('getProductUrl should return image url if product has imageUrl prop', async(() => {
+  it('getProductUrl should return image url if product has imageUrl prop', waitForAsync(() => {
     const param = {
       id: 1,
       imageList: [{
@@ -227,7 +227,7 @@ describe('PlacedOrdersComponent', () => {
     expect(component.getProductUrl(param)).toEqual('https://test-image1.jpg');
   }));
 
-  it('getProductUrl should return default image url if product does not have imageUrl prop', async(() => {
+  it('getProductUrl should return default image url if product does not have imageUrl prop', waitForAsync(() => {
       const param = {
         id: 1,
         imageList: [{
@@ -242,7 +242,7 @@ describe('PlacedOrdersComponent', () => {
       expect(component.getProductUrl(param)).toEqual('/assets/images/teapod.jpeg');
     }));
 
-    it('getProductUrl should return large image url if product does not have imageUrl prop', async(() => {
+    it('getProductUrl should return large image url if product does not have imageUrl prop', waitForAsync(() => {
       const param = {
         id: 1,
         imageList: [{
