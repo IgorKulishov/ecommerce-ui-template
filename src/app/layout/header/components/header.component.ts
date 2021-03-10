@@ -47,7 +47,7 @@ export class HeaderComponent implements OnInit {
     });
     // cart properties for header
     this.cart$ = this.store.select( store => {
-      return store['cartReducer'];
+      return store['cart'];
     }).pipe(map((res: any) => {
       if (res && res.currentOrderInCart) {
         return res.currentOrderInCart;
@@ -55,7 +55,7 @@ export class HeaderComponent implements OnInit {
     }));
 
     this.checkOutConfirmationStatus$ = this.store.select( (store: any) => {
-      return store['cartReducer'];
+      return store['cart'];
     }).pipe(map(res => {
       if (res && res.checkOutConfirmationStatus) {
         return res.checkOutConfirmationStatus;

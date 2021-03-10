@@ -2,14 +2,15 @@ import { map, filter } from 'rxjs/operators';
 import { Component, OnInit, Inject, ViewChild, TemplateRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { FetchOrderHistory, DeleteOrderFromHistoryApi } from '../../store/actions/cart.actions';
-import { AppStates } from '../../store/states/cart.states';
+import { CartState } from '../../store/states/cart.states';
 import { PaymentDescription } from '../../models/cart.model';
 import { SessionService } from '../../../core/services/session.service';
 import { CartService } from '../../../core/services/cart.service';
 import { BsModalRef, BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
+import { selectCart } from '../../store/selectors/cart.selectors';
 @Component({
   templateUrl: './placed-orders.component.html',
   styleUrls: ['./placed-orders.component.scss']
@@ -26,16 +27,14 @@ export class PlacedOrdersComponent implements OnInit {
   modalRef: BsModalRef;
   accordionPosition: {[index: number]: boolean} = [];
 
-  constructor(private store: Store<AppStates>,
+  constructor(private store: Store<CartState>,
               private sessionService: SessionService,
               private router: Router,
               private cartService: CartService,
               private modalService: BsModalService) {
 
     // app store for total amount
-    this.placedOrdersDetails$ = this.store.select( ( store: any ) => {
-      return store['cartReducer'];
-    }).pipe(
+    this.placedOrdersDetails$ = this.store.select( selectCart ).pipe(
       filter((res: any) => res && res.orderStoredInHistoryApi),
       map((res: any) => {
         return res.orderStoredInHistoryApi;

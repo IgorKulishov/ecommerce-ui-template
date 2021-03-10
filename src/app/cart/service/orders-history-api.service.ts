@@ -47,8 +47,8 @@ export class OrdersHistoryApiService {
           }
         }),
         this.store.select(storeData => {
-          if (storeData && storeData['cartReducer'] && storeData['cartReducer']['currentOrderInCart']) {
-            return storeData['cartReducer']['currentOrderInCart'];
+          if (storeData && storeData['cart'] && storeData['cart']['currentOrderInCart']) {
+            return storeData['cart']['currentOrderInCart'];
           }
         })
       ]).pipe(
