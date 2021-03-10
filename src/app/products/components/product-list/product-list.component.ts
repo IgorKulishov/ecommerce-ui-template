@@ -2,16 +2,14 @@ import {map} from 'rxjs/operators';
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import { BsModalService, BsModalRef, ModalDirective } from 'ngx-bootstrap/modal';
 import { Store } from '@ngrx/store';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-
+import { Router } from '@angular/router';
 import { GetProducts } from '../../store/actions/products.actions';
 import { AppStates } from '../../../app.states';
-import { errorState, Products } from '../../store/models/products.model';
+import { Products } from '../../store/models/products.model';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { SessionService } from '../../../core/services/session.service';
 import { RemoveItemFromProductList } from '../../store/actions/products.actions';
 import { ProductDetails} from '../../store/models/products.model';
-
 
 @Component({
   templateUrl: './product-list.component.html',

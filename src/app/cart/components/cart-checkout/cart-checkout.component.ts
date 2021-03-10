@@ -6,7 +6,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {GetCurrentOrderFromStore, CheckOut, RemoveFromCart} from '../../store/actions/cart.actions';
-import { AppStates } from '../../store/states/cart.states';
+import { CartState } from '../../store/states/cart.states';
 import { Order, CheckoutInfo, PaymentMethods, PaymentDescription } from '../../models/cart.model';
 import {BehaviorSubject, Observable} from 'rxjs';
 import { SessionService } from '../../../core/services/session.service';
@@ -59,7 +59,7 @@ export class CartCheckoutComponent implements OnInit {
   @ViewChild('confirmation_template', {'static': false}) confirmation_template: ModalDirective;
   @ViewChild('remove_item_confirmation_template', {'static': false}) remove_item_confirmation_template: ModalDirective;
 
-  constructor(private store: Store<AppStates>,
+  constructor(private store: Store<CartState>,
               private sessionService: SessionService,
               private router: Router,
               private cartService: CartService,
@@ -73,7 +73,7 @@ export class CartCheckoutComponent implements OnInit {
 
     // app store for total amount
     this.store.select( store => {
-      return store['cartReducer'];
+      return store['cart'];
     }).pipe(map(res => {
       if (res && res.currentOrderInCart) {
         return res.currentOrderInCart;
@@ -90,7 +90,7 @@ export class CartCheckoutComponent implements OnInit {
     });
     // checkout confirmation status
     this.store.select( store => {
-      return store['cartReducer'];
+      return store['cart'];
     }).pipe(map(res => {
       if (res && res.checkOutConfirmationStatus) {
         return res.checkOutConfirmationStatus;

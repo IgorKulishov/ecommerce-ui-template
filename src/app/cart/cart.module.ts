@@ -24,7 +24,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     EffectsModule.forRoot([CartEffects]),
-    StoreModule.forFeature('cartReducer', cartReducer),
+    StoreModule.forFeature('cart', cartReducer),
     RouterModule.forChild(routes),
     SharedModule,
     ModalModule.forRoot(),

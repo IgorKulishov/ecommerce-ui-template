@@ -6,7 +6,7 @@ import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-transla
 import { PlacedOrdersComponent } from './placed-orders.component';
 import { StoreMock, cartReducerStateMock, TranslateLoaderMock } from '../../../../test/mock';
 import { Store } from '@ngrx/store';
-import { AppStates } from '../../store/states/cart.states';
+import { CartState } from '../../store/states/cart.states';
 import { BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CartService } from '../../../core/services/cart.service';
@@ -32,7 +32,7 @@ describe('PlacedOrdersComponent', () => {
   let appComponent: AppComponent;
   let fixture: ComponentFixture<PlacedOrdersComponent>;
   let appFixture: ComponentFixture<AppComponent>;
-  let store: MockStore<AppStates>;
+  let store: MockStore<CartState>;
   let router: Router;
   let location: Location;
   let translate: TranslateService;

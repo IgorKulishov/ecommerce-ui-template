@@ -8,7 +8,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { SessionService } from '../../../core/services/session.service';
 import { ProductListComponent } from './product-list.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import { AppStates } from '../../../cart/store/states/cart.states';
+import { AppStates } from '../../../app.states';
 import { initialAppState } from '../../../../test/mock';
 import { LoginComponent } from '../../../auth/components/login/login.component';
 

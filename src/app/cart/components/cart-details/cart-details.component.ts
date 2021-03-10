@@ -3,8 +3,8 @@ import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
-import { GetCurrentOrderFromStore, RemoveFromCart } from '../../store/actions/cart.actions';
-import { AppStates } from '../../store/states/cart.states';
+import {  RemoveFromCart } from '../../store/actions/cart.actions';
+import { CartState } from '../../store/states/cart.states';
 import { Order } from '../../models/cart.model';
 import {BehaviorSubject, Observable} from 'rxjs';
 import { SessionService } from '../../../core/services/session.service';
@@ -30,7 +30,7 @@ export class CartDetailsComponent implements OnInit {
   deleteProductState: {action: string; state: string; } = {action: undefined, state: undefined };
   deleteProductSubject: BehaviorSubject<{action: string; state: string; }> = new BehaviorSubject({action: undefined, state: undefined });
 
-  constructor(private store: Store<AppStates>,
+  constructor(private store: Store<CartState>,
               private sessionService: SessionService,
               private router: Router,
               private bsModalService: BsModalService) {
@@ -44,8 +44,8 @@ export class CartDetailsComponent implements OnInit {
           this.deleteProductSubject.next(this.deleteProductState);
         }
 
-        if (store && store['cartReducer']) {
-          return store['cartReducer'];
+        if (store && store['cart']) {
+          return store['cart'];
         }
       }
     ).pipe(map(data => {

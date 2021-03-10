@@ -18,7 +18,7 @@ import {
 // TODO: need to add order models
 
 import { CartService } from '../../../core/services/cart.service';
-import { AppStates } from '../../../app.states';
+import { CartState } from '../states/cart.states';
 import {ProductsService} from '../../../core/services/products.service';
 import {EffectError} from '../../../products/store/actions/products.actions';
 import {GetOrderNumber} from '../../../auth/store/actions/login.actions';
@@ -35,7 +35,7 @@ export class CartEffects {
               private saveOrderInHistoryApiAction$: Actions,
               private deleteOrderInHistoryApiAction$: Actions,
               private productService: ProductsService,
-              private store: Store<AppStates>,
+              private store: Store<CartState>,
               private cartService: CartService,
               private sessionService: SessionService,
               private ordersHistoryService: OrdersHistoryApiService) {}

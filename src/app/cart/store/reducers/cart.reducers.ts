@@ -1,63 +1,60 @@
-import { Action, ActionReducer } from '@ngrx/store';
-import { AppStates } from '../../../app.states';
+import { Action } from '@ngrx/store';
+import { CartState } from '../states/cart.states';
 import {
   ADD_TO_CART, ADD_TO_CART_SUCCESS,
   SAVE_CURRENT_ORDER_IN_STORE, GET_CURRENT_ORDER_FROM_STORE, SAVE_PLACED_ORDER,
   GET_CURRENT_ORDER_FROM_STORE_SUCCESS, CHECK_OUT, CHECK_OUT_SUCCESS, REMOVE_FROM_CART,
   STORE_PROCESSED_ORDER_IN_HISTORY_API_SUCCESS
 } from '../actions/cart.actions';
-import { Order } from '../../models/cart.model';
-import { INITIAL_STORE_DATA } from '../../../app.states';
 
 export class ReducerClass implements Action {
   type: string;
   payload?: any;
 }
 
-const addProductToCart = (state: AppStates, action: ReducerClass): AppStates => {
-  const newData: AppStates = Object.assign({}, state, { productsInCart: action.payload} );
+const addProductToCart = (state: CartState, action: ReducerClass): CartState => {
+  const newData: CartState = Object.assign({}, state, { productsInCart: action.payload} );
   return newData;
 }
-const addProductToCartSuccess = (state: AppStates, action: ReducerClass): AppStates => {
-  const newData: AppStates = Object.assign({}, state, { productToCartSuccess: action.payload} );
+const addProductToCartSuccess = (state: CartState, action: ReducerClass): CartState => {
+  const newData: CartState = Object.assign({}, state, { productToCartSuccess: action.payload} );
   return newData;
 }
-const removeProductFromCart = (state: AppStates, action: ReducerClass): AppStates => {
-  const newData: AppStates = Object.assign({}, state, { removeProductFromCart: action.payload} );
+const removeProductFromCart = (state: CartState, action: ReducerClass): CartState => {
+  const newData: CartState = Object.assign({}, state, { removeProductFromCart: action.payload} );
   return newData;
 };
-const storeCurrentOrderInCart = (state: AppStates, action: ReducerClass): AppStates => {
-  const newData: AppStates = Object.assign({}, state, { currentOrderInCart: action.payload} );
+const storeCurrentOrderInCart = (state: CartState, action: ReducerClass): CartState => {
+  const newData: CartState = Object.assign({}, state, { currentOrderInCart: action.payload} );
   return newData;
 };
 //TODO: finilize readCurrentOrderFromStore & readCurrentOrderFromStoreSuccess:
-const readCurrentOrderFromStore =  (state: AppStates, action: ReducerClass): AppStates => {
+const readCurrentOrderFromStore =  (state: CartState, action: ReducerClass): CartState => {
   return state;
 };
-const readCurrentOrderFromStoreSuccess = (state: AppStates, action: ReducerClass): AppStates => {
+const readCurrentOrderFromStoreSuccess = (state: CartState, action: ReducerClass): CartState => {
   return state;
 };
 // make payment
-const checkOut = (state: AppStates, action: ReducerClass): AppStates => {
-  const newData: AppStates = Object.assign({}, state, { checkOutDetails: action.payload} );
+const checkOut = (state: CartState, action: ReducerClass): CartState => {
+  const newData: CartState = Object.assign({}, state, { checkOutDetails: action.payload} );
   return newData;
 };
-const savePlacedOrder = (state: AppStates, action: ReducerClass): AppStates => {
-  const newData: AppStates = Object.assign({}, state, { processedOrders: action.payload} );
+const savePlacedOrder = (state: CartState, action: ReducerClass): CartState => {
+  const newData: CartState = Object.assign({}, state, { processedOrders: action.payload} );
   return newData;
 };
-const savePlacedOrderDetails = (state: AppStates, action: ReducerClass): AppStates => {
-  const newData: AppStates = Object.assign({}, state, { processedOrdersDetails: action.payload} );
+const savePlacedOrderDetails = (state: CartState, action: ReducerClass): CartState => {
+  const newData: CartState = Object.assign({}, state, { processedOrdersDetails: action.payload} );
   return newData;
 };
 // There is no actual use of the (same) order details processed also saved in history lambda API
-const storeProcessedOrderInHistoryApi = (state: AppStates, action: ReducerClass): AppStates => {
-  const newData: AppStates = Object.assign({}, state, { orderStoredInHistoryApi: action.payload} );
+const storeProcessedOrderInHistoryApi = (state: CartState, action: ReducerClass): CartState => {
+  const newData: CartState = Object.assign({}, state, { orderStoredInHistoryApi: action.payload} );
   return newData;
 };
-const checkOutSuccess = (state: AppStates, action: ReducerClass): AppStates => {
-  // const newData: AppStates = Object.assign({}, state, { checkOutConfirmationStatus: action.payload} );
-  const newData: AppStates = Object.assign({}, state, {
+const checkOutSuccess = (state: CartState, action: ReducerClass): CartState => {
+  const newData: CartState = Object.assign({}, state, {
     checkOutConfirmationStatus: false,
     shoppingOrderNumber: undefined,
     productsInCart: undefined,
@@ -69,7 +66,7 @@ const checkOutSuccess = (state: AppStates, action: ReducerClass): AppStates => {
 };
 
 
-export function cartReducer (state: AppStates, action: ReducerClass) {
+export function cartReducer (state: CartState, action: ReducerClass) {
   switch (action.type) {
     case ADD_TO_CART:
       return addProductToCart(state, action);

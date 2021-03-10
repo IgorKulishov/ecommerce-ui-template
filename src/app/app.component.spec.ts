@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import {Observable} from 'rxjs';
-import {AppStates} from './cart/store/states/cart.states';
+import { AppStates } from './app.states';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 
 export class FakeLoader implements TranslateLoader {

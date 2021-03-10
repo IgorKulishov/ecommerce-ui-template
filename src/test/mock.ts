@@ -66,7 +66,7 @@ export const initialAppState = {
 };
 
 export const cartReducerStateMock = {
-  cartReducer: {
+  cart: {
     orderStoredInHistoryApi: [
       {
         'checked': false,
