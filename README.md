@@ -1,7 +1,7 @@
 ***
 
 ## Framework 
-Angular 10
+Angular 11
 
 ## Docker
 run one of the following commands:
