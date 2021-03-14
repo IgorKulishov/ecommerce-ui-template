@@ -13,7 +13,6 @@ import { CartService } from '../../../core/services/cart.service';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { HttpClientTestingModule} from '@angular/common/http/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-const cartReducerState = cartReducerStateMock;
 import { By } from '@angular/platform-browser';
 import {Routes, Router} from '@angular/router';
 
@@ -57,7 +56,7 @@ describe('PlacedOrdersComponent', () => {
         { provide: Store, useClass: StoreMock },
         BsModalService,
         CartService,
-        provideMockStore({ initialState: cartReducerState })
+        provideMockStore({ initialState: cartReducerStateMock })
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).overrideComponent(PlacedOrdersComponent, {
@@ -315,4 +314,11 @@ describe('PlacedOrdersComponent', () => {
       const element = fixture.debugElement.query(By.css('#product')).nativeElement;
       expect(element.innerHTML).toEqual('Product');
     });
+
+  it('should render Product column name in En', () => {
+    fixture.detectChanges();
+    component.placedOrdersDetails$.subscribe(result => {
+      expect(result).toEqual(cartReducerStateMock.cart.orderStoredInHistoryApi);
+    });
+  });
 });

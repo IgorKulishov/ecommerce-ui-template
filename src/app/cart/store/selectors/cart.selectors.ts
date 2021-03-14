@@ -5,6 +5,8 @@ export const selectCart = createFeatureSelector<CartState>('cart');
 export const selectOrdersHistory = createSelector(
   selectCart,
   (state: CartState) => {
-    return state && state.orderStoredInHistoryApi;
+      if(state && state.orderStoredInHistoryApi) {
+        return state && state.orderStoredInHistoryApi;
+      }
   }
 );
