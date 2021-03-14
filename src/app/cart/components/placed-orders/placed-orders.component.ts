@@ -1,5 +1,5 @@
-import { map, filter } from 'rxjs/operators';
-import { Component, OnInit, Inject, ViewChild, TemplateRef } from '@angular/core';
+import { map, distinct } from 'rxjs/operators';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
@@ -10,7 +10,7 @@ import { SessionService } from '../../../core/services/session.service';
 import { CartService } from '../../../core/services/cart.service';
 import { BsModalRef, BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
-import { selectCart } from '../../store/selectors/cart.selectors';
+import { selectOrdersHistory } from '../../store/selectors/cart.selectors';
 @Component({
   templateUrl: './placed-orders.component.html',
   styleUrls: ['./placed-orders.component.scss']
@@ -34,10 +34,10 @@ export class PlacedOrdersComponent implements OnInit {
               private modalService: BsModalService) {
 
     // app store for total amount
-    this.placedOrdersDetails$ = this.store.select( selectCart ).pipe(
-      filter((res: any) => res && res.orderStoredInHistoryApi),
+    this.placedOrdersDetails$ = this.store.select( selectOrdersHistory ).pipe(
+      distinct(),
       map((res: any) => {
-        return res.orderStoredInHistoryApi;
+        return res;
     }));
 
   }

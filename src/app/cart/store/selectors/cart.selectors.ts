@@ -1,9 +1,12 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { CartState } from '../states/cart.states'
 
-export const selectFeature = createFeatureSelector<CartState>('cart');
-
-export const selectCart = createSelector(
-  selectFeature,
-  (state: any) => state.cart
+export const selectCart = createFeatureSelector<CartState>('cart');
+export const selectOrdersHistory = createSelector(
+  selectCart,
+  (state: CartState) => {
+      if(state && state.orderStoredInHistoryApi) {
+        return state && state.orderStoredInHistoryApi;
+      }
+  }
 );
