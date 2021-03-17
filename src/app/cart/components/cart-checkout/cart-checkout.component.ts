@@ -1,5 +1,5 @@
 
-import {map} from 'rxjs/operators';
+import {distinct, map} from 'rxjs/operators';
 import {Component, OnInit, Inject, TemplateRef, ViewChild} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -15,6 +15,7 @@ import { Payments } from '../../enums/payments.enum';
 
 import { BsModalService, BsModalRef, ModalDirective } from 'ngx-bootstrap/modal';
 import {ItemList} from '../../models/cart.model';
+import { selectItemListDetails } from '../../store/selectors/cart.selectors';
 
 @Component({
   selector: 'app-home',
@@ -40,7 +41,7 @@ export class CartCheckoutComponent implements OnInit {
       'paymentType': 'check'
     }
   ];
-  productsInCart: any;
+  productsInCart$: Observable<any>;
   checkOutConfirmationStatus = false;
   error = false;
   private payment = {};
@@ -56,6 +57,7 @@ export class CartCheckoutComponent implements OnInit {
 
   modalCheckoutApprove: BsModalRef | null;
   modalCheckoutConfirmation: BsModalRef;
+  // selectedItemListDetails$: Observable<any>
   @ViewChild('confirmation_template', {'static': false}) confirmation_template: ModalDirective;
   @ViewChild('remove_item_confirmation_template', {'static': false}) remove_item_confirmation_template: ModalDirective;
 
@@ -72,22 +74,14 @@ export class CartCheckoutComponent implements OnInit {
     });
 
     // app store for total amount
-    this.store.select( store => {
-      return store['cart'];
-    }).pipe(map(res => {
-      if (res && res.currentOrderInCart) {
-        return res.currentOrderInCart;
+    this.productsInCart$ = this.store.select( selectItemListDetails )
+    .pipe(
+      distinct(),
+      map((res: any) => {
+        return res
       }
-    })).subscribe(cartInfo => {
-      if (cartInfo && cartInfo.totalAmount && cartInfo.totalAmount) {
-        this.totalAmount = cartInfo.totalAmount;
-        this.totalQuantity = cartInfo.totalQuantity;
-        this.payment = {amount: cartInfo.totalAmount}
-      }
-      if (cartInfo && cartInfo.itemList) {
-        this.productsInCart = cartInfo.itemList;
-      }
-    });
+    ));
+    
     // checkout confirmation status
     this.store.select( store => {
       return store['cart'];

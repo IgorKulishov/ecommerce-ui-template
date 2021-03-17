@@ -315,7 +315,7 @@ describe('PlacedOrdersComponent', () => {
       expect(element.innerHTML).toEqual('Product');
     });
 
-  it('should render Product column name in En', () => {
+  it('should return orderStoredInHistoryApi', () => {
     fixture.detectChanges();
     component.placedOrdersDetails$.subscribe(result => {
       expect(result).toEqual(cartReducerStateMock.cart.orderStoredInHistoryApi);

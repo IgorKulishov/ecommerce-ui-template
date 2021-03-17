@@ -67,6 +67,136 @@ export const initialAppState = {
 
 export const cartReducerStateMock = {
   cart: {
+    currentOrderInCart: {
+      "orderNumber": "c7fc090507095ac35e251a5973ec916b",
+      "orderToken": null,
+      "userId": 1211,
+      "totalAmount": 123.97,
+      "totalQuantity": 4,
+      "paymentId": null,
+      "paymentPlaced": null,
+      "paymentPaid": null,
+      "itemList": [
+        {
+          "itemId": null,
+          "productId": 40,
+          "quantity": 1,
+          "orderNumber": "c7fc090507095ac35e251a5973ec916b",
+          "product": {
+            "name": "toy",
+            "description": "mechanic toy",
+            "slug": "mechanic-toy",
+            "price": 9.99,
+            "defaultMaxQuantity": 10,
+            "isRemoved": false,
+            "productInfo": {
+              "imageList": [
+                {
+                  "largeUrl": null,
+                  "imageUrl": "https://res.cloudinary.com/webcodes-io/image/upload/v1573100286/cgncnogdofepfd1jc9oy.jpg",
+                  "publicId": "cgncnogdofepfd1jc9oy",
+                  "description": null,
+                  "productInfoId": 41,
+                  "id": 50
+                }
+              ],
+              "id": 41
+            },
+            "id": 40
+          },
+          "id": 2305
+        },
+        {
+          "itemId": null,
+          "productId": 42,
+          "quantity": 1,
+          "orderNumber": "c7fc090507095ac35e251a5973ec916b",
+          "product": {
+            "name": "robot",
+            "description": "robot1",
+            "slug": "robot1",
+            "price": 100,
+            "defaultMaxQuantity": 10,
+            "isRemoved": false,
+            "productInfo": {
+              "imageList": [
+                {
+                  "largeUrl": null,
+                  "imageUrl": "https://res.cloudinary.com/webcodes-io/image/upload/v1573100113/m6xqpddpalxl2zubmajx.png",
+                  "publicId": "m6xqpddpalxl2zubmajx",
+                  "description": null,
+                  "productInfoId": 43,
+                  "id": 44
+                }
+              ],
+              "id": 43
+            },
+            "id": 42
+          },
+          "id": 2306
+        },
+        {
+          "itemId": null,
+          "productId": 55,
+          "quantity": 1,
+          "orderNumber": "c7fc090507095ac35e251a5973ec916b",
+          "product": {
+            "name": "Plastic toy",
+            "description": "plastic toy",
+            "slug": "plastic-toy",
+            "price": 3.99,
+            "defaultMaxQuantity": 10,
+            "isRemoved": false,
+            "productInfo": {
+              "imageList": [
+                {
+                  "largeUrl": null,
+                  "imageUrl": "https://res.cloudinary.com/webcodes-io/image/upload/v1573100620/s4l1dp26u0cllhvmafm6.jpg",
+                  "publicId": "s4l1dp26u0cllhvmafm6",
+                  "description": null,
+                  "productInfoId": 56,
+                  "id": 57
+                }
+              ],
+              "id": 56
+            },
+            "id": 55
+          },
+          "id": 2307
+        },
+        {
+          "itemId": null,
+          "productId": 40,
+          "quantity": 1,
+          "orderNumber": "c7fc090507095ac35e251a5973ec916b",
+          "product": {
+            "name": "toy",
+            "description": "mechanic toy",
+            "slug": "mechanic-toy",
+            "price": 9.99,
+            "defaultMaxQuantity": 10,
+            "isRemoved": false,
+            "productInfo": {
+              "imageList": [
+                {
+                  "largeUrl": null,
+                  "imageUrl": "https://res.cloudinary.com/webcodes-io/image/upload/v1573100286/cgncnogdofepfd1jc9oy.jpg",
+                  "publicId": "cgncnogdofepfd1jc9oy",
+                  "description": null,
+                  "productInfoId": 41,
+                  "id": 50
+                }
+              ],
+              "id": 41
+            },
+            "id": 40
+          },
+          "id": 2308
+        }
+      ],
+      "payment": null,
+      "id": 2304
+    },
     orderStoredInHistoryApi: [
       {
         'checked': false,

@@ -1,5 +1,5 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { CartState } from '../states/cart.states'
+import { CartState, CurrentOrderInCart } from '../states/cart.states'
 
 export const selectCart = createFeatureSelector<CartState>('cart');
 export const selectOrdersHistory = createSelector(
@@ -10,3 +10,13 @@ export const selectOrdersHistory = createSelector(
       }
   }
 );
+
+export const selectCurrentOrderInCart = createFeatureSelector<CurrentOrderInCart>('cart');
+export const selectItemListDetails = createSelector(
+  selectCurrentOrderInCart,
+  (state: CurrentOrderInCart) => {
+    if (state && state.itemList) {
+      return state.itemList;
+  }
+}
+)
