@@ -11,7 +11,12 @@ export const selectOrdersHistory = createSelector(
   }
 );
 
-export const selectCurrentOrderInCart = createFeatureSelector<CurrentOrderInCart>('cart');
+export const selectCurrentOrderInCart = createSelector(
+  selectCart,
+  (state: CartState) => {
+    return state.currentOrderInCart;
+  }
+);
 export const selectItemListDetails = createSelector(
   selectCurrentOrderInCart,
   (state: CurrentOrderInCart) => {
