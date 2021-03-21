@@ -14,7 +14,8 @@ export const selectOrdersHistory = createSelector(
 export const selectCurrentOrderInCart = createSelector(
   selectCart,
   (state: CartState) => {
-    return state.currentOrderInCart;
+    if (state && state.currentOrderInCart)
+      return state.currentOrderInCart;
   }
 );
 export const selectItemListDetails = createSelector(
@@ -28,6 +29,8 @@ export const selectItemListDetails = createSelector(
 export const selectTotalAmountInCart = createSelector(
   selectCurrentOrderInCart,
   (orderInCart: CurrentOrderInCart) => {
-    return orderInCart.totalAmount;
+    if (orderInCart && orderInCart.totalAmount){
+      return orderInCart.totalAmount;
+    }
   }
 );
