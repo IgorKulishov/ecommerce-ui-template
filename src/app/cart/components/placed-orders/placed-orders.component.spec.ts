@@ -15,7 +15,7 @@ import { HttpClientTestingModule} from '@angular/common/http/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import {Routes, Router} from '@angular/router';
-
+import { cold, getTestScheduler, hot } from 'jasmine-marbles';
 
 @Component({
   template: `<router-outlet></router-outlet>`
@@ -183,10 +183,10 @@ describe('PlacedOrdersComponent', () => {
     }).compileComponents();
   }));
   beforeEach(() => {
-    router = TestBed.get(Router);
-    location = TestBed.get(Location);
-    store = TestBed.get(Store);
-    translate = TestBed.get(TranslateService);
+    router = TestBed.inject(Router);
+    location = TestBed.inject(Location);
+    store = TestBed.inject(MockStore);
+    translate = TestBed.inject(TranslateService);
     translate.use('en');
     fixture = TestBed.createComponent(PlacedOrdersComponent);
     appFixture = TestBed.createComponent(AppComponent);
@@ -321,4 +321,10 @@ describe('PlacedOrdersComponent', () => {
       expect(result).toEqual(cartReducerStateMock.cart.orderStoredInHistoryApi);
     });
   });
+  it('should have OrderHistoryState', () => {
+    fixture.detectChanges();
+    const expectedOrderHistory$ = cold('a', { a: cartReducerStateMock.cart.orderStoredInHistoryApi });
+    expect(component.placedOrdersDetails$).toBeObservable(expectedOrderHistory$);
+  });
+
 });

@@ -1,6 +1,5 @@
 import {empty, of, Observable} from 'rxjs';
-import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core'
-
+import { TranslateLoader } from '@ngx-translate/core'
 // Translation
 const enJson = require('../assets/i18n/en.json');
 const frJson = require('../assets/i18n/fr.json');

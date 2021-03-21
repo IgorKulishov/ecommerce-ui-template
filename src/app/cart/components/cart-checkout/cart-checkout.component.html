@@ -59,7 +59,7 @@
         <div class="card-body">
           <h3 class="card-title">{{ 'checkout.cartTotals' | translate }}</h3>
           <table class="cart__totals">
-            <thead *ngIf="totalAmount" class="cart__totals-header">
+            <thead *ngIf="(totalAmountInCart$ | async) as totalAmount" class="cart__totals-header">
               <tr>
                 <th>{{ 'checkout.subtotal' | translate }}</th>
                 <td>$ {{totalAmount}}</td>
