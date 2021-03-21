@@ -66,7 +66,6 @@ export class CartCheckoutComponent implements OnInit {
               private router: Router,
               private cartService: CartService,
               private modalService: BsModalService,
-              private bsModalService: BsModalService,
                @Inject(FormBuilder) fb: FormBuilder) {
 
     this.checkoutForm = fb.group({
@@ -162,7 +161,7 @@ export class CartCheckoutComponent implements OnInit {
   removeProductConfirmation(template: TemplateRef<any>, deleteProduct: ItemList) {
     this.deleteProduct = deleteProduct;
     this.errorModal = null;
-    this.approveModal = this.bsModalService.show(template, { class: 'modal-lg' });
+    this.approveModal = this.modalService.show(template, { class: 'modal-lg' });
   }
 
   removeItemFromOrder() {

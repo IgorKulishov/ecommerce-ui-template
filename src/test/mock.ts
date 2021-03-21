@@ -250,3 +250,11 @@ export const cartReducerStateMock = {
     ]
   }
 };
+
+export class SessionServiceMock {
+  public logout(): any {}
+  public storeTokenInSession(data: any): void {}
+  public getTokenFromStorage(): any {}
+  public storeOrderNumberInStorage(data: any): void {}
+  public getOrderNumberFromStorage(): any {}
+}
