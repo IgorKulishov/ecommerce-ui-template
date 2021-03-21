@@ -2,6 +2,7 @@ import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { CartState, CurrentOrderInCart } from '../states/cart.states'
 
 export const selectCart = createFeatureSelector<CartState>('cart');
+
 export const selectOrdersHistory = createSelector(
   selectCart,
   (state: CartState) => {
@@ -10,7 +11,6 @@ export const selectOrdersHistory = createSelector(
       }
   }
 );
-
 export const selectCurrentOrderInCart = createSelector(
   selectCart,
   (state: CartState) => {
@@ -19,9 +19,15 @@ export const selectCurrentOrderInCart = createSelector(
 );
 export const selectItemListDetails = createSelector(
   selectCurrentOrderInCart,
-  (state: CurrentOrderInCart) => {
-    if (state && state.itemList) {
-      return state.itemList;
+  (orderInCart: CurrentOrderInCart) => {
+    if (orderInCart && orderInCart.itemList) {
+      return orderInCart.itemList;
+    }
   }
-}
-)
+);
+export const selectTotalAmountInCart = createSelector(
+  selectCurrentOrderInCart,
+  (orderInCart: CurrentOrderInCart) => {
+    return orderInCart.totalAmount;
+  }
+);
