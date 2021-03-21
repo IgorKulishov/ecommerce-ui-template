@@ -1,11 +1,13 @@
+import { ItemList } from "../../models/cart.model";
+
 export interface CartState {
-  currentOrderInCart:         any;
-  orderStoredInHistoryApi:    OrderHistory[];
-  productToCartSuccess:       any;
-  productsInCart:             any;
-  checkOutConfirmationStatus: any;
-  shoppingOrderNumber:        any;
-  checkOutDetails:            any;
+  currentOrderInCart?:         any;
+  orderStoredInHistoryApi?:    OrderHistory[];
+  productToCartSuccess?:       any;
+  productsInCart?:             any;
+  checkOutConfirmationStatus?: any;
+  shoppingOrderNumber?:        any;
+  checkOutDetails?:            any;
 }
 
 export interface OrderHistory {
@@ -28,4 +30,18 @@ export interface OrderDetails {
   paymentPlaced: null
   totalAmount: number;
   totalQuantity: number;
+}
+
+export interface CurrentOrderInCart {
+  orderNumber: string,
+  orderToken: number,
+  userId: number,
+  totalAmount: number,
+  totalQuantity: number,
+  paymentId: number,
+  paymentPlaced: number,
+  paymentPaid: number,
+  itemList: ItemList,
+  payment: number,
+  id: number
 }
