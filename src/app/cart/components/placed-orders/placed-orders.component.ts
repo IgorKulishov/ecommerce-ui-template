@@ -33,17 +33,17 @@ export class PlacedOrdersComponent implements OnInit {
               private cartService: CartService,
               private modalService: BsModalService) {
 
+  }
+
+  ngOnInit() {
+    this.store.dispatch(new FetchOrderHistory());
+
     // app store for total amount
     this.placedOrdersDetails$ = this.store.select( selectOrdersHistory ).pipe(
       distinct(),
       map((res: any) => {
         return res;
-    }));
-
-  }
-
-  ngOnInit() {
-    this.store.dispatch(new FetchOrderHistory());
+      }));
   }
 
   totalSum(price, selectedQuantity) {
