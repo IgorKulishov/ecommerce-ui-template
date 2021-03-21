@@ -15,7 +15,7 @@ import { HttpClientTestingModule} from '@angular/common/http/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import {Routes, Router} from '@angular/router';
-import { cold, getTestScheduler } from 'jasmine-marbles';
+import { cold, getTestScheduler, hot } from 'jasmine-marbles';
 
 @Component({
   template: `<router-outlet></router-outlet>`
@@ -194,137 +194,137 @@ describe('PlacedOrdersComponent', () => {
     appComponent = appFixture.componentInstance;
   });
 
-  // it('should create the app', waitForAsync(() => {
-  //   expect(component).toBeTruthy();
-  // }));
-  //
-  // it('should change chevron index # 1 to open position if it was closed', waitForAsync(() => {
-  //   fixture.detectChanges();
-  //   component.changeChevronDirection(1);
-  //   expect(component.accordionPosition[1]).toBe(true);
-  // }));
-  //
-  // it('should change chevron index # 1 to close position if it was open', waitForAsync(() => {
-  //   fixture.detectChanges();
-  //   component.changeChevronDirection(1);
-  //   component.changeChevronDirection(1);
-  //   expect(component.accordionPosition[1]).toBe(false);
-  // }));
-  //
-  // it('getProductUrl should return image url if product has imageUrl prop', waitForAsync(() => {
-  //   const param = {
-  //     id: 1,
-  //     imageList: [{
-  //       description: null,
-  //       id: 2,
-  //       imageUrl: 'https://test-image1.jpg',
-  //       largeUrl: null,
-  //       productInfoId: 56,
-  //       publicId: 's4l1dp26u0cllhvmafm6'
-  //     }]
-  //   };
-  //   expect(component.getProductUrl(param)).toEqual('https://test-image1.jpg');
-  // }));
-  //
-  // it('getProductUrl should return default image url if product does not have imageUrl prop', waitForAsync(() => {
-  //     const param = {
-  //       id: 1,
-  //       imageList: [{
-  //         description: null,
-  //         id: 2,
-  //         imageUrl: null,
-  //         largeUrl: null,
-  //         productInfoId: 56,
-  //         publicId: 's4l1dp26u0cllhvmafm6'
-  //       }]
-  //     };
-  //     expect(component.getProductUrl(param)).toEqual('/assets/images/teapod.jpeg');
-  //   }));
-  //
-  //   it('getProductUrl should return large image url if product does not have imageUrl prop', waitForAsync(() => {
-  //     const param = {
-  //       id: 1,
-  //       imageList: [{
-  //         description: null,
-  //         id: 2,
-  //         imageUrl: null,
-  //         largeUrl: 'https://test-image-large.jpg',
-  //         productInfoId: 56,
-  //         publicId: 's4l1dp26u0cllhvmafm6'
-  //       }]
-  //     };
-  //     expect(component.getProductUrl(param)).toEqual('https://test-image-large.jpg');
-  //   }));
-  //
-  //   it('if product does not have images', () => {
-  //     const param = {
-  //       id: 1,
-  //       imageList: []
-  //     }
-  //     expect(component.getProductUrl(param)).toEqual('/assets/images/teapod.jpeg')
-  //   });
-  //
-  //   // Routing testing
-  //   it('should navigate to "/placed-orders"" component', fakeAsync(() => {
-  //       router.initialNavigation();
-  //       tick();
-  //       router.navigate(['/placed-orders']).then(() => {
-  //         const path = location.path();
-  //         expect(path).toBe('/placed-orders');
-  //       });
-  //   }));
-  //   // Template testing
-  //   it('should render Image column name in En', () => {
-  //     translate.use('en');
-  //     fixture.detectChanges();
-  //     const element = fixture.debugElement.query(By.css('#image')).nativeElement;
-  //     expect(element.innerHTML).toEqual('Image');
-  //   });
-  //   it('should render Image column name in Ru', () => {
-  //     translate.use('ru');
-  //     fixture.detectChanges();
-  //     const element = fixture.debugElement.query(By.css('#image')).nativeElement;
-  //     expect(element.innerHTML).toEqual('Фото');
-  //   });
-  //   it('should render Image column name in Fr', () => {
-  //     translate.use('fr');
-  //     fixture.detectChanges();
-  //     const element = fixture.debugElement.query(By.css('#image')).nativeElement;
-  //     expect(element.innerHTML).toEqual('Image');
-  //   });
-  //
-  //   //Product column translate
-  //   it('should render Product column name in Fr', () => {
-  //     translate.use('fr');
-  //     fixture.detectChanges();
-  //     const element = fixture.debugElement.query(By.css('#product')).nativeElement;
-  //     expect(element.innerHTML).toEqual('Produit');
-  //   });
-  //
-  //   it('should render Product column name in Ru', () => {
-  //     translate.use('ru');
-  //     fixture.detectChanges();
-  //     const element = fixture.debugElement.query(By.css('#product')).nativeElement;
-  //     expect(element.innerHTML).toEqual('Продукт');
-  //   });
-  //
-  //   it('should render Product column name in En', () => {
-  //     translate.use('en');
-  //     fixture.detectChanges();
-  //     const element = fixture.debugElement.query(By.css('#product')).nativeElement;
-  //     expect(element.innerHTML).toEqual('Product');
-  //   });
-  //
-  // it('should return orderStoredInHistoryApi', () => {
-  //   fixture.detectChanges();
-  //   component.placedOrdersDetails$.subscribe(result => {
-  //     expect(result).toEqual(cartReducerStateMock.cart.orderStoredInHistoryApi);
-  //   });
-  // });
-  it('testing with marble diagram', () => {
-    const initialPacedOrderHistoryState = cartReducerStateMock.cart.orderStoredInHistoryApi;
-    const expected = cold('(a|)', initialPacedOrderHistoryState);
+  it('should create the app', waitForAsync(() => {
+    expect(component).toBeTruthy();
+  }));
+
+  it('should change chevron index # 1 to open position if it was closed', waitForAsync(() => {
     fixture.detectChanges();
-    expect(component.placedOrdersDetails$).toBeObservable(expected);
+    component.changeChevronDirection(1);
+    expect(component.accordionPosition[1]).toBe(true);
+  }));
+
+  it('should change chevron index # 1 to close position if it was open', waitForAsync(() => {
+    fixture.detectChanges();
+    component.changeChevronDirection(1);
+    component.changeChevronDirection(1);
+    expect(component.accordionPosition[1]).toBe(false);
+  }));
+
+  it('getProductUrl should return image url if product has imageUrl prop', waitForAsync(() => {
+    const param = {
+      id: 1,
+      imageList: [{
+        description: null,
+        id: 2,
+        imageUrl: 'https://test-image1.jpg',
+        largeUrl: null,
+        productInfoId: 56,
+        publicId: 's4l1dp26u0cllhvmafm6'
+      }]
+    };
+    expect(component.getProductUrl(param)).toEqual('https://test-image1.jpg');
+  }));
+
+  it('getProductUrl should return default image url if product does not have imageUrl prop', waitForAsync(() => {
+      const param = {
+        id: 1,
+        imageList: [{
+          description: null,
+          id: 2,
+          imageUrl: null,
+          largeUrl: null,
+          productInfoId: 56,
+          publicId: 's4l1dp26u0cllhvmafm6'
+        }]
+      };
+      expect(component.getProductUrl(param)).toEqual('/assets/images/teapod.jpeg');
+    }));
+
+    it('getProductUrl should return large image url if product does not have imageUrl prop', waitForAsync(() => {
+      const param = {
+        id: 1,
+        imageList: [{
+          description: null,
+          id: 2,
+          imageUrl: null,
+          largeUrl: 'https://test-image-large.jpg',
+          productInfoId: 56,
+          publicId: 's4l1dp26u0cllhvmafm6'
+        }]
+      };
+      expect(component.getProductUrl(param)).toEqual('https://test-image-large.jpg');
+    }));
+
+    it('if product does not have images', () => {
+      const param = {
+        id: 1,
+        imageList: []
+      }
+      expect(component.getProductUrl(param)).toEqual('/assets/images/teapod.jpeg')
+    });
+
+    // Routing testing
+    it('should navigate to "/placed-orders"" component', fakeAsync(() => {
+        router.initialNavigation();
+        tick();
+        router.navigate(['/placed-orders']).then(() => {
+          const path = location.path();
+          expect(path).toBe('/placed-orders');
+        });
+    }));
+    // Template testing
+    it('should render Image column name in En', () => {
+      translate.use('en');
+      fixture.detectChanges();
+      const element = fixture.debugElement.query(By.css('#image')).nativeElement;
+      expect(element.innerHTML).toEqual('Image');
+    });
+    it('should render Image column name in Ru', () => {
+      translate.use('ru');
+      fixture.detectChanges();
+      const element = fixture.debugElement.query(By.css('#image')).nativeElement;
+      expect(element.innerHTML).toEqual('Фото');
+    });
+    it('should render Image column name in Fr', () => {
+      translate.use('fr');
+      fixture.detectChanges();
+      const element = fixture.debugElement.query(By.css('#image')).nativeElement;
+      expect(element.innerHTML).toEqual('Image');
+    });
+
+    //Product column translate
+    it('should render Product column name in Fr', () => {
+      translate.use('fr');
+      fixture.detectChanges();
+      const element = fixture.debugElement.query(By.css('#product')).nativeElement;
+      expect(element.innerHTML).toEqual('Produit');
+    });
+
+    it('should render Product column name in Ru', () => {
+      translate.use('ru');
+      fixture.detectChanges();
+      const element = fixture.debugElement.query(By.css('#product')).nativeElement;
+      expect(element.innerHTML).toEqual('Продукт');
+    });
+
+    it('should render Product column name in En', () => {
+      translate.use('en');
+      fixture.detectChanges();
+      const element = fixture.debugElement.query(By.css('#product')).nativeElement;
+      expect(element.innerHTML).toEqual('Product');
+    });
+
+  it('should return orderStoredInHistoryApi', () => {
+    fixture.detectChanges();
+    component.placedOrdersDetails$.subscribe(result => {
+      expect(result).toEqual(cartReducerStateMock.cart.orderStoredInHistoryApi);
+    });
   });
+  it('should have OrderHistoryState', () => {
+    fixture.detectChanges();
+    const expectedOrderHistory$ = cold('a', { a: cartReducerStateMock.cart.orderStoredInHistoryApi });
+    expect(component.placedOrdersDetails$).toBeObservable(expectedOrderHistory$);
+  });
+
 });
