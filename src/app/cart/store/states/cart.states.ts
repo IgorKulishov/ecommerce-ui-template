@@ -1,13 +1,13 @@
 import { ItemList } from "../../models/cart.model";
 
 export interface CartState {
-  currentOrderInCart:         any;
-  orderStoredInHistoryApi:    OrderHistory[];
-  productToCartSuccess:       any;
-  productsInCart:             any;
-  checkOutConfirmationStatus: any;
-  shoppingOrderNumber:        any;
-  checkOutDetails:            any;
+  currentOrderInCart?:         any;
+  orderStoredInHistoryApi?:    OrderHistory[];
+  productToCartSuccess?:       any;
+  productsInCart?:             any;
+  checkOutConfirmationStatus?: any;
+  shoppingOrderNumber?:        any;
+  checkOutDetails?:            any;
 }
 
 export interface OrderHistory {

@@ -1,4 +1,3 @@
-
 import {distinct, map} from 'rxjs/operators';
 import {Component, OnInit, Inject, TemplateRef, ViewChild} from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -6,7 +5,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {GetCurrentOrderFromStore, CheckOut, RemoveFromCart} from '../../store/actions/cart.actions';
-import { CartState } from '../../store/states/cart.states';
+import { CartState, CurrentOrderInCart } from '../../store/states/cart.states';
 import { Order, CheckoutInfo, PaymentMethods, PaymentDescription } from '../../models/cart.model';
 import {BehaviorSubject, Observable} from 'rxjs';
 import { SessionService } from '../../../core/services/session.service';
@@ -15,7 +14,7 @@ import { Payments } from '../../enums/payments.enum';
 
 import { BsModalService, BsModalRef, ModalDirective } from 'ngx-bootstrap/modal';
 import {ItemList} from '../../models/cart.model';
-import { selectItemListDetails } from '../../store/selectors/cart.selectors';
+import { selectItemListDetails, selectTotalAmountInCart } from '../../store/selectors/cart.selectors';
 
 @Component({
   selector: 'app-home',
@@ -41,6 +40,7 @@ export class CartCheckoutComponent implements OnInit {
       'paymentType': 'check'
     }
   ];
+  totalAmountInCart$: Observable<number>;
   productsInCart$: Observable<any>;
   checkOutConfirmationStatus = false;
   error = false;
@@ -66,22 +66,32 @@ export class CartCheckoutComponent implements OnInit {
               private router: Router,
               private cartService: CartService,
               private modalService: BsModalService,
-              private bsModalService: BsModalService,
-               @Inject(FormBuilder) fb: FormBuilder) {
+              @Inject(FormBuilder) fb: FormBuilder) {
 
     this.checkoutForm = fb.group({
       payment_method_id: [null, Validators.minLength(50)]
     });
 
+  }
+
+  ngOnInit() {
+
     // app store for total amount
     this.productsInCart$ = this.store.select( selectItemListDetails )
-    .pipe(
-      distinct(),
-      map((res: any) => {
-        return res
-      }
-    ));
-    
+      .pipe(
+        distinct(),
+        map((res: any) => {
+            return res
+          }
+        ));
+
+    this.totalAmountInCart$ = this.store.select( selectTotalAmountInCart ).pipe(
+      map((amountInCart: number) => {
+        this.setTotalAmountInCart(amountInCart);
+        return amountInCart;
+      } )
+    )
+
     // checkout confirmation status
     this.store.select( store => {
       return store['cart'];
@@ -92,21 +102,19 @@ export class CartCheckoutComponent implements OnInit {
     })).subscribe(cartInfo => {
       this.checkOutConfirmationStatus = cartInfo;
     });
-  }
 
-  ngOnInit() {
     if (this.sessionService.getTokenFromStorage() != null ) {
       this.store.dispatch(new GetCurrentOrderFromStore());
     }
     else
       this.router.navigate(['/login']);
     this.cartService.getMethodsOfPayment()
-    .subscribe((res: any) => {
-      if (res.payments.length > 0) {
-        this.methodsOfPayment = res.payments;
-      }
-    },
-    err => console.error(err));
+      .subscribe((res: any) => {
+          if (res.payments.length > 0) {
+            this.methodsOfPayment = res.payments;
+          }
+        },
+        err => console.error(err));
   }
 
   submitOrder() {
@@ -162,7 +170,7 @@ export class CartCheckoutComponent implements OnInit {
   removeProductConfirmation(template: TemplateRef<any>, deleteProduct: ItemList) {
     this.deleteProduct = deleteProduct;
     this.errorModal = null;
-    this.approveModal = this.bsModalService.show(template, { class: 'modal-lg' });
+    this.approveModal = this.modalService.show(template, { class: 'modal-lg' });
   }
 
   removeItemFromOrder() {
@@ -174,6 +182,10 @@ export class CartCheckoutComponent implements OnInit {
     Object.assign(this.deleteProductState, { action: 'delete_product', state: 'no_errors' });
     this.deleteProductSubject.next(this.deleteProductState);
     this.approveModal.hide();
+  }
+
+  setTotalAmountInCart(totalAmount: number) {
+    this.payment = {amount: totalAmount};
   }
 
 }
