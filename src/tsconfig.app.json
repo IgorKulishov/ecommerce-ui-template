@@ -10,7 +10,8 @@
   },
   "exclude": [
     "test.ts",
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "**/*.stories.*"
   ],
   "files": [
     "main.ts",
