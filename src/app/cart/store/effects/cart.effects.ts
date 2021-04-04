@@ -10,10 +10,11 @@ import {
   ADD_TO_CART, ADD_TO_CART_SUCCESS,
   GET_CURRENT_ORDER_FROM_STORE,
   CHECK_OUT, REMOVE_FROM_CART, SAVE_PLACED_ORDER, DELETE_ORDER_FROM_HISTORY_API,
-  FETCH_ORDERS_HISTORY, SAVE_ORDER_IN_HISTORY_API,
+  FETCH_ORDERS_HISTORY, FETCH_ALL_ORDERS_HISTORY, SAVE_ORDER_IN_HISTORY_API,
   AddToCart, AddToCartSuccess, StoreCurrentOrder,
   GetCurrentOrderFromStoreSuccess, CheckOutSuccess, SavePlacedOrder,
-  SaveOrderInHistoryApi, StoreProcessedOrderInHistoryApiSuccess, FetchOrderHistory
+  SaveOrderInHistoryApi, StoreProcessedOrderInHistoryApiSuccess, FetchOrderHistory, StoreAllOrdersApiSuccess,
+  
 } from '../actions/cart.actions';
 // TODO: need to add order models
 
@@ -34,6 +35,7 @@ export class CartEffects {
               private savePlacedOrderActions$: Actions,
               private saveOrderInHistoryApiAction$: Actions,
               private deleteOrderInHistoryApiAction$: Actions,
+              private getAllOrdersFromtStoreAction$: Actions,
               private productService: ProductsService,
               private store: Store<CartState>,
               private cartService: CartService,
@@ -92,6 +94,20 @@ export class CartEffects {
     switchMap(() => this.ordersHistoryService.fetchOrdersHistory().pipe(
       map((data: any) => {
         return new StoreProcessedOrderInHistoryApiSuccess(data);
+      }),
+      catchError(err => {
+        console.error(err);
+        return of(new Error('error'));
+      })
+    ))
+  );
+
+  @Effect() getAllOrdersFromHistoryApi$: any = this.getAllOrdersFromtStoreAction$.pipe(
+    ofType(FETCH_ALL_ORDERS_HISTORY),
+    switchMap(() => this.ordersHistoryService.fetchAllOrdersHistory().pipe(
+      map((data: any) => {
+        console.log(data);
+        return new StoreAllOrdersApiSuccess(data);
       }),
       catchError(err => {
         console.error(err);

@@ -6,6 +6,7 @@ export interface CartState {
   checkOutConfirmationStatus: any;
   shoppingOrderNumber:        any;
   checkOutDetails:            any;
+  allOrders: any;
 }
 
 export interface OrderHistory {

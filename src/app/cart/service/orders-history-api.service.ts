@@ -31,6 +31,19 @@ export class OrdersHistoryApiService {
       return this.http.get(environment.ORDER_HISTORY_API + `/orders/userid/${userid}`, options );
     }
   }
+  fetchAllOrdersHistory(): Observable<any> {
+    const token = this.sessionService.getTokenFromStorage();
+    if (!!token) {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      });
+      const options = {
+        headers: headers
+      };
+      return this.http.get(environment.ORDER_HISTORY_API + `/orders`, options );
+    }
+  }
   saveOrder() {
     const token = this.sessionService.getTokenFromStorage();
       const headers = new HttpHeaders({

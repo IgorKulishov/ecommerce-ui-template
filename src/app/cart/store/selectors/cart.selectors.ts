@@ -10,3 +10,11 @@ export const selectOrdersHistory = createSelector(
       }
   }
 );
+export const selectAllOrdersHistory = createSelector(
+  selectCart,
+  (state: CartState) => {
+      if(state && state.allOrders) {
+        return state && state.allOrders;
+      }
+  }
+);

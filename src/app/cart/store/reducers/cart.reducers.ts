@@ -4,7 +4,7 @@ import {
   ADD_TO_CART, ADD_TO_CART_SUCCESS,
   SAVE_CURRENT_ORDER_IN_STORE, GET_CURRENT_ORDER_FROM_STORE, SAVE_PLACED_ORDER,
   GET_CURRENT_ORDER_FROM_STORE_SUCCESS, CHECK_OUT, CHECK_OUT_SUCCESS, REMOVE_FROM_CART,
-  STORE_PROCESSED_ORDER_IN_HISTORY_API_SUCCESS
+  STORE_PROCESSED_ORDER_IN_HISTORY_API_SUCCESS,STORE_ALL_ORDERS_API_SUCCESS
 } from '../actions/cart.actions';
 
 export class ReducerClass implements Action {
@@ -53,6 +53,10 @@ const storeProcessedOrderInHistoryApi = (state: CartState, action: ReducerClass)
   const newData: CartState = Object.assign({}, state, { orderStoredInHistoryApi: action.payload} );
   return newData;
 };
+const storeAllOrderApiSuccess = (state: CartState, action: ReducerClass): CartState => {
+  const newData: CartState = Object.assign({}, state, { allOrders: action.payload} );
+  return newData;
+};
 const checkOutSuccess = (state: CartState, action: ReducerClass): CartState => {
   const newData: CartState = Object.assign({}, state, {
     checkOutConfirmationStatus: false,
@@ -88,7 +92,11 @@ export function cartReducer (state: CartState, action: ReducerClass) {
       return checkOutSuccess(state, action);
     case STORE_PROCESSED_ORDER_IN_HISTORY_API_SUCCESS:
       return storeProcessedOrderInHistoryApi(state, action);
+    case STORE_ALL_ORDERS_API_SUCCESS:
+      return storeAllOrderApiSuccess(state, action);
     default:
       return state;
   }
 }
+// STORE_PROCESSED_ORDER_IN_HISTORY_API_SUCCESS
+// STORE_ALL_ORDERS_API_SUCCESS

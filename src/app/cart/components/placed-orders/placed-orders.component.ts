@@ -3,14 +3,14 @@ import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
-import { FetchOrderHistory, DeleteOrderFromHistoryApi } from '../../store/actions/cart.actions';
+import { FetchOrderHistory, DeleteOrderFromHistoryApi, FetchAllOrdersHistory } from '../../store/actions/cart.actions';
 import { CartState } from '../../store/states/cart.states';
 import { PaymentDescription } from '../../models/cart.model';
 import { SessionService } from '../../../core/services/session.service';
 import { CartService } from '../../../core/services/cart.service';
 import { BsModalRef, BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
-import { selectOrdersHistory } from '../../store/selectors/cart.selectors';
+import { selectOrdersHistory, selectAllOrdersHistory } from '../../store/selectors/cart.selectors';
 @Component({
   templateUrl: './placed-orders.component.html',
   styleUrls: ['./placed-orders.component.scss']
@@ -39,11 +39,16 @@ export class PlacedOrdersComponent implements OnInit {
       map((res: any) => {
         return res;
     }));
-
+    this.store.select(selectAllOrdersHistory).pipe(
+      map(store => store)
+      ).subscribe(
+        console.log
+      )
   }
 
   ngOnInit() {
     this.store.dispatch(new FetchOrderHistory());
+    this.store.dispatch(new FetchAllOrdersHistory());
   }
 
   totalSum(price, selectedQuantity) {
