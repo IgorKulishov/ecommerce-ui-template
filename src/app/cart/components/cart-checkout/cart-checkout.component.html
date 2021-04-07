@@ -11,7 +11,7 @@
     </tr>
     </thead>
     <tbody class="cart-table__body">
-    <tr *ngFor='let product of productsInCart' class="cart-table__row">
+    <tr *ngFor='let product of (productsInCart$ | async)' class="cart-table__row">
       <td class="cart-table__column cart-table__column--image">
         <!--      <a [routerLink]="root.product(item.cartItem.product.id)" *ngIf="item.cartItem.product.images?.length"><img [src]="item.cartItem.product.images[0]" alt=""></a>-->
         <img class="product-image" [src]="getProductUrl(product.product.productInfo)"
@@ -59,7 +59,7 @@
         <div class="card-body">
           <h3 class="card-title">{{ 'checkout.cartTotals' | translate }}</h3>
           <table class="cart__totals">
-            <thead *ngIf="totalAmount" class="cart__totals-header">
+            <thead *ngIf="(totalAmountInCart$ | async) as totalAmount" class="cart__totals-header">
               <tr>
                 <th>{{ 'checkout.subtotal' | translate }}</th>
                 <td>$ {{totalAmount}}</td>

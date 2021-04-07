@@ -1,12 +1,11 @@
-
-import {map} from 'rxjs/operators';
+import {distinct, map} from 'rxjs/operators';
 import {Component, OnInit, Inject, TemplateRef, ViewChild} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {GetCurrentOrderFromStore, CheckOut, RemoveFromCart} from '../../store/actions/cart.actions';
-import { CartState } from '../../store/states/cart.states';
+import { CartState, CurrentOrderInCart } from '../../store/states/cart.states';
 import { Order, CheckoutInfo, PaymentMethods, PaymentDescription } from '../../models/cart.model';
 import {BehaviorSubject, Observable} from 'rxjs';
 import { SessionService } from '../../../core/services/session.service';
@@ -15,6 +14,7 @@ import { Payments } from '../../enums/payments.enum';
 
 import { BsModalService, BsModalRef, ModalDirective } from 'ngx-bootstrap/modal';
 import {ItemList} from '../../models/cart.model';
+import { selectItemListDetails, selectTotalAmountInCart } from '../../store/selectors/cart.selectors';
 
 @Component({
   selector: 'app-home',
@@ -40,7 +40,8 @@ export class CartCheckoutComponent implements OnInit {
       'paymentType': 'check'
     }
   ];
-  productsInCart: any;
+  totalAmountInCart$: Observable<number>;
+  productsInCart$: Observable<any>;
   checkOutConfirmationStatus = false;
   error = false;
   private payment = {};
@@ -56,6 +57,7 @@ export class CartCheckoutComponent implements OnInit {
 
   modalCheckoutApprove: BsModalRef | null;
   modalCheckoutConfirmation: BsModalRef;
+  // selectedItemListDetails$: Observable<any>
   @ViewChild('confirmation_template', {'static': false}) confirmation_template: ModalDirective;
   @ViewChild('remove_item_confirmation_template', {'static': false}) remove_item_confirmation_template: ModalDirective;
 
@@ -64,31 +66,33 @@ export class CartCheckoutComponent implements OnInit {
               private router: Router,
               private cartService: CartService,
               private modalService: BsModalService,
-              private bsModalService: BsModalService,
                @Inject(FormBuilder) fb: FormBuilder) {
 
     this.checkoutForm = fb.group({
       payment_method_id: [null, Validators.minLength(50)]
     });
 
+  }
+
+  ngOnInit() {
+
     // app store for total amount
-    this.store.select( store => {
-      return store['cart'];
-    }).pipe(map(res => {
-      if (res && res.currentOrderInCart) {
-        return res.currentOrderInCart;
-      }
-    })).subscribe(cartInfo => {
-      if (cartInfo && cartInfo.totalAmount && cartInfo.totalAmount) {
-        this.totalAmount = cartInfo.totalAmount;
-        this.totalQuantity = cartInfo.totalQuantity;
-        this.payment = {amount: cartInfo.totalAmount}
-      }
-      if (cartInfo && cartInfo.itemList) {
-        this.productsInCart = cartInfo.itemList;
-      }
-    });
-    // checkout confirmation status
+    this.productsInCart$ = this.store.select( selectItemListDetails )
+      .pipe(
+        distinct(),
+        map((res: any) => {
+            return res
+          }
+        ));
+
+    this.totalAmountInCart$ = this.store.select( selectTotalAmountInCart ).pipe(
+      map((amountInCart: number) => {
+        this.setTotalAmountInCart(amountInCart);
+        return amountInCart;
+      } )
+    )
+
+      // checkout confirmation status
     this.store.select( store => {
       return store['cart'];
     }).pipe(map(res => {
@@ -98,9 +102,7 @@ export class CartCheckoutComponent implements OnInit {
     })).subscribe(cartInfo => {
       this.checkOutConfirmationStatus = cartInfo;
     });
-  }
 
-  ngOnInit() {
     if (this.sessionService.getTokenFromStorage() != null ) {
       this.store.dispatch(new GetCurrentOrderFromStore());
     }
@@ -168,7 +170,7 @@ export class CartCheckoutComponent implements OnInit {
   removeProductConfirmation(template: TemplateRef<any>, deleteProduct: ItemList) {
     this.deleteProduct = deleteProduct;
     this.errorModal = null;
-    this.approveModal = this.bsModalService.show(template, { class: 'modal-lg' });
+    this.approveModal = this.modalService.show(template, { class: 'modal-lg' });
   }
 
   removeItemFromOrder() {
@@ -180,6 +182,10 @@ export class CartCheckoutComponent implements OnInit {
     Object.assign(this.deleteProductState, { action: 'delete_product', state: 'no_errors' });
     this.deleteProductSubject.next(this.deleteProductState);
     this.approveModal.hide();
+  }
+
+  setTotalAmountInCart(totalAmount: number) {
+    this.payment = {amount: totalAmount};
   }
 
 }
