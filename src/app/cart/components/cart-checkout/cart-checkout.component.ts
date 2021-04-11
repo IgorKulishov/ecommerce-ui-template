@@ -66,7 +66,7 @@ export class CartCheckoutComponent implements OnInit {
               private router: Router,
               private cartService: CartService,
               private modalService: BsModalService,
-               @Inject(FormBuilder) fb: FormBuilder) {
+              @Inject(FormBuilder) fb: FormBuilder) {
 
     this.checkoutForm = fb.group({
       payment_method_id: [null, Validators.minLength(50)]
@@ -92,7 +92,7 @@ export class CartCheckoutComponent implements OnInit {
       } )
     )
 
-      // checkout confirmation status
+    // checkout confirmation status
     this.store.select( store => {
       return store['cart'];
     }).pipe(map(res => {
@@ -109,12 +109,12 @@ export class CartCheckoutComponent implements OnInit {
     else
       this.router.navigate(['/login']);
     this.cartService.getMethodsOfPayment()
-    .subscribe((res: any) => {
-      if (res.payments.length > 0) {
-        this.methodsOfPayment = res.payments;
-      }
-    },
-    err => console.error(err));
+      .subscribe((res: any) => {
+          if (res.payments.length > 0) {
+            this.methodsOfPayment = res.payments;
+          }
+        },
+        err => console.error(err));
   }
 
   submitOrder() {
