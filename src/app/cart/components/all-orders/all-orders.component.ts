@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
+import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
 import { FetchAllOrdersHistory } from "../../store/actions/cart.actions";
@@ -12,11 +13,12 @@ import { CartState } from "../../store/states/cart.states";
   styleUrls: ["./all-orders.component.sass"],
 })
 export class AllOrdersComponent implements OnInit {
+  allOrdersDetails$: Observable<any>;
+
   constructor(private store: Store<CartState>) {
-    this.store
+    this.allOrdersDetails$ = this.store
       .select(selectAllOrdersHistory)
-      .pipe(map((store) => store))
-      .subscribe(console.log);
+      .pipe(map((store) => store));
   }
 
   ngOnInit(): void {
