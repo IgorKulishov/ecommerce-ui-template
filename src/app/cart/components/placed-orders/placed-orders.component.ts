@@ -1,19 +1,30 @@
-import { map, distinct } from 'rxjs/operators';
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Router } from '@angular/router';
-import { FormGroup } from '@angular/forms';
-import { FetchOrderHistory, DeleteOrderFromHistoryApi } from '../../store/actions/cart.actions';
-import { CartState } from '../../store/states/cart.states';
-import { PaymentDescription } from '../../models/cart.model';
-import { SessionService } from '../../../core/services/session.service';
-import { CartService } from '../../../core/services/cart.service';
-import { BsModalRef, BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
-import { Observable } from 'rxjs';
-import { selectOrdersHistory } from '../../store/selectors/cart.selectors';
+import { map, distinct } from "rxjs/operators";
+import { Component, OnInit, ViewChild, TemplateRef } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { Router } from "@angular/router";
+import { FormGroup } from "@angular/forms";
+import {
+  FetchOrderHistory,
+  DeleteOrderFromHistoryApi,
+  FetchAllOrdersHistory,
+} from "../../store/actions/cart.actions";
+import { CartState } from "../../store/states/cart.states";
+import { PaymentDescription } from "../../models/cart.model";
+import { SessionService } from "../../../core/services/session.service";
+import { CartService } from "../../../core/services/cart.service";
+import {
+  BsModalRef,
+  BsModalService,
+  ModalDirective,
+} from "ngx-bootstrap/modal";
+import { Observable } from "rxjs";
+import {
+  selectOrdersHistory,
+  selectAllOrdersHistory,
+} from "../../store/selectors/cart.selectors";
 @Component({
-  templateUrl: './placed-orders.component.html',
-  styleUrls: ['./placed-orders.component.scss']
+  templateUrl: "./placed-orders.component.html",
+  styleUrls: ["./placed-orders.component.scss"],
 })
 export class PlacedOrdersComponent implements OnInit {
   methodsOfPayment: PaymentDescription[] = [];
@@ -22,28 +33,31 @@ export class PlacedOrdersComponent implements OnInit {
   totalQuantity: number;
   checkoutForm: FormGroup;
   placedOrdersDetails$: Observable<any>;
-  @ViewChild('confirmation_template', {'static': false}) confirmation_template: ModalDirective;
-  @ViewChild('remove_item_confirmation_template', {'static': false}) remove_item_confirmation_template: ModalDirective;
+  @ViewChild("confirmation_template", { static: false })
+  confirmation_template: ModalDirective;
+  @ViewChild("remove_item_confirmation_template", { static: false })
+  remove_item_confirmation_template: ModalDirective;
   modalRef: BsModalRef;
-  accordionPosition: {[index: number]: boolean} = [];
+  accordionPosition: { [index: number]: boolean } = [];
 
-  constructor(private store: Store<CartState>,
-              private sessionService: SessionService,
-              private router: Router,
-              private cartService: CartService,
-              private modalService: BsModalService) {
-
+  constructor(
+    private store: Store<CartState>,
+    private sessionService: SessionService,
+    private router: Router,
+    private cartService: CartService,
+    private modalService: BsModalService
+  ) {
+    // app store for total amount
+    this.placedOrdersDetails$ = this.store.select(selectOrdersHistory).pipe(
+      distinct(),
+      map((res: any) => {
+        return res;
+      })
+    );
   }
 
   ngOnInit() {
     this.store.dispatch(new FetchOrderHistory());
-
-    // app store for total amount
-    this.placedOrdersDetails$ = this.store.select( selectOrdersHistory ).pipe(
-      distinct(),
-      map((res: any) => {
-        return res;
-      }));
   }
 
   totalSum(price, selectedQuantity) {
@@ -52,15 +66,18 @@ export class PlacedOrdersComponent implements OnInit {
 
   getProductUrl(product) {
     if (product && product.imageList.length > 0) {
-      const url = product.imageList[0]['imageUrl'] ? product.imageList[0]['imageUrl'] :
-        product.imageList[0]['largeUrl'] ? product.imageList[0]['largeUrl'] : '/assets/images/teapod.jpeg';
+      const url = product.imageList[0]["imageUrl"]
+        ? product.imageList[0]["imageUrl"]
+        : product.imageList[0]["largeUrl"]
+        ? product.imageList[0]["largeUrl"]
+        : "/assets/images/teapod.jpeg";
       return url;
     } else if (product && product.imageList.length === 0) {
-      return  '/assets/images/teapod.jpeg';
+      return "/assets/images/teapod.jpeg";
     }
   }
 
-  deleteOrderFromHistory( orderId: string ) {
+  deleteOrderFromHistory(orderId: string) {
     this.store.dispatch(new DeleteOrderFromHistoryApi(orderId));
     this.modalService.hide();
   }
@@ -70,12 +87,10 @@ export class PlacedOrdersComponent implements OnInit {
   }
 
   changeChevronDirection(index) {
-    if ( this.accordionPosition && this.accordionPosition[index] ) {
+    if (this.accordionPosition && this.accordionPosition[index]) {
       this.accordionPosition[index] = !this.accordionPosition[index];
     } else {
       this.accordionPosition[index] = true;
     }
   }
-
-
 }
