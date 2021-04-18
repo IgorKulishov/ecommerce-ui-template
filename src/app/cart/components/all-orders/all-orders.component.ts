@@ -14,7 +14,6 @@ import { CartState } from "../../store/states/cart.states";
 })
 export class AllOrdersComponent implements OnInit {
   allOrdersDetails$: Observable<any>;
-  accordionPosition: { [index: number]: boolean } = [];
 
   constructor(private store: Store<CartState>) {
     this.allOrdersDetails$ = this.store
@@ -26,11 +25,4 @@ export class AllOrdersComponent implements OnInit {
     this.store.dispatch(new FetchAllOrdersHistory());
   }
 
-  changeChevronDirection(index) {
-    if (this.accordionPosition && this.accordionPosition[index]) {
-      this.accordionPosition[index] = !this.accordionPosition[index];
-    } else {
-      this.accordionPosition[index] = true;
-    }
-  }
 }
