@@ -1,1 +1,5 @@
-<p *ngFor = 'let allOrdersDetails of (allOrdersDetails$ | async)'>{{allOrdersDetails | json}}</p>
+<app-alert [size]="'lg'" [dismissible]="true" [type]="'warning'"></app-alert>
+
+
+<all-orders-filter></all-orders-filter>
+<all-orders-content [allOrdersDetails]="(allOrdersDetails$ | async)"></all-orders-content>

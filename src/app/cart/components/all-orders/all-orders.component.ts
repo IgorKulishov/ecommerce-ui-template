@@ -10,7 +10,7 @@ import { CartState } from "../../store/states/cart.states";
 @Component({
   selector: "all-orders",
   templateUrl: "./all-orders.component.html",
-  styleUrls: ["./all-orders.component.sass"],
+  styleUrls: ["./all-orders.component.scss"],
 })
 export class AllOrdersComponent implements OnInit {
   allOrdersDetails$: Observable<any>;
@@ -24,4 +24,5 @@ export class AllOrdersComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(new FetchAllOrdersHistory());
   }
+
 }
