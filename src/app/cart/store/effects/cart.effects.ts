@@ -122,7 +122,8 @@ export class CartEffects {
     switchMap(() =>
       this.ordersHistoryService.fetchOrdersHistory().pipe(
         map((data: any) => {
-          return new StoreProcessedOrderInHistoryApiSuccess(data);
+          const response = data?.body;
+          return new StoreProcessedOrderInHistoryApiSuccess(response);
         }),
         catchError((err) => {
           console.error(err);
