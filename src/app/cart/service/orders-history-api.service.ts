@@ -83,7 +83,6 @@ export class OrdersHistoryApiService {
   }
   deleteOrder(orderId: string): Observable<any> {
     const token = this.sessionService.getTokenFromStorage();
-    const userid = this.sessionService.getUserIdFromStorage();
     if (!!token) {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
@@ -92,7 +91,9 @@ export class OrdersHistoryApiService {
       const options = {
         headers: headers
       };
-      return this.http.delete(environment.ORDER_HISTORY_API + `/orders/${orderId}`, options );
+      return this.http.post(environment.ORDER_HISTORY_API + `/orders/${orderId}/delete`,
+        {order_id: orderId},
+        options );
     }
   }
 }
