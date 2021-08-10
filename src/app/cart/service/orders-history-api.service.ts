@@ -91,7 +91,7 @@ export class OrdersHistoryApiService {
       const options = {
         headers: headers
       };
-      return this.http.post(environment.ORDER_HISTORY_API + `/orders/${orderId}/delete`,
+      return this.http.post(environment.ORDER_HISTORY_API + `/orders/delete`,
         {order_id: orderId},
         options );
     }
