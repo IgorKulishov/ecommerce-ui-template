@@ -48,7 +48,6 @@ export class OrdersHistoryApiService {
     }
   }
   fetchOrdersDatesForCurrentMonth(yearMonth: string): Observable<any> {
-    yearMonth = yearMonth || "2021-08";
     const token = this.sessionService.getTokenFromStorage();
     if (!!token) {
       const headers = new HttpHeaders({

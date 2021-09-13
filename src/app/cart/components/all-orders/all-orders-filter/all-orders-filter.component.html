@@ -1,4 +1,4 @@
-<div *ngFor='let date of orderDates'>
-    <input type="radio" id="scales" name="date" value='{{date}}' (change)="onSelectDate(date)">
+<div *ngFor='let date of orderDates; index as i'>
+    <input type="radio" id="date-{{i}}" name="date" value='{{date}}' (change)="onSelectDate(date)">
   <label for="date">{{date}}</label>
 </div>

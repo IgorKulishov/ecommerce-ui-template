@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { CommonModule, DatePipe } from "@angular/common";
 import { RouterModule, Routes } from "@angular/router";
 import { EffectsModule } from "@ngrx/effects";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -13,8 +13,8 @@ import { CoreModule } from "../core/core.module";
 import { PlacedOrdersComponent } from "./components/placed-orders/placed-orders.component";
 import { SharedModule } from "../shared/shared.module";
 import { AllOrdersComponent } from "./components/all-orders/all-orders.component";
-import { AllOrdersContentComponent } from './components/all-orders/all-orders-content/all-orders-content.component';
-import { AllOrdersFilterComponent } from './components/all-orders/all-orders-filter/all-orders-filter.component';
+import { AllOrdersContentComponent } from "./components/all-orders/all-orders-content/all-orders-content.component";
+import { AllOrdersFilterComponent } from "./components/all-orders/all-orders-filter/all-orders-filter.component";
 
 const routes: Routes = [
   { path: "cart", component: CartDetailsComponent },
@@ -44,5 +44,6 @@ const routes: Routes = [
     AllOrdersContentComponent,
     AllOrdersFilterComponent,
   ],
+  providers: [DatePipe],
 })
 export class CartModule {}
