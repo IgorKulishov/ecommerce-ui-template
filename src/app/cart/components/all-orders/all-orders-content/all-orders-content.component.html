@@ -10,6 +10,11 @@
       <tbody *ngFor='let allOrdersDetail of allOrdersDetails' id="order-block-for-desktop">
       <div class="all-block-item">{{allOrdersDetail | json}}</div>
       </tbody>
+
+      <div *ngFor="let orderOnDate of ordersOnDate">
+        <pre>{{orderOnDate | json}}</pre>
+      </div>
+
       <!-- mobile view -->
       <tbody *ngFor='let allOrdersDetail of allOrdersDetails; let i = index' id="order-block-for-mobile">
       <accordion [isAnimated]="true">

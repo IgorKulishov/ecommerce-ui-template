@@ -1,18 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from "@angular/core";
 
 @Component({
-  selector: 'all-orders-content',
-  templateUrl: './all-orders-content.component.html',
-  styleUrls: ['./all-orders-content.component.scss']
+  selector: "all-orders-content",
+  templateUrl: "./all-orders-content.component.html",
+  styleUrls: ["./all-orders-content.component.scss"],
 })
-export class AllOrdersContentComponent implements OnInit {
-  @Input() allOrdersDetails
+export class AllOrdersContentComponent {
+  @Input() allOrdersDetails;
+  @Input() ordersOnDate = [];
   accordionPosition: { [index: number]: boolean } = [];
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  constructor() {}
 
   changeChevronDirection(index) {
     if (this.accordionPosition && this.accordionPosition[index]) {
@@ -21,5 +18,4 @@ export class AllOrdersContentComponent implements OnInit {
       this.accordionPosition[index] = true;
     }
   }
-
 }
