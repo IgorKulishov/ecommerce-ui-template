@@ -44,11 +44,6 @@ accordion-group svg {
   border-top: none;
 }
 
-#order-block-for-desktop pre,
-#order-block-for-mobile pre {
-  white-space: pre-wrap;
-}
-
 @media (max-width: 729px) {
   #order-block-for-desktop {
     display: none;

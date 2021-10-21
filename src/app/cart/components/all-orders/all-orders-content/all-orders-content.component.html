@@ -3,7 +3,7 @@
     <table class="table ">
       <thead class="text-center">
         <tr>
-          <th id="image">Backend response</th>
+          <!-- <th id="image">Some header info</th> -->
         </tr>
       </thead>
       <!-- fullscreen view -->
@@ -11,9 +11,7 @@
         <tr>
           <td>
             <div >
-              <pre>
-                {{orderOnDate | json}}
-              </pre>
+              {{orderOnDate}}
             </div>
           </td>
         </tr>
@@ -26,7 +24,7 @@
             <button id="modalBtn" class="btn btn-link" accordion-heading type="button" (click)='changeChevronDirection(i)'>
               <div class="row">
                 <div class="col-10 text-left">
-                  {{placedOrdersDetail?.updatedAt | date}}
+                  <!-- here will be order's date -->
                 </div>
                 <div class="col-2 text-right">
                   <img [ngClass]="{'expanded-block': accordionPosition && accordionPosition[i], 'close-block': (accordionPosition && !accordionPosition[i])}" src="../../../../assets/svg/arrow-rounded-right-6x9.svg" alt="Right caret">
@@ -35,9 +33,7 @@
             </button>
 
             <div class="all-block-item">
-              <pre>
-                {{orderOnDate | json}}
-              </pre>
+              {{orderOnDate}}
             </div>
           </accordion-group>
         </accordion>
