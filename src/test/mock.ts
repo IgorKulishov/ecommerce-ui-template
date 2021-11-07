@@ -257,3 +257,5 @@ export class SessionServiceMock {
   public storeOrderNumberInStorage(data: any): void {}
   public getOrderNumberFromStorage(): any {}
 }
+
+export const ordersOnDate = [{"id":"463c3530-320c-11ec-a3be-035d1a899729","orderPlacedDate":"2021-10-21","orderStatus":"not_checked","orderDetails":{"totalAmount":100,"orderNumber":"f94721190cbd0e21356352f8a1c05293","orderToken":null,"totalQuantity":1,"paymentPlaced":null,"paymentId":null,"itemList":[{"itemId":null,"product":{"isRemoved":false,"price":100,"defaultMaxQuantity":10,"name":"robot","description":"robot1","id":42,"slug":"robot1","productInfo":{"imageList":[{"description":null,"largeUrl":null,"id":44,"publicId":"m6xqpddpalxl2zubmajx","productInfoId":43,"imageUrl":"https://res.cloudinary.com/webcodes-io/image/upload/v1573100113/m6xqpddpalxl2zubmajx.png"}],"id":43}},"quantity":1,"orderNumber":"f94721190cbd0e21356352f8a1c05293","id":2897,"productId":42}],"payment":null,"id":2896,"userId":35,"paymentPaid":null},"updatedAt":1634778884098}];

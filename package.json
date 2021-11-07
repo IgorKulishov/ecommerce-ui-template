@@ -128,5 +128,11 @@
     "hooks": {
       "pre-commit": "npm run test"
     }
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": true
   }
 }
