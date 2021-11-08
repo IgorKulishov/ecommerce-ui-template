@@ -7,11 +7,14 @@
         </tr>
       </thead>
       <!-- fullscreen view -->
-      <tbody *ngFor='let orderOnDate of ordersOnDate' id="order-block-for-desktop">
+      <tbody *ngFor='let order of ordersOnDate' id="order-block-for-desktop">
         <tr>
           <td>
-            <div >
-              {{orderOnDate}}
+            <div *ngFor='let item of order?.orderDetails?.itemList' class="orders-items-desktop">
+              <div><img class="orders-items-img-desktop" [src]="item?.product?.productInfo?.imageList[0]?.imageUrl"></div> |
+              <div>{{item?.product?.name | titlecase}}</div> |
+              <div>{{item?.product?.description | titlecase}}</div> |
+              <div>{{item?.product?.slug | titlecase}}</div>
             </div>
           </td>
         </tr>

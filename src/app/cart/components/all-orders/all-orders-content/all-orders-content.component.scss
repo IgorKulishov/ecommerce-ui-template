@@ -44,7 +44,20 @@ accordion-group svg {
   border-top: none;
 }
 
+.orders-items-desktop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .orders-items-img-desktop {
+    height: auto;
+    max-width: 3rem;
+  }
+}
+
 @media (max-width: 729px) {
+  .orders-items-desktop {
+    display: none;
+  }
   #order-block-for-desktop {
     display: none;
   }
