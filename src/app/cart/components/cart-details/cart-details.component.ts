@@ -1,24 +1,21 @@
 import {map} from 'rxjs/operators';
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-
+import { Router } from '@angular/router';
 import {  RemoveFromCart } from '../../store/actions/cart.actions';
 import { CartState } from '../../store/states/cart.states';
 import { Order } from '../../models/cart.model';
-import {BehaviorSubject, Observable} from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { SessionService } from '../../../core/services/session.service';
-import { RemoveItemFromProductList } from '../../../products/store/actions/products.actions';
-import {ProductDetails} from '../../../products/store/models/products.model';
+import { ProductDetails } from '../../../products/store/models/products.model';
 import { BsModalService, BsModalRef, ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
-  selector: 'app-home',
+  selector: 'cart-details',
   templateUrl: './cart-details.component.html',
   styleUrls: ['./cart-details.component.scss']
 })
 export class CartDetailsComponent implements OnInit {
-
   public productsInCart: Observable<Order>;
   public error = false;
   @ViewChild('confirmation_template', {'static': false}) confirmation_template: ModalDirective;
@@ -58,15 +55,8 @@ export class CartDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    // if (this.sessionService.getTokenFromStorage() != null ) {
-    //   this.store.dispatch(new GetCurrentOrderFromStore());
-    // }
-    // else
-    //   this.router.navigate(['/login']);
     this.deleteProductSubject.subscribe( (status: any) => {
-
       if (status.state === 'delete_product_error' && status.action == 'delete_product') {
-
         if (this.confirmationModal) {
           this.confirmationModal.hide();
         }
@@ -75,18 +65,11 @@ export class CartDetailsComponent implements OnInit {
         }
         if (!this.errorModal) {
           this.errorModal = this.bsModalService.show(this.error_modal, {class: 'modal-lg'});
-        } else {
         }
-
       } else if (status.state === 'no_error' && status.action === 'delete_product') {
         if(this.errorModal) {this.errorModal.hide()}
         if(!this.confirmationModal) {this.confirmationModal = this.bsModalService.show(this.confirmation_template, { class: 'modal-lg' })}
       }
-
-      else {
-
-      }
-
     });
   }
 
@@ -114,7 +97,6 @@ export class CartDetailsComponent implements OnInit {
     if (product && product.imageList.length > 0) {
       const url = product.imageList[0]['imageUrl'] ? product.imageList[0]['imageUrl'] :
         product.imageList[0]['largeUrl'] ? product.imageList[0]['largeUrl'] : '/assets/images/teapod.jpeg';
-      console.log(url);
       return url;
     } else if(product && product.imageList.length === 0) {
       return  '/assets/images/teapod.jpeg';

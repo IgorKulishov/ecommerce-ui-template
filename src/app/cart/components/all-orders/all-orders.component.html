@@ -1,1 +1,11 @@
-<p *ngFor = 'let allOrdersDetails of (allOrdersDetails$ | async)'>{{allOrdersDetails | json}}</p>
+<app-alert [size]="'lg'" [dismissible]="true" [type]="'warning'"></app-alert>
+
+
+<all-orders-filter 
+[orderDates] = 'orderDates$ | async'
+(selectDate) = onSelectDate($event)
+></all-orders-filter>
+<all-orders-content 
+[allOrdersDetails]="(allOrdersDetails$ | async)"
+[ordersOnDate] = 'ordersOnDate$ | async'
+></all-orders-content>

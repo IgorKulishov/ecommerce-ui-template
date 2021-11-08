@@ -80,6 +80,7 @@
             <ul id="dropdown-seller-console" *dropdownMenu class="dropdown-menu"
                 role="menu" aria-labelledby="button-dropdown-seller-console">
               <li *ngIf="user?.userName" class=""><a  [routerLink]="['/create-product']" class="nav-link">{{ 'header.createProduct' | translate }}</a></li>
+              <li *ngIf="user?.userName" class=""><a  [routerLink]="['/all-orders']" class="nav-link">All orders</a></li>
             </ul>
           </div>
         </li>
@@ -92,6 +93,7 @@
           <div class="collapse navbar-collapse" id="seller-console" [collapse]="isCollapsedSellerConsole" [isAnimated]="true">
             <ul id="collapse-seller-console" class="navbar-nav mr-auto navbar-custom custom-menu-dropdown">
               <li *ngIf="user?.userName" class=""><a  [routerLink]="['/create-product']" class="nav-link">{{ 'header.createProduct' | translate }}</a></li>
+              <li *ngIf="user?.userName" class=""><a  [routerLink]="['/all-orders']" class="nav-link">All orders</a></li>
             </ul>
           </div>
         </li>

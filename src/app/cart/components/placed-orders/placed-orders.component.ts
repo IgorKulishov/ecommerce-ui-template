@@ -6,7 +6,6 @@ import { FormGroup } from "@angular/forms";
 import {
   FetchOrderHistory,
   DeleteOrderFromHistoryApi,
-  FetchAllOrdersHistory,
 } from "../../store/actions/cart.actions";
 import { CartState } from "../../store/states/cart.states";
 import { PaymentDescription } from "../../models/cart.model";
@@ -18,10 +17,7 @@ import {
   ModalDirective,
 } from "ngx-bootstrap/modal";
 import { Observable } from "rxjs";
-import {
-  selectOrdersHistory,
-  selectAllOrdersHistory,
-} from "../../store/selectors/cart.selectors";
+import { selectOrdersHistory } from "../../store/selectors/cart.selectors";
 @Component({
   templateUrl: "./placed-orders.component.html",
   styleUrls: ["./placed-orders.component.scss"],
